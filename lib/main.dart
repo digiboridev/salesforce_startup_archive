@@ -12,20 +12,26 @@ void main() {
 
 class App extends StatelessWidget {
   test() async {
-    print("do");
+    print("do some");
+
     // SalesforcePlugin.logoutCurrentUser();
-    // var asd = await SalesforcePlugin.getAuthCredentials();
-    var asd = await SalesforcePlugin.sendRequest(
-      endPoint: '***REMOVED***',
-      path: '/me',
-    );
+
+    var asd = await SalesforcePlugin.getAuthCredentials();
+
+    // var asd = await SalesforcePlugin.sendRequest(
+    //   endPoint: '***REMOVED***',
+    //   path: '/me',
+    // );
+
     // var asd = await SalesforcePlugin.sendRequest(
     //     endPoint: '***REMOVED***',
     //     path: '/me/changeLang',
     //     method: 'POST',
     //     payload: {"langCode": "en"});
+
     // var asd = await SalesforcePlugin.sendRequest(
     //     endPoint: '***REMOVED***', path: '/customer/1015586');
+
     print(asd);
   }
 

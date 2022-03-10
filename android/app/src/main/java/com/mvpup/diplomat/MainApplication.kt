@@ -9,6 +9,5 @@ class MainApplication : FlutterApplication() {
     override fun onCreate() {
         super.onCreate()
         SalesforceSDKManager.initNative(applicationContext, MainActivity::class.java)
-        SalesforceSDKManager.getInstance().loginOptions.setUrl("https://***REMOVED***")
     }
 }
