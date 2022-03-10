@@ -1,7 +1,6 @@
 *.iml
 *.class
 .gradle
-.dart_tool
 /local.properties
 /.idea/workspace.xml
 /.idea/libraries
