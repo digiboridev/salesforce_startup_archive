@@ -40,12 +40,9 @@ class App extends StatelessWidget {
     //     path: '/materials/catalog/1009006');
 
     print(asd);
-    // final uri = Uri.parse(
-    //     'https://firebasestorage.googleapis.com/v0/b/todoreference.appspot.com/o/asd.dart');
-    // await Isolate.spawnUri(uri, [], null, checked: false);
 
-    Repo repo = Repo();
-    repo.setEnt(ent: TEntity(index: 123));
+    // Repo repo = Repo();
+    // repo.setEnt(ent: TEntity(index: 123));
   }
 
   @override
