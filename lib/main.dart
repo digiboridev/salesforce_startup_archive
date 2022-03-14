@@ -1,3 +1,6 @@
+import 'dart:isolate';
+
+import 'package:***REMOVED***/asd.dart';
 import 'package:flutter/material.dart';
 import 'package:salesforce/salesforce.dart';
 
@@ -32,7 +35,17 @@ class App extends StatelessWidget {
     // var asd = await SalesforcePlugin.sendRequest(
     //     endPoint: '***REMOVED***', path: '/customer/1015586');
 
+    // var asd = await SalesforcePlugin.sendRequest(
+    //     endPoint: '***REMOVED***',
+    //     path: '/materials/catalog/1009006');
+
     print(asd);
+    // final uri = Uri.parse(
+    //     'https://firebasestorage.googleapis.com/v0/b/todoreference.appspot.com/o/asd.dart');
+    // await Isolate.spawnUri(uri, [], null, checked: false);
+
+    Repo repo = Repo();
+    repo.setEnt(ent: TEntity(index: 123));
   }
 
   @override

@@ -130,7 +130,10 @@ public abstract class SalesforceFlutterActivity extends FlutterActivity implemen
     }
 
     @Override
-    public void onLogoutComplete() { }
+    public void onLogoutComplete() {
+        restClient = null;
+        Log.i(TAG, "LOGOUTEDddddddd");
+     }
 
     @Override
     public void onUserSwitched() {
@@ -142,7 +145,7 @@ public abstract class SalesforceFlutterActivity extends FlutterActivity implemen
      *         false if you want do login at a later point
      */
     public boolean shouldAuthenticate() {
-        return true;
+        return false;
     }
 
     /**
@@ -202,5 +205,6 @@ public abstract class SalesforceFlutterActivity extends FlutterActivity implemen
     public void logout() {
         Log.i(TAG, "logout called");
         SalesforceSDKManager.getInstance().logout(this, true);
+        Log.i(TAG, "LOGOUTED");
     }
 }
