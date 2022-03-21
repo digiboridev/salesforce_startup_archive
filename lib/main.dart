@@ -1,3 +1,8 @@
+import 'package:***REMOVED***/data/datasouces/user_data_remote_datasource.dart';
+import 'package:***REMOVED***/data/models/user_data_model.dart';
+import 'package:***REMOVED***/data/repositories/user_data_repository.dart';
+import 'package:***REMOVED***/domain/usecases/get_remote_userdata.dart';
+import 'package:***REMOVED***/domain/usecases/usecase.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:salesforce/salesforce.dart';
@@ -21,15 +26,17 @@ class _AppState extends State<App> {
   test() async {
     print("do some");
 
-    SalesforcePlugin.logoutCurrentUser();
+    // SalesforcePlugin.logoutCurrentUser();
 
     // Map<String, dynamic> asd =
-    // await SalesforcePlugin.getAuthCredentials() as Map<String, dynamic>;
+    //     await SalesforcePlugin.getAuthCredentials() as Map<String, dynamic>;
 
-    // var asd = await SalesforcePlugin.sendRequest(
+    // Map<String, dynamic> asd = await SalesforcePlugin.sendRequest(
     //   endPoint: '***REMOVED***',
     //   path: '/me',
-    // );
+    // ) as Map<String, dynamic>;
+
+    // UserDataModel d = UserDataModel.fromMap(asd['result']);
 
     // var asd = await SalesforcePlugin.sendRequest(
     //     endPoint: '***REMOVED***',
@@ -44,7 +51,14 @@ class _AppState extends State<App> {
     //     endPoint: '***REMOVED***',
     //     path: '/materials/catalog/1009006');
 
-    // print(asd);
+    // UserDataRemoteDatasourceImpl userDataRemoteDatasourceImpl =
+    //     UserDataRemoteDatasourceImpl();
+    UseCase c = GetRemoteUserData(UserDataRepositoryImpl(
+        userDataRemoteDatasource: UserDataRemoteDatasourceImpl()));
+
+    var asd = await c(null);
+
+    print(asd);
 
     // Repo repo = Repo();
     // repo.setEnt(ent: TEntity(index: 123));
