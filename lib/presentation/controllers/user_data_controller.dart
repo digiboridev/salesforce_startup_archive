@@ -7,7 +7,8 @@ import 'package:get/get.dart';
 class UserDataController extends GetxController {
   SFSDKService sfsdkService = SFSDKService();
 
-  Rxn<AuthData> authData = Rxn<AuthData>();
+  Rxn<AuthData> _authData = Rxn<AuthData>();
+  AuthData? get authData => _authData.value;
 
   @override
   void onReady() {
@@ -18,8 +19,8 @@ class UserDataController extends GetxController {
   listenByTimer() {
     Timer.periodic(Duration(seconds: 1), (t) async {
       AuthData? d = await sfsdkService.authData;
-      authData.value = d;
-      print(authData);
+      _authData.value = d;
+      print(_authData);
     });
   }
 
