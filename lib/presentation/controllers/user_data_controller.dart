@@ -19,8 +19,10 @@ class UserDataController extends GetxController {
   listenByTimer() {
     Timer.periodic(Duration(seconds: 1), (t) async {
       AuthData? d = await sfsdkService.authData;
-      _authData.value = d;
-      print(_authData);
+      if (_authData.value != d) {
+        _authData.value = d;
+        print(_authData);
+      }
     });
   }
 

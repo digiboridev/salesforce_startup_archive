@@ -1,27 +1,18 @@
 import 'package:simple_connection_checker/simple_connection_checker.dart';
 import 'package:get/get.dart';
 
-// class ConnectionService {
-//   ConnectionService._constructor()
-//       : _hasConnectionStream =
-//             SimpleConnectionChecker().onConnectionChange.asBroadcastStream();
-
-//   static final ConnectionService _instance = ConnectionService._constructor();
-
-//   factory ConnectionService() {
-//     return _instance;
-//   }
-//   Stream<bool> _hasConnectionStream;
-//   Stream<bool> get hasConnectionStream => _hasConnectionStream;
-//   Future<bool> get hasConnection =>
-//       SimpleConnectionChecker.isConnectedToInternet();
-// }
-
 class ConnectionService extends GetxService {
   SimpleConnectionChecker _simpleConnectionChecker = SimpleConnectionChecker();
+  ConnectionService();
 
-  RxBool _hasConnection = RxBool(true);
+  late RxBool _hasConnection;
   bool get hasConnection => _hasConnection.value;
+
+  Future<ConnectionService> init() async {
+    _hasConnection =
+        RxBool(await SimpleConnectionChecker.isConnectedToInternet());
+    return this;
+  }
 
   @override
   void onReady() {
