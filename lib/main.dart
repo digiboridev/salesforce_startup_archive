@@ -1,14 +1,17 @@
 import 'package:***REMOVED***/data/datasouces/user_data_remote_datasource.dart';
 import 'package:***REMOVED***/data/models/user_data_model.dart';
 import 'package:***REMOVED***/data/repositories/user_data_repository.dart';
+import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/domain/usecases/get_remote_userdata.dart';
 import 'package:***REMOVED***/domain/usecases/usecase.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:salesforce/salesforce.dart';
 import 'package:get/get.dart';
 
-void main() {
+Future<void> main() async {
+  await GetStorage.init();
   runApp(GetMaterialApp(
     home: App(),
   ));
@@ -51,14 +54,51 @@ class _AppState extends State<App> {
     //     endPoint: '***REMOVED***',
     //     path: '/materials/catalog/1009006');
 
-    // UserDataRemoteDatasourceImpl userDataRemoteDatasourceImpl =
-    //     UserDataRemoteDatasourceImpl();
-    UseCase c = GetRemoteUserData(UserDataRepositoryImpl(
-        userDataRemoteDatasource: UserDataRemoteDatasourceImpl()));
+    // UseCase c = GetRemoteUserData(UserDataRepositoryImpl(
+    //     userDataRemoteDatasource: UserDataRemoteDatasourceImpl()));
 
-    var asd = await c(null);
+    // var asd = await c(null);
 
-    print(asd);
+    // print(asd);
+
+    UserDataModel d = UserDataModel(
+        sFUserId: 'sFUserId',
+        selectedLanguage: 'selectedLanguage',
+        requireLegalDocSign: false,
+        relatedCustomers: [],
+        legalDoc: Uri.parse('legalDoc'),
+        isSystemAdmin: false,
+        isStandardUser: false,
+        isSalesAdmin: false,
+        isMerchandiser: false,
+        imageUrl: 'imageUrl',
+        hasAcceptedLegalDoc: false,
+        didChangePassword: false,
+        defaultLanguage: 'defaultLanguage',
+        currencyKey: 'currencyKey',
+        country: 'country',
+        contactName: 'contactName',
+        contactMobile: 'contactMobile',
+        contactLastName: 'contactLastName',
+        contactId: 'contactId',
+        contactFirstName: 'contactFirstName',
+        contactEmail: 'contactEmail',
+        availableLanguages: 'availableLanguages');
+
+    // final box = GetStorage('UserData');
+    // // box.erase();
+
+    // // await box.write('asd', d.toMap());
+
+    // Map<String, dynamic>? asd = box.read('asd');
+
+    // if (asd == null) {
+    //   throw Exception('Empty cache');
+    // }
+
+    // UserDataModel cd = UserDataModel.fromMap(asd);
+
+    // print(asd);
 
     // Repo repo = Repo();
     // repo.setEnt(ent: TEntity(index: 123));

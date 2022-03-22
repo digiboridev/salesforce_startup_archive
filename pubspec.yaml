@@ -13,7 +13,9 @@ dependencies:
   cupertino_icons: ^1.0.3
   shared_preferences: ^2.0.13
   get: ^4.6.1
+  get_storage: ^2.0.3
   http: ^0.13.4
+  simple_connection_checker: ^0.2.1
 
 dev_dependencies:
   # change_app_package_name: ^1.0.0

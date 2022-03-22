@@ -50,6 +50,33 @@ class UserDataModel extends UserData {
           availableLanguages: availableLanguages,
         );
 
+  Map<String, dynamic> toMap() {
+    return {
+      'sFUserId': sFUserId,
+      'selectedLanguage': selectedLanguage,
+      'requireLegalDocSign': requireLegalDocSign,
+      'relatedCustomers': relatedCustomers,
+      'legalDoc': legalDoc.toString(),
+      'isSystemAdmin': isSystemAdmin,
+      'isStandardUser': isStandardUser,
+      'isSalesAdmin': isSalesAdmin,
+      'isMerchandiser': isMerchandiser,
+      'imageUrl': imageUrl,
+      'hasAcceptedLegalDoc': hasAcceptedLegalDoc,
+      'didChangePassword': didChangePassword,
+      'defaultLanguage': defaultLanguage,
+      'currencyKey': currencyKey,
+      'country': country,
+      'contactName': contactName,
+      'contactMobile': contactMobile,
+      'contactLastName': contactLastName,
+      'contactId': contactId,
+      'contactFirstName': contactFirstName,
+      'contactEmail': contactEmail,
+      'availableLanguages': availableLanguages,
+    };
+  }
+
   factory UserDataModel.fromMap(Map<String, dynamic> map) {
     return UserDataModel(
       sFUserId: map['SFUserId'] ?? '',
@@ -76,6 +103,35 @@ class UserDataModel extends UserData {
       availableLanguages: map['AvailableLanguages'] ?? '',
     );
   }
+
+  factory UserDataModel.fromEnitty(UserData userData) {
+    return UserDataModel(
+      sFUserId: userData.sFUserId,
+      selectedLanguage: userData.selectedLanguage,
+      requireLegalDocSign: userData.requireLegalDocSign,
+      relatedCustomers: userData.relatedCustomers,
+      legalDoc: userData.legalDoc,
+      isSystemAdmin: userData.isSystemAdmin,
+      isStandardUser: userData.isStandardUser,
+      isSalesAdmin: userData.isSalesAdmin,
+      isMerchandiser: userData.isMerchandiser,
+      imageUrl: userData.imageUrl,
+      hasAcceptedLegalDoc: userData.hasAcceptedLegalDoc,
+      didChangePassword: userData.didChangePassword,
+      defaultLanguage: userData.defaultLanguage,
+      currencyKey: userData.currencyKey,
+      country: userData.country,
+      contactName: userData.contactName,
+      contactMobile: userData.contactMobile,
+      contactLastName: userData.contactLastName,
+      contactId: userData.contactId,
+      contactFirstName: userData.contactFirstName,
+      contactEmail: userData.contactEmail,
+      availableLanguages: userData.availableLanguages,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
 
   factory UserDataModel.fromJson(String source) =>
       UserDataModel.fromMap(json.decode(source));
