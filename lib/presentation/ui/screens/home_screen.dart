@@ -52,6 +52,8 @@ class HomeScreen extends StatelessWidget {
         child: Icon(Icons.refresh),
       ),
       body: Obx(() {
+        bool s = connectionService.hasConnection;
+        print(s);
         return Center(
           child: Text(userDataController.authData.toString()),
         );

@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/core/constants.dart';
 import 'package:simple_connection_checker/simple_connection_checker.dart';
 import 'package:get/get.dart';
 
@@ -9,14 +10,15 @@ class ConnectionService extends GetxService {
   bool get hasConnection => _hasConnection.value;
 
   Future<ConnectionService> init() async {
-    _hasConnection =
-        RxBool(await SimpleConnectionChecker.isConnectedToInternet());
+    _hasConnection = RxBool(await SimpleConnectionChecker.isConnectedToInternet(
+        lookUpAddress: ***REMOVED***));
     return this;
   }
 
   @override
   void onReady() {
     super.onReady();
+    _simpleConnectionChecker.setLookUpAddress(***REMOVED***);
     _hasConnection.bindStream(_simpleConnectionChecker.onConnectionChange);
   }
 }
