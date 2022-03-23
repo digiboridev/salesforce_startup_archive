@@ -1,14 +1,16 @@
 import 'package:***REMOVED***/domain/services/connections_service.dart';
-import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
+import 'package:***REMOVED***/presentation/controllers/user_controller.dart';
+import 'package:***REMOVED***/presentation/controllers/user_controller_states.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
-  final UserDataController userDataController = Get.put(UserDataController());
+  final UserController userController = Get.put(UserController());
   final ConnectionService connectionService = Get.find();
 
   test() async {
     print("do some");
+    userController.updateUserData();
 
     // SalesforcePlugin.logoutCurrentUser();
 
@@ -51,13 +53,44 @@ class HomeScreen extends StatelessWidget {
         onPressed: () => test(),
         child: Icon(Icons.refresh),
       ),
-      body: Obx(() {
-        bool s = connectionService.hasConnection;
-        print(s);
-        return Center(
-          child: Text(userDataController.authData.toString()),
-        );
-      }),
+      body: SafeArea(
+        child: Obx(() {
+          UserDataState userDataState = userController.userDataState;
+
+          if (userDataState is UserDataLoadingState) {
+            return Center(child: CircularProgressIndicator());
+          }
+
+          if (userDataState is UserDataLoadingErrorState) {
+            return Column(
+              children: [
+                Text('Loaing error'),
+                Text(userDataState.msg),
+                Container(
+                  color: Colors.amber,
+                  child: GestureDetector(
+                      onTap: () => userController.loadUserData(),
+                      child: Text('try again')),
+                ),
+              ],
+            );
+          }
+
+          if (userDataState is UserDataCommonState) {
+            print(userDataState.userData.hashCode);
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  Text('Loaded'),
+                  Text(userDataState.userData.toString()),
+                ],
+              ),
+            );
+          }
+
+          return SizedBox();
+        }),
+      ),
     );
   }
 }
