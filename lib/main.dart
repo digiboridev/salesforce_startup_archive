@@ -25,34 +25,9 @@ class Loader extends StatelessWidget {
       Get.put(UserDataController(), permanent: true);
   final ConnectionService connectionService = Get.find();
 
-  test() async {
-    print("do some");
-    userDataController.updateUserData();
-
-    // var asd = await SalesforcePlugin.sendRequest(
-    //     endPoint: '***REMOVED***',
-    //     path: '/me/changeLang',
-    //     method: 'POST',
-    //     payload: {"langCode": "en"});
-
-    // var asd = await SalesforcePlugin.sendRequest(
-    //     endPoint: '***REMOVED***', path: '/customer/1015586');
-
-    // var asd = await SalesforcePlugin.sendRequest(
-    //     endPoint: '***REMOVED***',
-    //     path: '/materials/catalog/1009006');
-
-    // print(asd);
-  }
-
   @override
   Widget build(BuildContext context) {
-    // test();
     return Scaffold(
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () => test(),
-      //   child: Icon(Icons.refresh),
-      // ),
       body: SafeArea(
         child: Obx(() {
           UserDataState userDataState = userDataController.userDataState;
@@ -61,23 +36,40 @@ class Loader extends StatelessWidget {
             return Center(child: CircularProgressIndicator());
           }
 
-          if (userDataState is UserDataUpdatingState) {
-            return Center(child: CircularProgressIndicator());
+          if (userDataState is UserDataLoadingErrorState) {
+            return SizedBox.expand(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text('Loading error'),
+                  SizedBox(
+                    height: Get.width * 0.06,
+                  ),
+                  Text(userDataState.msg),
+                  SizedBox(
+                    height: Get.width * 0.06,
+                  ),
+                  GestureDetector(
+                    onTap: () => userDataController.loadUserData(),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.amber,
+                          borderRadius:
+                              BorderRadius.circular(Get.width * 0.06)),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: Get.width * 0.1,
+                          vertical: Get.width * 0.03),
+                      child: Text('try again'),
+                    ),
+                  )
+                ],
+              ),
+            );
           }
 
-          if (userDataState is UserDataLoadingErrorState) {
-            return Column(
-              children: [
-                Text('Loaing error'),
-                Text(userDataState.msg),
-                Container(
-                  color: Colors.amber,
-                  child: GestureDetector(
-                      onTap: () => userDataController.loadUserData(),
-                      child: Text('try again')),
-                ),
-              ],
-            );
+          if (userDataState is UserDataAskLegalDocState) {
+            return LegalDocView(userDataState: userDataState);
           }
 
           if (userDataState is UserDataCommonState) {
@@ -90,10 +82,6 @@ class Loader extends StatelessWidget {
                 ],
               ),
             );
-          }
-
-          if (userDataState is UserDataAskLegalDocState) {
-            return LegalDocView(userDataState: userDataState);
           }
 
           return SizedBox();

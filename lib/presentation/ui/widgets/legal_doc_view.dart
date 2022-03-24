@@ -21,6 +21,7 @@ class _LegalDocViewState extends State<LegalDocView> {
   final UserDataController userDataController = Get.find();
   final ConnectionService connectionService = Get.find();
   WebViewController? webViewController;
+  bool error = false;
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +43,9 @@ class _LegalDocViewState extends State<LegalDocView> {
               onProgress: (progress) {
                 print(progress);
               },
-              onWebResourceError: (error) {
-                print(error);
+              onWebResourceError: (e) {
+                print(e);
+                setState(() => error = true);
               },
               onWebViewCreated: (controller) {
                 webViewController = controller;
@@ -73,24 +75,26 @@ class _LegalDocViewState extends State<LegalDocView> {
             ),
           ],
         ),
-        Positioned(
-          right: Get.width * 0.06,
-          bottom: Get.width * 0.3,
-          child: GestureDetector(
-            onTap: () {
-              if (webViewController != null) {
-                webViewController!.reload();
-              }
-            },
-            child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.amber,
-                    borderRadius: BorderRadius.circular(Get.width * 0.06)),
-                padding: EdgeInsets.symmetric(
-                    horizontal: Get.width * 0.03, vertical: Get.width * 0.03),
-                child: Icon(Icons.replay_rounded)),
-          ),
-        )
+        if (error)
+          Positioned(
+            right: Get.width * 0.06,
+            bottom: Get.width * 0.3,
+            child: GestureDetector(
+              onTap: () {
+                if (webViewController != null) {
+                  setState(() => error = false);
+                  webViewController!.reload();
+                }
+              },
+              child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.blue[200],
+                      borderRadius: BorderRadius.circular(Get.width * 0.06)),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: Get.width * 0.03, vertical: Get.width * 0.03),
+                  child: Icon(Icons.replay_rounded)),
+            ),
+          )
       ],
     );
   }

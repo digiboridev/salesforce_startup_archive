@@ -11,15 +11,14 @@ class ConnectionService extends GetxService {
 
   Future<ConnectionService> init() async {
     _hasConnection = RxBool(await SimpleConnectionChecker.isConnectedToInternet(
-        // lookUpAddress: ***REMOVED***
-        ));
+        lookUpAddress: ***REMOVED***));
     return this;
   }
 
   @override
   void onReady() {
     super.onReady();
-    // _simpleConnectionChecker.setLookUpAddress(***REMOVED***);
+    _simpleConnectionChecker.setLookUpAddress(***REMOVED***);
     _hasConnection.bindStream(_simpleConnectionChecker.onConnectionChange);
 
     _hasConnection.listen((p0) {

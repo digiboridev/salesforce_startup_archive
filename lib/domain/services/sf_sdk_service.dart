@@ -14,4 +14,6 @@ class SFSDKService {
       return null;
     }
   }
+
+  Future<void> logout() => SalesforcePlugin.logoutCurrentUser();
 }
