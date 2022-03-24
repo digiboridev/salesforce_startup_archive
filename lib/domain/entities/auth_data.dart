@@ -1,4 +1,6 @@
-class AuthData {
+import 'package:equatable/equatable.dart';
+
+class AuthData extends Equatable {
   final String communityUrl;
   final String loginUrl;
   final String identityUrl;
@@ -23,38 +25,23 @@ class AuthData {
   });
 
   @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is AuthData &&
-        other.communityUrl == communityUrl &&
-        other.loginUrl == loginUrl &&
-        other.identityUrl == identityUrl &&
-        other.userAgent == userAgent &&
-        other.accessToken == accessToken &&
-        other.communityId == communityId &&
-        other.userId == userId &&
-        other.orgId == orgId &&
-        other.refreshToken == refreshToken &&
-        other.instanceUrl == instanceUrl;
-  }
-
-  @override
-  int get hashCode {
-    return communityUrl.hashCode ^
-        loginUrl.hashCode ^
-        identityUrl.hashCode ^
-        userAgent.hashCode ^
-        accessToken.hashCode ^
-        communityId.hashCode ^
-        userId.hashCode ^
-        orgId.hashCode ^
-        refreshToken.hashCode ^
-        instanceUrl.hashCode;
-  }
-
-  @override
   String toString() {
     return 'AuthData(communityUrl: $communityUrl, loginUrl: $loginUrl, identityUrl: $identityUrl, userAgent: $userAgent, accessToken: $accessToken, communityId: $communityId, userId: $userId, orgId: $orgId, refreshToken: $refreshToken, instanceUrl: $instanceUrl)';
+  }
+
+  @override
+  List<Object> get props {
+    return [
+      communityUrl,
+      loginUrl,
+      identityUrl,
+      userAgent,
+      accessToken,
+      communityId,
+      userId,
+      orgId,
+      refreshToken,
+      instanceUrl,
+    ];
   }
 }

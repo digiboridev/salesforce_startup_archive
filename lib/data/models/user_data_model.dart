@@ -1,12 +1,16 @@
 import 'dart:convert';
+import 'package:***REMOVED***/data/models/related_consumer_model.dart';
 import 'package:***REMOVED***/domain/entities/user_data.dart';
 
 class UserDataModel extends UserData {
+  @override
+  final List<RelatedConsumerModel> relatedCustomers;
+
   UserDataModel({
     required String sFUserId,
     required String selectedLanguage,
     required bool requireLegalDocSign,
-    required List relatedCustomers,
+    required this.relatedCustomers,
     required Uri legalDoc,
     required bool isSystemAdmin,
     required bool isStandardUser,
@@ -55,7 +59,7 @@ class UserDataModel extends UserData {
       'SFUserId': sFUserId,
       'SelectedLanguage': selectedLanguage,
       'RequireLegalDocSign': requireLegalDocSign,
-      'RelatedCustomers': relatedCustomers,
+      'RelatedCustomers': relatedCustomers.map((x) => x.toMap()).toList(),
       'LegalDoc': legalDoc.toString(),
       'isSystemAdmin': isSystemAdmin,
       'isStandardUser': isStandardUser,
@@ -78,11 +82,13 @@ class UserDataModel extends UserData {
   }
 
   factory UserDataModel.fromMap(Map<String, dynamic> map) {
+    Map m = map;
     return UserDataModel(
       sFUserId: map['SFUserId'] ?? '',
       selectedLanguage: map['SelectedLanguage'] ?? '',
       requireLegalDocSign: map['RequireLegalDocSign'] ?? false,
-      relatedCustomers: List.from(map['RelatedCustomers'] ?? const []),
+      relatedCustomers: List<RelatedConsumerModel>.from(
+          map['RelatedCustomers'].map((x) => RelatedConsumerModel.fromMap(x))),
       legalDoc: Uri.parse(map['LegalDoc']),
       isSystemAdmin: map['isSystemAdmin'] ?? false,
       isStandardUser: map['isStandardUser'] ?? false,
@@ -109,7 +115,9 @@ class UserDataModel extends UserData {
       sFUserId: userData.sFUserId,
       selectedLanguage: userData.selectedLanguage,
       requireLegalDocSign: userData.requireLegalDocSign,
-      relatedCustomers: userData.relatedCustomers,
+      relatedCustomers: userData.relatedCustomers
+          .map((e) => RelatedConsumerModel.fromEnitty(e))
+          .toList(),
       legalDoc: userData.legalDoc,
       isSystemAdmin: userData.isSystemAdmin,
       isStandardUser: userData.isStandardUser,

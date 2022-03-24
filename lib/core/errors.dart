@@ -3,7 +3,7 @@ class CacheException implements Exception {
 
   const CacheException([this.message = ""]);
 
-  String toString() => "FormatException: $message";
+  String toString() => "CacheException: $message";
 }
 
 class ServerException implements Exception {
@@ -11,5 +11,5 @@ class ServerException implements Exception {
 
   const ServerException([this.message = ""]);
 
-  String toString() => "FormatException: $message";
+  String toString() => "ServerException: $message";
 }

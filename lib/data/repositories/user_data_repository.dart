@@ -7,6 +7,7 @@ abstract class UserDataRepository {
   Future<UserData> get getRemoteUserData;
   Future<UserData> getLocalUserData({required userId});
   Future setLocalUserData({required userId, required UserData userData});
+  Future<bool> acceptLegalDoc();
 }
 
 class UserDataRepositoryImpl implements UserDataRepository {
@@ -29,4 +30,7 @@ class UserDataRepositoryImpl implements UserDataRepository {
   Future setLocalUserData({required userId, required UserData userData}) =>
       userDataLocalDatasource.setUserData(
           userId: userId, userDataModel: UserDataModel.fromEnitty(userData));
+
+  @override
+  Future<bool> acceptLegalDoc() => userDataRemoteDatasource.acceptLegalDoc();
 }

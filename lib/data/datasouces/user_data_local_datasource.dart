@@ -13,17 +13,17 @@ class UserDataLocalDatasourceImpl implements UserDataLocalDatasource {
 
   @override
   Future<UserDataModel> getUserData({required String userId}) async {
-    Map<String, dynamic>? data = box.read(userId);
+    String? data = box.read(userId);
 
     if (data == null) {
       throw CacheException('No cached data for $userId');
     }
 
-    return UserDataModel.fromMap(data);
+    return UserDataModel.fromJson(data);
   }
 
   Future setUserData(
       {required String userId, required UserDataModel userDataModel}) async {
-    await box.write(userId, userDataModel.toMap());
+    await box.write(userId, userDataModel.toJson());
   }
 }
