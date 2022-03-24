@@ -82,7 +82,6 @@ class UserDataModel extends UserData {
   }
 
   factory UserDataModel.fromMap(Map<String, dynamic> map) {
-    Map m = map;
     return UserDataModel(
       sFUserId: map['SFUserId'] ?? '',
       selectedLanguage: map['SelectedLanguage'] ?? '',

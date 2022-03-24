@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/core/languages.dart';
 import 'package:***REMOVED***/data/datasouces/user_data_local_datasource.dart';
 import 'package:***REMOVED***/data/datasouces/user_data_remote_datasource.dart';
 import 'package:***REMOVED***/data/models/user_data_model.dart';
@@ -7,7 +8,8 @@ abstract class UserDataRepository {
   Future<UserData> get getRemoteUserData;
   Future<UserData> getLocalUserData({required userId});
   Future setLocalUserData({required userId, required UserData userData});
-  Future<bool> acceptLegalDoc();
+  Future<void> acceptLegalDoc();
+  Future<void> changeLanguage({required Languages lang});
 }
 
 class UserDataRepositoryImpl implements UserDataRepository {
@@ -32,5 +34,9 @@ class UserDataRepositoryImpl implements UserDataRepository {
           userId: userId, userDataModel: UserDataModel.fromEnitty(userData));
 
   @override
-  Future<bool> acceptLegalDoc() => userDataRemoteDatasource.acceptLegalDoc();
+  Future<void> acceptLegalDoc() => userDataRemoteDatasource.acceptLegalDoc();
+
+  @override
+  Future<void> changeLanguage({required Languages lang}) =>
+      userDataRemoteDatasource.changeLanguage(lang: lang);
 }

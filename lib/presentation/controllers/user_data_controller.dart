@@ -1,14 +1,13 @@
 import 'dart:async';
-import 'package:***REMOVED***/core/errors.dart';
+import 'package:***REMOVED***/core/languages.dart';
 import 'package:***REMOVED***/domain/usecases/accept_legal_doc.dart';
+import 'package:***REMOVED***/domain/usecases/change_language.dart';
+import 'package:***REMOVED***/domain/usecases/usecase.dart';
 import 'package:***REMOVED***/main.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller_states.dart';
 import 'package:***REMOVED***/presentation/ui/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:***REMOVED***/data/datasouces/user_data_local_datasource.dart';
-import 'package:***REMOVED***/data/datasouces/user_data_remote_datasource.dart';
-import 'package:***REMOVED***/data/repositories/user_data_repository.dart';
 import 'package:***REMOVED***/domain/entities/auth_data.dart';
 import 'package:***REMOVED***/domain/entities/user_data.dart';
 import 'package:***REMOVED***/domain/services/sf_sdk_service.dart';
@@ -17,14 +16,11 @@ import 'package:***REMOVED***/domain/usecases/get_userdata_and_cache.dart';
 class UserDataController extends GetxController {
   SFSDKService _sfsdkService = SFSDKService();
 
-  GetUserDataAndCache _getUserDataAndCache = GetUserDataAndCache(
-      UserDataRepositoryImpl(
-          userDataLocalDatasource: UserDataLocalDatasourceImpl(),
-          userDataRemoteDatasource: UserDataRemoteDatasourceImpl()));
+  GetUserDataAndCache _getUserDataAndCache = Get.find();
 
-  AcceptLegalDoc _acceptLegaloc = AcceptLegalDoc(UserDataRepositoryImpl(
-      userDataLocalDatasource: UserDataLocalDatasourceImpl(),
-      userDataRemoteDatasource: UserDataRemoteDatasourceImpl()));
+  AcceptLegalDoc _acceptLegaloc = Get.find();
+
+  ChangeLanguage _changeLanguage = Get.find();
 
   Rxn<AuthData> _authData = Rxn<AuthData>();
   AuthData? get authData => _authData.value;
@@ -86,8 +82,17 @@ class UserDataController extends GetxController {
 
   Future acceptLegalDoc() async {
     try {
-      await _acceptLegaloc(null);
+      await _acceptLegaloc(NoParams());
       loadUserData();
+    } catch (e) {
+      Get.snackbar('Error', e.toString(), backgroundColor: Colors.amber);
+    }
+  }
+
+  Future changeLanguage({required Languages lang}) async {
+    try {
+      await _changeLanguage(ChangeLanguageParams(lang: lang));
+      updateUserData();
     } catch (e) {
       Get.snackbar('Error', e.toString(), backgroundColor: Colors.amber);
     }

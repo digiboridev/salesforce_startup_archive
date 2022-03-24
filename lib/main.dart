@@ -1,4 +1,10 @@
+import 'package:***REMOVED***/data/datasouces/user_data_local_datasource.dart';
+import 'package:***REMOVED***/data/datasouces/user_data_remote_datasource.dart';
+import 'package:***REMOVED***/data/repositories/user_data_repository.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
+import 'package:***REMOVED***/domain/usecases/accept_legal_doc.dart';
+import 'package:***REMOVED***/domain/usecases/change_language.dart';
+import 'package:***REMOVED***/domain/usecases/get_userdata_and_cache.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller_states.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/legal_doc_view.dart';
@@ -7,10 +13,25 @@ import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
 
 main() async {
+  await injectDependency();
   await initServices();
   runApp(GetMaterialApp(
     home: Loader(),
   ));
+}
+
+Future injectDependency() async {
+  // Repositories
+  UserDataRepository userDataRepository = Get.put(UserDataRepositoryImpl(
+      userDataLocalDatasource: UserDataLocalDatasourceImpl(),
+      userDataRemoteDatasource: UserDataRemoteDatasourceImpl()));
+
+  // Use cases
+  Get.put<GetUserDataAndCache>(GetUserDataAndCache(userDataRepository));
+  Get.put<AcceptLegalDoc>(AcceptLegalDoc(userDataRepository));
+  Get.put<ChangeLanguage>(ChangeLanguage(userDataRepository));
+
+  print('injected dependencies...');
 }
 
 Future initServices() async {
