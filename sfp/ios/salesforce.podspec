@@ -1,9 +1,9 @@
 #
 # To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
-#
+# 7.3.0
 Pod::Spec.new do |s|
-  s.name             = 'sfplugin'
-  s.version          = '6.1.0'
+  s.name             = 'salesforce'
+  s.version          = '10.0.0'
   s.summary          = 'Flutter plugin for the Salesforce Mobile SDK.'
   s.description      = 'Flutter plugin for the Salesforce Mobile SDK.'
   s.homepage         = "https://github.com/forcedotcom/SalesforceMobileSDK-FlutterPlugin"
@@ -13,11 +13,13 @@ Pod::Spec.new do |s|
   s.source_files = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
-  s.dependency 'SmartSync'
-  s.dependency 'SmartStore'
-  s.dependency 'SalesforceSDKCore'
-  s.dependency 'SalesforceAnalytics'
+  s.dependency 'SalesforceSDKCommon', "~>#{s.version}"
+  s.dependency 'SmartStore', "~>#{s.version}"
+  s.dependency 'SalesforceAnalytics', "~>#{s.version}"
+  s.dependency 'SalesforceSDKCore', "~>#{s.version}"
+  s.dependency 'MobileSync', "~>#{s.version}"
 
-  s.ios.deployment_target = '11.0'
+
+  s.ios.deployment_target = '13.0'
 end
 
