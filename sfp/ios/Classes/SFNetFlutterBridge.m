@@ -91,7 +91,8 @@ static NSString * const kHttpContentType = @"content-type";
             NSString* fileUrl = [fileParam nonNullObjectForKey:kFileUrl];
             NSString* fileName = [fileParam nonNullObjectForKey:kFileName];
             NSData* fileData = [NSData dataWithContentsOfURL:[NSURL URLWithString:fileUrl]];
-            [request addPostFileData:fileData paramName:fileParamName description:nil fileName:fileName mimeType:fileMimeType];
+            NSDictionary *params = @{@"title" : fileName};
+            [request addPostFileData:fileData paramName:fileParamName fileName:fileName mimeType:fileMimeType params:params];
         }
     }
 
@@ -101,40 +102,41 @@ static NSString * const kHttpContentType = @"content-type";
     }
 
 
-    [[SFRestAPI sharedInstance] sendRESTRequest:request
-                                      failBlock:^(NSError *e, NSURLResponse *rawResponse) {
-                                          // XXX callback(@[RCTMakeError(@"sendRequest failed", e, nil)]);
-                                      }
-                                  completeBlock:^(id response, NSURLResponse *rawResponse) {
-                                      id result;
-
-                                      // Binary response
-                                      if (returnBinary) {
-                                          result = @{
-                                                     kEncodedBody:[((NSData*) response) base64EncodedStringWithOptions:0],
-                                                     kContentType:((NSHTTPURLResponse*) rawResponse).allHeaderFields[kHttpContentType]
-                                                     };
-                                      }
-                                      // Some response
-                                      else if (response) {
-                                          if ([response isKindOfClass:[NSDictionary class]]) {
-                                              result = response;
-                                          } else if ([response isKindOfClass:[NSArray class]]) {
-                                              result = response;
-                                          } else {
-                                              NSData* responseAsData = response;
-                                              NSStringEncoding encodingType = rawResponse.textEncodingName == nil ? NSUTF8StringEncoding :  CFStringConvertEncodingToNSStringEncoding(CFStringConvertIANACharSetNameToEncoding((CFStringRef)rawResponse.textEncodingName));
-                                              result = [[NSString alloc] initWithData:responseAsData encoding:encodingType];
+    [[SFRestAPI sharedInstance] sendRequest:request
+        failureBlock:^(id response, NSError *e, NSURLResponse *rawResponse)  {
+                                            // XXX callback(@[RCTMakeError(@"sendRequest failed", e, nil)]);
                                           }
-                                      }
-                                      // No response
-                                      else {
-                                          result = nil;
-                                      }
+                                   successBlock:^(id response, NSURLResponse *rawResponse) {
 
-                                      callback(result);
-                                  }
-     ];
-}
+                                            id result;
 
-@end
+                                          // Binary response
+                                          if (returnBinary) {
+                                              result = @{
+                                                         kEncodedBody:[((NSData*) response) base64EncodedStringWithOptions:0],
+                                                         kContentType:((NSHTTPURLResponse*) rawResponse).allHeaderFields[kHttpContentType]
+                                                         };
+                                          }
+                                          // Some response
+                                          else if (response) {
+                                              if ([response isKindOfClass:[NSDictionary class]]) {
+                                                  result = response;
+                                              } else if ([response isKindOfClass:[NSArray class]]) {
+                                                  result = response;
+                                              } else {
+                                                  NSData* responseAsData = response;
+                                                  NSStringEncoding encodingType = rawResponse.textEncodingName == nil ? NSUTF8StringEncoding :  CFStringConvertEncodingToNSStringEncoding(CFStringConvertIANACharSetNameToEncoding((CFStringRef)rawResponse.textEncodingName));
+                                                  result = [[NSString alloc] initWithData:responseAsData encoding:encodingType];
+                                              }
+                                          }
+                                          // No response
+                                          else {
+                                              result = nil;
+                                          }
+
+                                          callback(result);
+                                      }
+         ];
+    }
+
+    @end
