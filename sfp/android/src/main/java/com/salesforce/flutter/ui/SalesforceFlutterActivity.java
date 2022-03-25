@@ -72,6 +72,8 @@ public abstract class SalesforceFlutterActivity extends FlutterActivity implemen
         setTheme(isDarkTheme ? R.style.SalesforceSDK_Dark : R.style.SalesforceSDK);
         // This makes the navigation bar visible on light themes.
         SalesforceSDKManager.getInstance().setViewNavigationVisibility(this);
+
+
     }
 
     @Override
