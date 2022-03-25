@@ -117,6 +117,8 @@
     //loginViewConfig.navBarFont = [UIFont fontWithName:@"Helvetica" size:16.0];
     [SFUserAccountManager sharedInstance].loginViewControllerConfig = loginViewConfig;
 
+    [[SFUserAccountManager sharedInstance] setLoginHost:@"***REMOVED***"];
+
     ///[[SalesforceSDKManager sharedManager] launch];
 __weak typeof (self) weakSelf = self;
     [SFSDKAuthHelper loginIfRequired:^{
