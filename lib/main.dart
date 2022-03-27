@@ -14,6 +14,7 @@ import 'package:get/get.dart';
 
 
 main() async {
+  //WidgetsFlutterBinding.ensureInitialized();
   await injectDependency();
   await initServices();
   runApp(GetMaterialApp(
@@ -47,8 +48,10 @@ class Loader extends StatelessWidget {
       Get.put(UserDataController(), permanent: true);
   final ConnectionService connectionService = Get.find();
 
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SafeArea(
         child: Obx(() {
