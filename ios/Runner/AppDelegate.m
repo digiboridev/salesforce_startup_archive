@@ -120,6 +120,8 @@
     [[SFUserAccountManager sharedInstance] setLoginHost:@"***REMOVED***"];
 
     ///[[SalesforceSDKManager sharedManager] launch];
+
+
 __weak typeof (self) weakSelf = self;
     [SFSDKAuthHelper loginIfRequired:^{
         [weakSelf resetUserloginStatus];
@@ -155,7 +157,8 @@ __weak typeof (self) weakSelf = self;
     //   OAuth Redirect URI custom URL scheme.
     // --Uncomment the following line and delete the original return statement:
 
-    // return [[SFUserAccountManager sharedInstance] handleAdvancedAuthenticationResponse:url options:options];
+   //return [[SFUserAccountManager sharedInstance] handleAdvancedAuthenticationResponse:url options:options];
+   //return [[SFUserAccountManager sharedInstance] handleIDPAuthenticationResponse:url options:options];
     return NO;
 }
 

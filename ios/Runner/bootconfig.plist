@@ -8,9 +8,9 @@
         <string>api</string>
     </array>
     <key>oauthRedirectURI</key>
-    <string>sfdc://success/android</string>
+    <string>sfdc://success/ios</string>
     <key>remoteAccessConsumerKey</key>
-    <string>3MVG92H4TjwUcLlLvIMWkOuic3bII9pd.5HcJF9ystbw_UTotvYjP5xjIjZlQNULW4kcdpL5MXI1dTNo8ftGZ</string>
+    <string>3MVG92H4TjwUcLlLvIMWkOuic3bII9pd.5HcJXJMHYf_ATSEtbSV54TjF3mCCbjmV4dcKVnxCGGGih_LB6qo3</string>
     <key>shouldAuthenticate</key>
     <true/>
 </dict>

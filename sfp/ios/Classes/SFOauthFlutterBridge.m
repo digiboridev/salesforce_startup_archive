@@ -46,10 +46,34 @@
     }
 }
 
-- (SFOAuthCredentials*) getAuthCredentials:(NSDictionary *)argsDict
+- (NSString*) getAuthCredentials:(NSDictionary *)argsDict
 {
+
     SFOAuthCredentials *creds = [SFUserAccountManager sharedInstance].currentUser.credentials;
-    return creds;
+    NSDictionary *credentialsDict = nil;
+    if (nil != creds) {
+
+            credentialsDict = @{
+                               @"communityUrl": creds.communityUrl.absoluteString,
+                               @"loginUrl": creds.communityUrl.absoluteString,
+                               @"identityUrl": creds.identityUrl.absoluteString,
+                               @"userAgent": @"",
+                               @"accessToken": creds.accessToken,
+                               @"communityId": creds.communityId,
+                               @"userId": creds.userId,
+                               @"orgId": creds.organizationId,
+                               @"refreshToken": creds.refreshToken,
+                               @"instanceUrl": creds.instanceUrl.absoluteString,
+                               };
+        }
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:credentialsDict
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&error];
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    return jsonString;
+
+
 }
 
 - (SFOAuthCredentials*) getClientInfo:(NSDictionary *)argsDict

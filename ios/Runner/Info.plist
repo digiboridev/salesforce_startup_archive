@@ -6,6 +6,17 @@
 	<string>en</string>
 	<key>LSRequiresIPhoneOS</key>
     	<true/>
+        <key>CFBundleURLTypes</key>
+        <array>
+            <dict>
+                <key>CFBundleURLName</key>
+                <string>sfdc</string>
+                <key>CFBundleURLSchemes</key>
+                <array>
+                    <string>sfdc</string>
+                </array>
+            </dict>
+        </array>
 	<key>SFDCOAuthLoginHost</key>
     <string>***REMOVED***</string>
 	<key>CFBundleExecutable</key>
