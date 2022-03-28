@@ -15,6 +15,7 @@ import 'package:get/get.dart';
 
 main() async {
   //WidgetsFlutterBinding.ensureInitialized();
+
   await injectDependency();
   await initServices();
   runApp(GetMaterialApp(
