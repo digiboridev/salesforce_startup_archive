@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
 
 class Customer extends Equatable {
@@ -5,28 +7,28 @@ class Customer extends Equatable {
   final String customerName;
   final String customerId;
   final String customerAddress;
-  final double vat;
+  final num vat;
   final bool showPriceWithVAT;
   final String salesOrganization;
   final bool returnEnabled;
   final String plantCode;
   final String paymentMethod;
-  final DateTime nextDeliveryFrozen;
+  final DateTime? nextDeliveryFrozen;
   final DateTime nextDelivery;
   final DateTime nextCutOff;
-  final double minimumOrderAmountFrozen;
-  final double minimumOrderAmount;
-  final double maximumReturnItems;
-  final double maximumLinesInOrder;
+  final num minimumOrderAmountFrozen;
+  final num minimumOrderAmount;
+  final num maximumReturnItems;
+  final num maximumLinesInOrder;
   final String industryKey;
   final bool hidePrices;
   final bool hasUnpaidInvoice;
   final bool forceMinimum;
   final bool financialExportEnabled;
-  final String distributionType;
+  final num distributionType;
   final String cutOffTime;
   final List creditCards;
-  final double customerGroup;
+  final String customerGroup;
   final List customerLineItems;
   final String countryKey;
   final String country;
@@ -63,7 +65,7 @@ class Customer extends Equatable {
   });
 
   @override
-  List<Object> get props {
+  List<Object?> get props {
     return [
       customerSAPNumber,
       customerName,

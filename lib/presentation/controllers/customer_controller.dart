@@ -1,9 +1,10 @@
 import 'dart:async';
 
 import 'package:***REMOVED***/data/datasouces/customers_remote_datasource.dart';
+import 'package:***REMOVED***/data/models/customer_model.dart';
 import 'package:***REMOVED***/domain/entities/related_consumer.dart';
-import 'package:***REMOVED***/domain/usecases/get_selected_customer_id.dart';
-import 'package:***REMOVED***/domain/usecases/set_selected_customer_id.dart';
+import 'package:***REMOVED***/domain/usecases/get_selected_customer_sap.dart';
+import 'package:***REMOVED***/domain/usecases/set_selected_customer_sap.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller_states.dart';
 import 'package:get/get.dart';
@@ -13,8 +14,8 @@ class CustomerController extends GetxController {
   UserDataController _userDataController = Get.find();
 
   // Usecases
-  GetSelectedCustomerId _getSelectedCustomerId = Get.find();
-  SetSelectedCustomerId _setSelectedCustomerId = Get.find();
+  GetSelectedCustomerSAP _getSelectedCustomerSAP = Get.find();
+  SetSelectedCustomerSAP _setSelectedCustomerSAP = Get.find();
 
   // Any non autocloseable streams
   List<StreamSubscription> _subs = [];
@@ -49,29 +50,26 @@ class CustomerController extends GetxController {
     if (uds is UserDataCommonState) {
       _relatedConsumers.value = uds.userData.relatedCustomers;
 
-      String? selectedCustomerId = await _getSelectedCustomerId
-          .call(GetSelectedCustomerIdParams(userId: uds.userData.sFUserId));
-
-      if (selectedCustomerId is! String) {
-        selectedCustomerId = uds.userData.relatedCustomers.first.customerId;
-        _setSelectedCustomerId.call(SetSelectedCustomerIdParams(
-            userId: uds.userData.sFUserId, customerId: selectedCustomerId));
+      String? selectedCustomerSap = await _getSelectedCustomerSAP
+          .call(GetSelectedCustomerSAPParams(userId: uds.userData.sFUserId));
+      // selectedCustomerSap = null;
+      if (selectedCustomerSap is! String) {
+        selectedCustomerSap =
+            uds.userData.relatedCustomers.first.customerSAPNumber;
+        _setSelectedCustomerSAP.call(SetSelectedCustomerSAPParams(
+            userId: uds.userData.sFUserId, customerSAP: selectedCustomerSap));
       }
 
-      loadCustomer(customerId: selectedCustomerId);
+      loadCustomer(customerSAP: selectedCustomerSap);
     } else {
       // clear all data
       _relatedConsumers.clear();
     }
   }
 
-  loadCustomer({required String customerId}) async {
-    print(DateTime.parse('2021-10-21'));
-    try {
-      await CustomersRemoteDatasourceImpl()
-          .getCustomerById(customerId: customerId);
-    } catch (e) {
-      print(e);
-    }
+  loadCustomer({required String customerSAP}) async {
+    CustomerModel c = await CustomersRemoteDatasourceImpl()
+        .getCustomerById(customerSAP: customerSAP);
+    print(c);
   }
 }

@@ -1,9 +1,9 @@
 import 'package:***REMOVED***/data/datasouces/customers_local_datasource.dart';
 
 abstract class CustomersRepository {
-  Future<String> getSelectedCustomerId({required String userId});
-  Future setSelectedCustomerId(
-      {required String userId, required String consumerId});
+  Future<String> getSelectedCustomerSAP({required String userId});
+  Future setSelectedCustomerSAP(
+      {required String userId, required String customerSAP});
 }
 
 class CustomersRepositoryImpl implements CustomersRepository {
@@ -14,12 +14,12 @@ class CustomersRepositoryImpl implements CustomersRepository {
   });
 
   @override
-  Future<String> getSelectedCustomerId({required String userId}) =>
+  Future<String> getSelectedCustomerSAP({required String userId}) =>
       customersLocalDatasource.getSelectedCustomerId(userId: userId);
 
   @override
-  Future setSelectedCustomerId(
-          {required String userId, required String consumerId}) =>
+  Future setSelectedCustomerSAP(
+          {required String userId, required String customerSAP}) =>
       customersLocalDatasource.setSelectedCustomerId(
-          userId: userId, consumerId: consumerId);
+          userId: userId, consumerId: customerSAP);
 }

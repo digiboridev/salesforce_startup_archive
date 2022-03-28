@@ -1,16 +1,16 @@
 import 'package:***REMOVED***/data/repositories/customers_repository.dart';
 import 'package:***REMOVED***/domain/usecases/usecase.dart';
 
-class GetSelectedCustomerId
-    implements UseCase<String?, GetSelectedCustomerIdParams> {
+class GetSelectedCustomerSAP
+    implements UseCase<String?, GetSelectedCustomerSAPParams> {
   final CustomersRepository customersRepository;
 
-  GetSelectedCustomerId(this.customersRepository);
+  GetSelectedCustomerSAP(this.customersRepository);
 
   @override
   Future<String?> call(params) async {
     try {
-      return await customersRepository.getSelectedCustomerId(
+      return await customersRepository.getSelectedCustomerSAP(
           userId: params.userId);
     } catch (e) {
       print(e);
@@ -19,9 +19,9 @@ class GetSelectedCustomerId
   }
 }
 
-class GetSelectedCustomerIdParams {
+class GetSelectedCustomerSAPParams {
   final String userId;
-  GetSelectedCustomerIdParams({
+  GetSelectedCustomerSAPParams({
     required this.userId,
   });
 }

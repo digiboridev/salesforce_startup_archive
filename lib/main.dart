@@ -6,9 +6,9 @@ import 'package:***REMOVED***/data/repositories/user_data_repository.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/domain/usecases/accept_legal_doc.dart';
 import 'package:***REMOVED***/domain/usecases/change_language.dart';
-import 'package:***REMOVED***/domain/usecases/get_selected_customer_id.dart';
+import 'package:***REMOVED***/domain/usecases/get_selected_customer_sap.dart';
 import 'package:***REMOVED***/domain/usecases/get_userdata_and_cache.dart';
-import 'package:***REMOVED***/domain/usecases/set_selected_customer_id.dart';
+import 'package:***REMOVED***/domain/usecases/set_selected_customer_sap.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller_states.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/legal_doc_view.dart';
@@ -38,8 +38,8 @@ Future injectDependency() async {
   Get.put<AcceptLegalDoc>(AcceptLegalDoc(userDataRepository));
   Get.put<ChangeLanguage>(ChangeLanguage(userDataRepository));
 
-  Get.put<GetSelectedCustomerId>(GetSelectedCustomerId(customersRepository));
-  Get.put<SetSelectedCustomerId>(SetSelectedCustomerId(customersRepository));
+  Get.put<GetSelectedCustomerSAP>(GetSelectedCustomerSAP(customersRepository));
+  Get.put<SetSelectedCustomerSAP>(SetSelectedCustomerSAP(customersRepository));
 
   print('injected dependencies...');
 }
