@@ -3,7 +3,7 @@
 # 7.3.0
 Pod::Spec.new do |s|
   s.name             = 'salesforce'
-  s.version          = '6.2.1'
+  s.version          = '6.2.0'
   s.summary          = 'Flutter plugin for the Salesforce Mobile SDK.'
   s.description      = 'Flutter plugin for the Salesforce Mobile SDK.'
   s.homepage         = "https://github.com/forcedotcom/SalesforceMobileSDK-FlutterPlugin"
