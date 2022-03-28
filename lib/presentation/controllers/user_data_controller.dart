@@ -14,24 +14,32 @@ import 'package:***REMOVED***/domain/services/sf_sdk_service.dart';
 import 'package:***REMOVED***/domain/usecases/get_userdata_and_cache.dart';
 
 class UserDataController extends GetxController {
+  // dependencies
   SFSDKService _sfsdkService = SFSDKService();
 
+  // usecases
   GetUserDataAndCache _getUserDataAndCache = Get.find();
-
   AcceptLegalDoc _acceptLegaloc = Get.find();
-
   ChangeLanguage _changeLanguage = Get.find();
 
+  // valiables
   Rxn<AuthData> _authData = Rxn<AuthData>();
   AuthData? get authData => _authData.value;
 
   Rx<UserDataState> _userDataState = Rx(UserDataInitialState());
   UserDataState get userDataState => _userDataState.value;
+  Rx<UserDataState> get userDataStateStream => _userDataState;
 
   @override
   void onReady() {
     super.onReady();
     listenByTimer();
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    // TODO close event channel
   }
 
   listenByTimer() {
