@@ -66,6 +66,10 @@
                                @"instanceUrl": creds.instanceUrl.absoluteString,
                                };
         }
+        else
+        {
+            return @"No restClient - getAuthCredentials";
+        }
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:credentialsDict
                                                        options:NSJSONWritingPrettyPrinted

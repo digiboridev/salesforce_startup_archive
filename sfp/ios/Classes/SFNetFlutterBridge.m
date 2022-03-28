@@ -92,7 +92,9 @@ static NSString * const kHttpContentType = @"content-type";
             NSString* fileName = [fileParam nonNullObjectForKey:kFileName];
             NSData* fileData = [NSData dataWithContentsOfURL:[NSURL URLWithString:fileUrl]];
             NSDictionary *params = @{@"title" : fileName};
-            [request addPostFileData:fileData paramName:fileParamName fileName:fileName mimeType:fileMimeType params:params];
+            //[request addPostFileData:fileData paramName:fileParamName fileName:fileName mimeType:fileMimeType params:params];
+            [request addPostFileData:fileData paramName:fileParamName description:nil fileName:fileName mimeType:fileMimeType];
+            
         }
     }
 
@@ -101,13 +103,14 @@ static NSString * const kHttpContentType = @"content-type";
         request.parseResponse = NO;
     }
 
-
-    [[SFRestAPI sharedInstance] sendRequest:request
-        failureBlock:^(id response, NSError *e, NSURLResponse *rawResponse)  {
+    [[SFRestAPI sharedInstance] sendRESTRequest:request
+    //[[SFRestAPI sharedInstance] sendRequest:request
+        //failureBlock:^(id response, NSError *e, NSURLResponse *rawResponse)  {
+                                      failBlock:^(NSError *e, NSURLResponse *rawResponse) {
                                             // XXX callback(@[RCTMakeError(@"sendRequest failed", e, nil)]);
                                           }
-                                   successBlock:^(id response, NSURLResponse *rawResponse) {
-
+                                   //successBlock:^(id response, NSURLResponse *rawResponse) {
+                                  completeBlock:^(id response, NSURLResponse *rawResponse) {
                                             id result;
 
                                           // Binary response

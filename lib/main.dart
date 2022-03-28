@@ -37,7 +37,6 @@ Future injectDependency() async {
 }
 
 Future initServices() async {
-  print('starting services ...');
   await GetStorage.init();
   await Get.putAsync(() => ConnectionService().init());
   print('All services started...');
