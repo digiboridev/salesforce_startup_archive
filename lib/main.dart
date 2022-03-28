@@ -14,7 +14,7 @@ import 'package:get/get.dart';
 
 
 main() async {
-  //WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
 
   await injectDependency();
   await initServices();
@@ -33,11 +33,11 @@ Future injectDependency() async {
   Get.put<GetUserDataAndCache>(GetUserDataAndCache(userDataRepository));
   Get.put<AcceptLegalDoc>(AcceptLegalDoc(userDataRepository));
   Get.put<ChangeLanguage>(ChangeLanguage(userDataRepository));
-
   print('injected dependencies...');
 }
 
 Future initServices() async {
+  print('starting services ...');
   await GetStorage.init();
   await Get.putAsync(() => ConnectionService().init());
   print('All services started...');
@@ -47,6 +47,7 @@ class Loader extends StatelessWidget {
   final UserDataController userDataController =
       Get.put(UserDataController(), permanent: true);
   final ConnectionService connectionService = Get.find();
+
 
 
   @override

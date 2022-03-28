@@ -123,7 +123,13 @@ static NSString * const kHttpContentType = @"content-type";
                                           // Some response
                                           else if (response) {
                                               if ([response isKindOfClass:[NSDictionary class]]) {
-                                                  result = response;
+                                                      NSError *error;
+                                                      NSData *jsonData = [NSJSONSerialization dataWithJSONObject:response
+                                                                                                         options:NSJSONWritingPrettyPrinted
+                                                                                                           error:&error];
+                                                      NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+
+                                                  result = jsonString;
                                               } else if ([response isKindOfClass:[NSArray class]]) {
                                                   result = response;
                                               } else {

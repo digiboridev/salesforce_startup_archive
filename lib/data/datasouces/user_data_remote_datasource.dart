@@ -13,18 +13,19 @@ abstract class UserDataRemoteDatasource {
 class UserDataRemoteDatasourceImpl implements UserDataRemoteDatasource {
   @override
   Future<UserDataModel> get getUserData async {
+
     try {
       Map<String, dynamic> response = await SalesforcePlugin.sendRequest(
         endPoint: ***REMOVED***Endpoint,
         path: '/me',
       ) as Map<String, dynamic>;
-
       if (response['success']) {
         return UserDataModel.fromMap(response['result']);
       } else {
         throw ServerException(response['errorMsg']);
       }
     } catch (e) {
+      print(e);
       throw ServerException('Internal error');
     }
   }

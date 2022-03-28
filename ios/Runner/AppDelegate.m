@@ -37,7 +37,9 @@
 static NSString * const RemoteAccessConsumerKey = @"3MVG92H4TjwUcLlLvIMWkOuic3bII9pd.5HcJXJMHYf_ATSEtbSV54TjF3mCCbjmV4dcKVnxCGGGih_LB6qo3";
 static NSString * const OAuthRedirectURI        = @"sfdc://success/ios";
 
-@implementation AppDelegate
+@implementation AppDelegate {
+  GeneratedPluginRegistrant *plugins;
+}
 
 - (id)init
 {
@@ -71,8 +73,11 @@ static NSString * const OAuthRedirectURI        = @"sfdc://success/ios";
             //[[SFPushNotificationManager sharedInstance] registerForRemoteNotifications];
             //
 
-            [SFSDKLogger log:[weakSelf class] level:DDLogLevelInfo format:@"Post-launch: launch actions taken: %@", [SalesforceSDKManager launchActionsStringRepresentation:launchActionList]];
-            [weakSelf setupRootViewController];
+            //[SFSDKLogger log:[weakSelf class] level:DDLogLevelInfo format:@"Post-launch: launch actions taken: %@", [SalesforceSDKManager launchActionsStringRepresentation:launchActionList]];
+            //[weakSelf setupRootViewController];
+            //[GeneratedPluginRegistrant registerWithRegistry:weakSelf];
+
+
         };
         [SalesforceSDKManager sharedManager].launchErrorAction = ^(NSError *error, SFSDKLaunchAction launchActionList) {
             [SFSDKLogger log:[weakSelf class] level:DDLogLevelError format:@"Error during SDK launch: %@", [error localizedDescription]];
@@ -85,6 +90,8 @@ static NSString * const OAuthRedirectURI        = @"sfdc://success/ios";
         [SalesforceSDKManager sharedManager].switchUserAction = ^(SFUserAccount *fromUser, SFUserAccount *toUser) {
             [weakSelf handleUserSwitch:fromUser toUser:toUser];
         };
+
+
     }
 
     return self;
@@ -92,9 +99,9 @@ static NSString * const OAuthRedirectURI        = @"sfdc://success/ios";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-
-    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    [self initializeAppViewState];
+    [GeneratedPluginRegistrant registerWithRegistry:self];
+    //self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    //[self initializeAppViewState];
 
 
     //Uncomment the code below to see how you can customize the color, textcolor, font and   fontsize of the navigation bar
@@ -111,7 +118,10 @@ static NSString * const OAuthRedirectURI        = @"sfdc://success/ios";
     [[SalesforceSDKManager sharedManager] launch];
 
 
-    [GeneratedPluginRegistrant registerWithRegistry:self];
+
+
+
+
     // Override point for customization after application launch.
     return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
