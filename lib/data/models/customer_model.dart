@@ -71,7 +71,7 @@ class CustomerModel extends Customer {
       'CustomerName': customerName,
       'CustomerId': customerId,
       'CustomerAddress': customerAddress,
-      'Vat': vat,
+      'VAT': vat,
       'ShowPriceWithVAT': showPriceWithVAT,
       'SalesOrganization': salesOrganization,
       'ReturnEnabled': returnEnabled,
@@ -80,7 +80,7 @@ class CustomerModel extends Customer {
       'NextDeliveryFrozen': nextDeliveryFrozen.toString(),
       'NextDelivery': nextDelivery.toString(),
       'NextCutOff': nextCutOff.toString(),
-      'MinimumOrderAmountFrozen': toString(),
+      'MinimumOrderAmountFrozen': minimumOrderAmountFrozen,
       'MinimumOrderAmount': minimumOrderAmount,
       'MaximumReturnItems': maximumReturnItems,
       'MaximumLinesInOrder': maximumLinesInOrder,
@@ -112,7 +112,9 @@ class CustomerModel extends Customer {
       plantCode: map['PlantCode'],
       paymentMethod: map['PaymentMethod'],
       nextDeliveryFrozen: map['NextDeliveryFrozen'] != null
-          ? DateTime.parse(map['NextDeliveryFrozen'])
+          ? map['NextDeliveryFrozen'] != 'null'
+              ? DateTime.parse(map['NextDeliveryFrozen'])
+              : null
           : null,
       nextDelivery: DateTime.parse(map['NextDelivery']),
       nextCutOff: DateTime.parse(map['NextCutOff']),

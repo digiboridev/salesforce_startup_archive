@@ -25,77 +25,82 @@ class _LegalDocViewState extends State<LegalDocView> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Column(
-          children: [
-            Text('Diplomat Header'),
-            Expanded(
-                child: WebView(
-              javascriptMode: JavascriptMode.unrestricted,
-              initialUrl: widget.userDataState.legalDoc.toString(),
-              onPageFinished: (url) {
-                print(url);
-              },
-              onPageStarted: (url) {
-                print(url);
-              },
-              onProgress: (progress) {
-                print(progress);
-              },
-              onWebResourceError: (e) {
-                print(e);
-                setState(() => error = true);
-              },
-              onWebViewCreated: (controller) {
-                webViewController = controller;
-              },
-            )),
-            Padding(
-              padding: EdgeInsets.all(Get.width * 0.06),
-              child: GestureDetector(
-                onTap: () {
-                  if (!connectionService.hasConnection) {
-                    Get.snackbar('Error', 'No internet',
-                        backgroundColor: Colors.amber);
-                    return;
-                  }
-
-                  userDataController.acceptLegalDoc();
+    return Scaffold(
+      body: SafeArea(
+          child: Stack(
+        children: [
+          Column(
+            children: [
+              Text('Diplomat Header'),
+              Expanded(
+                  child: WebView(
+                javascriptMode: JavascriptMode.unrestricted,
+                initialUrl: widget.userDataState.legalDoc.toString(),
+                onPageFinished: (url) {
+                  print(url);
                 },
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.circular(Get.width * 0.06)),
-                  padding: EdgeInsets.symmetric(
-                      horizontal: Get.width * 0.1, vertical: Get.width * 0.03),
-                  child: Text('Understood'),
+                onPageStarted: (url) {
+                  print(url);
+                },
+                onProgress: (progress) {
+                  print(progress);
+                },
+                onWebResourceError: (e) {
+                  print(e);
+                  setState(() => error = true);
+                },
+                onWebViewCreated: (controller) {
+                  webViewController = controller;
+                },
+              )),
+              Padding(
+                padding: EdgeInsets.all(Get.width * 0.06),
+                child: GestureDetector(
+                  onTap: () {
+                    if (!connectionService.hasConnection) {
+                      Get.snackbar('Error', 'No internet',
+                          backgroundColor: Colors.amber);
+                      return;
+                    }
+
+                    userDataController.acceptLegalDoc();
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.amber,
+                        borderRadius: BorderRadius.circular(Get.width * 0.06)),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: Get.width * 0.1,
+                        vertical: Get.width * 0.03),
+                    child: Text('Understood'),
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-        if (error)
-          Positioned(
-            right: Get.width * 0.06,
-            bottom: Get.width * 0.3,
-            child: GestureDetector(
-              onTap: () {
-                if (webViewController != null) {
-                  setState(() => error = false);
-                  webViewController!.reload();
-                }
-              },
-              child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.blue[200],
-                      borderRadius: BorderRadius.circular(Get.width * 0.06)),
-                  padding: EdgeInsets.symmetric(
-                      horizontal: Get.width * 0.03, vertical: Get.width * 0.03),
-                  child: Icon(Icons.replay_rounded)),
-            ),
-          )
-      ],
+            ],
+          ),
+          if (error)
+            Positioned(
+              right: Get.width * 0.06,
+              bottom: Get.width * 0.3,
+              child: GestureDetector(
+                onTap: () {
+                  if (webViewController != null) {
+                    setState(() => error = false);
+                    webViewController!.reload();
+                  }
+                },
+                child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.blue[200],
+                        borderRadius: BorderRadius.circular(Get.width * 0.06)),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: Get.width * 0.03,
+                        vertical: Get.width * 0.03),
+                    child: Icon(Icons.replay_rounded)),
+              ),
+            )
+        ],
+      )),
     );
   }
 }

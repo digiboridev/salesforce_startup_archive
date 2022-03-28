@@ -4,10 +4,12 @@ import 'package:***REMOVED***/data/models/customer_model.dart';
 import 'package:flutter/services.dart';
 import 'package:salesforce/salesforce.dart';
 
-abstract class CustomersRemoteDatasource {}
+abstract class CustomersRemoteDatasource {
+  Future<CustomerModel> getCustomerBySAP({required String customerSAP});
+}
 
 class CustomersRemoteDatasourceImpl implements CustomersRemoteDatasource {
-  Future<CustomerModel> getCustomerById({required String customerSAP}) async {
+  Future<CustomerModel> getCustomerBySAP({required String customerSAP}) async {
     try {
       Map<String, dynamic> response = await SalesforcePlugin.sendRequest(
         endPoint: ***REMOVED***Endpoint,
