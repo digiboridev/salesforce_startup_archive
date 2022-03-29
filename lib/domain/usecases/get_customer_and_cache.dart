@@ -18,6 +18,7 @@ class GetCustomerAndCache
           customerSAP: params.customerSAP, customer: remoteCustomer);
       return remoteCustomer;
     } catch (e) {
+      print(e);
       return customersRepository.getLocalCustomerBySAP(
           customerSAP: params.customerSAP);
     }

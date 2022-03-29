@@ -106,5 +106,8 @@ class UserDataController extends GetxController {
     }
   }
 
-  Future<void> logout() => _sfsdkService.logout();
+  Future<void> logout() async {
+    _sfsdkService.logout();
+    Get.until((route) => Get.currentRoute == '/');
+  }
 }

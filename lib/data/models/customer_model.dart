@@ -18,8 +18,8 @@ class CustomerModel extends Customer {
     required DateTime nextDelivery,
     required DateTime nextCutOff,
     required num minimumOrderAmountFrozen,
-    required num minimumOrderAmount,
-    required num maximumReturnItems,
+    required num? minimumOrderAmount,
+    required num? maximumReturnItems,
     required num maximumLinesInOrder,
     required String industryKey,
     required bool hidePrices,
@@ -100,6 +100,7 @@ class CustomerModel extends Customer {
   }
 
   factory CustomerModel.fromMap(Map<String, dynamic> map) {
+    print(map['MaximumReturnItems'] is num);
     return CustomerModel(
       customerSAPNumber: map['CustomerSAPNumber'],
       customerName: map['CustomerName'],
@@ -120,7 +121,8 @@ class CustomerModel extends Customer {
       nextCutOff: DateTime.parse(map['NextCutOff']),
       minimumOrderAmountFrozen: map['MinimumOrderAmountFrozen'],
       minimumOrderAmount: map['MinimumOrderAmount'],
-      maximumReturnItems: map['MaximumReturnItems'],
+      maximumReturnItems:
+          map['MaximumReturnItems'] is num ? map['MaximumReturnItems'] : null,
       maximumLinesInOrder: map['MaximumLinesInOrder'],
       industryKey: map['IndustryKey'],
       hidePrices: map['HidePrices'],

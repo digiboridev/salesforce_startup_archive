@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:equatable/equatable.dart';
 
 class Customer extends Equatable {
@@ -17,8 +15,8 @@ class Customer extends Equatable {
   final DateTime nextDelivery;
   final DateTime nextCutOff;
   final num minimumOrderAmountFrozen;
-  final num minimumOrderAmount;
-  final num maximumReturnItems;
+  final num? minimumOrderAmount;
+  final num? maximumReturnItems;
   final num maximumLinesInOrder;
   final String industryKey;
   final bool hidePrices;
