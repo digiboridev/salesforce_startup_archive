@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:***REMOVED***/domain/entities/customer.dart';
 import 'package:***REMOVED***/domain/entities/related_consumer.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
-import 'package:***REMOVED***/domain/usecases/get_customer_and_cache.dart';
+import 'package:***REMOVED***/domain/usecases/get_customers_and_cache.dart';
 import 'package:***REMOVED***/domain/usecases/get_selected_customer_sap.dart';
 import 'package:***REMOVED***/domain/usecases/set_selected_customer_sap.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
@@ -18,30 +18,29 @@ class CustomerController extends GetxController {
   // Usecases
   GetSelectedCustomerSAP _getSelectedCustomerSAP = Get.find();
   SetSelectedCustomerSAP _setSelectedCustomerSAP = Get.find();
-  GetCustomerAndCache _getCustomerAndCache = Get.find();
+  GetCustomersAndCache _getCustomersAndCache = Get.find();
 
   // Any non autocloseable streams
   List<StreamSubscription> _subs = [];
 
   // variables
   RxList<RelatedConsumer> _relatedConsumers = RxList();
-  List<RelatedConsumer> get relatedConsumers => _relatedConsumers;
-
   RxnString _selectedCustomerSAP = RxnString();
-  String? get selectedCustomerSAP => _selectedCustomerSAP.value;
 
-  Rxn<Customer> _selectedCustomer = Rxn<Customer>();
-  Customer? get selectedCustomer => _selectedCustomer.value;
+  RxList<Customer> _relatedConsumersEntities = RxList();
+  List<Customer> get relatedConsumersEntities => _relatedConsumersEntities;
 
   RxnString _customerLoadingError = RxnString();
   String? get customerLoadingError => _customerLoadingError.value;
 
+  Customer? get selectedCustomer => _relatedConsumersEntities.firstWhere(
+        (element) => element.customerSAPNumber == _selectedCustomerSAP.value,
+      );
+
   @override
   void onReady() {
     super.onReady();
-    print('Consumer controller ready');
-
-    // Bind userData
+    // Listen to user data
     handleUserDataState(
         userDataState: _userDataController.userDataStateStream.value);
     StreamSubscription userDataSub = _userDataController.userDataStateStream
@@ -57,43 +56,50 @@ class CustomerController extends GetxController {
     _subs.forEach((sub) => sub.cancel());
   }
 
+  // Update all on user data change
   handleUserDataState({required UserDataState userDataState}) async {
     UserDataState uds = userDataState;
-
     if (uds is UserDataCommonState) {
       _relatedConsumers.value = uds.userData.relatedCustomers;
-
-      // Load selected customer from cache
-      // if not pick the first one
-
-      _selectedCustomerSAP.value = await _getSelectedCustomerSAP
-          .call(GetSelectedCustomerSAPParams(userId: uds.userData.sFUserId));
-
-      if (_selectedCustomerSAP.value is! String) {
-        _selectedCustomerSAP.value =
-            uds.userData.relatedCustomers.first.customerSAPNumber;
-
-        _setSelectedCustomerSAP.call(SetSelectedCustomerSAPParams(
-            userId: uds.userData.sFUserId,
-            customerSAP: _selectedCustomerSAP.value!));
-      }
-
-      loadCustomer();
+      loadCustomers();
     } else {
       // clear all data
       _relatedConsumers.clear();
+      _relatedConsumersEntities.clear();
       _selectedCustomerSAP.value = null;
-      _selectedCustomer.value = null;
     }
   }
 
   // Load full customer data
-  Future<void> loadCustomer() async {
+  Future<void> loadCustomers() async {
     _customerLoadingError.value = null;
     try {
-      Customer c = await _getCustomerAndCache.call(
-          GetCustomerAndCacheParams(customerSAP: _selectedCustomerSAP.value!));
-      _selectedCustomer.value = c;
+      // Get all customers by related list
+      List<Customer> c = await _getCustomersAndCache.call(
+          GetCustomersAndCacheParams(
+              customersSAP: _relatedConsumers
+                  .map((element) => element.customerSAPNumber)
+                  .toList(),
+              userId: _userDataController.authData!.userId));
+      _relatedConsumersEntities.value = c;
+
+      // Get saved selection
+      _selectedCustomerSAP.value = await _getSelectedCustomerSAP.call(
+          GetSelectedCustomerSAPParams(
+              userId: _userDataController.authData!.userId));
+
+      // Select customer on first time or related list changes
+      if (_selectedCustomerSAP.value is! String ||
+          !c
+              .map((element) => element.customerSAPNumber)
+              .contains(_selectedCustomerSAP.value)) {
+        // select
+        _selectedCustomerSAP.value = c.first.customerSAPNumber;
+        // save
+        _setSelectedCustomerSAP.call(SetSelectedCustomerSAPParams(
+            userId: _userDataController.authData!.userId,
+            customerSAP: _selectedCustomerSAP.value!));
+      }
     } catch (e) {
       _customerLoadingError.value = e.toString();
       print(e.toString());
@@ -107,27 +113,14 @@ class CustomerController extends GetxController {
       return;
     }
 
-    Get.defaultDialog(
-        onWillPop: () async => false,
-        title: '',
-        barrierDismissible: false,
-        backgroundColor: Colors.transparent,
-        content: CircularProgressIndicator());
-
     try {
-      Customer c = await _getCustomerAndCache
-          .call(GetCustomerAndCacheParams(customerSAP: customerSAP));
-      _selectedCustomer.value = c;
+      // Switch
       _selectedCustomerSAP.value = customerSAP;
-      await _setSelectedCustomerSAP.call(SetSelectedCustomerSAPParams(
+      // save
+      _setSelectedCustomerSAP.call(SetSelectedCustomerSAPParams(
           userId: _userDataController.authData!.userId,
           customerSAP: _selectedCustomerSAP.value!));
-      await 0.1.delay();
-      Get.back();
     } catch (e) {
-      await 0.1.delay();
-      Get.back();
-      await 0.1.delay();
       Get.snackbar('Error', e.toString());
     }
   }

@@ -7,6 +7,8 @@ import 'package:***REMOVED***/presentation/ui/widgets/legal_doc_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+// Loader provides view functionality of initial loading process
+// Handle loading state of core controllers and prsent usercases of retry load and legal doc acceptation
 class Loader extends StatelessWidget {
   final UserDataController userDataController =
       Get.put(UserDataController(), permanent: true);
@@ -30,7 +32,7 @@ class Loader extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text('Loading error'),
+                Text('User loading error'),
                 SizedBox(
                   height: Get.width * 0.06,
                 ),
@@ -61,10 +63,6 @@ class Loader extends StatelessWidget {
       }
 
       if (userDataState is UserDataCommonState) {
-        if (customerController.selectedCustomer == null) {
-          return JustLoadingScreen();
-        }
-
         if (customerController.customerLoadingError is String) {
           return Scaffold(
             body: SafeArea(
@@ -82,7 +80,7 @@ class Loader extends StatelessWidget {
                     height: Get.width * 0.06,
                   ),
                   GestureDetector(
-                    onTap: () => customerController.loadCustomer(),
+                    onTap: () => customerController.loadCustomers(),
                     child: Container(
                       decoration: BoxDecoration(
                           color: Colors.amber,
@@ -98,6 +96,10 @@ class Loader extends StatelessWidget {
               ),
             )),
           );
+        }
+
+        if (customerController.relatedConsumersEntities.isEmpty) {
+          return JustLoadingScreen();
         }
 
         return HomeScreen();

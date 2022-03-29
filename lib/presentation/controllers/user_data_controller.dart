@@ -56,7 +56,6 @@ class UserDataController extends GetxController {
   Future loadUserData() async {
     if (_authData.value == null) {
       _userDataState.value = UserDataInitialState();
-      // Get.off(() => Loader());
     }
     _userDataState.value = UserDataLoadingState();
     try {
@@ -66,7 +65,6 @@ class UserDataController extends GetxController {
             UserDataAskLegalDocState(legalDoc: userData.legalDoc);
       } else {
         _userDataState.value = UserDataCommonState(userData: userData);
-        // Get.off(() => HomeScreen());
       }
     } catch (e) {
       _userDataState.value = UserDataLoadingErrorState(msg: e.toString());

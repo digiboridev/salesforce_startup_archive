@@ -20,7 +20,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // test();
     return Scaffold(
         body: SafeArea(
       child: SizedBox.expand(
@@ -48,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Container(
               height: headerHeight,
-              color: Colors.red,
+              color: Color(0xff00458C),
               padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
               child: Column(
                 children: [
@@ -56,27 +55,36 @@ class _HomeScreenState extends State<HomeScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Icon(Icons.feed),
-                      Text('Diplomat logo'),
+                      Image.asset(
+                        'assets/icons/contact.png',
+                        width: Get.width * 0.05,
+                      ),
+                      Hero(
+                        tag: 'logo',
+                        child: Image.asset(
+                          'assets/images/***REMOVED***_logo.png',
+                          width: Get.width * 0.3,
+                        ),
+                      ),
                       GestureDetector(
                           onTap: () {
-                            Get.to(() => ProfileScreen());
+                            Get.to(() => ProfileScreen(),
+                                transition: Transition.cupertino);
                           },
-                          child: Icon(Icons.settings))
+                          child: Image.asset(
+                            'assets/icons/settings.png',
+                            width: Get.width * 0.05,
+                          ))
                     ],
                   ),
                   Spacer(),
-                  headerExpanded
-                      ? Icon(Icons.arrow_circle_up)
-                      : Icon(Icons.arrow_circle_down),
-                  SizedBox(height: Get.width * 0.01),
                 ],
               ),
             ),
             if (headerExpanded)
               Container(
                 height: topSheetHeight,
-                color: Colors.amber,
+                color: Color(0xff00458C),
                 child: Column(
                   children: [
                     SizedBox(
@@ -87,8 +95,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           EdgeInsets.symmetric(horizontal: Get.width * 0.04),
                       child: Align(
                         alignment: Alignment.centerLeft,
-                        child: Text('Brunch: ' +
-                            customerController.selectedCustomer!.customerName),
+                        child: Obx(() => Text(
+                              'Brunch: ' +
+                                  customerController
+                                      .selectedCustomer!.customerName,
+                              style: TextStyle(color: Colors.white),
+                            )),
                       ),
                     ),
                     Padding(
@@ -96,8 +108,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           EdgeInsets.symmetric(horizontal: Get.width * 0.04),
                       child: Align(
                         alignment: Alignment.centerLeft,
-                        child: Text('Id: ' +
-                            customerController.selectedCustomer!.customerId),
+                        child: Obx(() => Text(
+                              'Id: ' +
+                                  customerController
+                                      .selectedCustomer!.customerId,
+                              style: TextStyle(color: Colors.white),
+                            )),
                       ),
                     ),
                     SizedBox(
@@ -108,14 +124,19 @@ class _HomeScreenState extends State<HomeScreen> {
                           EdgeInsets.symmetric(horizontal: Get.width * 0.04),
                       child: Align(
                         alignment: Alignment.centerLeft,
-                        child: Text('All branches:'),
+                        child: Text(
+                          'All branches:',
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ),
                     Expanded(
                         child: Container(
                       // color: Colors.blue,
                       child: ListView(
-                        children: customerController.relatedConsumers.map((e) {
+                        physics: BouncingScrollPhysics(),
+                        children: customerController.relatedConsumersEntities
+                            .map((e) {
                           return Padding(
                             padding: EdgeInsets.all(Get.width * 0.01),
                             child: GestureDetector(
@@ -126,16 +147,25 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: Container(
                                   padding: EdgeInsets.all(Get.width * 0.04),
                                   decoration: BoxDecoration(
-                                      color: Colors.blue,
+                                      color: Colors.blue[800],
                                       borderRadius: BorderRadius.circular(
-                                          Get.width * 0.06)),
+                                          Get.width * 0.02)),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(e.customerId),
-                                      Text(e.customerName),
-                                      Text(e.customerAddress),
+                                      Text(
+                                        e.customerId,
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      Text(
+                                        e.customerName,
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      Text(
+                                        e.customerAddress,
+                                        style: TextStyle(color: Colors.white),
+                                      ),
                                     ],
                                   )),
                             ),
@@ -157,7 +187,7 @@ class _HomeScreenState extends State<HomeScreen> {
       padding: EdgeInsets.only(top: headerHeight),
       child: Container(
         width: Get.width,
-        color: Colors.yellow,
+        color: Colors.white,
         child: Column(
           children: [
             Spacer(),
