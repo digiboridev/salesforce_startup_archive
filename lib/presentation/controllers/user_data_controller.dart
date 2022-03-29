@@ -12,6 +12,7 @@ import 'package:***REMOVED***/domain/entities/auth_data.dart';
 import 'package:***REMOVED***/domain/entities/user_data.dart';
 import 'package:***REMOVED***/domain/services/sf_sdk_service.dart';
 import 'package:***REMOVED***/domain/usecases/get_userdata_and_cache.dart';
+import 'package:get_storage/get_storage.dart';
 
 class UserDataController extends GetxController {
   // dependencies

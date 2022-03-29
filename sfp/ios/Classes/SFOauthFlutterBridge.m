@@ -36,35 +36,63 @@
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
     if ([@"oauth#getAuthCredentials" isEqualToString:call.method]) {
-        [self getAuthCredentials:result:result];
+        result([self getAuthCredentials:call.arguments]);
     } else if ([@"oauth#getClientInfo" isEqualToString:call.method]) {
-       [self getClientInfo:result:result];
+       result([self getClientInfo:call.arguments]);
     } else if ([@"oauth#logoutCurrentUser" isEqualToString:call.method]) {
-       [self logoutCurrentUser:result:result];
+       result([self logoutCurrentUser:call.arguments]);
     } else {
         result(FlutterMethodNotImplemented);
     }
 }
 
-- (void) getAuthCredentials:(NSDictionary *)argsDict result:(FlutterResult)callback
+- (NSString*) getAuthCredentials:(NSDictionary *)argsDict
 {
+
     SFOAuthCredentials *creds = [SFUserAccountManager sharedInstance].currentUser.credentials;
-    result = creds;
+    NSDictionary *credentialsDict = nil;
+    if (nil != creds) {
+
+            credentialsDict = @{
+                               @"communityUrl": creds.communityUrl.absoluteString,
+                               @"loginUrl": creds.communityUrl.absoluteString,
+                               @"identityUrl": creds.identityUrl.absoluteString,
+                               @"userAgent": @"",
+                               @"accessToken": creds.accessToken,
+                               @"communityId": creds.communityId,
+                               @"userId": creds.userId,
+                               @"orgId": creds.organizationId,
+                               @"refreshToken": creds.refreshToken,
+                               @"instanceUrl": creds.instanceUrl.absoluteString,
+                               };
+        }
+        else
+        {
+            return @"No restClient - getAuthCredentials";
+        }
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:credentialsDict
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&error];
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    return jsonString;
+
+
 }
 
-- (void) getClientInfo:(NSDictionary *)argsDict result:(FlutterResult)callback
+- (SFOAuthCredentials*) getClientInfo:(NSDictionary *)argsDict
 {
     SFOAuthCredentials *creds = [SFUserAccountManager sharedInstance].currentUser.credentials;
-    result = creds;
+    return creds;
 }
 
-- (void) logoutCurrentUser:(NSDictionary *)argsDict result:(FlutterResult)callback
+- (NSString*) logoutCurrentUser:(NSDictionary *)argsDict
 {
-    [SalesforceSDKManager sharedManager].postLogoutAction = ^{
-       [weakSelf handleSdkManagerLogout];
-    };
+    //[SalesforceSDKManager sharedManager].postLogoutAction = ^{
+    //   [weakSelf handleSdkManagerLogout];
+    //};
 
-    result = @"success";
+    return @"success";
 }
 
 @end

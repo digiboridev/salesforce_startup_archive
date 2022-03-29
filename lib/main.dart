@@ -17,6 +17,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
 
 main() async {
+  //WidgetsFlutterBinding.ensureInitialized();
+
   await injectDependency();
   await initServices();
   runApp(GetMaterialApp(
@@ -47,7 +49,6 @@ Future injectDependency() async {
 }
 
 Future initServices() async {
-  print('starting services ...');
   await GetStorage.init();
   await Get.putAsync(() => ConnectionService().init());
   print('All services started...');

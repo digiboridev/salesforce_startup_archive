@@ -23,7 +23,7 @@
  */
 
 #import "AppDelegate.h"
-#import <SalesforceAnalytics/SFSDKAnalyticsLogger.h>
+#import <SalesforceAnalytics/SFSDKLogger.h>
 #import <SalesforceSDKCore/SFSDKAppConfig.h>
 #import <SalesforceSDKCore/SFPushNotificationManager.h>
 #import <SalesforceSDKCore/SFDefaultUserManagementViewController.h>
@@ -34,8 +34,8 @@
 #include "GeneratedPluginRegistrant.h"
 
 // Fill these in when creating a new Connected Application on Force.com
-static NSString * const RemoteAccessConsumerKey = @"3MVG9Iu66FKeHhINkB1l7xt7kR8czFcCTUhgoA8Ol2Ltf1eYHOU4SqQRSEitYFDUpqRWcoQ2.dBv_a1Dyu5xa";
-static NSString * const OAuthRedirectURI        = @"testsfdc:///mobilesdk/detect/oauth/done";
+static NSString * const RemoteAccessConsumerKey = @"3MVG92H4TjwUcLlLvIMWkOuic3bII9pd.5HcJXJMHYf_ATSEtbSV54TjF3mCCbjmV4dcKVnxCGGGih_LB6qo3";
+static NSString * const OAuthRedirectURI        = @"sfdc://success/ios";
 
 @implementation AppDelegate
 
@@ -71,11 +71,11 @@ static NSString * const OAuthRedirectURI        = @"testsfdc:///mobilesdk/detect
             //[[SFPushNotificationManager sharedInstance] registerForRemoteNotifications];
             //
 
-            [SFSDKAnalyticsLogger log:[weakSelf class] level:SFLogLevelInfo format:@"Post-launch: launch actions taken: %@", [SalesforceSDKManager launchActionsStringRepresentation:launchActionList]];
+            [SFSDKLogger log:[weakSelf class] level:DDLogLevelInfo format:@"Post-launch: launch actions taken: %@", [SalesforceSDKManager launchActionsStringRepresentation:launchActionList]];
             [weakSelf setupRootViewController];
         };
         [SalesforceSDKManager sharedManager].launchErrorAction = ^(NSError *error, SFSDKLaunchAction launchActionList) {
-            [SFSDKAnalyticsLogger log:[weakSelf class] level:SFLogLevelError format:@"Error during SDK launch: %@", [error localizedDescription]];
+            [SFSDKLogger log:[weakSelf class] level:DDLogLevelError format:@"Error during SDK launch: %@", [error localizedDescription]];
             [weakSelf initializeAppViewState];
             [[SalesforceSDKManager sharedManager] launch];
         };
@@ -92,19 +92,21 @@ static NSString * const OAuthRedirectURI        = @"testsfdc:///mobilesdk/detect
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [self initializeAppViewState];
 
+
     //Uncomment the code below to see how you can customize the color, textcolor, font and   fontsize of the navigation bar
-    //SFSDKLoginViewControllerConfig *loginViewConfig = [[SFSDKLoginViewControllerConfig  alloc] init];
+    SFSDKLoginViewControllerConfig *loginViewConfig = [[SFSDKLoginViewControllerConfig  alloc] init];
     //Set showSettingsIcon to NO if you want to hide the settings icon on the nav bar
-    //loginViewConfig.showSettingsIcon = YES;
+    loginViewConfig.showSettingsIcon = NO;
     //Set showNavBar to NO if you want to hide the top bar
-    //loginViewConfig.showNavbar = YES;
+    loginViewConfig.showNavbar = NO;
     //loginViewConfig.navBarColor = [UIColor colorWithRed:0.051 green:0.765 blue:0.733 alpha:1.0];
     //loginViewConfig.navBarTextColor = [UIColor whiteColor];
     //loginViewConfig.navBarFont = [UIFont fontWithName:@"Helvetica" size:16.0];
-    //[SFUserAccountManager sharedInstance].loginViewControllerConfig = loginViewConfig;
+    [SFUserAccountManager sharedInstance].loginViewControllerConfig = loginViewConfig;
 
     [[SalesforceSDKManager sharedManager] launch];
 
@@ -179,7 +181,7 @@ static NSString * const OAuthRedirectURI        = @"testsfdc:///mobilesdk/detect
 
 - (void)handleSdkManagerLogout
 {
-    [SFSDKAnalyticsLogger log:[self class] level:SFLogLevelDebug format:@"SFUserAccountManager logged out.  Resetting app."];
+    [SFSDKLogger log:[self class] level:DDLogLevelDebug format:@"SFUserAccountManager logged out.  Resetting app."];
     [self resetViewState:^{
         [self initializeAppViewState];
 
@@ -210,7 +212,7 @@ static NSString * const OAuthRedirectURI        = @"testsfdc:///mobilesdk/detect
 - (void)handleUserSwitch:(SFUserAccount *)fromUser
                   toUser:(SFUserAccount *)toUser
 {
-    [SFSDKAnalyticsLogger log:[self class] level:SFLogLevelDebug format:@"SFUserAccountManager changed from user %@ to %@.  Resetting app.",
+    [SFSDKLogger log:[self class] level:DDLogLevelDebug format:@"SFUserAccountManager changed from user %@ to %@.  Resetting app.",
      fromUser.userName, toUser.userName];
     [self resetViewState:^{
         [self initializeAppViewState];
@@ -219,5 +221,4 @@ static NSString * const OAuthRedirectURI        = @"testsfdc:///mobilesdk/detect
 }
 
 @end
-
 
