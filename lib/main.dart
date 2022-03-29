@@ -9,6 +9,7 @@ import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart
 import 'package:***REMOVED***/presentation/controllers/user_data_controller_states.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/legal_doc_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
 
@@ -40,6 +41,16 @@ Future initServices() async {
   print('starting services ...');
   await GetStorage.init();
   await Get.putAsync(() => ConnectionService().init());
+  final EventChannel channel = new EventChannel('authSF');
+
+  channel.receiveBroadcastStream('some args')
+      .listen((data) {
+    print("recv:");
+    //authSuccess
+    //authLogout
+    print(data);
+  });
+
   print('All services started...');
 }
 

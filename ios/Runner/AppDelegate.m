@@ -38,7 +38,7 @@ static NSString * const RemoteAccessConsumerKey = @"3MVG92H4TjwUcLlLvIMWkOuic3bI
 static NSString * const OAuthRedirectURI        = @"sfdc://success/ios";
 
 @implementation AppDelegate {
-  GeneratedPluginRegistrant *plugins;
+  FlutterEventSink _eventSink;
 }
 
 - (id)init
@@ -70,21 +70,23 @@ static NSString * const OAuthRedirectURI        = @"sfdc://success/ios";
             // if you want to receive push notifications from Salesforce, you will also need to
             // implement the application:didRegisterForRemoteNotificationsWithDeviceToken: method (below).
             //
-            //[[SFPushNotificationManager sharedInstance] registerForRemoteNotifications];
+            _eventSink(@"authSuccess");
+            [[SFPushNotificationManager sharedInstance] registerForRemoteNotifications];
             //
 
             //[SFSDKLogger log:[weakSelf class] level:DDLogLevelInfo format:@"Post-launch: launch actions taken: %@", [SalesforceSDKManager launchActionsStringRepresentation:launchActionList]];
             //[weakSelf setupRootViewController];
-            //[GeneratedPluginRegistrant registerWithRegistry:weakSelf];
+
 
 
         };
         [SalesforceSDKManager sharedManager].launchErrorAction = ^(NSError *error, SFSDKLaunchAction launchActionList) {
-            [SFSDKLogger log:[weakSelf class] level:DDLogLevelError format:@"Error during SDK launch: %@", [error localizedDescription]];
-            [weakSelf initializeAppViewState];
+            //[SFSDKLogger log:[weakSelf class] level:DDLogLevelError format:@"Error during SDK launch: %@", [error localizedDescription]];
+            //[weakSelf initializeAppViewState];
             [[SalesforceSDKManager sharedManager] launch];
         };
         [SalesforceSDKManager sharedManager].postLogoutAction = ^{
+            _eventSink(@"authLogout");
             [weakSelf handleSdkManagerLogout];
         };
         [SalesforceSDKManager sharedManager].switchUserAction = ^(SFUserAccount *fromUser, SFUserAccount *toUser) {
@@ -103,7 +105,8 @@ static NSString * const OAuthRedirectURI        = @"sfdc://success/ios";
     //self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     //[self initializeAppViewState];
 
-
+    FlutterViewController* controller =
+          (FlutterViewController*)self.window.rootViewController;
     //Uncomment the code below to see how you can customize the color, textcolor, font and   fontsize of the navigation bar
     SFSDKLoginViewControllerConfig *loginViewConfig = [[SFSDKLoginViewControllerConfig  alloc] init];
     //Set showSettingsIcon to NO if you want to hide the settings icon on the nav bar
@@ -115,26 +118,29 @@ static NSString * const OAuthRedirectURI        = @"sfdc://success/ios";
     //loginViewConfig.navBarFont = [UIFont fontWithName:@"Helvetica" size:16.0];
     [SFUserAccountManager sharedInstance].loginViewControllerConfig = loginViewConfig;
 
+
     [[SalesforceSDKManager sharedManager] launch];
-
-
-
-
-
-
+    FlutterEventChannel* chargingChannel = [FlutterEventChannel
+          eventChannelWithName:@"authSF"
+               binaryMessenger:controller];
+    [chargingChannel setStreamHandler:self];
     // Override point for customization after application launch.
     return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
-
+- (FlutterError*)onListenWithArguments:(id)arguments
+                             eventSink:(FlutterEventSink)eventSink {
+  _eventSink = eventSink;
+  return nil;
+}
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     //
     // Uncomment the code below to register your device token with the push notification manager
     //
-    //[[SFPushNotificationManager sharedInstance] didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
-    //if ([SFUserAccountManager sharedInstance].currentUser.credentials.accessToken != nil) {
-    //    [[SFPushNotificationManager sharedInstance] registerForSalesforceNotifications];
-    //}
+    [[SFPushNotificationManager sharedInstance] didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+    if ([SFUserAccountManager sharedInstance].currentUser.credentials.accessToken != nil) {
+        [[SFPushNotificationManager sharedInstance] registerForSalesforceNotifications];
+    }
     //
 }
 
