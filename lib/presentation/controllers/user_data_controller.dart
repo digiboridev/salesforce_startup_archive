@@ -95,11 +95,44 @@ class UserDataController extends GetxController {
     }
   }
 
+  List<Languages> get avaliableLanguages {
+    var state = _userDataState.value;
+    if (state is UserDataCommonState) {
+      List<Languages> languages = [];
+      state.userData.availableLanguages.split(',').forEach((identifier) {
+        var l = Languages.fromIdentifier(identifier: identifier);
+        languages.add(l);
+      });
+      return languages;
+    } else {
+      throw Exception('Denied operation');
+    }
+  }
+
+  Languages get currentLanguage {
+    var state = _userDataState.value;
+    if (state is UserDataCommonState) {
+      return Languages.fromIdentifier(
+          identifier: state.userData.selectedLanguage);
+    } else {
+      throw Exception('Denied operation');
+    }
+  }
+
   Future changeLanguage({required Languages lang}) async {
     try {
+      Get.defaultDialog(
+          onWillPop: () async => false,
+          title: '',
+          barrierDismissible: false,
+          backgroundColor: Colors.transparent,
+          content: CircularProgressIndicator());
+      await 0.1.delay();
       await _changeLanguage(ChangeLanguageParams(lang: lang));
-      updateUserData();
+      await updateUserData();
+      Get.back();
     } catch (e) {
+      Get.back();
       Get.snackbar('Error', e.toString(), backgroundColor: Colors.amber);
     }
   }

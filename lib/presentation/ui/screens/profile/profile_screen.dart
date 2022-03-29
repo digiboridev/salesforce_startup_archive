@@ -1,5 +1,6 @@
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
+import 'package:***REMOVED***/presentation/ui/screens/profile/change_language_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -39,16 +40,23 @@ class ProfileScreen extends StatelessWidget {
               child: Container(
             child: Column(
               children: [
-                Container(
-                  color: Colors.white,
-                  padding: EdgeInsets.symmetric(
-                      horizontal: Get.width * 0.06, vertical: Get.width * 0.04),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Choose language'),
-                      Icon(Icons.arrow_forward)
-                    ],
+                GestureDetector(
+                  onTap: () {
+                    Get.to(() => ChangeLanguagePage(),
+                        transition: Transition.cupertino);
+                  },
+                  child: Container(
+                    color: Colors.white,
+                    padding: EdgeInsets.symmetric(
+                        horizontal: Get.width * 0.06,
+                        vertical: Get.width * 0.04),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Choose language'),
+                        Icon(Icons.arrow_forward)
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -87,9 +95,12 @@ class ProfileScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Image.asset(
-                'assets/icons/contact.png',
-                width: Get.width * 0.05,
+              Hero(
+                tag: 'contact_btn',
+                child: Image.asset(
+                  'assets/icons/contact.png',
+                  width: Get.width * 0.05,
+                ),
               ),
               Hero(
                 tag: 'logo',

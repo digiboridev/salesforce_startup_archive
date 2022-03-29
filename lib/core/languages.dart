@@ -1,3 +1,5 @@
+import 'package:equatable/equatable.dart';
+
 abstract class Languages {
   Languages();
 
@@ -6,7 +8,7 @@ abstract class Languages {
 
   factory Languages.fromIdentifier({required String identifier}) {
     if (identifier == 'en') {
-      return Eanglish();
+      return English();
     } else if (identifier == 'he') {
       return Hebrew();
     } else {
@@ -14,17 +16,33 @@ abstract class Languages {
     }
   }
 
-  factory Languages.english() => Eanglish();
+  factory Languages.english() => English();
 
   factory Languages.hebrew() => Hebrew();
 }
 
-class Eanglish extends Languages {
-  final String languageString = 'Eanglish';
+class English extends Languages with EquatableMixin {
+  final String languageString = 'English';
   final String identifier = 'en';
+
+  @override
+  List<Object> get props {
+    return [
+      languageString,
+      identifier,
+    ];
+  }
 }
 
-class Hebrew extends Languages {
+class Hebrew extends Languages with EquatableMixin {
   final String languageString = 'Hebrew';
   final String identifier = 'he';
+
+  @override
+  List<Object> get props {
+    return [
+      languageString,
+      identifier,
+    ];
+  }
 }

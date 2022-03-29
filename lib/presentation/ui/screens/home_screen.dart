@@ -1,6 +1,6 @@
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
-import 'package:***REMOVED***/presentation/ui/screens/profile_screen.dart';
+import 'package:***REMOVED***/presentation/ui/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -55,9 +55,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Image.asset(
-                        'assets/icons/contact.png',
-                        width: Get.width * 0.05,
+                      Hero(
+                        tag: 'contact_btn',
+                        child: Image.asset(
+                          'assets/icons/contact.png',
+                          width: Get.width * 0.05,
+                        ),
                       ),
                       Hero(
                         tag: 'logo',
