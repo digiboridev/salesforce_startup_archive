@@ -7,6 +7,7 @@ import 'package:***REMOVED***/data/repositories/user_data_repository.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/domain/usecases/accept_legal_doc.dart';
 import 'package:***REMOVED***/domain/usecases/change_language.dart';
+import 'package:***REMOVED***/domain/usecases/change_password.dart';
 import 'package:***REMOVED***/domain/usecases/get_customer_and_cache.dart';
 import 'package:***REMOVED***/domain/usecases/get_selected_customer_sap.dart';
 import 'package:***REMOVED***/domain/usecases/get_userdata_and_cache.dart';
@@ -40,6 +41,7 @@ Future injectDependency() async {
   Get.put<GetUserDataAndCache>(GetUserDataAndCache(userDataRepository));
   Get.put<AcceptLegalDoc>(AcceptLegalDoc(userDataRepository));
   Get.put<ChangeLanguage>(ChangeLanguage(userDataRepository));
+  Get.put<ChangePassword>(ChangePassword(userDataRepository));
 
   Get.put<GetSelectedCustomerSAP>(GetSelectedCustomerSAP(customersRepository));
   Get.put<SetSelectedCustomerSAP>(SetSelectedCustomerSAP(customersRepository));

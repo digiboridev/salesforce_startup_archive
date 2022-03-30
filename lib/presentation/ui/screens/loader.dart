@@ -59,7 +59,19 @@ class Loader extends StatelessWidget {
       }
 
       if (userDataState is UserDataAskLegalDocState) {
-        return LegalDocView(userDataState: userDataState);
+        return LegalDocView(
+          legalDocLink: userDataState.legalDoc,
+          buttonText: 'Understood',
+          callback: () {
+            if (!connectionService.hasConnection) {
+              Get.snackbar('Error', 'No internet',
+                  backgroundColor: Colors.amber);
+              return;
+            }
+
+            userDataController.acceptLegalDoc();
+          },
+        );
       }
 
       if (userDataState is UserDataCommonState) {

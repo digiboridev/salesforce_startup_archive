@@ -10,6 +10,8 @@ abstract class UserDataRepository {
   Future setLocalUserData({required userId, required UserData userData});
   Future<void> acceptLegalDoc();
   Future<void> changeLanguage({required Languages lang});
+  Future<void> changePassword(
+      {required String oldPass, required String newPass});
 }
 
 class UserDataRepositoryImpl implements UserDataRepository {
@@ -39,4 +41,9 @@ class UserDataRepositoryImpl implements UserDataRepository {
   @override
   Future<void> changeLanguage({required Languages lang}) =>
       userDataRemoteDatasource.changeLanguage(lang: lang);
+  @override
+  Future<void> changePassword(
+          {required String oldPass, required String newPass}) =>
+      userDataRemoteDatasource.changePassword(
+          oldPass: oldPass, newPass: newPass);
 }

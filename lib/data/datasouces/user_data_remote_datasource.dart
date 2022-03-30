@@ -8,12 +8,13 @@ abstract class UserDataRemoteDatasource {
   Future<UserDataModel> get getUserData;
   Future<void> acceptLegalDoc();
   Future<void> changeLanguage({required Languages lang});
+  Future<void> changePassword(
+      {required String oldPass, required String newPass});
 }
 
 class UserDataRemoteDatasourceImpl implements UserDataRemoteDatasource {
   @override
   Future<UserDataModel> get getUserData async {
-
     try {
       Map<String, dynamic> response = await SalesforcePlugin.sendRequest(
         endPoint: ***REMOVED***Endpoint,
@@ -63,6 +64,26 @@ class UserDataRemoteDatasourceImpl implements UserDataRemoteDatasource {
       }
     } catch (e) {
       throw ServerException('Internal error');
+    }
+  }
+
+  @override
+  Future<void> changePassword(
+      {required String oldPass, required String newPass}) async {
+    try {
+      Map<String, dynamic> response = await SalesforcePlugin.sendRequest(
+              endPoint: ***REMOVED***Endpoint,
+              path: '/newPassword',
+              method: 'POST',
+              payload: {"newPassword": newPass, "oldPassword": oldPass})
+          as Map<String, dynamic>;
+      if (response['success']) {
+        return;
+      } else {
+        throw ServerException(response['errorMsg']);
+      }
+    } catch (e) {
+      throw ServerException(e.toString());
     }
   }
 }

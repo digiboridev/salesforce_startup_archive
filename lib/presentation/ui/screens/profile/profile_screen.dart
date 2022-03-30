@@ -1,6 +1,8 @@
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/profile/change_language_page.dart';
+import 'package:***REMOVED***/presentation/ui/screens/profile/change_password_page.dart';
+import 'package:***REMOVED***/presentation/ui/widgets/legal_doc_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -54,6 +56,57 @@ class ProfileScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text('Choose language'),
+                        Icon(Icons.arrow_forward)
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: Get.width * 0.01,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Get.to(() => ChangePasswordPage(),
+                        transition: Transition.cupertino);
+                  },
+                  child: Container(
+                    color: Colors.white,
+                    padding: EdgeInsets.symmetric(
+                        horizontal: Get.width * 0.06,
+                        vertical: Get.width * 0.04),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Change password'),
+                        Icon(Icons.arrow_forward)
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: Get.width * 0.01,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Get.to(
+                        () => LegalDocView(
+                              legalDocLink: userDataController.legalocLink,
+                              buttonText: 'Close',
+                              callback: () {
+                                Get.back();
+                              },
+                            ),
+                        transition: Transition.cupertino);
+                  },
+                  child: Container(
+                    color: Colors.white,
+                    padding: EdgeInsets.symmetric(
+                        horizontal: Get.width * 0.06,
+                        vertical: Get.width * 0.04),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Terms an conditions'),
                         Icon(Icons.arrow_forward)
                       ],
                     ),

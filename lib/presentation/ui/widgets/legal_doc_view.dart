@@ -1,25 +1,26 @@
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/user_data_controller_states.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class LegalDocView extends StatefulWidget {
-  const LegalDocView({
-    Key? key,
-    required this.userDataState,
-  }) : super(key: key);
+  const LegalDocView(
+      {Key? key,
+      required this.legalDocLink,
+      required this.callback,
+      required this.buttonText})
+      : super(key: key);
 
-  final UserDataAskLegalDocState userDataState;
+  final Uri legalDocLink;
+  final Function callback;
+  final String buttonText;
 
   @override
   State<LegalDocView> createState() => _LegalDocViewState();
 }
 
 class _LegalDocViewState extends State<LegalDocView> {
-  final UserDataController userDataController = Get.find();
-  final ConnectionService connectionService = Get.find();
   WebViewController? webViewController;
   bool error = false;
 
@@ -31,11 +32,11 @@ class _LegalDocViewState extends State<LegalDocView> {
         children: [
           Column(
             children: [
-              Text('Diplomat Header'),
+              buildHeader(),
               Expanded(
                   child: WebView(
                 javascriptMode: JavascriptMode.unrestricted,
-                initialUrl: widget.userDataState.legalDoc.toString(),
+                initialUrl: widget.legalDocLink.toString(),
                 onPageFinished: (url) {
                   print(url);
                 },
@@ -53,26 +54,21 @@ class _LegalDocViewState extends State<LegalDocView> {
                   webViewController = controller;
                 },
               )),
-              Padding(
-                padding: EdgeInsets.all(Get.width * 0.06),
-                child: GestureDetector(
-                  onTap: () {
-                    if (!connectionService.hasConnection) {
-                      Get.snackbar('Error', 'No internet',
-                          backgroundColor: Colors.amber);
-                      return;
-                    }
-
-                    userDataController.acceptLegalDoc();
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.amber,
-                        borderRadius: BorderRadius.circular(Get.width * 0.06)),
-                    padding: EdgeInsets.symmetric(
-                        horizontal: Get.width * 0.1,
-                        vertical: Get.width * 0.03),
-                    child: Text('Understood'),
+              GestureDetector(
+                onTap: () => widget.callback(),
+                child: Container(
+                  width: Get.width,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      color: Color(0xff00458C),
+                      borderRadius: BorderRadius.circular(Get.width * 0.06)),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: Get.width * 0.3, vertical: Get.width * 0.03),
+                  margin: EdgeInsets.symmetric(
+                      horizontal: Get.width * 0.1, vertical: Get.width * 0.03),
+                  child: Text(
+                    widget.buttonText,
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
               ),
@@ -101,6 +97,46 @@ class _LegalDocViewState extends State<LegalDocView> {
             )
         ],
       )),
+    );
+  }
+
+  Container buildHeader() {
+    return Container(
+      height: Get.width * 0.3,
+      color: Color(0xff00458C),
+      padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
+      child: Column(
+        children: [
+          Spacer(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Hero(
+                tag: 'contact_btn',
+                child: Image.asset(
+                  'assets/icons/contact.png',
+                  width: Get.width * 0.05,
+                ),
+              ),
+              Hero(
+                tag: 'logo',
+                child: Image.asset(
+                  'assets/images/***REMOVED***_logo.png',
+                  width: Get.width * 0.3,
+                ),
+              ),
+              GestureDetector(
+                onTap: () => widget.callback(),
+                child: Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
+          Spacer(),
+        ],
+      ),
     );
   }
 }

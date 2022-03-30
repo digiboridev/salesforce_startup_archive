@@ -2,8 +2,10 @@ import 'dart:async';
 import 'package:***REMOVED***/core/languages.dart';
 import 'package:***REMOVED***/domain/usecases/accept_legal_doc.dart';
 import 'package:***REMOVED***/domain/usecases/change_language.dart';
+import 'package:***REMOVED***/domain/usecases/change_password.dart';
 import 'package:***REMOVED***/domain/usecases/usecase.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller_states.dart';
+import 'package:***REMOVED***/presentation/ui/widgets/dialogs/default_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:***REMOVED***/domain/entities/auth_data.dart';
@@ -19,6 +21,7 @@ class UserDataController extends GetxController {
   GetUserDataAndCache _getUserDataAndCache = Get.find();
   AcceptLegalDoc _acceptLegaloc = Get.find();
   ChangeLanguage _changeLanguage = Get.find();
+  ChangePassword _changePassword = Get.find();
 
   // valiables
   Rxn<AuthData> _authData = Rxn<AuthData>();
@@ -92,6 +95,15 @@ class UserDataController extends GetxController {
     }
   }
 
+  Uri get legalocLink {
+    var state = _userDataState.value;
+    if (state is UserDataCommonState) {
+      return state.userData.legalDoc;
+    } else {
+      throw Exception('Operation denied');
+    }
+  }
+
   Future acceptLegalDoc() async {
     try {
       await _acceptLegaloc(NoParams());
@@ -127,18 +139,26 @@ class UserDataController extends GetxController {
 
   Future changeLanguage({required Languages lang}) async {
     try {
-      Get.defaultDialog(
-          onWillPop: () async => false,
-          title: '',
-          barrierDismissible: false,
-          backgroundColor: Colors.transparent,
-          content: CircularProgressIndicator());
-      await 0.1.delay();
+      defaultDialog();
+
       await _changeLanguage(ChangeLanguageParams(lang: lang));
       await updateUserData();
-      Get.back();
+      Get.until((route) => !Get.isDialogOpen!);
     } catch (e) {
-      Get.back();
+      Get.until((route) => !Get.isDialogOpen!);
+      Get.snackbar('Error', e.toString(), backgroundColor: Colors.amber);
+    }
+  }
+
+  Future changePassword(
+      {required String oldPass, required String newPass}) async {
+    try {
+      defaultDialog();
+      await _changePassword
+          .call(ChangePasswordParams(oldPass: oldPass, newPass: newPass));
+      Get.until((route) => !Get.isDialogOpen!);
+    } catch (e) {
+      Get.until((route) => !Get.isDialogOpen!);
       Get.snackbar('Error', e.toString(), backgroundColor: Colors.amber);
     }
   }
