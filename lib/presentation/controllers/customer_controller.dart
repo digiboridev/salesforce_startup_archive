@@ -29,15 +29,8 @@ class CustomerController extends GetxController {
 
   RxnString _selectedCustomerSAP = RxnString();
 
-  // RxList<Customer> _relatedConsumersEntities = RxList();
-  // List<Customer> get relatedConsumersEntities => _relatedConsumersEntities;
-
   RxnString _customerLoadingError = RxnString();
   String? get customerLoadingError => _customerLoadingError.value;
-
-  // Customer? get selectedCustomer => _relatedConsumersEntities.firstWhere(
-  //       (element) => element.customerSAPNumber == _selectedCustomerSAP.value,
-  //     );
 
   Rxn<Customer> _selectedCustomer = Rxn<Customer>();
   Customer? get selectedCustomer => _selectedCustomer.value;
@@ -70,7 +63,6 @@ class CustomerController extends GetxController {
     } else {
       // clear all data
       _relatedConsumers.clear();
-      // _relatedConsumersEntities.clear();
       _selectedCustomer.value = null;
       _selectedCustomerSAP.value = null;
     }
@@ -80,22 +72,15 @@ class CustomerController extends GetxController {
   Future<void> loadCustomers() async {
     _customerLoadingError.value = null;
     try {
-      // // Get all customers by related list
-      // List<Customer> c = await _getCustomersAndCache.call(
-      //     GetCustomersAndCacheParams(
-      //         customersSAP: _relatedConsumers
-      //             .map((element) => element.customerSAPNumber)
-      //             .toList(),
-      //         userId: _userDataController.authData!.userId));
-      // _relatedConsumersEntities.value = c;
-
       // Get saved selection
       _selectedCustomerSAP.value = await _getSelectedCustomerSAP.call(
           GetSelectedCustomerSAPParams(
               userId: _userDataController.authData!.userId));
-      _selectedCustomerSAP.value = null;
       // Select customer on first time or related list changes
-      if (_selectedCustomerSAP.value is! String) {
+      if (_selectedCustomerSAP.value is! String ||
+          !_relatedConsumers
+              .map((element) => element.customerSAPNumber)
+              .contains(_selectedCustomerSAP.value)) {
         // select
         _selectedCustomerSAP.value = _relatedConsumers.first.customerSAPNumber;
         // save
@@ -104,6 +89,7 @@ class CustomerController extends GetxController {
             customerSAP: _selectedCustomerSAP.value!));
       }
 
+      // load data
       _selectedCustomer.value = await _getCustomerAndCache.call(
           GetCustomerAndCacheParams(customerSAP: _selectedCustomerSAP.value!));
     } catch (e) {
@@ -120,6 +106,7 @@ class CustomerController extends GetxController {
     }
 
     try {
+      // Show loading dialog
       Get.defaultDialog(
           onWillPop: () async => false,
           title: '',
@@ -127,6 +114,7 @@ class CustomerController extends GetxController {
           backgroundColor: Colors.transparent,
           content: CircularProgressIndicator());
 
+      // load data
       _selectedCustomer.value = await _getCustomerAndCache.call(
           GetCustomerAndCacheParams(customerSAP: _selectedCustomerSAP.value!));
 
