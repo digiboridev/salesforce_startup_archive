@@ -17,6 +17,9 @@ import 'package:***REMOVED***/domain/usecases/get_customer_and_cache.dart';
 import 'package:***REMOVED***/domain/usecases/get_selected_customer_sap.dart';
 import 'package:***REMOVED***/domain/usecases/get_userdata_and_cache.dart';
 import 'package:***REMOVED***/domain/usecases/set_selected_customer_sap.dart';
+import 'package:***REMOVED***/presentation/controllers/contactus_controller.dart';
+import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
+import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
@@ -27,6 +30,7 @@ main() async {
 
   await injectDependency();
   await initServices();
+  await initControllers();
   runApp(GetMaterialApp(
     home: Loader(),
   ));
@@ -68,4 +72,12 @@ Future initServices() async {
   await Get.putAsync(() => ConnectionService().init());
 
   print('All services started...');
+}
+
+Future initControllers() async {
+  print('starting controllers ...');
+  Get.put(UserDataController(), permanent: true);
+  Get.put(CustomerController(), permanent: true);
+  Get.put(ContactusController(), permanent: true);
+  print('All controllers started...');
 }

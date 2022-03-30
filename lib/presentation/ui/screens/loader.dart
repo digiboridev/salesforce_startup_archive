@@ -11,12 +11,10 @@ import 'package:get/get.dart';
 // Loader provides view functionality of initial loading process
 // Handle loading state of core controllers and prsent usercases of retry load and legal doc acceptation
 class Loader extends StatelessWidget {
-  final UserDataController userDataController =
-      Get.put(UserDataController(), permanent: true);
-  final CustomerController customerController = Get.put(CustomerController());
+  final UserDataController userDataController = Get.find();
+  final CustomerController customerController = Get.find();
+  final ContactusController contactusController = Get.find();
   final ConnectionService connectionService = Get.find();
-  final ContactusController contactusController =
-      Get.put(ContactusController(), permanent: true);
 
   @override
   Widget build(BuildContext context) {
