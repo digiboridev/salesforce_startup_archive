@@ -1,4 +1,5 @@
 import 'package:***REMOVED***/domain/services/connections_service.dart';
+import 'package:***REMOVED***/presentation/controllers/contactus_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller_states.dart';
@@ -14,6 +15,8 @@ class Loader extends StatelessWidget {
       Get.put(UserDataController(), permanent: true);
   final CustomerController customerController = Get.put(CustomerController());
   final ConnectionService connectionService = Get.find();
+  final ContactusController contactusController =
+      Get.put(ContactusController(), permanent: true);
 
   @override
   Widget build(BuildContext context) {

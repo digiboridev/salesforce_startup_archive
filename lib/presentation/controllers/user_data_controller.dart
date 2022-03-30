@@ -56,8 +56,10 @@ class UserDataController extends GetxController {
   }
 
   handleAuthData({required AuthData? authData}) {
-    _authData.value = authData;
-    loadUserData();
+    if (_authData.value != authData) {
+      _authData.value = authData;
+      loadUserData();
+    }
     print(_authData);
   }
 
