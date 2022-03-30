@@ -98,7 +98,11 @@ static NSString * const OAuthRedirectURI        = @"sfdc://success/ios";
 
     return self;
 }
-
+ - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    NSLog(@"push recv");
+    NSLog(@"%@", userInfo);
+}
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [GeneratedPluginRegistrant registerWithRegistry:self];
