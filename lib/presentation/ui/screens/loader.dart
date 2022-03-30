@@ -98,7 +98,7 @@ class Loader extends StatelessWidget {
           );
         }
 
-        if (customerController.relatedConsumersEntities.isEmpty) {
+        if (customerController.selectedCustomer == null) {
           return JustLoadingScreen();
         }
 

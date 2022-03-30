@@ -1,5 +1,4 @@
 package com.mvpup.***REMOVED***
-
 import com.salesforce.androidsdk.app.SalesforceSDKManager
 import com.salesforce.androidsdk.rest.ClientManager
 import io.flutter.app.FlutterApplication

@@ -138,8 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       // color: Colors.blue,
                       child: ListView(
                         physics: BouncingScrollPhysics(),
-                        children: customerController.relatedConsumersEntities
-                            .map((e) {
+                        children: customerController.relatedConsumers.map((e) {
                           return Padding(
                             padding: EdgeInsets.all(Get.width * 0.01),
                             child: GestureDetector(

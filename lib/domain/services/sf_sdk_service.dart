@@ -16,4 +16,6 @@ class SFSDKService {
   }
 
   Future<void> logout() => SalesforcePlugin.logoutCurrentUser();
+
+  Stream get authEventStream => SalesforcePlugin.authChannelStream;
 }

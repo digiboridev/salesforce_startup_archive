@@ -28,31 +28,37 @@ class UserDataController extends GetxController {
   UserDataState get userDataState => _userDataState.value;
   Rx<UserDataState> get userDataStateStream => _userDataState;
 
+  late StreamSubscription _sub;
+
   @override
   void onReady() {
     super.onReady();
-    listenByTimer();
+    bindToAuthEvent();
   }
 
   @override
   void onClose() {
     super.onClose();
-    // TODO close event channel
+    if (_sub is StreamSubscription) _sub.cancel();
   }
 
-  listenByTimer() {
-    Timer.periodic(Duration(seconds: 1), (t) async {
+  bindToAuthEvent() async {
+    AuthData? d = await _sfsdkService.authData;
+    handleAuthData(authData: d);
+
+    _sub = _sfsdkService.authEventStream.listen((event) async {
       AuthData? d = await _sfsdkService.authData;
-      if (_authData.value != d) {
-        _authData.value = d;
-        loadUserData();
-        print(_authData);
-      }
+      handleAuthData(authData: d);
     });
   }
 
-  Future loadUserData() async {
+  handleAuthData({required AuthData? authData}) {
+    _authData.value = authData;
+    loadUserData();
+    print(_authData);
+  }
 
+  Future loadUserData() async {
     if (_authData.value == null) {
       _userDataState.value = UserDataInitialState();
     }

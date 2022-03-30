@@ -44,7 +44,16 @@ class SalesforcePlugin {
    * @param headerParams
    * @param fileParams  Expected to be of the form: {<fileParamNameInPost>: {fileMimeType:<someMimeType>, fileUrl:<fileUrl>, fileName:<fileNameForPost>}}
    * @param returnBinary When true response returned as {encodedBody:"base64-encoded-response", contentType:"content-type"}
+   * 
+   * 
+   * 
+   * 
   */
+
+  static final Stream _authChannelStream =
+      EventChannel('authSF').receiveBroadcastStream();
+
+  static Stream get authChannelStream => _authChannelStream;
 
   static Future<Map> sendRequest(
       {String endPoint: '/services/data',
