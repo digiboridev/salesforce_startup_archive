@@ -40,6 +40,7 @@ import com.salesforce.androidsdk.ui.SalesforceActivityInterface;
 import com.salesforce.androidsdk.util.SalesforceSDKLogger;
 import com.salesforce.flutter.R;
 
+
 import io.flutter.embedding.android.FlutterActivity;
 
 /**
@@ -48,9 +49,9 @@ import io.flutter.embedding.android.FlutterActivity;
 public abstract class SalesforceFlutterActivity extends FlutterActivity implements SalesforceActivityInterface {
 
     private static final String TAG = "SalesforceFlutterActivity";
-
     // Delegate
     private final SalesforceActivityDelegate delegate;
+
 
     // Rest client
     private static RestClient restClient;
@@ -60,6 +61,7 @@ public abstract class SalesforceFlutterActivity extends FlutterActivity implemen
         super();
         this.delegate = new SalesforceActivityDelegate(this);
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +76,10 @@ public abstract class SalesforceFlutterActivity extends FlutterActivity implemen
         SalesforceSDKManager.getInstance().setViewNavigationVisibility(this);
 
 
+
     }
+
+
 
     @Override
     public void onResume() {

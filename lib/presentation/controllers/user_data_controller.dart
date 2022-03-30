@@ -52,6 +52,7 @@ class UserDataController extends GetxController {
   }
 
   Future loadUserData() async {
+
     if (_authData.value == null) {
       _userDataState.value = UserDataInitialState();
     }
@@ -65,6 +66,7 @@ class UserDataController extends GetxController {
         _userDataState.value = UserDataCommonState(userData: userData);
       }
     } catch (e) {
+      print(e);
       _userDataState.value = UserDataLoadingErrorState(msg: e.toString());
     }
   }

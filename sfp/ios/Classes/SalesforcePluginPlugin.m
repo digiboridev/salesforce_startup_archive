@@ -39,6 +39,7 @@
 
 @implementation SalesforcePlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
+
     FlutterMethodChannel* channel = [FlutterMethodChannel
                                      methodChannelWithName:@"com.salesforce.flutter.SalesforcePlugin"
                                      binaryMessenger:[registrar messenger]];
@@ -70,3 +71,6 @@
 }
 
 @end
+
+
+

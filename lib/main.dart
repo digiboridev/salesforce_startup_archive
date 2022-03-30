@@ -13,11 +13,12 @@ import 'package:***REMOVED***/domain/usecases/get_userdata_and_cache.dart';
 import 'package:***REMOVED***/domain/usecases/set_selected_customer_sap.dart';
 import 'package:***REMOVED***/presentation/ui/screens/loader.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
 
 main() async {
-  //WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
 
   await injectDependency();
   await initServices();
@@ -49,7 +50,17 @@ Future injectDependency() async {
 }
 
 Future initServices() async {
+  print('starting services ...');
   await GetStorage.init();
   await Get.putAsync(() => ConnectionService().init());
+  final EventChannel channel = new EventChannel('authSF');
+
+  channel.receiveBroadcastStream().listen((data) {
+    print("recv:");
+    //authSuccess
+    //authLogout
+    print(data);
+  });
+
   print('All services started...');
 }
