@@ -100,7 +100,6 @@ class CustomerModel extends Customer {
   }
 
   factory CustomerModel.fromMap(Map<String, dynamic> map) {
-    print(map['MaximumReturnItems'] is num);
     return CustomerModel(
       customerSAPNumber: map['CustomerSAPNumber'],
       customerName: map['CustomerName'],

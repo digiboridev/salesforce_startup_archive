@@ -3,16 +3,13 @@ import 'package:***REMOVED***/core/languages.dart';
 import 'package:***REMOVED***/domain/usecases/accept_legal_doc.dart';
 import 'package:***REMOVED***/domain/usecases/change_language.dart';
 import 'package:***REMOVED***/domain/usecases/usecase.dart';
-import 'package:***REMOVED***/main.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller_states.dart';
-import 'package:***REMOVED***/presentation/ui/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:***REMOVED***/domain/entities/auth_data.dart';
 import 'package:***REMOVED***/domain/entities/user_data.dart';
 import 'package:***REMOVED***/domain/services/sf_sdk_service.dart';
 import 'package:***REMOVED***/domain/usecases/get_userdata_and_cache.dart';
-import 'package:get_storage/get_storage.dart';
 
 class UserDataController extends GetxController {
   // dependencies
@@ -106,7 +103,7 @@ class UserDataController extends GetxController {
       });
       return languages;
     } else {
-      throw Exception('Denied operation');
+      throw Exception('Operation denied');
     }
   }
 
@@ -116,7 +113,7 @@ class UserDataController extends GetxController {
       return Languages.fromIdentifier(
           identifier: state.userData.selectedLanguage);
     } else {
-      throw Exception('Denied operation');
+      throw Exception('Operation denied');
     }
   }
 
