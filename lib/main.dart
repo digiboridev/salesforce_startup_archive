@@ -43,7 +43,7 @@ Future initServices() async {
   await Get.putAsync(() => ConnectionService().init());
   final EventChannel channel = new EventChannel('authSF');
 
-  channel.receiveBroadcastStream('some args')
+  channel.receiveBroadcastStream()
       .listen((data) {
     print("recv:");
     //authSuccess

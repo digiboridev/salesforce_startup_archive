@@ -70,7 +70,7 @@ static NSString * const OAuthRedirectURI        = @"sfdc://success/ios";
             // if you want to receive push notifications from Salesforce, you will also need to
             // implement the application:didRegisterForRemoteNotificationsWithDeviceToken: method (below).
             //
-            _eventSink(@"authSuccess");
+            if(_eventSink!=nil) _eventSink(@"authSuccess");
             [[SFPushNotificationManager sharedInstance] registerForRemoteNotifications];
             //
 
@@ -81,12 +81,12 @@ static NSString * const OAuthRedirectURI        = @"sfdc://success/ios";
 
         };
         [SalesforceSDKManager sharedManager].launchErrorAction = ^(NSError *error, SFSDKLaunchAction launchActionList) {
-            //[SFSDKLogger log:[weakSelf class] level:DDLogLevelError format:@"Error during SDK launch: %@", [error localizedDescription]];
-            //[weakSelf initializeAppViewState];
+            [SFSDKLogger log:[weakSelf class] level:DDLogLevelError format:@"Error during SDK launch: %@", [error localizedDescription]];
+            [weakSelf initializeAppViewState];
             [[SalesforceSDKManager sharedManager] launch];
         };
         [SalesforceSDKManager sharedManager].postLogoutAction = ^{
-            _eventSink(@"authLogout");
+            if(_eventSink!=nil) _eventSink(@"authLogout");
             [weakSelf handleSdkManagerLogout];
         };
         [SalesforceSDKManager sharedManager].switchUserAction = ^(SFUserAccount *fromUser, SFUserAccount *toUser) {
@@ -130,6 +130,10 @@ static NSString * const OAuthRedirectURI        = @"sfdc://success/ios";
 - (FlutterError*)onListenWithArguments:(id)arguments
                              eventSink:(FlutterEventSink)eventSink {
   _eventSink = eventSink;
+  return nil;
+}
+- (FlutterError*)onCancelWithArguments:(id)arguments {
+  _eventSink = nil;
   return nil;
 }
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
