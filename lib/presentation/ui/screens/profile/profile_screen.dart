@@ -2,6 +2,7 @@ import 'package:***REMOVED***/presentation/controllers/customer_controller.dart'
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/profile/change_language_page.dart';
 import 'package:***REMOVED***/presentation/ui/screens/profile/change_password_page.dart';
+import 'package:***REMOVED***/presentation/ui/screens/profile/personal_details_page.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/legal_doc_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -42,6 +43,28 @@ class ProfileScreen extends StatelessWidget {
               child: Container(
             child: Column(
               children: [
+                GestureDetector(
+                  onTap: () {
+                    Get.to(() => PersonalDetailsPage(),
+                        transition: Transition.cupertino);
+                  },
+                  child: Container(
+                    color: Colors.white,
+                    padding: EdgeInsets.symmetric(
+                        horizontal: Get.width * 0.06,
+                        vertical: Get.width * 0.04),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Personal details'),
+                        Icon(Icons.arrow_forward)
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: Get.width * 0.01,
+                ),
                 GestureDetector(
                   onTap: () {
                     Get.to(() => ChangeLanguagePage(),
