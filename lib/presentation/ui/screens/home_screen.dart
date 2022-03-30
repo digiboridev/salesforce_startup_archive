@@ -123,124 +123,154 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget buildContact() {
-    return contactusController.obx((state) {
-      if (state is ContactUsData) {
+    return contactusController.obx(
+      (state) {
+        if (state is ContactUsData) {
+          return Container(
+            height: topSheetHeight,
+            color: Color(0xff00458C),
+            child: Column(
+              children: [
+                Container(
+                  height: Get.width * 0.2,
+                  decoration: BoxDecoration(
+                      color: Color(0xff0250A0),
+                      borderRadius: BorderRadius.circular(Get.width * 0.02)),
+                  margin: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
+                  padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Center(
+                          child: Text(
+                            'Our focus is open',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Center(
+                          child: Text(
+                            state.openingHoursString,
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: Get.width * 0.02,
+                ),
+                ...state.contactOptionsList.map((e) {
+                  return Column(
+                    children: [
+                      Container(
+                        height: Get.width * 0.25,
+                        decoration: BoxDecoration(
+                            color: Color(0xff0250A0),
+                            borderRadius:
+                                BorderRadius.circular(Get.width * 0.02)),
+                        margin:
+                            EdgeInsets.symmetric(horizontal: Get.width * 0.06),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: Get.width * 0.02),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: Get.width * 0.02),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  e.description,
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    launch('mailto:${e.email}');
+                                  },
+                                  child: Image.asset(
+                                    'assets/icons/contact_mail.png',
+                                    width: Get.width * 0.15,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: Get.width * 0.05,
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    launch('${e.whatsAppLink}');
+                                  },
+                                  child: Image.asset(
+                                    'assets/icons/contact_messanger.png',
+                                    width: Get.width * 0.15,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: Get.width * 0.05,
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    launch('tel:${e.phoneNumber}');
+                                  },
+                                  child: Image.asset(
+                                    'assets/icons/contact_phone.png',
+                                    width: Get.width * 0.15,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: Get.width * 0.02,
+                      ),
+                    ],
+                  );
+                })
+              ],
+            ),
+          );
+        } else {
+          return SizedBox();
+        }
+      },
+      onError: (error) {
         return Container(
+          width: Get.width,
           height: topSheetHeight,
           color: Color(0xff00458C),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                height: Get.width * 0.2,
-                decoration: BoxDecoration(
-                    color: Color(0xff0250A0),
-                    borderRadius: BorderRadius.circular(Get.width * 0.02)),
-                margin: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
-                padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Center(
-                        child: Text(
-                          'Our focus is open',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Center(
-                        child: Text(
-                          state.openingHoursString,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: Get.width * 0.02,
-              ),
-              ...state.contactOptionsList.map((e) {
-                return Column(
-                  children: [
-                    Container(
-                      height: Get.width * 0.25,
-                      decoration: BoxDecoration(
-                          color: Color(0xff0250A0),
-                          borderRadius:
-                              BorderRadius.circular(Get.width * 0.02)),
-                      margin:
-                          EdgeInsets.symmetric(horizontal: Get.width * 0.06),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: Get.width * 0.02),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: Get.width * 0.02),
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                e.description,
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  launch('mailto:${e.email}');
-                                },
-                                child: Image.asset(
-                                  'assets/icons/contact_mail.png',
-                                  width: Get.width * 0.15,
-                                ),
-                              ),
-                              SizedBox(
-                                width: Get.width * 0.05,
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  launch('${e.whatsAppLink}');
-                                },
-                                child: Image.asset(
-                                  'assets/icons/contact_messanger.png',
-                                  width: Get.width * 0.15,
-                                ),
-                              ),
-                              SizedBox(
-                                width: Get.width * 0.05,
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  launch('tel:${e.phoneNumber}');
-                                },
-                                child: Image.asset(
-                                  'assets/icons/contact_phone.png',
-                                  width: Get.width * 0.15,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: Get.width * 0.02,
-                    ),
-                  ],
-                );
-              })
+              Text('Contact Us loaing error',
+                  style: TextStyle(color: Colors.white)),
+              SizedBox(height: Get.width * 0.06),
+              GestureDetector(
+                  onTap: () {
+                    contactusController.load();
+                  },
+                  child: Text('Reload', style: TextStyle(color: Colors.white))),
             ],
           ),
         );
-      } else {
-        return SizedBox();
-      }
-    });
+      },
+      onLoading: Container(
+        width: Get.width,
+        height: topSheetHeight,
+        color: Color(0xff00458C),
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      ),
+    );
   }
 
   Widget buildBranchSelection() {
