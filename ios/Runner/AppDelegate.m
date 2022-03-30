@@ -145,8 +145,15 @@ static NSString * const OAuthRedirectURI        = @"sfdc://success/ios";
     //
     // Uncomment the code below to register your device token with the push notification manager
     //
+    NSLog(@"push device token:");
+        NSLog(@"%@", deviceToken);
+
+
+
     [[SFPushNotificationManager sharedInstance] didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
     if ([SFUserAccountManager sharedInstance].currentUser.credentials.accessToken != nil) {
+    NSLog(@"access token:");
+                NSLog(@"%@", [SFUserAccountManager sharedInstance].currentUser.credentials.accessToken);
         [[SFPushNotificationManager sharedInstance] registerForSalesforceNotifications];
     }
     //
@@ -155,6 +162,8 @@ static NSString * const OAuthRedirectURI        = @"sfdc://success/ios";
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
     // Respond to any push notification registration errors here.
+    NSLog(@"push reg error:");
+            NSLog(@"%@", error);
 }
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options{
