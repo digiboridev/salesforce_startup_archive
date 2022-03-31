@@ -87,3 +87,5 @@ Future initControllers() async {
   Get.put(ContactusController(), permanent: true);
   print('All controllers started...');
 }
+
+//test
