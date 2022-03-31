@@ -5,15 +5,21 @@ import 'package:***REMOVED***/domain/entities/customer.dart';
 
 abstract class CustomersRepository {
   Future<String> getSelectedCustomerSAP({required String userId});
+
   Future setSelectedCustomerSAP(
       {required String userId, required String customerSAP});
+
   Future<Customer> getRemoteCustomerBySAP({required String customerSAP});
+
   Future<Customer> getLocalCustomerBySAP({required String customerSAP});
+
   Future setLocalCustomerBySAP(
       {required String customerSAP, required Customer customer});
-  // Future<void> setCustomersListToCache(
-  //     {required String userId, required List<Customer> customers});
-  // Future<List<Customer>> getCustomersListFromCache({required String userId});
+
+  Future setCustomerSyncTime(
+      {required String customerSAP, required DateTime dateTime});
+
+  Future<DateTime> getCustomerSyncTime({required String customerSAP});
 }
 
 class CustomersRepositoryImpl implements CustomersRepository {
@@ -35,25 +41,28 @@ class CustomersRepositoryImpl implements CustomersRepository {
       customersLocalDatasource.setSelectedCustomerSAP(
           userId: userId, customerSAP: customerSAP);
 
+  @override
   Future<Customer> getRemoteCustomerBySAP({required String customerSAP}) =>
       customersRemoteDatasource.getCustomerBySAP(customerSAP: customerSAP);
 
+  @override
   Future<Customer> getLocalCustomerBySAP({required String customerSAP}) =>
       customersLocalDatasource.getCustomerBySAP(customerSAP: customerSAP);
 
+  @override
   Future setLocalCustomerBySAP(
           {required String customerSAP, required Customer customer}) =>
       customersLocalDatasource.setCustomer(
           customerSAP: customerSAP,
           customerModel: CustomerModel.fromEntity(customer));
 
-  // Future<void> setCustomersListToCache(
-  //         {required String userId, required List<Customer> customers}) =>
-  //     customersLocalDatasource.setCustomersList(
-  //         userId: userId,
-  //         customers:
-  //             customers.map((e) => CustomerModel.fromEntity(e)).toList());
+  @override
+  Future setCustomerSyncTime(
+          {required String customerSAP, required DateTime dateTime}) =>
+      customersLocalDatasource.setCustomerSyncTime(
+          customerSAP: customerSAP, dateTime: dateTime);
 
-  // Future<List<Customer>> getCustomersListFromCache({required String userId}) =>
-  //     customersLocalDatasource.getCustomersList(userId: userId);
+  @override
+  Future<DateTime> getCustomerSyncTime({required String customerSAP}) =>
+      customersLocalDatasource.getCustomerSyncTime(customerSAP: customerSAP);
 }

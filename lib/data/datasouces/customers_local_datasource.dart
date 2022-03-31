@@ -4,22 +4,25 @@ import 'package:get_storage/get_storage.dart';
 
 abstract class CustomersLocalDatasource {
   Future<String> getSelectedCustomerSAP({required String userId});
+
   Future setSelectedCustomerSAP(
       {required String userId, required String customerSAP});
+
   Future setCustomer(
       {required String customerSAP, required CustomerModel customerModel});
 
   Future<CustomerModel> getCustomerBySAP({required String customerSAP});
 
-  // Future<void> setCustomersList(
-  //     {required String userId, required List<CustomerModel> customers});
+  Future setCustomerSyncTime(
+      {required String customerSAP, required DateTime dateTime});
 
-  // Future<List<CustomerModel>> getCustomersList({required String userId});
+  Future<DateTime> getCustomerSyncTime({required String customerSAP});
 }
 
 class CustomersLocalDatasourceImpl implements CustomersLocalDatasource {
-  final sapBox = GetStorage('customerSAP');
   final customersBox = GetStorage('customers');
+  final sapBox = GetStorage('customerSAP');
+  final customerSyncBox = GetStorage('customersSyncBox');
 
   @override
   Future<String> getSelectedCustomerSAP({required String userId}) async {
@@ -56,20 +59,20 @@ class CustomersLocalDatasourceImpl implements CustomersLocalDatasource {
     return CustomerModel.fromJson(data);
   }
 
-  // @override
-  // Future<void> setCustomersList(
-  //     {required String userId, required List<CustomerModel> customers}) async {
-  //   await customersBox.write(userId, customers.map((e) => e.toJson()).toList());
-  // }
+  @override
+  Future setCustomerSyncTime(
+      {required String customerSAP, required DateTime dateTime}) async {
+    await customerSyncBox.write(customerSAP, dateTime.millisecondsSinceEpoch);
+  }
 
-  // @override
-  // Future<List<CustomerModel>> getCustomersList({required String userId}) async {
-  //   List? data = customersBox.read(userId);
+  @override
+  Future<DateTime> getCustomerSyncTime({required String customerSAP}) async {
+    int? data = customerSyncBox.read(customerSAP);
 
-  //   if (data == null) {
-  //     throw CacheException('No chached cuctomers for: $userId');
-  //   }
+    if (data == null) {
+      throw CacheException('No sync time for $customerSAP');
+    }
 
-  //   return data.map((e) => CustomerModel.fromJson(e)).toList();
-  // }
+    return DateTime.fromMillisecondsSinceEpoch(data);
+  }
 }

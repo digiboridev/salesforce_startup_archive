@@ -16,6 +16,8 @@ class GetCustomerAndCache
 
       customersRepository.setLocalCustomerBySAP(
           customerSAP: params.customerSAP, customer: remoteCustomer);
+      customersRepository.setCustomerSyncTime(
+          customerSAP: params.customerSAP, dateTime: DateTime.now());
       return remoteCustomer;
     } catch (e) {
       print(e);

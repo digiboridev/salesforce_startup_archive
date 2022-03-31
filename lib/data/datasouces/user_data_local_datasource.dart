@@ -6,14 +6,18 @@ abstract class UserDataLocalDatasource {
   Future<UserDataModel> getUserData({required String userId});
   Future setUserData(
       {required String userId, required UserDataModel userDataModel});
+  Future setUserDataSyncTime(
+      {required String userId, required DateTime dateTime});
+  Future<DateTime> getUserDataSyncTime({required String userId});
 }
 
 class UserDataLocalDatasourceImpl implements UserDataLocalDatasource {
-  final box = GetStorage('UserData');
+  final userDataBox = GetStorage('userDataBox');
+  final syncBox = GetStorage('syncBox');
 
   @override
   Future<UserDataModel> getUserData({required String userId}) async {
-    String? data = box.read(userId);
+    String? data = userDataBox.read(userId);
 
     if (data == null) {
       throw CacheException('No cached data for $userId');
@@ -22,8 +26,26 @@ class UserDataLocalDatasourceImpl implements UserDataLocalDatasource {
     return UserDataModel.fromJson(data);
   }
 
+  @override
   Future setUserData(
       {required String userId, required UserDataModel userDataModel}) async {
-    await box.write(userId, userDataModel.toJson());
+    await userDataBox.write(userId, userDataModel.toJson());
+  }
+
+  @override
+  Future setUserDataSyncTime(
+      {required String userId, required DateTime dateTime}) async {
+    await syncBox.write(userId, dateTime.millisecondsSinceEpoch);
+  }
+
+  @override
+  Future<DateTime> getUserDataSyncTime({required String userId}) async {
+    int? data = syncBox.read(userId);
+
+    if (data == null) {
+      throw CacheException('No sync time for $userId');
+    }
+
+    return DateTime.fromMillisecondsSinceEpoch(data);
   }
 }

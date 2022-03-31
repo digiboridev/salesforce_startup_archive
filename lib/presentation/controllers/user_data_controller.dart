@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'package:***REMOVED***/core/languages.dart';
+import 'package:***REMOVED***/domain/services/cache_ferchig_service.dart';
 import 'package:***REMOVED***/domain/usecases/accept_legal_doc.dart';
 import 'package:***REMOVED***/domain/usecases/change_language.dart';
 import 'package:***REMOVED***/domain/usecases/change_password.dart';
+import 'package:***REMOVED***/domain/usecases/get_userdata_sync_time.dart';
 import 'package:***REMOVED***/domain/usecases/usecase.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller_states.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/dialogs/default_dialog.dart';
@@ -16,12 +18,14 @@ import 'package:***REMOVED***/domain/usecases/get_userdata_and_cache.dart';
 class UserDataController extends GetxController {
   // dependencies
   SFSDKService _sfsdkService = SFSDKService();
+  CacheFetchingService _cacheFetchingService = Get.find();
 
   // usecases
   GetUserDataAndCache _getUserDataAndCache = Get.find();
   AcceptLegalDoc _acceptLegaloc = Get.find();
   ChangeLanguage _changeLanguage = Get.find();
   ChangePassword _changePassword = Get.find();
+  GetUserDataSyncTime _getUserDataSyncTime = Get.find();
 
   // valiables
   Rxn<AuthData> _authData = Rxn<AuthData>();
@@ -75,6 +79,12 @@ class UserDataController extends GetxController {
             UserDataAskLegalDocState(legalDoc: userData.legalDoc);
       } else {
         _userDataState.value = UserDataCommonState(userData: userData);
+
+        // Register in cache fetching service
+        CacheUpdateEvent cacheUpdateEvent = CacheUpdateEvent(
+            updateActionCallback: updateUserData,
+            lastUpdateTimeCallback: getLastSync);
+        _cacheFetchingService.registerEvent(cacheUpdateEvent: cacheUpdateEvent);
       }
     } catch (e) {
       print(e);
@@ -82,17 +92,19 @@ class UserDataController extends GetxController {
     }
   }
 
+  Future<DateTime> getLastSync() async {
+    return _getUserDataSyncTime.call(_authData.value!.userId);
+  }
+
   Future updateUserData() async {
     UserDataState oldState = _userDataState.value;
     if (oldState is UserDataCommonState) {
-      _userDataState.value = UserDataUpdatingState(userData: oldState.userData);
       try {
         UserData userData = await _getUserDataAndCache(_authData.value!.userId);
         _userDataState.value = UserDataCommonState(userData: userData);
       } catch (e) {
         print('Update user data error');
         print(e);
-        _userDataState.value = oldState;
       }
     }
   }
@@ -142,7 +154,6 @@ class UserDataController extends GetxController {
   Future changeLanguage({required Languages lang}) async {
     try {
       defaultDialog();
-
       await _changeLanguage(ChangeLanguageParams(lang: lang));
       await updateUserData();
       Get.until((route) => !Get.isDialogOpen!);

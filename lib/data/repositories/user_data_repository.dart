@@ -8,6 +8,9 @@ abstract class UserDataRepository {
   Future<UserData> get getRemoteUserData;
   Future<UserData> getLocalUserData({required userId});
   Future setLocalUserData({required userId, required UserData userData});
+  Future setUserDataSyncTime(
+      {required String userId, required DateTime dateTime});
+  Future<DateTime> getUserDataSyncTime({required String userId});
   Future<void> acceptLegalDoc();
   Future<void> changeLanguage({required Languages lang});
   Future<void> changePassword(
@@ -34,6 +37,16 @@ class UserDataRepositoryImpl implements UserDataRepository {
   Future setLocalUserData({required userId, required UserData userData}) =>
       userDataLocalDatasource.setUserData(
           userId: userId, userDataModel: UserDataModel.fromEnitty(userData));
+
+  @override
+  Future setUserDataSyncTime(
+          {required String userId, required DateTime dateTime}) =>
+      userDataLocalDatasource.setUserDataSyncTime(
+          userId: userId, dateTime: dateTime);
+
+  @override
+  Future<DateTime> getUserDataSyncTime({required String userId}) =>
+      userDataLocalDatasource.getUserDataSyncTime(userId: userId);
 
   @override
   Future<void> acceptLegalDoc() => userDataRemoteDatasource.acceptLegalDoc();

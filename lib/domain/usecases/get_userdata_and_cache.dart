@@ -14,6 +14,8 @@ class GetUserDataAndCache implements UseCase<UserData, String> {
 
       userDataRepository.setLocalUserData(
           userId: userId, userData: remoteUserData);
+      userDataRepository.setUserDataSyncTime(
+          userId: userId, dateTime: DateTime.now());
       return remoteUserData;
     } catch (e) {
       return userDataRepository.getLocalUserData(userId: userId);

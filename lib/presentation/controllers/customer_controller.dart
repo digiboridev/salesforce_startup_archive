@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'package:***REMOVED***/domain/entities/customer.dart';
 import 'package:***REMOVED***/domain/entities/related_consumer.dart';
+import 'package:***REMOVED***/domain/services/cache_ferchig_service.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/domain/usecases/get_customer_and_cache.dart';
+import 'package:***REMOVED***/domain/usecases/get_customer_sync_time.dart';
 import 'package:***REMOVED***/domain/usecases/get_selected_customer_sap.dart';
 import 'package:***REMOVED***/domain/usecases/set_selected_customer_sap.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
@@ -15,11 +17,13 @@ class CustomerController extends GetxController {
   // dependencies
   UserDataController _userDataController = Get.find();
   ConnectionService _connectionService = Get.find();
+  CacheFetchingService _cacheFetchingService = Get.find();
 
   // Usecases
   GetSelectedCustomerSAP _getSelectedCustomerSAP = Get.find();
   SetSelectedCustomerSAP _setSelectedCustomerSAP = Get.find();
   GetCustomerAndCache _getCustomerAndCache = Get.find();
+  GetCustomerSyncTime _getCustomerSyncTime = Get.find();
 
   // Any non autocloseable streams
   List<StreamSubscription> _subs = [];
@@ -93,9 +97,29 @@ class CustomerController extends GetxController {
       // load data
       _selectedCustomer.value = await _getCustomerAndCache.call(
           GetCustomerAndCacheParams(customerSAP: _selectedCustomerSAP.value!));
+
+      // Register in cache fetching service
+      CacheUpdateEvent cacheUpdateEvent = CacheUpdateEvent(
+          updateActionCallback: updateCustomerData,
+          lastUpdateTimeCallback: getLastSync);
+      _cacheFetchingService.registerEvent(cacheUpdateEvent: cacheUpdateEvent);
     } catch (e) {
       _customerLoadingError.value = e.toString();
       print(e.toString());
+    }
+  }
+
+  Future<DateTime> getLastSync() async {
+    return _getCustomerSyncTime.call(_selectedCustomerSAP.value!);
+  }
+
+  Future updateCustomerData() async {
+    try {
+      Customer c = await _getCustomerAndCache.call(
+          GetCustomerAndCacheParams(customerSAP: _selectedCustomerSAP.value!));
+      _selectedCustomer.value = c;
+    } catch (e) {
+      Get.snackbar('Error', e.toString());
     }
   }
 
