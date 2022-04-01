@@ -1,5 +1,4 @@
 import 'package:***REMOVED***/domain/entities/contact_us_data.dart';
-import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/presentation/controllers/contactus_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/profile/profile_screen.dart';
@@ -7,36 +6,31 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomePageHeader extends StatefulWidget {
+  final double headerHeight;
+  const HomePageHeader({Key? key, required this.headerHeight})
+      : super(key: key);
+
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomePageHeader> createState() => _HomePageHeaderState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomePageHeaderState extends State<HomePageHeader> {
   final CustomerController customerController = Get.find();
-  final ConnectionService connectionService = Get.find();
   final ContactusController contactusController = Get.find();
-
-  final double headerHeight = Get.width * 0.3;
   final double topSheetHeight = Get.width * 0.9;
-
   bool headerExpanded = false;
-
+  late double headerHeight;
   Widget? expandedChild;
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: SafeArea(
-      child: SizedBox.expand(
-        child: Stack(
-          children: [buildBody(), buildHeader()],
-        ),
-      ),
-    ));
+  void initState() {
+    super.initState();
+    headerHeight = widget.headerHeight;
   }
 
-  Widget buildHeader() {
+  @override
+  Widget build(BuildContext context) {
     return AnimatedContainer(
       decoration: BoxDecoration(color: Colors.transparent),
       clipBehavior: Clip.antiAlias,
@@ -331,26 +325,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ))
         ],
-      ),
-    );
-  }
-
-  Widget buildBody() {
-    return Padding(
-      padding: EdgeInsets.only(top: headerHeight),
-      child: Container(
-        width: Get.width,
-        color: Colors.white,
-        child: Column(
-          children: [
-            Spacer(),
-            Text('Homescreen'),
-            Spacer(),
-            Obx(() => Text(connectionService.hasConnection
-                ? 'Online mode'
-                : 'Offline mode')),
-          ],
-        ),
       ),
     );
   }

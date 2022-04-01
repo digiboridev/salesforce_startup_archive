@@ -3,7 +3,7 @@ import 'package:***REMOVED***/presentation/controllers/contactus_controller.dart
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller_states.dart';
-import 'package:***REMOVED***/presentation/ui/screens/home_screen.dart';
+import 'package:***REMOVED***/presentation/ui/screens/main_screen/main_screen.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/legal_doc_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -115,7 +115,7 @@ class Loader extends StatelessWidget {
           return JustLoadingScreen();
         }
 
-        return HomeScreen();
+        return MainScreen();
       }
 
       return JustLoadingScreen();
