@@ -1,6 +1,7 @@
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar_wrapper.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/homepage/homepage.dart';
+import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/mainscreen_header.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -27,49 +28,65 @@ class _MainScreenState extends State<MainScreen> {
     });
   }
 
+  final double headerHeight = Get.width * 0.3;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
       child: SizedBox.expand(
         child: BottomBarWrapper(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
+          child: Stack(
             children: [
-              Expanded(
-                child: PageView(
-                  onPageChanged: (value) =>
-                      bottomBarController.currentPageIndex.value = value + 1,
-                  controller: pageController,
+              Padding(
+                padding: EdgeInsets.only(top: headerHeight),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
                   children: [
-                    Container(
-                      alignment: Alignment.center,
-                      color: Colors.amber,
-                      child: Text('orders'),
+                    Expanded(
+                      child: buildPageView(),
                     ),
-                    Container(
-                      alignment: Alignment.center,
-                      color: Colors.red,
-                      child: Text('catalog'),
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      color: Colors.amber,
-                      child: Text('cart'),
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      color: Colors.red,
-                      child: Text('favorites'),
-                    ),
-                    HomePage(),
                   ],
                 ),
               ),
+              MainScreenHeader(
+                headerHeight: headerHeight,
+              )
             ],
           ),
         ),
       ),
     ));
+  }
+
+  PageView buildPageView() {
+    return PageView(
+      onPageChanged: (value) =>
+          bottomBarController.currentPageIndex.value = value + 1,
+      controller: pageController,
+      children: [
+        Container(
+          alignment: Alignment.center,
+          color: Colors.amber,
+          child: Text('orders'),
+        ),
+        Container(
+          alignment: Alignment.center,
+          color: Colors.red,
+          child: Text('catalog'),
+        ),
+        Container(
+          alignment: Alignment.center,
+          color: Colors.amber,
+          child: Text('cart'),
+        ),
+        Container(
+          alignment: Alignment.center,
+          color: Colors.red,
+          child: Text('favorites'),
+        ),
+        HomePage(),
+      ],
+    );
   }
 }
