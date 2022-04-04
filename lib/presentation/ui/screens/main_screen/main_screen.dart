@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar_wrapper.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/homepage/homepage.dart';
@@ -13,6 +14,9 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  MaterialsCatalogController materialsCatalogController =
+      Get.put(MaterialsCatalogController());
+
   late final BottomBarController bottomBarController;
   late final PageController pageController;
 
@@ -33,30 +37,31 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.grey,
         body: SafeArea(
-      child: SizedBox.expand(
-        child: BottomBarWrapper(
-          child: Stack(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(top: headerHeight),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                      child: buildPageView(),
+          child: SizedBox.expand(
+            child: BottomBarWrapper(
+              child: Stack(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(top: headerHeight),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Expanded(
+                          child: buildPageView(),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                  MainScreenHeader(
+                    headerHeight: headerHeight,
+                  )
+                ],
               ),
-              MainScreenHeader(
-                headerHeight: headerHeight,
-              )
-            ],
+            ),
           ),
-        ),
-      ),
-    ));
+        ));
   }
 
   PageView buildPageView() {

@@ -33,6 +33,7 @@ class CustomerController extends GetxController {
   List get relatedConsumers => _relatedConsumers;
 
   RxnString _selectedCustomerSAP = RxnString();
+  String? get selectedCustomerSAP => _selectedCustomerSAP.value;
 
   RxnString _customerLoadingError = RxnString();
   String? get customerLoadingError => _customerLoadingError.value;

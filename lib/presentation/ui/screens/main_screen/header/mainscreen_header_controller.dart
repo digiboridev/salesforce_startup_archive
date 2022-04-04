@@ -29,15 +29,25 @@ class MainScreeenHeaderController extends GetxController {
     }
   }
 
-  showContactus() {
+  Future hideAnother() async {
+    if (mainScreeenHeaderState.value is! MSHShowCommon) {
+      hide();
+      await 0.3.delay();
+    }
+  }
+
+  showContactus() async {
+    await hideAnother();
     mainScreeenHeaderState.value = MSHShowContactus();
   }
 
-  showBrunchSelection() {
+  showBrunchSelection() async {
+    await hideAnother();
     mainScreeenHeaderState.value = MSHShowBrunch();
   }
 
-  showSearch() {
+  showSearch() async {
+    await hideAnother();
     mainScreeenHeaderState.value = MSHShowSearch();
   }
 

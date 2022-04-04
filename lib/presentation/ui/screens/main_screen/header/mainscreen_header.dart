@@ -111,31 +111,33 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
         Obx(() => AnimatedContainer(
               decoration: BoxDecoration(color: Colors.transparent),
               clipBehavior: Clip.antiAlias,
-              duration: Duration(milliseconds: 300),
+              duration: Duration(milliseconds: 200),
               curve: Curves.easeInOut,
               height: mainScreeenHeaderController.mainScreeenHeaderState.value
-                      is! MSHShowCommon
+                      is MSHShowContactus
                   ? topSheetHeight
                   : 0,
               child: OverflowBox(
                 minHeight: 0,
-                child: expandedChild,
+                child: buildContact(),
               ),
-            ))
+            )),
+        Obx(() => AnimatedContainer(
+              decoration: BoxDecoration(color: Colors.transparent),
+              clipBehavior: Clip.antiAlias,
+              duration: Duration(milliseconds: 200),
+              curve: Curves.easeInOut,
+              height: mainScreeenHeaderController.mainScreeenHeaderState.value
+                      is MSHShowBrunch
+                  ? topSheetHeight
+                  : 0,
+              child: OverflowBox(
+                minHeight: 0,
+                child: buildBranchSelection(),
+              ),
+            )),
       ],
     );
-  }
-
-  Widget get expandedChild {
-    if (mainScreeenHeaderController.mainScreeenHeaderState.value
-        is MSHShowContactus) {
-      return buildContact();
-    } else if (mainScreeenHeaderController.mainScreeenHeaderState.value
-        is MSHShowBrunch) {
-      return buildBranchSelection();
-    } else {
-      return SizedBox();
-    }
   }
 
   Widget buildContact() {

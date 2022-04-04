@@ -9,7 +9,7 @@ class BottomBarWrapper extends StatelessWidget {
     required this.child,
   }) : super(key: key);
 
-  final double bottomBarHeight = Get.width * 0.2;
+  final double bottomBarHeight = Get.width * 0.25;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class BottomBarWrapper extends StatelessWidget {
           children: [
             Expanded(child: child),
             SizedBox(
-              height: bottomBarHeight * 0.75,
+              height: bottomBarHeight * 0.3,
             ),
           ],
         ),
