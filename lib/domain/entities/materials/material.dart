@@ -14,8 +14,8 @@ class Material extends Equatable {
   final num SalesUnitNumber;
   final String SalesUnitDisplay;
   final String SalesUnit;
-  final String? RecommendationType;
-  final String? RecommendationOrder;
+  final num? RecommendationType;
+  final num? RecommendationOrder;
   final String? ProductDescription;
   final List<Pricing> pricing;
   final num PalletCount;

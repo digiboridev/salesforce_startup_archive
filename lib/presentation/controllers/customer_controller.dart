@@ -34,6 +34,7 @@ class CustomerController extends GetxController {
 
   RxnString _selectedCustomerSAP = RxnString();
   String? get selectedCustomerSAP => _selectedCustomerSAP.value;
+  Stream<String?> get selectedCustomerSAPStream => _selectedCustomerSAP.stream;
 
   RxnString _customerLoadingError = RxnString();
   String? get customerLoadingError => _customerLoadingError.value;
@@ -101,6 +102,7 @@ class CustomerController extends GetxController {
 
       // Register in cache fetching service
       CacheUpdateEvent cacheUpdateEvent = CacheUpdateEvent(
+          tag: 'customer',
           updateActionCallback: updateCustomerData,
           lastUpdateTimeCallback: getLastSync);
       _cacheFetchingService.registerEvent(cacheUpdateEvent: cacheUpdateEvent);

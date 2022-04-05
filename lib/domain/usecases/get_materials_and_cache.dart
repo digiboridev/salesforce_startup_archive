@@ -20,7 +20,14 @@ class GetMaterialsAndCache implements UseCase<MaterialsCatalog, String> {
           customerSAP: customerSAP, dateTime: DateTime.now());
       return remoteMaterialsCatalog;
     } catch (e) {
-      return materialsRepository.getLocalMaterials(customerSAP: customerSAP);
+      print(e);
+      try {
+        MaterialsCatalog localMaterialsCatalog = await materialsRepository
+            .getLocalMaterials(customerSAP: customerSAP);
+        return localMaterialsCatalog;
+      } catch (e) {
+        throw Exception('Unable to load catalog for consumer $customerSAP');
+      }
     }
   }
 }

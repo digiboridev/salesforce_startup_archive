@@ -1,6 +1,7 @@
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar_wrapper.dart';
+import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalog_loader.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/homepage/homepage.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/mainscreen_header.dart';
 import 'package:flutter/material.dart';
@@ -75,11 +76,7 @@ class _MainScreenState extends State<MainScreen> {
           color: Colors.amber,
           child: Text('orders'),
         ),
-        Container(
-          alignment: Alignment.center,
-          color: Colors.red,
-          child: Text('catalog'),
-        ),
+        CatalogLoader(),
         Container(
           alignment: Alignment.center,
           color: Colors.amber,

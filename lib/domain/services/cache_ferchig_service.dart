@@ -3,9 +3,11 @@ import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:get/get.dart';
 
 class CacheUpdateEvent {
+  final String tag;
   final Future<DateTime> Function() lastUpdateTimeCallback;
   final Future Function() updateActionCallback;
   CacheUpdateEvent({
+    required this.tag,
     required this.lastUpdateTimeCallback,
     required this.updateActionCallback,
   });
@@ -20,6 +22,8 @@ class CacheFetchingService extends GetxService {
   List<CacheUpdateEvent> _cacheUpdateEvents = [];
 
   registerEvent({required CacheUpdateEvent cacheUpdateEvent}) {
+    _cacheUpdateEvents
+        .removeWhere((element) => element.tag == cacheUpdateEvent.tag);
     _cacheUpdateEvents.add(cacheUpdateEvent);
   }
 

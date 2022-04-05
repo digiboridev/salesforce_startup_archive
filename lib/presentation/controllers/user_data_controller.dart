@@ -82,6 +82,7 @@ class UserDataController extends GetxController {
 
         // Register in cache fetching service
         CacheUpdateEvent cacheUpdateEvent = CacheUpdateEvent(
+            tag: 'user',
             updateActionCallback: updateUserData,
             lastUpdateTimeCallback: getLastSync);
         _cacheFetchingService.registerEvent(cacheUpdateEvent: cacheUpdateEvent);
