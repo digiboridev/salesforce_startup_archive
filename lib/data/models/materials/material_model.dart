@@ -5,7 +5,7 @@ import 'package:***REMOVED***/data/models/materials/pricing_model.dart';
 import 'package:***REMOVED***/data/models/materials/supplementary_item_model.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
 
-class MaterialModel extends Material {
+class MaterialModel extends Materiale {
   @override
   final List<SupplementaryItemModel> SupplementaryItems;
   @override
@@ -195,7 +195,7 @@ class MaterialModel extends Material {
     );
   }
 
-  factory MaterialModel.fromEntity(Material materialModel) {
+  factory MaterialModel.fromEntity(Materiale materialModel) {
     return MaterialModel(
       WeightUnitDisplay: materialModel.WeightUnitDisplay,
       UnitPrice: materialModel.UnitPrice,

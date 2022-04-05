@@ -4,18 +4,35 @@ import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalo
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CatalogLoader extends StatelessWidget {
+class CatalogLoader extends StatefulWidget {
   CatalogLoader({Key? key}) : super(key: key);
+
+  @override
+  State<CatalogLoader> createState() => _CatalogLoaderState();
+}
+
+class _CatalogLoaderState extends State<CatalogLoader>
+    with AutomaticKeepAliveClientMixin {
   final MaterialsCatalogController materialsCatalogController = Get.find();
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Obx(() {
       MaterialsCatalogState state =
           materialsCatalogController.materialsCatalogState.value;
 
       if (state is MCSCommon) {
         return CatalogPage(
+          key: ObjectKey(state.catalog),
           materialsCatalog: state.catalog,
         );
       } else if (state is MCSLoadingError) {

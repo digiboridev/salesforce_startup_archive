@@ -4,7 +4,7 @@ import 'package:***REMOVED***/domain/entities/materials/pricing.dart';
 import 'package:***REMOVED***/domain/entities/materials/supplementary_item.dart';
 import 'package:equatable/equatable.dart';
 
-class Material extends Equatable {
+class Materiale extends Equatable {
   final String WeightUnitDisplay;
   final num UnitPrice;
   final num UnitNetPrice;
@@ -45,7 +45,7 @@ class Material extends Equatable {
   final String Barcode;
   final num AverageQty;
   final List<AlternativeItem> alternativeItems;
-  Material({
+  Materiale({
     required this.WeightUnitDisplay,
     required this.UnitPrice,
     required this.UnitNetPrice,

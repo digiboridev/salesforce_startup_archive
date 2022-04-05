@@ -1,4 +1,5 @@
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
+import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,6 +9,7 @@ class ChangeLanguagePage extends StatelessWidget {
 
   final CustomerController customerController = Get.find();
   final UserDataController userDataController = Get.find();
+  final MaterialsCatalogController materialsCatalogController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +55,10 @@ class ChangeLanguagePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: userDataController.avaliableLanguages.map((e) {
                   return GestureDetector(
-                    onTap: () => userDataController.changeLanguage(lang: e),
+                    onTap: () => userDataController
+                        .changeLanguage(lang: e)
+                        .then((value) =>
+                            materialsCatalogController.loadCatalog()),
                     child: Padding(
                       padding: EdgeInsets.symmetric(vertical: Get.width * 0.01),
                       child: Obx(() => Row(

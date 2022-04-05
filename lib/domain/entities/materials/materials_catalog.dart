@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-
 import 'package:***REMOVED***/domain/entities/materials/brand.dart';
 import 'package:***REMOVED***/domain/entities/materials/classification.dart';
 import 'package:***REMOVED***/domain/entities/materials/family.dart';
@@ -7,7 +6,7 @@ import 'package:***REMOVED***/domain/entities/materials/hierarchy.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
 
 class MaterialsCatalog extends Equatable {
-  final List<Material> materials;
+  final List<Materiale> materials;
   final List<Family> families;
   final List<Classification> classifications;
   final List<Brand> brands;
