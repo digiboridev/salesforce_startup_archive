@@ -2,10 +2,13 @@ import 'package:***REMOVED***/data/datasouces/contact_us_local_datasource.dart';
 import 'package:***REMOVED***/data/datasouces/contact_us_remote_datasource.dart';
 import 'package:***REMOVED***/data/datasouces/customers_local_datasource.dart';
 import 'package:***REMOVED***/data/datasouces/customers_remote_datasource.dart';
+import 'package:***REMOVED***/data/datasouces/materials_local_datasource.dart';
+import 'package:***REMOVED***/data/datasouces/materials_remote_datasource.dart';
 import 'package:***REMOVED***/data/datasouces/user_data_local_datasource.dart';
 import 'package:***REMOVED***/data/datasouces/user_data_remote_datasource.dart';
 import 'package:***REMOVED***/data/repositories/contact_us_repository.dart';
 import 'package:***REMOVED***/data/repositories/customers_repository.dart';
+import 'package:***REMOVED***/data/repositories/materials_repository.dart';
 import 'package:***REMOVED***/data/repositories/user_data_repository.dart';
 import 'package:***REMOVED***/domain/entities/contact_us_data.dart';
 import 'package:***REMOVED***/domain/services/cache_ferchig_service.dart';
@@ -16,6 +19,8 @@ import 'package:***REMOVED***/domain/usecases/change_password.dart';
 import 'package:***REMOVED***/domain/usecases/get_contactus_and_cache.dart';
 import 'package:***REMOVED***/domain/usecases/get_customer_and_cache.dart';
 import 'package:***REMOVED***/domain/usecases/get_customer_sync_time.dart';
+import 'package:***REMOVED***/domain/usecases/get_materials_and_cache.dart';
+import 'package:***REMOVED***/domain/usecases/get_materials_sync_time.dart';
 import 'package:***REMOVED***/domain/usecases/get_selected_customer_sap.dart';
 import 'package:***REMOVED***/domain/usecases/get_userdata_and_cache.dart';
 import 'package:***REMOVED***/domain/usecases/get_userdata_sync_time.dart';
@@ -53,21 +58,30 @@ Future injectDependency() async {
       contactUsLocalDatasource: ContactUsLocalDatasourceImpl(),
       contactUsRemoteDatasource: ContactUsRemoteDatasourceImpl()));
 
+  MaterialsRepository materialsRepository = Get.put(MaterialsRepositoryImpl(
+      materialsLocalDataSource: MaterialsLocalDataSourceImpl(),
+      materialsRemoteDatasource: MaterialsRemoteDatasourceImpl()));
+
   // Use cases
-  //// userdata
+  //-- userdata
   Get.put<GetUserDataAndCache>(GetUserDataAndCache(userDataRepository));
   Get.put<AcceptLegalDoc>(AcceptLegalDoc(userDataRepository));
   Get.put<ChangeLanguage>(ChangeLanguage(userDataRepository));
   Get.put<ChangePassword>(ChangePassword(userDataRepository));
   Get.put<GetUserDataSyncTime>(GetUserDataSyncTime(userDataRepository));
 
-  //// customers
+  //-- customers
   Get.put<GetSelectedCustomerSAP>(GetSelectedCustomerSAP(customersRepository));
   Get.put<SetSelectedCustomerSAP>(SetSelectedCustomerSAP(customersRepository));
   Get.put<GetCustomerAndCache>(GetCustomerAndCache(customersRepository));
   Get.put<GetCustomerSyncTime>(GetCustomerSyncTime(customersRepository));
-  //// contactus
+
+  //-- contactus
   Get.put<GetContactusAndCache>(GetContactusAndCache(contactUsRepository));
+
+  //-- materials
+  Get.put<GetMaterialsAndCache>(GetMaterialsAndCache(materialsRepository));
+  Get.put<GetMaterialsSyncTime>(GetMaterialsSyncTime(materialsRepository));
 
   print('injected dependencies...');
 }

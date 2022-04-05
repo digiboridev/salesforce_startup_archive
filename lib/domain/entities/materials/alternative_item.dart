@@ -4,7 +4,7 @@ class AlternativeItem extends Equatable {
   final String SFId;
   final String RelatedMaterialId;
   final String MaterialId;
-  final String Index;
+  final num? Index;
   AlternativeItem({
     required this.SFId,
     required this.RelatedMaterialId,
@@ -13,7 +13,7 @@ class AlternativeItem extends Equatable {
   });
 
   @override
-  List<Object> get props => [SFId, RelatedMaterialId, MaterialId, Index];
+  List<Object> get props => [SFId, RelatedMaterialId, MaterialId, Index ?? 0];
 
   @override
   String toString() {

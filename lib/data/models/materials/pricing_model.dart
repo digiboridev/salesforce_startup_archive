@@ -10,9 +10,9 @@ class PricingModel extends Pricing {
     required String? UnitDisplay,
     required String Unit,
     required String SFId,
-    required String Rate,
+    required num Rate,
     required String MaterialId,
-    required String IsPercentage,
+    required bool IsPercentage,
     required bool HasScale,
     required List<ScalesModel> this.scales,
   }) : super(

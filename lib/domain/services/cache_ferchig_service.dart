@@ -41,10 +41,14 @@ class CacheFetchingService extends GetxService {
     print('Start cache update');
 
     Future.forEach<CacheUpdateEvent>(_cacheUpdateEvents, (event) async {
-      DateTime lastSync = await event.lastUpdateTimeCallback();
-      print(DateTime.now().difference(lastSync));
-      if (DateTime.now().difference(lastSync) > updateInterval) {
-        await event.updateActionCallback();
+      try {
+        DateTime lastSync = await event.lastUpdateTimeCallback();
+        print(DateTime.now().difference(lastSync));
+        if (DateTime.now().difference(lastSync) > updateInterval) {
+          await event.updateActionCallback();
+        }
+      } catch (e) {
+        print('sync error ' + e.toString());
       }
     });
 

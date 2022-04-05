@@ -13,3 +13,11 @@ class ServerException implements Exception {
 
   String toString() => "ServerException: $message";
 }
+
+class InternalException implements Exception {
+  final String message;
+
+  const InternalException([this.message = ""]);
+
+  String toString() => "InternalException: $message";
+}

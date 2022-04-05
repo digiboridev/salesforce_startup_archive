@@ -5,9 +5,9 @@ class Pricing extends Equatable {
   final String? UnitDisplay;
   final String Unit;
   final String SFId;
-  final String Rate;
+  final num Rate;
   final String MaterialId;
-  final String IsPercentage;
+  final bool IsPercentage;
   final bool HasScale;
   final List<Scales> scales;
   Pricing({

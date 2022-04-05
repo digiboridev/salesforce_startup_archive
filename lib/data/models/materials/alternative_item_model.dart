@@ -6,7 +6,7 @@ class AlternativeItemModel extends AlternativeItem {
     required String SFId,
     required String RelatedMaterialId,
     required String MaterialId,
-    required String Index,
+    required num? Index,
   }) : super(
             SFId: SFId,
             RelatedMaterialId: RelatedMaterialId,
@@ -24,10 +24,10 @@ class AlternativeItemModel extends AlternativeItem {
 
   factory AlternativeItemModel.fromMap(Map<String, dynamic> map) {
     return AlternativeItemModel(
-      SFId: map['SFId'] ?? '',
-      RelatedMaterialId: map['RelatedMaterialId'] ?? '',
-      MaterialId: map['MaterialId'] ?? '',
-      Index: map['Index'] ?? '',
+      SFId: map['SFId'],
+      RelatedMaterialId: map['RelatedMaterialId'],
+      MaterialId: map['MaterialId'],
+      Index: map['Index'],
     );
   }
 

@@ -35,8 +35,8 @@ class Material extends Equatable {
   final bool HasPromotion;
   final String? GrossWeight;
   final List<FreeGoods> freeGoods;
-  final String FamilyId;
-  final String ClassificationId;
+  final String? FamilyId;
+  final String? ClassificationId;
   final String? Hierarchy4;
   final num CartonCount;
   final String? BrandId;
@@ -121,8 +121,8 @@ class Material extends Equatable {
       HasPromotion,
       GrossWeight ?? 0,
       freeGoods,
-      FamilyId,
-      ClassificationId,
+      FamilyId ?? 0,
+      ClassificationId ?? 0,
       Hierarchy4 ?? 0,
       CartonCount,
       BrandId ?? 0,
