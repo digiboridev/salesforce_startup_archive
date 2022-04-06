@@ -38,7 +38,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey,
+        backgroundColor: Color(0xffF4F4F6),
         body: SafeArea(
           child: SizedBox.expand(
             child: BottomBarWrapper(

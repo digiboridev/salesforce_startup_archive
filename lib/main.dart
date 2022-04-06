@@ -13,6 +13,7 @@ import 'package:***REMOVED***/data/repositories/user_data_repository.dart';
 import 'package:***REMOVED***/domain/entities/contact_us_data.dart';
 import 'package:***REMOVED***/domain/services/cache_ferchig_service.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
+import 'package:***REMOVED***/domain/services/image_caching_service.dart';
 import 'package:***REMOVED***/domain/usecases/accept_legal_doc.dart';
 import 'package:***REMOVED***/domain/usecases/change_language.dart';
 import 'package:***REMOVED***/domain/usecases/change_password.dart';
@@ -90,6 +91,7 @@ Future initServices() async {
   print('starting services ...');
   await GetStorage.init();
   await Get.putAsync(() => ConnectionService().init());
+  await Get.put(ImageCachingService());
   await Get.putAsync(() => CacheFetchingService(Duration(minutes: 30)).init());
   print('All services started...');
 }

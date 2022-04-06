@@ -13,6 +13,7 @@ class CatalogPageController extends GetxController {
 
   final Rx<MaterialsCatalog> materialsCatalog;
 
+  // Main data
   List<Materiale> get getMaterials => materialsCatalog.value.materials;
 
   List<Brand> get getBrands => materialsCatalog.value.brands;
@@ -24,9 +25,9 @@ class CatalogPageController extends GetxController {
 
   List<Hierarchy> get getHierarchys => materialsCatalog.value.hierarchys;
 
-  Rxn<Classification> selectedClassification = Rxn();
+  // Classification selection
 
-  RxBool brandsOrFamilies = RxBool(true);
+  Rxn<Classification> selectedClassification = Rxn();
 
   List<Materiale> get materialsByClassification =>
       getMaterials.where((element) {
@@ -47,10 +48,26 @@ class CatalogPageController extends GetxController {
     return false;
   }
 
+  // Brand and Families selection
+  RxBool brandsOrFamilies = RxBool(true);
+
+  Rxn<Brand> selectedBrand = Rxn();
+
+  Rxn<Family> selectedFamily = Rxn();
+
   bool get showBrandsPanel {
     if (showBrandsOrFamilies &&
         brandsOrFamilies.value == true &&
         selectedBrand.value == null) {
+      return true;
+    }
+    return false;
+  }
+
+  bool get showFamiliesPanel {
+    if (showBrandsOrFamilies &&
+        brandsOrFamilies.value == false &&
+        selectedFamily.value == null) {
       return true;
     }
     return false;
@@ -65,12 +82,30 @@ class CatalogPageController extends GetxController {
         return false;
       }).toList();
 
-  Rxn<Brand> selectedBrand = Rxn();
+  List<Family> get familiesToShow => getFamilies.where((element) {
+        if (materialsByClassification
+            .map((e) => e.FamilyId ?? '')
+            .contains(element.SFId)) {
+          return true;
+        }
+        return false;
+      }).toList();
+
+  // Materials list when brand or family selected
 
   bool get showMaterialsByBrand {
     if (showBrandsOrFamilies &&
         brandsOrFamilies.value == true &&
         selectedBrand.value is Brand) {
+      return true;
+    }
+    return false;
+  }
+
+  bool get showMaterialsByFamily {
+    if (showBrandsOrFamilies &&
+        brandsOrFamilies.value == false &&
+        selectedFamily.value is Family) {
       return true;
     }
     return false;
@@ -83,6 +118,17 @@ class CatalogPageController extends GetxController {
         }
         return false;
       }).toList();
+
+  List<Materiale> get materialsByFamily =>
+      materialsByClassification.where((element) {
+        if (element.FamilyId == selectedFamily.value?.SFId) {
+          return true;
+        }
+        return false;
+      }).toList();
+
+  // TODO when api fixes
+  Rxn<Hierarchy> selectedHierarhy = Rxn();
 
   @override
   void onInit() {

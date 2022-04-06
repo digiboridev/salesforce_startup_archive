@@ -9,6 +9,7 @@ class ConnectionService extends GetxService {
 
   late RxBool _hasConnection;
   bool get hasConnection => _hasConnection.value;
+  Stream<bool> get hasConnectionStream => _hasConnection.stream;
 
   Future<ConnectionService> init() async {
     _hasConnection = RxBool(await SimpleConnectionChecker.isConnectedToInternet(
