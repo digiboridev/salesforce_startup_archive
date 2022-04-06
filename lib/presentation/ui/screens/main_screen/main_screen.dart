@@ -1,10 +1,12 @@
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
+import 'package:***REMOVED***/presentation/controllers/search_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar_wrapper.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalog_loader.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/homepage/homepage.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/mainscreen_header.dart';
+import 'package:***REMOVED***/presentation/ui/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,6 +23,7 @@ class _MainScreenState extends State<MainScreen> {
 
   late final BottomBarController bottomBarController;
   late final PageController pageController;
+  SearchController searchController = Get.put(SearchController());
 
   @override
   void initState() {
@@ -52,7 +55,15 @@ class _MainScreenState extends State<MainScreen> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Expanded(
-                        child: buildPageView(),
+                        child: Obx(() {
+                          return Stack(
+                            children: [
+                              buildPageView(),
+                              if (searchController.showSearch.value)
+                                SearchScreen()
+                            ],
+                          );
+                        }),
                       ),
                     ],
                   ),

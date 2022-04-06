@@ -1,6 +1,8 @@
 import 'package:***REMOVED***/domain/entities/contact_us_data.dart';
+import 'package:***REMOVED***/domain/services/image_caching_service.dart';
 import 'package:***REMOVED***/presentation/controllers/contactus_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
+import 'package:***REMOVED***/presentation/controllers/search_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/mainscreen_header_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/mainscreen_header_states.dart';
 import 'package:***REMOVED***/presentation/ui/screens/profile/profile_screen.dart';
@@ -23,10 +25,14 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
 
   final CustomerController customerController = Get.find();
   final ContactusController contactusController = Get.find();
+
+  SearchController searchController = Get.find();
+
   final double topSheetHeight = Get.width * 0.9;
   late double headerHeight;
 
   FocusNode searchFocusNode = FocusNode();
+  bool searchHasFocus = false;
 
   @override
   void initState() {
@@ -34,6 +40,17 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
     headerHeight = widget.headerHeight;
     searchFocusNode.addListener(() {
       print(searchFocusNode.hasFocus);
+      setState(() {
+        searchHasFocus = searchFocusNode.hasFocus;
+      });
+
+      if (searchFocusNode.hasFocus) {
+        if (!searchController.showSearch.value) {
+          mainScreeenHeaderController.showSearch();
+        }
+      } else {
+        mainScreeenHeaderController.hide();
+      }
     });
   }
 
@@ -89,68 +106,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                 Spacer(
                   flex: 1,
                 ),
-                Row(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Color(0xffEEE4F2),
-                          borderRadius: BorderRadius.circular(Get.width * 0.1)),
-                      width: Get.width * 0.1,
-                      height: Get.width * 0.1,
-                      child: Icon(Icons.close),
-                    ),
-                    SizedBox(
-                      width: Get.width * 0.015,
-                    ),
-                    Expanded(
-                      child: Container(
-                        height: Get.width * 0.1,
-                        decoration: BoxDecoration(
-                            color: Color(0xffEEE4F2),
-                            borderRadius:
-                                BorderRadius.circular(Get.width * 0.1)),
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: Get.width * 0.03,
-                            ),
-                            Icon(Icons.search),
-                            Expanded(
-                                child: TextField(
-                              focusNode: searchFocusNode,
-                              keyboardType: TextInputType.name,
-                              onChanged: (value) {},
-                              textAlignVertical: TextAlignVertical.top,
-                              decoration: InputDecoration(
-                                isCollapsed: true,
-                                //isDense: true,
-                                alignLabelWithHint: true,
-
-                                labelText: 'Search product',
-                                labelStyle: TextStyle(
-                                    color: Colors.black.withOpacity(0.6)),
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.never,
-                                border: InputBorder.none,
-
-                                focusedBorder: InputBorder.none,
-                                enabledBorder: InputBorder.none,
-                                errorBorder: InputBorder.none,
-
-                                disabledBorder: InputBorder.none,
-                                contentPadding: EdgeInsets.all(0),
-                              ),
-                            )),
-                            Icon(Icons.scuba_diving_sharp),
-                            SizedBox(
-                              width: Get.width * 0.03,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                searchBar(),
                 Spacer(
                   flex: 1,
                 ),
@@ -178,6 +134,25 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
             ),
           );
         }),
+        Obx(() => Expanded(
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: AnimatedContainer(
+                  decoration: BoxDecoration(color: Colors.transparent),
+                  clipBehavior: Clip.antiAlias,
+                  duration: Duration(milliseconds: 200),
+                  curve: Curves.easeInOut,
+                  height: mainScreeenHeaderController
+                          .mainScreeenHeaderState.value is MSHShowSearch
+                      ? Get.height
+                      : 0,
+                  child: OverflowBox(
+                    minHeight: 0,
+                    child: buildSearchResults(),
+                  ),
+                ),
+              ),
+            )),
         Obx(() => AnimatedContainer(
               decoration: BoxDecoration(color: Colors.transparent),
               clipBehavior: Clip.antiAlias,
@@ -207,6 +182,126 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
               ),
             )),
       ],
+    );
+  }
+
+  Row searchBar() {
+    return Row(
+      children: [
+        if (searchHasFocus)
+          GestureDetector(
+            onTap: () {
+              searchFocusNode.unfocus();
+              mainScreeenHeaderController.hide();
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Color(0xffEEE4F2),
+                  borderRadius: BorderRadius.circular(Get.width * 0.1)),
+              width: Get.width * 0.1,
+              height: Get.width * 0.1,
+              child: Icon(Icons.close),
+            ),
+          ),
+        if (searchHasFocus)
+          SizedBox(
+            width: Get.width * 0.015,
+          ),
+        Expanded(
+          child: Container(
+            height: Get.width * 0.1,
+            decoration: BoxDecoration(
+                color: Color(0xffEEE4F2),
+                borderRadius: BorderRadius.circular(Get.width * 0.1)),
+            child: Row(
+              children: [
+                SizedBox(
+                  width: Get.width * 0.03,
+                ),
+                Icon(Icons.search),
+                Expanded(
+                    child: TextField(
+                  controller: searchController.textEditingController,
+                  focusNode: searchFocusNode,
+                  keyboardType: TextInputType.name,
+                  onChanged: (value) {},
+                  textAlignVertical: TextAlignVertical.top,
+                  decoration: InputDecoration(
+                    isCollapsed: true,
+                    //isDense: true,
+                    alignLabelWithHint: true,
+
+                    labelText: 'Search product',
+                    labelStyle: TextStyle(color: Colors.black.withOpacity(0.6)),
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    border: InputBorder.none,
+
+                    focusedBorder: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    errorBorder: InputBorder.none,
+
+                    disabledBorder: InputBorder.none,
+                    contentPadding: EdgeInsets.all(0),
+                  ),
+                )),
+                Icon(Icons.scuba_diving_sharp),
+                SizedBox(
+                  width: Get.width * 0.03,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget buildSearchResults() {
+    return Container(
+      width: Get.width,
+      // height: Get.height,
+      color: Color(0xff00458C),
+      child: Column(
+        children: [
+          Expanded(
+            child: ListView(
+              children: searchController.findedMaterials.map((element) {
+                return Container(
+                    margin: EdgeInsets.symmetric(
+                        horizontal: Get.width * 0.05,
+                        vertical: Get.width * 0.03),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(Get.width * 0.03),
+                    ),
+                    height: Get.height * 0.1,
+                    child: Row(
+                      children: [
+                        CachedImage(
+                            Url: element.ImageUrl,
+                            width: Get.height * 0.075,
+                            height: Get.height * 0.075),
+                        Expanded(child: Text(element.Name)),
+                      ],
+                    ));
+              }).toList(),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              searchController.showSearch.value = true;
+              mainScreeenHeaderController.hide();
+            },
+            child: Padding(
+              padding: EdgeInsets.all(Get.width * 0.05),
+              child: Text(
+                'More results',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 
