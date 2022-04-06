@@ -26,10 +26,15 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
   final double topSheetHeight = Get.width * 0.9;
   late double headerHeight;
 
+  FocusNode searchFocusNode = FocusNode();
+
   @override
   void initState() {
     super.initState();
     headerHeight = widget.headerHeight;
+    searchFocusNode.addListener(() {
+      print(searchFocusNode.hasFocus);
+    });
   }
 
   @override
@@ -67,7 +72,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                       tag: 'logo',
                       child: Image.asset(
                         'assets/images/***REMOVED***_logo.png',
-                        width: Get.width * 0.3,
+                        width: Get.width * 0.2,
                       ),
                     ),
                     GestureDetector(
@@ -79,6 +84,71 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                           'assets/icons/settings.png',
                           width: Get.width * 0.05,
                         ))
+                  ],
+                ),
+                Spacer(
+                  flex: 1,
+                ),
+                Row(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          color: Color(0xffEEE4F2),
+                          borderRadius: BorderRadius.circular(Get.width * 0.1)),
+                      width: Get.width * 0.1,
+                      height: Get.width * 0.1,
+                      child: Icon(Icons.close),
+                    ),
+                    SizedBox(
+                      width: Get.width * 0.015,
+                    ),
+                    Expanded(
+                      child: Container(
+                        height: Get.width * 0.1,
+                        decoration: BoxDecoration(
+                            color: Color(0xffEEE4F2),
+                            borderRadius:
+                                BorderRadius.circular(Get.width * 0.1)),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: Get.width * 0.03,
+                            ),
+                            Icon(Icons.search),
+                            Expanded(
+                                child: TextField(
+                              focusNode: searchFocusNode,
+                              keyboardType: TextInputType.name,
+                              onChanged: (value) {},
+                              textAlignVertical: TextAlignVertical.top,
+                              decoration: InputDecoration(
+                                isCollapsed: true,
+                                //isDense: true,
+                                alignLabelWithHint: true,
+
+                                labelText: 'Search product',
+                                labelStyle: TextStyle(
+                                    color: Colors.black.withOpacity(0.6)),
+                                floatingLabelBehavior:
+                                    FloatingLabelBehavior.never,
+                                border: InputBorder.none,
+
+                                focusedBorder: InputBorder.none,
+                                enabledBorder: InputBorder.none,
+                                errorBorder: InputBorder.none,
+
+                                disabledBorder: InputBorder.none,
+                                contentPadding: EdgeInsets.all(0),
+                              ),
+                            )),
+                            Icon(Icons.scuba_diving_sharp),
+                            SizedBox(
+                              width: Get.width * 0.03,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
                 Spacer(
@@ -129,7 +199,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
               curve: Curves.easeInOut,
               height: mainScreeenHeaderController.mainScreeenHeaderState.value
                       is MSHShowBrunch
-                  ? topSheetHeight
+                  ? Get.width * 1
                   : 0,
               child: OverflowBox(
                 minHeight: 0,
@@ -307,7 +377,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
 
   Widget buildBranchSelection() {
     return Container(
-      height: topSheetHeight,
+      height: Get.width * 1,
       color: Color(0xff00458C),
       child: Column(
         children: [

@@ -1,4 +1,5 @@
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
+import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar_wrapper.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalog_loader.dart';
@@ -33,7 +34,8 @@ class _MainScreenState extends State<MainScreen> {
     });
   }
 
-  final double headerHeight = Get.width * 0.3;
+  double headerHeight = Get.width * 0.35;
+  final double bottomBarHeight = Get.width * 0.25;
 
   @override
   Widget build(BuildContext context) {
@@ -41,25 +43,30 @@ class _MainScreenState extends State<MainScreen> {
         backgroundColor: Color(0xffF4F4F6),
         body: SafeArea(
           child: SizedBox.expand(
-            child: BottomBarWrapper(
-              child: Stack(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: headerHeight),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Expanded(
-                          child: buildPageView(),
-                        ),
-                      ],
-                    ),
+            child: Stack(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: headerHeight, bottom: bottomBarHeight * 0.3),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: buildPageView(),
+                      ),
+                    ],
                   ),
-                  MainScreenHeader(
-                    headerHeight: headerHeight,
-                  )
-                ],
-              ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  child: BottomBar(
+                    bottomBarHeight: bottomBarHeight,
+                  ),
+                ),
+                MainScreenHeader(
+                  headerHeight: headerHeight,
+                )
+              ],
             ),
           ),
         ));
