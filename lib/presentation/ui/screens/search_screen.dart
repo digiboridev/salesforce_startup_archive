@@ -22,7 +22,7 @@ class SearchScreen extends StatelessWidget {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'Choose language',
+                  'Search results',
                   style: TextStyle(
                     fontSize: Get.width * 0.05,
                   ),

@@ -75,6 +75,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                       onTap: () {
                         setState(() {
                           mainScreeenHeaderController.showContactus();
+                          searchFocusNode.unfocus();
                         });
                       },
                       child: Hero(
@@ -115,6 +116,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                     onTap: () {
                       setState(() {
                         mainScreeenHeaderController.showBrunchSelection();
+                        searchFocusNode.unfocus();
                       });
                     },
                     child: Align(
@@ -134,10 +136,11 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
             ),
           );
         }),
-        Obx(() => Expanded(
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: AnimatedContainer(
+        Expanded(
+            child: Align(
+          alignment: Alignment.topCenter,
+          child: Stack(children: [
+            Obx(() => AnimatedContainer(
                   decoration: BoxDecoration(color: Colors.transparent),
                   clipBehavior: Clip.antiAlias,
                   duration: Duration(milliseconds: 200),
@@ -150,37 +153,37 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                     minHeight: 0,
                     child: buildSearchResults(),
                   ),
-                ),
-              ),
-            )),
-        Obx(() => AnimatedContainer(
-              decoration: BoxDecoration(color: Colors.transparent),
-              clipBehavior: Clip.antiAlias,
-              duration: Duration(milliseconds: 200),
-              curve: Curves.easeInOut,
-              height: mainScreeenHeaderController.mainScreeenHeaderState.value
-                      is MSHShowContactus
-                  ? topSheetHeight
-                  : 0,
-              child: OverflowBox(
-                minHeight: 0,
-                child: buildContact(),
-              ),
-            )),
-        Obx(() => AnimatedContainer(
-              decoration: BoxDecoration(color: Colors.transparent),
-              clipBehavior: Clip.antiAlias,
-              duration: Duration(milliseconds: 200),
-              curve: Curves.easeInOut,
-              height: mainScreeenHeaderController.mainScreeenHeaderState.value
-                      is MSHShowBrunch
-                  ? Get.width * 1
-                  : 0,
-              child: OverflowBox(
-                minHeight: 0,
-                child: buildBranchSelection(),
-              ),
-            )),
+                )),
+            Obx(() => AnimatedContainer(
+                  decoration: BoxDecoration(color: Colors.transparent),
+                  clipBehavior: Clip.antiAlias,
+                  duration: Duration(milliseconds: 200),
+                  curve: Curves.easeInOut,
+                  height: mainScreeenHeaderController
+                          .mainScreeenHeaderState.value is MSHShowContactus
+                      ? topSheetHeight
+                      : 0,
+                  child: OverflowBox(
+                    minHeight: 0,
+                    child: buildContact(),
+                  ),
+                )),
+            Obx(() => AnimatedContainer(
+                  decoration: BoxDecoration(color: Colors.transparent),
+                  clipBehavior: Clip.antiAlias,
+                  duration: Duration(milliseconds: 200),
+                  curve: Curves.easeInOut,
+                  height: mainScreeenHeaderController
+                          .mainScreeenHeaderState.value is MSHShowBrunch
+                      ? Get.width * 1
+                      : 0,
+                  child: OverflowBox(
+                    minHeight: 0,
+                    child: buildBranchSelection(),
+                  ),
+                )),
+          ]),
+        )),
       ],
     );
   }
