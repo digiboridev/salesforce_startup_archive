@@ -85,8 +85,18 @@ class _MainScreenState extends State<MainScreen> {
 
   PageView buildPageView() {
     return PageView(
-      onPageChanged: (value) =>
-          bottomBarController.currentPageIndex.value = value + 1,
+      onPageChanged: (value) {
+        bottomBarController.currentPageIndex.value = value + 1;
+        if (value == 4) {
+          setState(() {
+            headerHeight = Get.width * 0.4;
+          });
+        } else {
+          setState(() {
+            headerHeight = Get.width * 0.35;
+          });
+        }
+      },
       controller: pageController,
       children: [
         Container(

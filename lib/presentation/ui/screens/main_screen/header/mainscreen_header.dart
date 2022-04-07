@@ -29,7 +29,6 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
   SearchController searchController = Get.find();
 
   final double topSheetHeight = Get.width * 0.9;
-  late double headerHeight;
 
   FocusNode searchFocusNode = FocusNode();
   bool searchHasFocus = false;
@@ -37,7 +36,6 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
   @override
   void initState() {
     super.initState();
-    headerHeight = widget.headerHeight;
     searchFocusNode.addListener(() {
       print(searchFocusNode.hasFocus);
       setState(() {
@@ -60,7 +58,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
       children: [
         Obx(() {
           return Container(
-            height: headerHeight,
+            height: widget.headerHeight,
             color: Color(0xff00458C),
             padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
             child: Column(
