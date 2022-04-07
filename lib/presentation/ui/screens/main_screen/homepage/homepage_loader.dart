@@ -1,17 +1,17 @@
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_states.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalog_page.dart';
+import 'package:***REMOVED***/presentation/ui/screens/main_screen/homepage/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CatalogLoader extends StatefulWidget {
-  CatalogLoader({Key? key}) : super(key: key);
+class HomepageLoader extends StatefulWidget {
+  HomepageLoader({Key? key}) : super(key: key);
 
   @override
-  State<CatalogLoader> createState() => _CatalogLoaderState();
+  State<HomepageLoader> createState() => _HomepageLoaderState();
 }
 
-class _CatalogLoaderState extends State<CatalogLoader>
+class _HomepageLoaderState extends State<HomepageLoader>
     with AutomaticKeepAliveClientMixin {
   final MaterialsCatalogController materialsCatalogController = Get.find();
 
@@ -31,7 +31,7 @@ class _CatalogLoaderState extends State<CatalogLoader>
           materialsCatalogController.materialsCatalogState.value;
 
       if (state is MCSCommon) {
-        return CatalogPage(
+        return HomePage(
           key: ObjectKey(state.catalog),
           materialsCatalog: state.catalog,
         );
