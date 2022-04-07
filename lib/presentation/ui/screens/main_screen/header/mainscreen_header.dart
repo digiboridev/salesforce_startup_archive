@@ -20,15 +20,11 @@ class MainScreenHeader extends StatefulWidget {
 }
 
 class _MainScreenHeaderState extends State<MainScreenHeader> {
-  MainScreeenHeaderController mainScreeenHeaderController =
+  final MainScreeenHeaderController mainScreeenHeaderController =
       Get.put(MainScreeenHeaderController());
-
   final CustomerController customerController = Get.find();
   final ContactusController contactusController = Get.find();
-
-  SearchController searchController = Get.find();
-
-  final double topSheetHeight = Get.width * 0.9;
+  final SearchController searchController = Get.find();
 
   FocusNode searchFocusNode = FocusNode();
   bool searchHasFocus = false;
@@ -37,7 +33,6 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
   void initState() {
     super.initState();
     searchFocusNode.addListener(() {
-      print(searchFocusNode.hasFocus);
       setState(() {
         searchHasFocus = searchFocusNode.hasFocus;
       });
@@ -57,7 +52,9 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
     return Column(
       children: [
         Obx(() {
-          return Container(
+          return AnimatedContainer(
+            curve: Curves.easeInOut,
+            duration: Duration(milliseconds: 300),
             height: widget.headerHeight,
             color: Color(0xff00458C),
             padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
@@ -109,8 +106,14 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                 Spacer(
                   flex: 1,
                 ),
-                if (mainScreeenHeaderController.enableBrunchSelection.value)
-                  GestureDetector(
+                AnimatedContainer(
+                  curve: Curves.easeInOut,
+                  duration: Duration(milliseconds: 300),
+                  height:
+                      mainScreeenHeaderController.enableBrunchSelection.value
+                          ? Get.width * 0.05
+                          : 0,
+                  child: GestureDetector(
                     onTap: () {
                       setState(() {
                         mainScreeenHeaderController.showBrunchSelection();
@@ -123,10 +126,13 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                             'Brunch: ' +
                                 customerController
                                     .selectedCustomer!.customerName,
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: Get.width * 0.035),
                           )),
                     ),
                   ),
+                ),
                 SizedBox(
                   height: Get.width * 0.04,
                 ),
@@ -159,7 +165,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                   curve: Curves.easeInOut,
                   height: mainScreeenHeaderController
                           .mainScreeenHeaderState.value is MSHShowContactus
-                      ? topSheetHeight
+                      ? Get.width
                       : 0,
                   child: OverflowBox(
                     minHeight: 0,
@@ -173,7 +179,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                   curve: Curves.easeInOut,
                   height: mainScreeenHeaderController
                           .mainScreeenHeaderState.value is MSHShowBrunch
-                      ? Get.width * 1
+                      ? Get.width
                       : 0,
                   child: OverflowBox(
                     minHeight: 0,
@@ -311,7 +317,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
       (state) {
         if (state is ContactUsData) {
           return Container(
-            height: topSheetHeight,
+            height: Get.width,
             color: Color(0xff00458C),
             child: Column(
               children: [
@@ -443,7 +449,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
       onError: (error) {
         return Container(
           width: Get.width,
-          height: topSheetHeight,
+          height: Get.width,
           color: Color(0xff00458C),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -462,7 +468,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
       },
       onLoading: Container(
         width: Get.width,
-        height: topSheetHeight,
+        height: Get.width,
         color: Color(0xff00458C),
         child: Center(
           child: CircularProgressIndicator(),
