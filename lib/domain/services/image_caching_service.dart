@@ -113,7 +113,7 @@ class _CachedImageState extends State<CachedImage> {
           return GestureDetector(
             onTap: () => load(),
             child: Center(
-              child: Text('Error'),
+              child: Text('Loading error'),
             ),
           );
         }
@@ -125,6 +125,15 @@ class _CachedImageState extends State<CachedImage> {
             imageData!,
             width: widget.width,
             height: widget.height,
+            errorBuilder: (BuildContext context, Object exception,
+                StackTrace? stackTrace) {
+              return GestureDetector(
+                onTap: () => load(),
+                child: Center(
+                  child: Text('Image broken'),
+                ),
+              );
+            },
           );
         }
 

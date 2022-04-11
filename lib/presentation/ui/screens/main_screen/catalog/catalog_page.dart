@@ -51,29 +51,32 @@ class _CatalogPageState extends State<CatalogPage> {
         child: Stack(
           children: [
             Column(
-          children: [
-            buildClassificationRow(),
-            if (catalogPageController.showBrandsOrFamilies)
-              buildBrandsOrFamilySelection(),
-            if (!catalogPageController.showBrandsOrFamilies)
-              buildAllMaterials(),
-
-
-
-            if (catalogPageController.showBrandsPanel) buildBrandsPanel(),
-            if (catalogPageController.showFamiliesPanel) buildFamiliesPanel(),
-            if (catalogPageController.showMaterialsByBrand)
-              buildMaterialsByBrand(),
-            if (catalogPageController.showMaterialsByFamily)
-              buildMaterialsByFamily(),
-
+              children: [
+                buildClassificationRow(),
+                if (catalogPageController.showBrandsOrFamilies)
+                  buildBrandsOrFamilySelection(),
+                if (!catalogPageController.showBrandsOrFamilies)
+                  buildAllMaterials(),
+                if (catalogPageController.showBrandsPanel) buildBrandsPanel(),
+                if (catalogPageController.showFamiliesPanel)
+                  buildFamiliesPanel(),
+                if (catalogPageController.showMaterialsByBrand)
+                  buildMaterialsByBrand(),
+                if (catalogPageController.showMaterialsByFamily)
+                  buildMaterialsByFamily(),
+              ],
+            ),
+            Visibility(
+              visible: catalogPageController.selectCount.value,
+              child: catalogPageController.selectCount.value
+                  ? ProductCount(
+                      controller: catalogPageController,
+                      cardController:
+                          catalogPageController.select_card_controller)
+                  : Container(),
+            ),
           ],
         ),
-            Visibility(visible: catalogPageController.selectCount.value,
-              child:catalogPageController.selectCount.value?
-              ProductCount(
-                controller: catalogPageController,
-                  cardController: catalogPageController.select_card_controller):Container(),),],),
       );
     });
   }
@@ -116,46 +119,65 @@ class _CatalogPageState extends State<CatalogPage> {
   }
 
   Widget buildBrandsPanel() {
-    return catalogPageController.brandsToShow.isNotEmpty? Expanded(
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: Get.width*0.02),
-        child: GridView.builder(
-          itemBuilder: (BuildContext context, int index) {
-            return GestureDetector(
-                onTap: () => catalogPageController.selectedBrand.value
-                = catalogPageController.brandsToShow[index],
-                child: BrandCard(brand: catalogPageController.brandsToShow[index],));
-          },
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              childAspectRatio: 1 / 1,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10, crossAxisCount: 3),
-
-        ),
-
-      ),
-    ):Container(child: Center(child: Text("No data"),),);
+    return catalogPageController.brandsToShow.isNotEmpty
+        ? Expanded(
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
+              child: GridView.builder(
+                physics: BouncingScrollPhysics(),
+                itemCount: catalogPageController.brandsToShow.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return GestureDetector(
+                      onTap: () => catalogPageController.selectedBrand.value =
+                          catalogPageController.brandsToShow[index],
+                      child: BrandCard(
+                        brand: catalogPageController.brandsToShow[index],
+                      ));
+                },
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    childAspectRatio: 1 / 1,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    crossAxisCount: 3),
+              ),
+            ),
+          )
+        : Container(
+            child: Center(
+              child: Text("No data"),
+            ),
+          );
   }
 
   Widget buildFamiliesPanel() {
-    return catalogPageController.familiesToShow.isNotEmpty? Expanded(
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: Get.width*0.02),
-        child: GridView.builder(
-          itemBuilder: (BuildContext context, int index) {
-              return GestureDetector(
-                onTap: () => catalogPageController.selectedFamily.value = catalogPageController.familiesToShow[index],
-                child: FamiliesCard(family: catalogPageController.familiesToShow[index],));
-          },
-          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent:  Get.width*0.5,
-            childAspectRatio: 3 / 2,
-            crossAxisSpacing: 20,
-            mainAxisSpacing: 20),
-
-        ),
-      ),
-    ):Container(child: Center(child: Text("No data"),),);
+    return catalogPageController.familiesToShow.isNotEmpty
+        ? Expanded(
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
+              child: GridView.builder(
+                physics: BouncingScrollPhysics(),
+                itemCount: catalogPageController.familiesToShow.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return GestureDetector(
+                      onTap: () => catalogPageController.selectedFamily.value =
+                          catalogPageController.familiesToShow[index],
+                      child: FamiliesCard(
+                        family: catalogPageController.familiesToShow[index],
+                      ));
+                },
+                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: Get.width * 0.5,
+                    childAspectRatio: 3 / 2,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20),
+              ),
+            ),
+          )
+        : Container(
+            child: Center(
+              child: Text("No data"),
+            ),
+          );
   }
 
   Widget buildBrandsOrFamilySelection() {
@@ -246,7 +268,6 @@ class _CatalogPageState extends State<CatalogPage> {
   }
 
   Widget buildAllMaterials() {
-
     return Expanded(
         child: ListView(
       children: catalogPageController.getMaterials.map((e) {
@@ -264,7 +285,8 @@ class _CatalogPageState extends State<CatalogPage> {
         child: ListView(
           children: catalogPageController.materialsByBrand.map((e) {
             return MaterialCard(
-              materiale: e, controller: catalogPageController,
+              materiale: e,
+              controller: catalogPageController,
             );
           }).toList(),
         ),
