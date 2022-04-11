@@ -1,17 +1,13 @@
-import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
+import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/brand_card.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/families_card.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/material_card.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/product_count.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:***REMOVED***/domain/entities/materials/hierarchy.dart';
 import 'package:***REMOVED***/domain/entities/materials/materials_catalog.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalog_page_controller.dart';
-
-import '../../../../../domain/entities/materials/material.dart';
-import 'brand_card.dart';
 
 class CatalogPage extends StatefulWidget {
   final MaterialsCatalog materialsCatalog;
@@ -124,6 +120,7 @@ class _CatalogPageState extends State<CatalogPage> {
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
               child: GridView.builder(
+                cacheExtent: Get.height * 3,
                 physics: BouncingScrollPhysics(),
                 itemCount: catalogPageController.brandsToShow.length,
                 itemBuilder: (BuildContext context, int index) {
@@ -155,6 +152,7 @@ class _CatalogPageState extends State<CatalogPage> {
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
               child: GridView.builder(
+                cacheExtent: Get.height * 3,
                 physics: BouncingScrollPhysics(),
                 itemCount: catalogPageController.familiesToShow.length,
                 itemBuilder: (BuildContext context, int index) {
@@ -270,6 +268,7 @@ class _CatalogPageState extends State<CatalogPage> {
   Widget buildAllMaterials() {
     return Expanded(
         child: ListView(
+      cacheExtent: Get.height * 3,
       children: catalogPageController.getMaterials.map((e) {
         return MaterialCard(
           materiale: e,
@@ -283,6 +282,7 @@ class _CatalogPageState extends State<CatalogPage> {
     return Expanded(
       child: Container(
         child: ListView(
+          cacheExtent: Get.height * 3,
           children: catalogPageController.materialsByBrand.map((e) {
             return MaterialCard(
               materiale: e,
@@ -298,6 +298,7 @@ class _CatalogPageState extends State<CatalogPage> {
     return Expanded(
       child: Container(
         child: ListView(
+          cacheExtent: Get.height * 3,
           children: catalogPageController.materialsByFamily.map((e) {
             return MaterialCard(
               materiale: e,

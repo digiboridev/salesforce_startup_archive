@@ -1,4 +1,5 @@
 import 'package:***REMOVED***/domain/services/cache_ferchig_service.dart';
+import 'package:***REMOVED***/domain/services/image_caching_service.dart';
 import 'package:***REMOVED***/domain/usecases/get_materials_sync_time.dart';
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_states.dart';
 import 'package:get/get.dart';
@@ -10,6 +11,7 @@ class MaterialsCatalogController extends GetxController {
   // Dependency
   CustomerController _customerController = Get.find();
   CacheFetchingService _cacheFetchingService = Get.find();
+  ImageCachingService _imageCachingService = Get.find();
 
   // usecases
   GetMaterialsAndCache _getMaterialsAndCache = Get.find();
@@ -41,6 +43,13 @@ class MaterialsCatalogController extends GetxController {
           updateActionCallback: updateCatalog,
           lastUpdateTimeCallback: getLastSync);
       _cacheFetchingService.registerEvent(cacheUpdateEvent: cacheUpdateEvent);
+
+      // Perform images caching
+      _imageCachingService.cacheBunch(uris: [
+        ...catalog.brands.map((e) => Uri.parse(e.ImageUrl)),
+        ...catalog.families.map((e) => Uri.parse(e.ImageUrl)),
+        ...catalog.materials.map((e) => Uri.parse(e.ImageUrl))
+      ]);
     } catch (e) {
       print('Load catalog error' + e.toString());
       materialsCatalogState.value =

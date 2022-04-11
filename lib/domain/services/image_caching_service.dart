@@ -31,6 +31,34 @@ class ImageCachingService extends GetxService {
       throw Exception(response.reasonPhrase);
     }
   }
+
+  Future cacheBunch({required List<Uri> uris}) async {
+    await Future.forEach(uris, (Uri uri) async {
+      try {
+        Directory appDocDir = await pp.getApplicationDocumentsDirectory();
+        String appDocPath = appDocDir.path;
+
+        File file = File('$appDocPath${uri.path}');
+
+        bool exist = await file.exists();
+
+        if (!exist) {
+          var response = await http.get(uri);
+
+          if (response.statusCode == 200) {
+            Uint8List image = response.bodyBytes;
+            await file.create(recursive: true);
+            await file.writeAsBytes(image);
+            print('Cached image : ' + uri.path);
+            return;
+          }
+        }
+      } catch (e) {
+        print('Image caching error: ' + uri.path);
+        print(e);
+      }
+    });
+  }
 }
 
 class CachedImage extends StatefulWidget {

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
+import 'package:***REMOVED***/domain/services/sync.dart';
 import 'package:get/get.dart';
 
 class CacheUpdateEvent {
@@ -28,6 +29,7 @@ class CacheFetchingService extends GetxService {
   }
 
   Future<CacheFetchingService> init() async {
+    parseConfig();
     if (t is! Timer) {
       t = Timer.periodic(Duration(minutes: 5), (t) => fetch());
     } else {
