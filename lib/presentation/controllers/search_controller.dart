@@ -1,6 +1,3 @@
-import 'dart:async';
-
-import 'package:***REMOVED***/domain/entities/materials/brand.dart';
 import 'package:***REMOVED***/domain/entities/materials/family.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
 import 'package:***REMOVED***/domain/entities/materials/materials_catalog.dart';
