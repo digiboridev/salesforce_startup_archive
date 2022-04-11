@@ -2,10 +2,9 @@ import 'package:***REMOVED***/presentation/controllers/materials_catalog_control
 import 'package:***REMOVED***/presentation/controllers/search_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar_controller.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar_wrapper.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalog_loader.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/homepage/homepage.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/mainscreen_header.dart';
+import 'package:***REMOVED***/presentation/ui/screens/main_screen/homepage/homepage_loader.dart';
 import 'package:***REMOVED***/presentation/ui/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -86,8 +85,18 @@ class _MainScreenState extends State<MainScreen> {
 
   PageView buildPageView() {
     return PageView(
-      onPageChanged: (value) =>
-          bottomBarController.currentPageIndex.value = value + 1,
+      onPageChanged: (value) {
+        bottomBarController.currentPageIndex.value = value + 1;
+        if (value == 4) {
+          setState(() {
+            headerHeight = Get.width * 0.4;
+          });
+        } else {
+          setState(() {
+            headerHeight = Get.width * 0.35;
+          });
+        }
+      },
       controller: pageController,
       children: [
         Container(
@@ -106,7 +115,7 @@ class _MainScreenState extends State<MainScreen> {
           color: Colors.red,
           child: Text('favorites'),
         ),
-        HomePage(),
+        HomepageLoader(),
       ],
     );
   }
