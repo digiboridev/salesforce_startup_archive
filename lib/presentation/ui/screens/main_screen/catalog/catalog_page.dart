@@ -1,10 +1,17 @@
+import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
+import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/families_card.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/material_card.dart';
+import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/product_count.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:***REMOVED***/domain/entities/materials/hierarchy.dart';
 import 'package:***REMOVED***/domain/entities/materials/materials_catalog.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalog_page_controller.dart';
+
+import '../../../../../domain/entities/materials/material.dart';
+import 'brand_card.dart';
 
 class CatalogPage extends StatefulWidget {
   final MaterialsCatalog materialsCatalog;
@@ -41,21 +48,32 @@ class _CatalogPageState extends State<CatalogPage> {
       return Container(
         // color: Color(0xffF4F4F6),
         width: Get.width,
-        child: Column(
+        child: Stack(
+          children: [
+            Column(
           children: [
             buildClassificationRow(),
             if (catalogPageController.showBrandsOrFamilies)
               buildBrandsOrFamilySelection(),
             if (!catalogPageController.showBrandsOrFamilies)
               buildAllMaterials(),
+
+
+
             if (catalogPageController.showBrandsPanel) buildBrandsPanel(),
             if (catalogPageController.showFamiliesPanel) buildFamiliesPanel(),
             if (catalogPageController.showMaterialsByBrand)
               buildMaterialsByBrand(),
             if (catalogPageController.showMaterialsByFamily)
               buildMaterialsByFamily(),
+
           ],
         ),
+            Visibility(visible: catalogPageController.selectCount.value,
+              child:catalogPageController.selectCount.value?
+              ProductCount(
+                controller: catalogPageController,
+                  cardController: catalogPageController.select_card_controller):Container(),),],),
       );
     });
   }
@@ -98,41 +116,46 @@ class _CatalogPageState extends State<CatalogPage> {
   }
 
   Widget buildBrandsPanel() {
-    return Expanded(
+    return catalogPageController.brandsToShow.isNotEmpty? Expanded(
       child: Container(
-        child: ListView(
-          children: catalogPageController.brandsToShow.map((e) {
+        margin: EdgeInsets.symmetric(horizontal: Get.width*0.02),
+        child: GridView.builder(
+          itemBuilder: (BuildContext context, int index) {
             return GestureDetector(
-              onTap: () => catalogPageController.selectedBrand.value = e,
-              child: Container(
-                  color: Colors.white,
-                  padding: EdgeInsets.all(Get.width * 0.06),
-                  margin: EdgeInsets.all(Get.width * 0.01),
-                  child: Text(e.Display)),
-            );
-          }).toList(),
+                onTap: () => catalogPageController.selectedBrand.value
+                = catalogPageController.brandsToShow[index],
+                child: BrandCard(brand: catalogPageController.brandsToShow[index],));
+          },
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              childAspectRatio: 1 / 1,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10, crossAxisCount: 3),
+
         ),
+
       ),
-    );
+    ):Container(child: Center(child: Text("No data"),),);
   }
 
   Widget buildFamiliesPanel() {
-    return Expanded(
+    return catalogPageController.familiesToShow.isNotEmpty? Expanded(
       child: Container(
-        child: ListView(
-          children: catalogPageController.familiesToShow.map((e) {
-            return GestureDetector(
-              onTap: () => catalogPageController.selectedFamily.value = e,
-              child: Container(
-                  color: Colors.white,
-                  padding: EdgeInsets.all(Get.width * 0.06),
-                  margin: EdgeInsets.all(Get.width * 0.01),
-                  child: Text(e.Display)),
-            );
-          }).toList(),
+        margin: EdgeInsets.symmetric(horizontal: Get.width*0.02),
+        child: GridView.builder(
+          itemBuilder: (BuildContext context, int index) {
+              return GestureDetector(
+                onTap: () => catalogPageController.selectedFamily.value = catalogPageController.familiesToShow[index],
+                child: FamiliesCard(family: catalogPageController.familiesToShow[index],));
+          },
+          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent:  Get.width*0.5,
+            childAspectRatio: 3 / 2,
+            crossAxisSpacing: 20,
+            mainAxisSpacing: 20),
+
         ),
       ),
-    );
+    ):Container(child: Center(child: Text("No data"),),);
   }
 
   Widget buildBrandsOrFamilySelection() {
@@ -223,11 +246,13 @@ class _CatalogPageState extends State<CatalogPage> {
   }
 
   Widget buildAllMaterials() {
+
     return Expanded(
         child: ListView(
       children: catalogPageController.getMaterials.map((e) {
         return MaterialCard(
           materiale: e,
+          controller: catalogPageController,
         );
       }).toList(),
     ));
@@ -239,7 +264,7 @@ class _CatalogPageState extends State<CatalogPage> {
         child: ListView(
           children: catalogPageController.materialsByBrand.map((e) {
             return MaterialCard(
-              materiale: e,
+              materiale: e, controller: catalogPageController,
             );
           }).toList(),
         ),
@@ -254,6 +279,7 @@ class _CatalogPageState extends State<CatalogPage> {
           children: catalogPageController.materialsByFamily.map((e) {
             return MaterialCard(
               materiale: e,
+              controller: catalogPageController,
             );
           }).toList(),
         ),

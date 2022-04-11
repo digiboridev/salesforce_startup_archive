@@ -1,4 +1,6 @@
+import 'package:***REMOVED***/domain/entities/materials/materials_catalog.dart';
 import 'package:***REMOVED***/presentation/controllers/search_controller.dart';
+import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalog_page_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/material_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -52,6 +54,7 @@ class SearchScreen extends StatelessWidget {
                     children: searchController.findedMaterials
                         .map((element) => MaterialCard(
                               materiale: element,
+                      controller: Get.find(),
                             ))
                         .toList(),
                   ),
