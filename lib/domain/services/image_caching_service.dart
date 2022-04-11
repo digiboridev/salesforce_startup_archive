@@ -1,41 +1,34 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:typed_data';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:path_provider/path_provider.dart' as pp;
 
 class ImageCachingService extends GetxService {
-  final box = GetStorage('imagesBox');
+  Future<Uint8List> getImage({required Uri url}) async {
+    Directory appDocDir = await pp.getApplicationDocumentsDirectory();
+    String appDocPath = appDocDir.path;
 
-  Future<Uint8List> getImage({required String url}) async {
-    List? data = box.read(url);
+    File file = File('$appDocPath${url.path}');
 
-    if (data is List) {
-      List<int> intList = data.cast<int>().toList();
-      return Uint8List.fromList(intList);
+    bool exist = await file.exists();
+
+    if (exist) {
+      return await file.readAsBytes();
     }
 
-    var response = await http.get(Uri.parse(url));
+    var response = await http.get(url);
 
     if (response.statusCode == 200) {
       Uint8List image = response.bodyBytes;
-      box.write(url, image);
+      await file.create(recursive: true);
+      await file.writeAsBytes(image);
       return image;
     } else {
-      throw Exception('Error');
-    }
-  }
-
-  cacheImage({required String url}) async {
-    var response = await http.get(Uri.parse(url));
-    if (response.statusCode == 200) {
-      Uint8List image = response.bodyBytes;
-      await box.write(url, image);
-      return image;
-    } else {
-      throw Exception('Error');
+      throw Exception(response.reasonPhrase);
     }
   }
 }
@@ -82,13 +75,15 @@ class _CachedImageState extends State<CachedImage> {
       error = false;
     });
     try {
-      Uint8List d = await imageCachingService.getImage(url: widget.Url);
+      Uint8List d =
+          await imageCachingService.getImage(url: Uri.parse(widget.Url));
       if (mounted) {
         setState(() {
           imageData = d;
         });
       }
     } catch (e) {
+      print(e);
       if (mounted) {
         setState(() {
           error = true;
