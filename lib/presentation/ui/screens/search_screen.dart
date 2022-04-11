@@ -77,6 +77,24 @@ class SearchScreen extends StatelessWidget {
                   ),
                 if (searchController.findedMaterials.isEmpty &&
                     searchController.findedSimilarMaterials.isNotEmpty)
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: Get.width * 0.05),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      searchController
+                          .getCatalog()!
+                          .families
+                          .firstWhere((element) =>
+                              element.SFId ==
+                              searchController
+                                  .findedSimilarMaterials.first.FamilyId)
+                          .Display,
+                      style: TextStyle(
+                          color: Colors.black, fontSize: Get.width * 0.04),
+                    ),
+                  ),
+                if (searchController.findedMaterials.isEmpty &&
+                    searchController.findedSimilarMaterials.isNotEmpty)
                   Expanded(
                     child: ListView(
                       children: searchController.findedSimilarMaterials
