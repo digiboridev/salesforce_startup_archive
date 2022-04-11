@@ -120,7 +120,7 @@ class _CatalogPageState extends State<CatalogPage> {
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
               child: GridView.builder(
-                cacheExtent: Get.height * 3,
+                cacheExtent: Get.height * 2,
                 physics: BouncingScrollPhysics(),
                 itemCount: catalogPageController.brandsToShow.length,
                 itemBuilder: (BuildContext context, int index) {
@@ -152,7 +152,7 @@ class _CatalogPageState extends State<CatalogPage> {
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
               child: GridView.builder(
-                cacheExtent: Get.height * 3,
+                cacheExtent: Get.height * 2,
                 physics: BouncingScrollPhysics(),
                 itemCount: catalogPageController.familiesToShow.length,
                 itemBuilder: (BuildContext context, int index) {
@@ -268,7 +268,8 @@ class _CatalogPageState extends State<CatalogPage> {
   Widget buildAllMaterials() {
     return Expanded(
         child: ListView(
-      cacheExtent: Get.height * 3,
+      physics: BouncingScrollPhysics(),
+      cacheExtent: Get.height * 2,
       children: catalogPageController.getMaterials.map((e) {
         return MaterialCard(
           materiale: e,
@@ -282,7 +283,8 @@ class _CatalogPageState extends State<CatalogPage> {
     return Expanded(
       child: Container(
         child: ListView(
-          cacheExtent: Get.height * 3,
+          physics: BouncingScrollPhysics(),
+          cacheExtent: Get.height * 2,
           children: catalogPageController.materialsByBrand.map((e) {
             return MaterialCard(
               materiale: e,
@@ -298,7 +300,8 @@ class _CatalogPageState extends State<CatalogPage> {
     return Expanded(
       child: Container(
         child: ListView(
-          cacheExtent: Get.height * 3,
+          physics: BouncingScrollPhysics(),
+          cacheExtent: Get.height * 2,
           children: catalogPageController.materialsByFamily.map((e) {
             return MaterialCard(
               materiale: e,

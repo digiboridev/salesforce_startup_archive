@@ -85,16 +85,21 @@ class _MainScreenState extends State<MainScreen> {
 
   PageView buildPageView() {
     return PageView(
+      physics: BouncingScrollPhysics(),
       onPageChanged: (value) {
         bottomBarController.currentPageIndex.value = value + 1;
         if (value == 4) {
-          setState(() {
-            headerHeight = Get.width * 0.4;
-          });
+          if (headerHeight != Get.width * 0.4) {
+            setState(() {
+              headerHeight = Get.width * 0.4;
+            });
+          }
         } else {
-          setState(() {
-            headerHeight = Get.width * 0.35;
-          });
+          if (headerHeight != Get.width * 0.35) {
+            setState(() {
+              headerHeight = Get.width * 0.35;
+            });
+          }
         }
       },
       controller: pageController,

@@ -5,7 +5,6 @@ import 'package:***REMOVED***/domain/entities/materials/hierarchy.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
 import 'package:***REMOVED***/domain/entities/materials/materials_catalog.dart';
 import 'package:get/get.dart';
-
 import 'material_card_controller.dart';
 
 class CatalogPageController extends GetxController {
