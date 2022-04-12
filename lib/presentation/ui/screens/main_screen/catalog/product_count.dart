@@ -16,6 +16,7 @@ class ProductCount extends StatefulWidget {
 class ProductCountState extends State<ProductCount> {
   late CatalogPageController controller = Get.find();
   late TextEditingController textEditingController;
+  FocusNode focusNode = FocusNode();
   // List<String> box_list = ['Pallet', 'Carton', 'Inner', 'Unit'];
   // List<Widget> box_widget_list = [];
   // bool palletSelect = true;
@@ -39,8 +40,11 @@ class ProductCountState extends State<ProductCount> {
         text: widget.cardController.unit_count.toString());
 
     _countSub = widget.cardController.unit_countStream.listen((p0) {
-      textEditingController.text = p0.toString();
+      if (!focusNode.hasFocus) {
+        textEditingController.text = p0.toString();
+      }
     });
+
     // textEditingController.text =
     //     widget.cardController.product_count.value.toString();
 
@@ -203,13 +207,17 @@ class ProductCountState extends State<ProductCount> {
                             ),
                             Container(
                                 alignment: Alignment.center,
-                                //  margin: EdgeInsets.only(left: Get.width*0.2, right: Get.width*0.2),
                                 width: Get.width * 0.65,
                                 padding: EdgeInsets.only(
                                     left: Get.width * 0.1,
                                     right: Get.width * 0.1),
                                 height: 76,
                                 child: TextFormField(
+                                  focusNode: focusNode,
+                                  onChanged: (value) {
+                                    widget.cardController.setCountManual(
+                                        count: int.tryParse(value) ?? 0);
+                                  },
                                   keyboardType: TextInputType.number,
                                   maxLines: 1,
                                   cursorHeight: 0,

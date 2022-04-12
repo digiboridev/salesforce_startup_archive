@@ -34,6 +34,10 @@ class MaterialCardController extends GetxController {
     _unit_count.value = 0;
   }
 
+  void setCountManual({required int count}) {
+    _unit_count.value = count;
+  }
+
   void setUnitType({required UnitType unitType}) {
     _unitType.value = unitType;
   }

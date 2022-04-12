@@ -3,7 +3,6 @@ import 'package:***REMOVED***/domain/entities/materials/material.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/cart_top_icon.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalog_page_controller.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/material_card_component.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/product_count.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/product_options.dart';
 import 'package:flutter/material.dart';
@@ -30,8 +29,8 @@ class MaterialCardState extends State<MaterialCard> {
   // late String boxType;
   // late int product_count;
   // int productCount = 1;
-  Widget componentItem =
-      MaterialCardComponent(type: ComponentOutOfStockItem(isUpdate: false));
+  // Widget componentItem =
+  //     MaterialCardComponent(type: ComponentOutOfStockItem(isUpdate: false));
 
   // Map<String, int> getTypeAndCount(
   //     {required String salesUnit, required Materiale data}) {
@@ -69,14 +68,14 @@ class MaterialCardState extends State<MaterialCard> {
     // cardController.unit_count = productCount.obs;
     // cardController.setUnitCount(boxType: boxType);
 
-    if (materiale.IsInStock) {
-      componentItem = getNormal(
-          data: ComponentNormalItem(
-              minimum:
-                  "${materiale.MinimumOrderQuantity} ${materiale.salesUnitType.text}",
-              recommended:
-                  "${materiale.AverageQty} ${materiale.salesUnitType.text}"));
-    }
+    // if (materiale.IsInStock) {
+    //   componentItem = getNormal(
+    //       data: ComponentNormalItem(
+    //           minimum:
+    //               "${materiale.MinimumOrderQuantity} ${materiale.salesUnitType.text}",
+    //           recommended:
+    //               "${materiale.AverageQty} ${materiale.salesUnitType.text}"));
+    // }
     super.initState();
   }
 
@@ -254,7 +253,7 @@ class MaterialCardState extends State<MaterialCard> {
                 Container(
                     child: cardController.unit_count > 0
                         ? getFocused(margin_bottom: 11)
-                        : componentItem),
+                        : getNormal()),
                 SizedBox(
                     // height: Get.width * 0.05,
                     ),
@@ -293,7 +292,7 @@ class MaterialCardState extends State<MaterialCard> {
     });
   }
 
-  Widget getNormal({required ComponentNormalItem data}) {
+  Widget getNormal() {
     return Container(
       margin: EdgeInsets.only(
           left: Get.width * 0.04, right: Get.width * 0.03, bottom: 15),
@@ -319,7 +318,8 @@ class MaterialCardState extends State<MaterialCard> {
                             style: TextStyle(
                                 color: MyColors.blue_003E83, fontSize: 12),
                           ),
-                          Text("${data.recommended}",
+                          Text(
+                              "${materiale.AverageQty} ${materiale.salesUnitType.text}",
                               style: TextStyle(
                                   color: MyColors.blue_003E83, fontSize: 12))
                         ],
@@ -329,7 +329,8 @@ class MaterialCardState extends State<MaterialCard> {
                           Text("Minimum order: ",
                               style: TextStyle(
                                   color: MyColors.blue_003E83, fontSize: 12)),
-                          Text("${data.minimum}",
+                          Text(
+                              "${materiale.MinimumOrderQuantity} ${materiale.salesUnitType.text}",
                               style: TextStyle(
                                   color: MyColors.blue_003E83, fontSize: 12))
                         ],
