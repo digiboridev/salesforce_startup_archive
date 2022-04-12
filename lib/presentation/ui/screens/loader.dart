@@ -3,8 +3,9 @@ import 'package:***REMOVED***/presentation/controllers/contactus_controller.dart
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller_states.dart';
+import 'package:***REMOVED***/presentation/ui/screens/expired_password_screen.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/main_screen.dart';
-import 'package:***REMOVED***/presentation/ui/widgets/legal_doc_view.dart';
+import 'package:***REMOVED***/presentation/ui/screens/legal_doc_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -60,7 +61,7 @@ class Loader extends StatelessWidget {
       }
 
       if (userDataState is UserDataAskLegalDocState) {
-        return LegalDocView(
+        return LegalDocScreen(
           legalDocLink: userDataState.legalDoc,
           buttonText: 'Understood',
           callback: () {
@@ -73,6 +74,10 @@ class Loader extends StatelessWidget {
             userDataController.acceptLegalDoc();
           },
         );
+      }
+
+      if (userDataState is UserDataChangePasswordState) {
+        return ExpiredPasswordScreen();
       }
 
       if (userDataState is UserDataCommonState) {

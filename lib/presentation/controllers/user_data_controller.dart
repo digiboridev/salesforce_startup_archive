@@ -77,6 +77,8 @@ class UserDataController extends GetxController {
       if (!userData.hasAcceptedLegalDoc) {
         _userDataState.value =
             UserDataAskLegalDocState(legalDoc: userData.legalDoc);
+      } else if (!userData.didChangePassword) {
+        _userDataState.value = UserDataChangePasswordState();
       } else {
         _userDataState.value = UserDataCommonState(userData: userData);
 
@@ -165,12 +167,15 @@ class UserDataController extends GetxController {
   }
 
   Future changePassword(
-      {required String oldPass, required String newPass}) async {
+      {required String oldPass,
+      required String newPass,
+      bool onlogin = false}) async {
     try {
       defaultDialog();
       await _changePassword
           .call(ChangePasswordParams(oldPass: oldPass, newPass: newPass));
       Get.until((route) => !Get.isDialogOpen!);
+      if (onlogin) loadUserData();
     } catch (e) {
       Get.until((route) => !Get.isDialogOpen!);
       Get.snackbar('Error', e.toString(), backgroundColor: Colors.amber);

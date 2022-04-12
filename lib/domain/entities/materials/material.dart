@@ -2,6 +2,7 @@ import 'package:***REMOVED***/domain/entities/materials/alternative_item.dart';
 import 'package:***REMOVED***/domain/entities/materials/free_goods.dart';
 import 'package:***REMOVED***/domain/entities/materials/pricing.dart';
 import 'package:***REMOVED***/domain/entities/materials/supplementary_item.dart';
+import 'package:***REMOVED***/domain/entities/materials/unit_types.dart';
 import 'package:equatable/equatable.dart';
 
 class Materiale extends Equatable {
@@ -132,6 +133,43 @@ class Materiale extends Equatable {
       AverageQty,
       alternativeItems,
     ];
+  }
+
+  UnitType get salesUnitType {
+    return UnitType.fromSalesUnit(SalesUnit);
+  }
+
+  List<UnitType> get avaliableUnitTtypes {
+    // print(salesUnitType);
+    if (salesUnitType is InnerUT) {
+      return [InnerUT(), CartonUT(), PalletUT()];
+    }
+
+    if (salesUnitType is CartonUT) {
+      return [CartonUT(), PalletUT()];
+    }
+
+    if (salesUnitType is PalletUT) {
+      return [PalletUT()];
+    }
+
+    return [UnitUT(), InnerUT(), CartonUT(), PalletUT()];
+  }
+
+  num countByUnitType(UnitType unitType) {
+    if (unitType is InnerUT) {
+      return InnerCount;
+    }
+
+    if (unitType is CartonUT) {
+      return CartonCount;
+    }
+
+    if (unitType is PalletUT) {
+      return PalletCount;
+    }
+
+    return 1;
   }
 
   @override

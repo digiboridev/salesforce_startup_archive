@@ -1,11 +1,9 @@
-import 'package:***REMOVED***/domain/services/connections_service.dart';
-import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class LegalDocView extends StatefulWidget {
-  const LegalDocView(
+class LegalDocScreen extends StatefulWidget {
+  const LegalDocScreen(
       {Key? key,
       required this.legalDocLink,
       required this.callback,
@@ -17,10 +15,10 @@ class LegalDocView extends StatefulWidget {
   final String buttonText;
 
   @override
-  State<LegalDocView> createState() => _LegalDocViewState();
+  State<LegalDocScreen> createState() => _LegalDocScreenState();
 }
 
-class _LegalDocViewState extends State<LegalDocView> {
+class _LegalDocScreenState extends State<LegalDocScreen> {
   WebViewController? webViewController;
   bool error = false;
 

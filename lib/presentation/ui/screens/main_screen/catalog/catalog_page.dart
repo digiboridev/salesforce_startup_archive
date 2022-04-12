@@ -62,15 +62,8 @@ class _CatalogPageState extends State<CatalogPage> {
                   buildMaterialsByFamily(),
               ],
             ),
-            Visibility(
-              visible: catalogPageController.selectCount.value,
-              child: catalogPageController.selectCount.value
-                  ? ProductCount(
-                      controller: catalogPageController,
-                      cardController:
-                          catalogPageController.select_card_controller)
-                  : Container(),
-            ),
+            if (catalogPageController.overlayWidget.value != null)
+              catalogPageController.overlayWidget.value!
           ],
         ),
       );

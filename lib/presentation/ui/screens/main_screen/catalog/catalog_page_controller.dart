@@ -4,6 +4,7 @@ import 'package:***REMOVED***/domain/entities/materials/family.dart';
 import 'package:***REMOVED***/domain/entities/materials/hierarchy.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
 import 'package:***REMOVED***/domain/entities/materials/materials_catalog.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'material_card_controller.dart';
 
@@ -49,19 +50,16 @@ class CatalogPageController extends GetxController {
     return false;
   }
 
-  //show or close count screen
-  RxBool selectCount = RxBool(false);
-  late MaterialCardController select_card_controller;
-  void showProductCountScreen(
-      {required Materiale materiale,
-      required bool value,
-      required MaterialCardController cardController}) {
-    selectCount.value = value;
-    select_card_controller = cardController;
+  //show or close overlay
+
+  Rxn<Widget> overlayWidget = Rxn();
+
+  void showOverlay({required Widget widget}) {
+    overlayWidget.value = widget;
   }
 
-  void closeProductCountScreen() {
-    selectCount.value = false;
+  void closeOverlay() {
+    overlayWidget.value = null;
   }
 
   // Brand and Families selection

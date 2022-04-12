@@ -1,47 +1,40 @@
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
+import 'package:***REMOVED***/domain/entities/materials/unit_types.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
-class MaterialCardController extends GetxController{
+class MaterialCardController extends GetxController {
   final Materiale material;
   MaterialCardController({required this.material});
-  RxInt product_count = RxInt(0);
-  RxString box_type = ''.obs;
-  RxInt unit_count = 1.obs;
-  RxString select_box_type = ''.obs;
 
-  void increaseCount(){
-    (product_count.value += 1);
-    update();
-  }
+  late final Rx<UnitType> _unitType;
+  UnitType get unitType => _unitType.value;
 
-  void decreaseCount(){
-    if(product_count.value == 0){return;}
-    (product_count.value -= 1);
-    update();
-  }
-  void setUnitCount({required String boxType}){
-
-    if(boxType == "Unit"){
-      unit_count.value = 1;
-    }
-    if(boxType == "Pallets"){
-      unit_count.value = material.PalletCount.toInt();
-    }
-    if(boxType == "Cartons"){
-      unit_count.value = material.CartonCount.toInt();
-    }
-    if(boxType == "Inner"){
-      unit_count.value = material.InnerCount.toInt();
-    }
-  }
-
+  RxInt _unit_count = RxInt(0);
+  Stream<int> get unit_countStream => _unit_count.stream;
+  int get unit_count => _unit_count.value;
 
   @override
   void onInit() {
-    setUnitCount(boxType: box_type.value);
+    _unitType = Rx(material.avaliableUnitTtypes.first);
     super.onInit();
-
   }
 
+  void increaseCount() {
+    _unit_count.value++;
+  }
+
+  void decreaseCount() {
+    if (_unit_count.value < 1) {
+      return;
+    }
+    _unit_count.value--;
+  }
+
+  void resetCount() {
+    _unit_count.value = 0;
+  }
+
+  void setUnitType({required UnitType unitType}) {
+    _unitType.value = unitType;
+  }
 }

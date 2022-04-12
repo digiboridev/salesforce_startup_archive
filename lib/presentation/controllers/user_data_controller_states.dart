@@ -52,3 +52,8 @@ class UserDataAskLegalDocState extends UserDataState with EquatableMixin {
   @override
   String toString() => 'UserDataAskLegalDocState(legalDoc: $legalDoc)';
 }
+
+class UserDataChangePasswordState extends UserDataState with EquatableMixin {
+  @override
+  List<Object?> get props => [];
+}

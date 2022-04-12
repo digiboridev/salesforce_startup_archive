@@ -3,7 +3,7 @@ import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart
 import 'package:***REMOVED***/presentation/ui/screens/profile/change_language_page.dart';
 import 'package:***REMOVED***/presentation/ui/screens/profile/change_password_page.dart';
 import 'package:***REMOVED***/presentation/ui/screens/profile/personal_details_page.dart';
-import 'package:***REMOVED***/presentation/ui/widgets/legal_doc_view.dart';
+import 'package:***REMOVED***/presentation/ui/screens/legal_doc_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -112,7 +112,7 @@ class ProfileScreen extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     Get.to(
-                        () => LegalDocView(
+                        () => LegalDocScreen(
                               legalDocLink: userDataController.legalocLink,
                               buttonText: 'Close',
                               callback: () {
