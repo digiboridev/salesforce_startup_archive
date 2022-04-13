@@ -35,6 +35,12 @@ class _CatalogPageState extends State<CatalogPage> {
   @override
   void dispose() {
     super.dispose();
+    // Get.delete<CatalogPageController>();
+  }
+
+  @override
+  void deactivate() {
+    super.deactivate();
     Get.delete<CatalogPageController>();
   }
 
