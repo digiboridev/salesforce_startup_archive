@@ -81,6 +81,7 @@ class UserDataController extends GetxController {
         _userDataState.value = UserDataChangePasswordState();
       } else {
         _userDataState.value = UserDataCommonState(userData: userData);
+        setLocale();
 
         // Register in cache fetching service
         CacheUpdateEvent cacheUpdateEvent = CacheUpdateEvent(
@@ -105,11 +106,17 @@ class UserDataController extends GetxController {
       try {
         UserData userData = await _getUserDataAndCache(_authData.value!.userId);
         _userDataState.value = UserDataCommonState(userData: userData);
+
+        setLocale();
       } catch (e) {
         print('Update user data error');
         print(e);
       }
     }
+  }
+
+  setLocale() {
+    Get.updateLocale(Locale(currentLanguage.identifier));
   }
 
   Uri get legalocLink {

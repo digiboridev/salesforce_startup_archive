@@ -54,6 +54,8 @@ class MaterialCardState extends State<MaterialCard> {
     cardController = Get.put(MaterialCardController(material: materiale),
         tag: materiale.hashCode.toString());
 
+    // cardController = MaterialCardController(material: materiale);
+
     // boxType = getTypeAndCount(salesUnit: materiale.SalesUnit, data: materiale)
     //     .keys
     //     .first;

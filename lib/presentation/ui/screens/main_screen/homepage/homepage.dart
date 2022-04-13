@@ -45,6 +45,12 @@ class _HomePageState extends State<HomePage> {
         .toList();
   }
 
+  List<Materiale> get getDeals {
+    return widget.materialsCatalog.materials
+        .where((element) => element.IsHotSale)
+        .toList();
+  }
+
   Widget buildBody() {
     return Container(
       width: Get.width,

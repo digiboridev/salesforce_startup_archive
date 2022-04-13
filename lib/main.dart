@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/core/translations.dart';
 import 'package:***REMOVED***/data/datasouces/contact_us_local_datasource.dart';
 import 'package:***REMOVED***/data/datasouces/contact_us_remote_datasource.dart';
 import 'package:***REMOVED***/data/datasouces/customers_local_datasource.dart';
@@ -31,6 +32,7 @@ import 'package:***REMOVED***/presentation/controllers/customer_controller.dart'
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/loader.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
 
@@ -41,6 +43,16 @@ main() async {
   await initServices();
   await initControllers();
   runApp(GetMaterialApp(
+    supportedLocales: [Locale('en'), Locale('he')],
+    translations: Trs(),
+    // Keep in mind,locale will owerwrite by user controller based on language from api
+    locale: Get.deviceLocale,
+    fallbackLocale: Locale('he'),
+    localizationsDelegates: [
+      GlobalMaterialLocalizations.delegate, // uses `flutter_localizations`
+      GlobalWidgetsLocalizations.delegate,
+      GlobalCupertinoLocalizations.delegate,
+    ],
     home: Loader(),
   ));
 }
