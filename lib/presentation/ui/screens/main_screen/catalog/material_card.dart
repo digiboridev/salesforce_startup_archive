@@ -14,17 +14,13 @@ import 'package:get/get.dart';
 
 class MaterialCard extends StatefulWidget {
   final Materiale materiale;
-  final CatalogPageController controller;
-  const MaterialCard(
-      {Key? key, required this.materiale, required this.controller})
-      : super(key: key);
+  const MaterialCard({Key? key, required this.materiale}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => MaterialCardState();
 }
 
 class MaterialCardState extends State<MaterialCard> {
-  CatalogPageController controller = Get.find();
   late MaterialCountController materialCountController;
 
   @override

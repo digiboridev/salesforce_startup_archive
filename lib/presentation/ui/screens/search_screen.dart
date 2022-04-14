@@ -1,6 +1,4 @@
-import 'package:***REMOVED***/domain/entities/materials/materials_catalog.dart';
 import 'package:***REMOVED***/presentation/controllers/search_controller.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalog_page_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/material_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -62,7 +60,7 @@ class SearchScreen extends StatelessWidget {
                     child: ListView(
                       children: searchController.findedMaterials
                           .map((element) => MaterialCard(
-                                materiale: element, controller: Get.find(),
+                                materiale: element,
                               ))
                           .toList(),
                     ),
@@ -77,17 +75,13 @@ class SearchScreen extends StatelessWidget {
                           color: Colors.black, fontSize: Get.width * 0.04),
                     ),
                   ),
-
-            
-            Obx(() => Expanded(
-                  child: ListView(
-                    children: searchController.findedMaterials
-                        .map((element) => MaterialCard(
-                              materiale: element,
-                      controller: Get.find(),
-                            ))
-                        .toList()))),
-
+                Obx(() => Expanded(
+                    child: ListView(
+                        children: searchController.findedMaterials
+                            .map((element) => MaterialCard(
+                                  materiale: element,
+                                ))
+                            .toList()))),
                 if (searchController.findedMaterials.isEmpty &&
                     searchController.findedSimilarMaterials.isNotEmpty)
                   Container(
@@ -148,11 +142,10 @@ class SearchScreen extends StatelessWidget {
                     child: ListView(
                       children: searchController.findedSimilarMaterials
                           .map((element) => MaterialCard(
-                                materiale: element, controller: Get.find(),
+                                materiale: element,
                               ))
                           .toList(),
                     ),
-
                   ),
               ],
             )),

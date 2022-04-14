@@ -271,7 +271,6 @@ class _CatalogPageState extends State<CatalogPage> {
       children: catalogPageController.getMaterials.map((e) {
         return MaterialCard(
           materiale: e,
-          controller: catalogPageController,
         );
       }).toList(),
     ));
@@ -286,7 +285,6 @@ class _CatalogPageState extends State<CatalogPage> {
           children: catalogPageController.materialsByBrand.map((e) {
             return MaterialCard(
               materiale: e,
-              controller: catalogPageController,
             );
           }).toList(),
         ),
@@ -303,7 +301,6 @@ class _CatalogPageState extends State<CatalogPage> {
           children: catalogPageController.materialsByFamily.map((e) {
             return MaterialCard(
               materiale: e,
-              controller: catalogPageController,
             );
           }).toList(),
         ),
