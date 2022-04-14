@@ -13,6 +13,17 @@ abstract class MaterialsRemoteDatasource {
 }
 
 class MaterialsRemoteDatasourceImpl implements MaterialsRemoteDatasource {
+  Future subscribeToMaterial({required String customerSAP}) async {
+    var response = await SalesforcePlugin.sendRequest(
+      endPoint: ***REMOVED***Endpoint,
+      path: '/materials/subscribeInventory/$customerSAP',
+      method: 'POST',
+      payload: {'asd': 'asd'},
+    ) as Map<String, dynamic>;
+
+    print(response);
+  }
+
   Future<MaterialsCatalogModel> getCatalog(
       {required String customerSAP}) async {
     try {

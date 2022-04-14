@@ -46,6 +46,7 @@ class Materiale extends Equatable {
   final String Barcode;
   final num AverageQty;
   final List<AlternativeItem> alternativeItems;
+  final bool didSubscribedToInventoryAlert;
   Materiale({
     required this.WeightUnitDisplay,
     required this.UnitPrice,
@@ -87,6 +88,7 @@ class Materiale extends Equatable {
     required this.Barcode,
     required this.AverageQty,
     required this.alternativeItems,
+    required this.didSubscribedToInventoryAlert,
   });
 
   @override
@@ -132,6 +134,7 @@ class Materiale extends Equatable {
       Barcode,
       AverageQty,
       alternativeItems,
+      didSubscribedToInventoryAlert
     ];
   }
 

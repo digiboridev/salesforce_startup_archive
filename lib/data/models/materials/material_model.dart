@@ -56,6 +56,7 @@ class MaterialModel extends Materiale {
     required String Barcode,
     required num AverageQty,
     required List<AlternativeItemModel> this.alternativeItems,
+    required bool didSubscribedToInventoryAlert,
   }) : super(
           WeightUnitDisplay: WeightUnitDisplay,
           UnitPrice: UnitPrice,
@@ -97,6 +98,7 @@ class MaterialModel extends Materiale {
           Barcode: Barcode,
           AverageQty: AverageQty,
           alternativeItems: alternativeItems,
+          didSubscribedToInventoryAlert: didSubscribedToInventoryAlert,
         );
 
   Map<String, dynamic> toMap() {
@@ -141,6 +143,7 @@ class MaterialModel extends Materiale {
       'Barcode': Barcode,
       'AverageQty': AverageQty,
       'AlternativeItems': alternativeItems.map((x) => x.toMap()).toList(),
+      'didSubscribedToInventoryAlert': didSubscribedToInventoryAlert,
     };
   }
 
@@ -192,6 +195,7 @@ class MaterialModel extends Materiale {
       alternativeItems: List<AlternativeItemModel>.from(map['AlternativeItems']
               ?.map((x) => AlternativeItemModel.fromMap(x)) ??
           []),
+      didSubscribedToInventoryAlert: map['didSubscribedToInventoryAlert'],
     );
   }
 
@@ -243,6 +247,8 @@ class MaterialModel extends Materiale {
       alternativeItems: materialModel.alternativeItems
           .map((e) => AlternativeItemModel.fromEntity(e))
           .toList(),
+      didSubscribedToInventoryAlert:
+          materialModel.didSubscribedToInventoryAlert,
     );
   }
 
