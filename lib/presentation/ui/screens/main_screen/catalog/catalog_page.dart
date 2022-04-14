@@ -2,7 +2,6 @@ import 'package:***REMOVED***/domain/services/image_caching_service.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/brand_card.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/families_card.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/material_card.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/product_count.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:***REMOVED***/domain/entities/materials/hierarchy.dart';
