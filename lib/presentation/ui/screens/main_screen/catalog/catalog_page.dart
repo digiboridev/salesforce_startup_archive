@@ -47,32 +47,51 @@ class _CatalogPageState extends State<CatalogPage> {
   Widget build(BuildContext context) {
     return Obx(() {
       return Container(
-        // color: Color(0xffF4F4F6),
         width: Get.width,
-        child: Stack(
+        child: Column(
           children: [
-            Column(
-              children: [
-                buildClassificationRow(),
-                if (catalogPageController.showBrandsOrFamilies)
-                  buildBrandsOrFamilySelection(),
-                if (!catalogPageController.showBrandsOrFamilies)
-                  buildAllMaterials(),
-                if (catalogPageController.showBrandsPanel) buildBrandsPanel(),
-                if (catalogPageController.showFamiliesPanel)
-                  buildFamiliesPanel(),
-                if (catalogPageController.showMaterialsByBrand)
-                  buildMaterialsByBrand(),
-                if (catalogPageController.showMaterialsByFamily)
-                  buildMaterialsByFamily(),
-              ],
+            buildClassificationRow(),
+            AnimatedCrossFade(
+                firstChild: buildBrandsOrFamilySelection(),
+                secondChild: SizedBox(),
+                crossFadeState: catalogPageController.showBrandsOrFamilies
+                    ? CrossFadeState.showFirst
+                    : CrossFadeState.showSecond,
+                duration: Duration(milliseconds: 300)),
+            Expanded(
+              child: AnimatedSwitcher(
+                switchInCurve: Curves.easeOut,
+                key: Key('asd'),
+                duration: Duration(milliseconds: 300),
+                child: content,
+                transitionBuilder: (child, animation) {
+                  final offsetAnimation = Tween(
+                    begin: const Offset(1.0, 0.0),
+                    end: const Offset(0.0, 0.0),
+                  ).animate(animation);
+                  return ClipRect(
+                    child: SlideTransition(
+                      position: offsetAnimation,
+                      child: child,
+                    ),
+                  );
+                },
+              ),
             ),
-            if (catalogPageController.overlayWidget.value != null)
-              catalogPageController.overlayWidget.value!
           ],
         ),
       );
     });
+  }
+
+  Widget get content {
+    if (catalogPageController.showBrandsPanel) return buildBrandsPanel();
+    if (catalogPageController.showFamiliesPanel) return buildFamiliesPanel();
+    if (catalogPageController.showMaterialsByBrand)
+      return buildMaterialsByBrand();
+    if (catalogPageController.showMaterialsByFamily)
+      return buildMaterialsByFamily();
+    return buildAllMaterials();
   }
 
   Widget buildClassificationRow() {
@@ -114,27 +133,26 @@ class _CatalogPageState extends State<CatalogPage> {
 
   Widget buildBrandsPanel() {
     return catalogPageController.brandsToShow.isNotEmpty
-        ? Expanded(
-            child: Container(
-              margin: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
-              child: GridView.builder(
-                cacheExtent: Get.height * 2,
-                physics: BouncingScrollPhysics(),
-                itemCount: catalogPageController.brandsToShow.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return GestureDetector(
-                      onTap: () => catalogPageController.selectedBrand.value =
-                          catalogPageController.brandsToShow[index],
-                      child: BrandCard(
-                        brand: catalogPageController.brandsToShow[index],
-                      ));
-                },
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    childAspectRatio: 1 / 1,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    crossAxisCount: 3),
-              ),
+        ? Container(
+            key: UniqueKey(),
+            margin: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
+            child: GridView.builder(
+              cacheExtent: Get.height * 2,
+              physics: BouncingScrollPhysics(),
+              itemCount: catalogPageController.brandsToShow.length,
+              itemBuilder: (BuildContext context, int index) {
+                return GestureDetector(
+                    onTap: () => catalogPageController.selectedBrand.value =
+                        catalogPageController.brandsToShow[index],
+                    child: BrandCard(
+                      brand: catalogPageController.brandsToShow[index],
+                    ));
+              },
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  childAspectRatio: 1 / 1,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                  crossAxisCount: 3),
             ),
           )
         : Container(
@@ -146,27 +164,26 @@ class _CatalogPageState extends State<CatalogPage> {
 
   Widget buildFamiliesPanel() {
     return catalogPageController.familiesToShow.isNotEmpty
-        ? Expanded(
-            child: Container(
-              margin: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
-              child: GridView.builder(
-                cacheExtent: Get.height * 2,
-                physics: BouncingScrollPhysics(),
-                itemCount: catalogPageController.familiesToShow.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return GestureDetector(
-                      onTap: () => catalogPageController.selectedFamily.value =
-                          catalogPageController.familiesToShow[index],
-                      child: FamiliesCard(
-                        family: catalogPageController.familiesToShow[index],
-                      ));
-                },
-                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: Get.width * 0.5,
-                    childAspectRatio: 3 / 2,
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 20),
-              ),
+        ? Container(
+            key: UniqueKey(),
+            margin: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
+            child: GridView.builder(
+              cacheExtent: Get.height * 2,
+              physics: BouncingScrollPhysics(),
+              itemCount: catalogPageController.familiesToShow.length,
+              itemBuilder: (BuildContext context, int index) {
+                return GestureDetector(
+                    onTap: () => catalogPageController.selectedFamily.value =
+                        catalogPageController.familiesToShow[index],
+                    child: FamiliesCard(
+                      family: catalogPageController.familiesToShow[index],
+                    ));
+              },
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: Get.width * 0.5,
+                  childAspectRatio: 3 / 2,
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 20),
             ),
           )
         : Container(
@@ -178,6 +195,7 @@ class _CatalogPageState extends State<CatalogPage> {
 
   Widget buildBrandsOrFamilySelection() {
     return Container(
+        key: UniqueKey(),
         height: Get.width * 0.15,
         margin: EdgeInsets.only(left: Get.width * 0.04),
         child: Row(
@@ -264,46 +282,46 @@ class _CatalogPageState extends State<CatalogPage> {
   }
 
   Widget buildAllMaterials() {
-    return Expanded(
-        child: ListView(
-      physics: BouncingScrollPhysics(),
-      cacheExtent: Get.height * 2,
-      children: catalogPageController.getMaterials.map((e) {
-        return MaterialCard(
-          materiale: e,
-        );
-      }).toList(),
-    ));
+    return Container(
+      key: UniqueKey(),
+      child: ListView(
+        physics: BouncingScrollPhysics(),
+        cacheExtent: Get.height * 2,
+        children: catalogPageController.getMaterials.map((e) {
+          return MaterialCard(
+            materiale: e,
+          );
+        }).toList(),
+      ),
+    );
   }
 
   Widget buildMaterialsByBrand() {
-    return Expanded(
-      child: Container(
-        child: ListView(
-          physics: BouncingScrollPhysics(),
-          cacheExtent: Get.height * 2,
-          children: catalogPageController.materialsByBrand.map((e) {
-            return MaterialCard(
-              materiale: e,
-            );
-          }).toList(),
-        ),
+    return Container(
+      key: UniqueKey(),
+      child: ListView(
+        physics: BouncingScrollPhysics(),
+        cacheExtent: Get.height * 2,
+        children: catalogPageController.materialsByBrand.map((e) {
+          return MaterialCard(
+            materiale: e,
+          );
+        }).toList(),
       ),
     );
   }
 
   Widget buildMaterialsByFamily() {
-    return Expanded(
-      child: Container(
-        child: ListView(
-          physics: BouncingScrollPhysics(),
-          cacheExtent: Get.height * 2,
-          children: catalogPageController.materialsByFamily.map((e) {
-            return MaterialCard(
-              materiale: e,
-            );
-          }).toList(),
-        ),
+    return Container(
+      key: UniqueKey(),
+      child: ListView(
+        physics: BouncingScrollPhysics(),
+        cacheExtent: Get.height * 2,
+        children: catalogPageController.materialsByFamily.map((e) {
+          return MaterialCard(
+            materiale: e,
+          );
+        }).toList(),
       ),
     );
   }
