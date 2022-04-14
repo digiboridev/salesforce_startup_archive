@@ -299,14 +299,24 @@ class _CatalogPageState extends State<CatalogPage> {
   Widget buildMaterialsByBrand() {
     return Container(
       key: UniqueKey(),
-      child: ListView(
-        physics: BouncingScrollPhysics(),
-        cacheExtent: Get.height * 2,
-        children: catalogPageController.materialsByBrand.map((e) {
-          return MaterialCard(
-            materiale: e,
-          );
-        }).toList(),
+      child: Column(
+        children: [
+          CachedImage(
+              Url: catalogPageController.selectedBrand.value!.ImageUrl,
+              width: Get.width * 0.15,
+              height: Get.width * 0.15),
+          Expanded(
+            child: ListView(
+              physics: BouncingScrollPhysics(),
+              cacheExtent: Get.height * 2,
+              children: catalogPageController.materialsByBrand.map((e) {
+                return MaterialCard(
+                  materiale: e,
+                );
+              }).toList(),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -314,14 +324,24 @@ class _CatalogPageState extends State<CatalogPage> {
   Widget buildMaterialsByFamily() {
     return Container(
       key: UniqueKey(),
-      child: ListView(
-        physics: BouncingScrollPhysics(),
-        cacheExtent: Get.height * 2,
-        children: catalogPageController.materialsByFamily.map((e) {
-          return MaterialCard(
-            materiale: e,
-          );
-        }).toList(),
+      child: Column(
+        children: [
+          CachedImage(
+              Url: catalogPageController.selectedFamily.value!.ImageUrl,
+              width: Get.width * 0.15,
+              height: Get.width * 0.15),
+          Expanded(
+            child: ListView(
+              physics: BouncingScrollPhysics(),
+              cacheExtent: Get.height * 2,
+              children: catalogPageController.materialsByFamily.map((e) {
+                return MaterialCard(
+                  materiale: e,
+                );
+              }).toList(),
+            ),
+          ),
+        ],
       ),
     );
   }
