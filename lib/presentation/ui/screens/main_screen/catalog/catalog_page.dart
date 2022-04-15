@@ -1,40 +1,35 @@
+import 'package:***REMOVED***/domain/entities/materials/brand.dart';
+import 'package:***REMOVED***/domain/entities/materials/family.dart';
+import 'package:***REMOVED***/domain/entities/materials/material.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/brand_card.dart';
+import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalog_page_states.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/families_card.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/material_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:***REMOVED***/domain/entities/materials/hierarchy.dart';
 import 'package:***REMOVED***/domain/entities/materials/materials_catalog.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalog_page_controller.dart';
 
 class CatalogPage extends StatefulWidget {
   final MaterialsCatalog materialsCatalog;
-
   CatalogPage({
     Key? key,
     required this.materialsCatalog,
   }) : super(key: key);
-
   @override
   State<CatalogPage> createState() => _CatalogPageState();
 }
 
 class _CatalogPageState extends State<CatalogPage> {
   late CatalogPageController catalogPageController;
-  ImageCachingService imageCachingService = ImageCachingService();
 
+  // Init and dispose controller manualy due inherited routing
   @override
   void initState() {
     super.initState();
     catalogPageController = Get.put(
         CatalogPageController(materialsCatalog: widget.materialsCatalog));
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    // Get.delete<CatalogPageController>();
   }
 
   @override
@@ -52,9 +47,9 @@ class _CatalogPageState extends State<CatalogPage> {
           children: [
             buildClassificationRow(),
             AnimatedCrossFade(
-                firstChild: buildBrandsOrFamilySelection(),
-                secondChild: SizedBox(),
-                crossFadeState: catalogPageController.showBrandsOrFamilies
+                firstChild: SizedBox(),
+                secondChild: buildBrandsOrFamilySelection(),
+                crossFadeState: catalogPageController.state is ShowAllMaterials
                     ? CrossFadeState.showFirst
                     : CrossFadeState.showSecond,
                 duration: Duration(milliseconds: 300)),
@@ -85,13 +80,29 @@ class _CatalogPageState extends State<CatalogPage> {
   }
 
   Widget get content {
-    if (catalogPageController.showBrandsPanel) return buildBrandsPanel();
-    if (catalogPageController.showFamiliesPanel) return buildFamiliesPanel();
-    if (catalogPageController.showMaterialsByBrand)
-      return buildMaterialsByBrand();
-    if (catalogPageController.showMaterialsByFamily)
-      return buildMaterialsByFamily();
-    return buildAllMaterials();
+    CatalogPageState state = catalogPageController.state;
+    if (state is ShowAllMaterials) {
+      return buildAllMaterials(materials: state.materials);
+    }
+    if (state is ShowBrands) {
+      return buildBrandsPanel(brands: state.brands);
+    }
+
+    if (state is ShowFamilies) {
+      return buildFamiliesPanel(families: state.families);
+    }
+
+    if (state is ShowMaterialsByBrand) {
+      return buildMaterialsByBrand(
+          materials: state.materials, brand: state.brand);
+    }
+
+    if (state is ShowMaterialsByFamily) {
+      return buildMaterialsByFamily(
+          materials: state.materials, family: state.family);
+    }
+
+    return SizedBox();
   }
 
   Widget buildClassificationRow() {
@@ -104,11 +115,8 @@ class _CatalogPageState extends State<CatalogPage> {
             child: Row(
               children: catalogPageController.getClassifications.map((e) {
                 return GestureDetector(
-                  onTap: () {
-                    catalogPageController.selectedClassification.value = e;
-                    catalogPageController.selectedBrand.value = null;
-                    catalogPageController.selectedFamily.value = null;
-                  },
+                  onTap: () => catalogPageController.onClassificationClick(
+                      classification: e),
                   child: Container(
                       decoration: BoxDecoration(
                           color:
@@ -131,21 +139,21 @@ class _CatalogPageState extends State<CatalogPage> {
             )));
   }
 
-  Widget buildBrandsPanel() {
-    return catalogPageController.brandsToShow.isNotEmpty
+  Widget buildBrandsPanel({required List<Brand> brands}) {
+    return brands.isNotEmpty
         ? Container(
             key: UniqueKey(),
             margin: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
             child: GridView.builder(
               cacheExtent: Get.height * 2,
               physics: BouncingScrollPhysics(),
-              itemCount: catalogPageController.brandsToShow.length,
+              itemCount: brands.length,
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
-                    onTap: () => catalogPageController.selectedBrand.value =
-                        catalogPageController.brandsToShow[index],
+                    onTap: () => catalogPageController.onBrandSelect(
+                        brand: brands[index]),
                     child: BrandCard(
-                      brand: catalogPageController.brandsToShow[index],
+                      brand: brands[index],
                     ));
               },
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -162,21 +170,21 @@ class _CatalogPageState extends State<CatalogPage> {
           );
   }
 
-  Widget buildFamiliesPanel() {
-    return catalogPageController.familiesToShow.isNotEmpty
+  Widget buildFamiliesPanel({required List<Family> families}) {
+    return families.isNotEmpty
         ? Container(
             key: UniqueKey(),
             margin: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
             child: GridView.builder(
               cacheExtent: Get.height * 2,
               physics: BouncingScrollPhysics(),
-              itemCount: catalogPageController.familiesToShow.length,
+              itemCount: families.length,
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
-                    onTap: () => catalogPageController.selectedFamily.value =
-                        catalogPageController.familiesToShow[index],
+                    onTap: () => catalogPageController.onFamilySelect(
+                        family: families[index]),
                     child: FamiliesCard(
-                      family: catalogPageController.familiesToShow[index],
+                      family: families[index],
                     ));
               },
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
@@ -201,14 +209,12 @@ class _CatalogPageState extends State<CatalogPage> {
         child: Row(
           children: [
             GestureDetector(
-              onTap: () {
-                catalogPageController.brandsOrFamilies.value = true;
-                catalogPageController.selectedBrand.value = null;
-                catalogPageController.selectedFamily.value = null;
-              },
+              onTap: () => catalogPageController.showBrands(),
               child: Container(
                   decoration: BoxDecoration(
-                      color: catalogPageController.brandsOrFamilies.value
+                      color: catalogPageController.state is ShowBrands ||
+                              catalogPageController.state
+                                  is ShowMaterialsByBrand
                           ? Color(0xff00458C)
                           : Colors.grey,
                       borderRadius: BorderRadius.circular(Get.width * 0.04)),
@@ -222,14 +228,12 @@ class _CatalogPageState extends State<CatalogPage> {
                   )),
             ),
             GestureDetector(
-              onTap: () {
-                catalogPageController.brandsOrFamilies.value = false;
-                catalogPageController.selectedBrand.value = null;
-                catalogPageController.selectedFamily.value = null;
-              },
+              onTap: () => catalogPageController.showFamilies(),
               child: Container(
                   decoration: BoxDecoration(
-                      color: !catalogPageController.brandsOrFamilies.value
+                      color: catalogPageController.state is ShowFamilies ||
+                              catalogPageController.state
+                                  is ShowMaterialsByFamily
                           ? Color(0xff00458C)
                           : Colors.grey,
                       borderRadius: BorderRadius.circular(Get.width * 0.04)),
@@ -243,51 +247,17 @@ class _CatalogPageState extends State<CatalogPage> {
                   )),
             ),
             Spacer(),
-            if (catalogPageController.selectedBrand.value != null ||
-                catalogPageController.selectedFamily.value != null)
-              DropdownButton<Hierarchy>(
-                underline: SizedBox(),
-                value: catalogPageController.selectedHierarhy.value,
-                icon: Icon(
-                  Icons.arrow_downward,
-                ),
-                iconSize: 18,
-                elevation: 16,
-                isExpanded: false,
-                onChanged: (newValue) {
-                  catalogPageController.selectedHierarhy.value = newValue;
-                },
-                items: [
-                  ...catalogPageController.getHierarchys
-                      .map<DropdownMenuItem<Hierarchy>>((value) {
-                    return DropdownMenuItem<Hierarchy>(
-                      value: value,
-                      child: Text(
-                        value.Display,
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    );
-                  }),
-                  DropdownMenuItem<Hierarchy>(
-                    value: null,
-                    child: Text(
-                      'All',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  )
-                ].toList(),
-              )
           ],
         ));
   }
 
-  Widget buildAllMaterials() {
+  Widget buildAllMaterials({required List<Materiale> materials}) {
     return Container(
       key: UniqueKey(),
       child: ListView(
         physics: BouncingScrollPhysics(),
         cacheExtent: Get.height * 2,
-        children: catalogPageController.getMaterials.map((e) {
+        children: materials.map((e) {
           return MaterialCard(
             materiale: e,
           );
@@ -296,20 +266,21 @@ class _CatalogPageState extends State<CatalogPage> {
     );
   }
 
-  Widget buildMaterialsByBrand() {
+  Widget buildMaterialsByBrand(
+      {required List<Materiale> materials, required Brand brand}) {
     return Container(
       key: UniqueKey(),
       child: Column(
         children: [
           CachedImage(
-              Url: catalogPageController.selectedBrand.value!.ImageUrl,
+              Url: brand.ImageUrl,
               width: Get.width * 0.15,
               height: Get.width * 0.15),
           Expanded(
             child: ListView(
               physics: BouncingScrollPhysics(),
               cacheExtent: Get.height * 2,
-              children: catalogPageController.materialsByBrand.map((e) {
+              children: materials.map((e) {
                 return MaterialCard(
                   materiale: e,
                 );
@@ -321,20 +292,21 @@ class _CatalogPageState extends State<CatalogPage> {
     );
   }
 
-  Widget buildMaterialsByFamily() {
+  Widget buildMaterialsByFamily(
+      {required List<Materiale> materials, required Family family}) {
     return Container(
       key: UniqueKey(),
       child: Column(
         children: [
           CachedImage(
-              Url: catalogPageController.selectedFamily.value!.ImageUrl,
+              Url: family.ImageUrl,
               width: Get.width * 0.15,
               height: Get.width * 0.15),
           Expanded(
             child: ListView(
               physics: BouncingScrollPhysics(),
               cacheExtent: Get.height * 2,
-              children: catalogPageController.materialsByFamily.map((e) {
+              children: materials.map((e) {
                 return MaterialCard(
                   materiale: e,
                 );
