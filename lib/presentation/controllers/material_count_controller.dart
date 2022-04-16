@@ -2,9 +2,9 @@ import 'package:***REMOVED***/domain/entities/materials/material.dart';
 import 'package:***REMOVED***/domain/entities/materials/unit_types.dart';
 import 'package:get/get.dart';
 
-class MaterialCardController extends GetxController {
+class MaterialCountController extends GetxController {
   final Materiale material;
-  MaterialCardController({required this.material});
+  MaterialCountController({required this.material});
 
   late final Rx<UnitType> _unitType;
   UnitType get unitType => _unitType.value;

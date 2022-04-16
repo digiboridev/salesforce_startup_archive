@@ -83,6 +83,9 @@ class CustomerController extends GetxController {
       _selectedCustomerSAP.value = await _getSelectedCustomerSAP.call(
           GetSelectedCustomerSAPParams(
               userId: _userDataController.authData!.userId));
+
+      // _selectedCustomerSAP.value = null;
+
       // Select customer on first time or related list changes
       if (_selectedCustomerSAP.value is! String ||
           !_relatedConsumers

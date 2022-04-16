@@ -1,96 +1,54 @@
 import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
+import 'package:***REMOVED***/presentation/controllers/material_count_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/cart_top_icon.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalog_page_controller.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/product_count.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/product_options.dart';
+import 'package:***REMOVED***/presentation/ui/screens/material_screen.dart';
+import 'package:***REMOVED***/presentation/ui/widgets/material_components/focused_material_component.dart';
+import 'package:***REMOVED***/presentation/ui/widgets/material_components/normal_material_component.dart';
+import 'package:***REMOVED***/presentation/ui/widgets/material_components/outstock_material_component.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'material_card_controller.dart';
 
 class MaterialCard extends StatefulWidget {
   final Materiale materiale;
-  final CatalogPageController controller;
-  const MaterialCard(
-      {Key? key, required this.materiale, required this.controller})
-      : super(key: key);
+  const MaterialCard({Key? key, required this.materiale}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => MaterialCardState();
 }
 
 class MaterialCardState extends State<MaterialCard> {
-  late Materiale materiale;
-  CatalogPageController controller = Get.find();
-  late MaterialCardController cardController;
-  // bool isFocus = false;
-  // bool isCount = false;
-  // late String boxType;
-  // late int product_count;
-  // int productCount = 1;
-  // Widget componentItem =
-  //     MaterialCardComponent(type: ComponentOutOfStockItem(isUpdate: false));
-
-  // Map<String, int> getTypeAndCount(
-  //     {required String salesUnit, required Materiale data}) {
-  //   switch (salesUnit) {
-  //     case "EA":
-  //       return {"Unit": 1};
-  //     case "ZIN":
-  //       return {"Inner": data.InnerCount.toInt()};
-  //     case "KAR":
-  //       return {"Cartons": data.CartonCount.toInt()};
-  //     case "PAL":
-  //       return {"Pallets": data.PalletCount.toInt()};
-  //     default:
-  //       return {" ": 0};
-  //   }
-  // }
+  late MaterialCountController materialCountController;
 
   @override
   void initState() {
-    materiale = widget.materiale;
-    cardController = Get.put(MaterialCardController(material: materiale),
-        tag: materiale.hashCode.toString());
-
-    // cardController = MaterialCardController(material: materiale);
-
-    // boxType = getTypeAndCount(salesUnit: materiale.SalesUnit, data: materiale)
-    //     .keys
-    //     .first;
-    // product_count =
-    //     getTypeAndCount(salesUnit: materiale.SalesUnit, data: materiale)
-    //         .values
-    //         .first;
-
-    // cardController.product_count = 1.obs;
-    // cardController.box_type = boxType.obs;
-    // cardController.select_box_type = boxType.obs;
-    // cardController.unit_count = productCount.obs;
-    // cardController.setUnitCount(boxType: boxType);
-
-    // if (materiale.IsInStock) {
-    //   componentItem = getNormal(
-    //       data: ComponentNormalItem(
-    //           minimum:
-    //               "${materiale.MinimumOrderQuantity} ${materiale.salesUnitType.text}",
-    //           recommended:
-    //               "${materiale.AverageQty} ${materiale.salesUnitType.text}"));
-    // }
+    materialCountController = Get.put(
+        MaterialCountController(material: widget.materiale),
+        tag: widget.materiale.hashCode.toString());
     super.initState();
   }
 
   @override
   void dispose() {
     super.dispose();
-    Get.delete<MaterialCardController>(tag: materiale.hashCode.toString());
+    Get.delete<MaterialCountController>(
+        tag: widget.materiale.hashCode.toString());
   }
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      return Container(
+    return GestureDetector(
+      onTap: () {
+        Get.to(
+            () => MaterialScreen(
+                  material: widget.materiale,
+                ),
+            transition: Transition.cupertino);
+      },
+      child: Container(
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(Get.width * 0.04))),
@@ -124,7 +82,7 @@ class MaterialCardState extends State<MaterialCard> {
                                   blurRadius: 10)
                             ]),
                         child: CachedImage(
-                          Url: materiale.ImageUrl,
+                          Url: widget.materiale.ImageUrl,
                           width: Get.width * 0.25,
                           height: Get.width * 0.25,
                         ),
@@ -137,7 +95,7 @@ class MaterialCardState extends State<MaterialCard> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                             Text(
-                              materiale.Name,
+                              widget.materiale.Name,
                               style: TextStyle(color: MyColors.blue_003E7E),
                             ),
                             SizedBox(
@@ -149,7 +107,7 @@ class MaterialCardState extends State<MaterialCard> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "Quantity".tr,
+                                      "Quantity",
                                       style: TextStyle(
                                           color: MyColors.blue_0050A2,
                                           fontSize: 12),
@@ -158,7 +116,7 @@ class MaterialCardState extends State<MaterialCard> {
                                       height: Get.width * 0.02,
                                     ),
                                     Text(
-                                      "${materiale.countByUnitType(materiale.avaliableUnitTtypes.first)} ${'units per'.tr} ${materiale.avaliableUnitTtypes.first.text}",
+                                      "${widget.materiale.countByUnitType(widget.materiale.avaliableUnitTtypes.first)} units per ${widget.materiale.avaliableUnitTtypes.first.text}",
                                       style: TextStyle(
                                           color: MyColors.blue_0571E0,
                                           fontSize: 12),
@@ -166,7 +124,7 @@ class MaterialCardState extends State<MaterialCard> {
                                   ],
                                 ),
                                 Visibility(
-                                    visible: (materiale.UnitPrice != 0),
+                                    visible: (widget.materiale.UnitPrice != 0),
                                     child: Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
@@ -183,7 +141,7 @@ class MaterialCardState extends State<MaterialCard> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Text("Price per Unit".tr,
+                                            Text("Price per Unit׳",
                                                 style: TextStyle(
                                                     color: MyColors.blue_0050A2,
                                                     fontSize: 12)),
@@ -192,7 +150,7 @@ class MaterialCardState extends State<MaterialCard> {
                                             ),
                                             Row(children: [
                                               Text(
-                                                "${materiale.UnitNetPrice}",
+                                                "${widget.materiale.UnitNetPrice}",
                                                 style: TextStyle(
                                                     color: MyColors.blue_0571E0,
                                                     fontSize: 12),
@@ -211,7 +169,7 @@ class MaterialCardState extends State<MaterialCard> {
                                                                       Get.width *
                                                                           0.00),
                                                           child: Text(
-                                                            "${materiale.UnitPrice}",
+                                                            "${widget.materiale.UnitPrice}",
                                                             style: TextStyle(
                                                                 color: MyColors
                                                                     .gray_8B9298),
@@ -252,10 +210,7 @@ class MaterialCardState extends State<MaterialCard> {
                 SizedBox(
                   height: Get.width * 0.05,
                 ),
-                Container(
-                    child: cardController.unit_count > 0
-                        ? getFocused(margin_bottom: 11)
-                        : getNormal()),
+                Container(child: getMaterialComponent()),
                 SizedBox(
                     // height: Get.width * 0.05,
                     ),
@@ -283,166 +238,34 @@ class MaterialCardState extends State<MaterialCard> {
                 width: Get.width * 0.1,
                 height: Get.width * 0.2,
                 child: ProductOptions(
-                    isHotSale: materiale.IsHotSale,
-                    isNew: materiale.IsNew,
-                    isFrozen: materiale.IsFrozen),
+                    isHotSale: widget.materiale.IsHotSale,
+                    isNew: widget.materiale.IsNew,
+                    isFrozen: widget.materiale.IsFrozen),
               ),
             )
           ],
         ),
-      );
+      ),
+    );
+    ;
+  }
+
+  Widget getMaterialComponent() {
+    return Obx(() {
+      var asd = materialCountController.unit_count;
+      if (!widget.materiale.IsInStock) {
+        return OutStockMaterialComponent(
+          isUpdate: widget.materiale.didSubscribedToInventoryAlert,
+        );
+      } else if (materialCountController.unit_count > 0) {
+        return FocusedMaterialComponent(
+            materialCountController: materialCountController,
+            materiale: widget.materiale);
+      } else {
+        return NormalMaterialComponent(
+            materiale: widget.materiale,
+            materialCountController: materialCountController);
+      }
     });
-  }
-
-  Widget getNormal() {
-    return Container(
-      margin: EdgeInsets.only(
-          left: Get.width * 0.04, right: Get.width * 0.03, bottom: 15),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Container(
-                height: 24,
-                width: Get.width * 0.005,
-                color: MyColors.blue_003E7E,
-              ),
-              Padding(
-                  padding: EdgeInsets.only(left: Get.width * 0.02),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            "${'Recommended quantity'.tr}: ",
-                            style: TextStyle(
-                                color: MyColors.blue_003E83, fontSize: 12),
-                          ),
-                          Text(
-                              "${materiale.AverageQty} ${materiale.salesUnitType.text}",
-                              style: TextStyle(
-                                  color: MyColors.blue_003E83, fontSize: 12))
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text("${'Minimum order'.tr}: ",
-                              style: TextStyle(
-                                  color: MyColors.blue_003E83, fontSize: 12)),
-                          Text(
-                              "${materiale.MinimumOrderQuantity} ${materiale.salesUnitType.text}",
-                              style: TextStyle(
-                                  color: MyColors.blue_003E83, fontSize: 12))
-                        ],
-                      )
-                    ],
-                  ))
-            ],
-          ),
-          InkWell(
-              onTap: () => cardController.increaseCount(),
-              child: Container(
-                height: 44,
-                width: Get.width * 0.17,
-                decoration: BoxDecoration(
-                    color: MyColors.blue_003E7E,
-                    borderRadius: BorderRadius.all(Radius.circular(25))),
-                child: Icon(
-                  Icons.add,
-                  color: Colors.white,
-                ),
-              ))
-        ],
-      ),
-    );
-  }
-
-  Widget getFocused({required double margin_bottom}) {
-    return Container(
-      margin: EdgeInsets.only(
-          left: Get.width * 0.03,
-          right: Get.width * 0.03,
-          bottom: margin_bottom),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          InkWell(
-              onTap: () {
-                // controller.showProductCountScreen(
-                //     materiale: materiale,
-                //     value: true,
-                //     cardController: cardController);
-
-                controller.showOverlay(
-                    widget: ProductCount(
-                  cardController: cardController,
-                ));
-              },
-              child: Container(
-                  height: 44,
-                  width: Get.width * 0.45,
-                  child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                            color: MyColors.blue_00458C,
-                            style: BorderStyle.solid,
-                            width: 0.80),
-                      ),
-                      child: Padding(
-                          padding: EdgeInsets.only(
-                              left: Get.width * 0.04, right: Get.width * 0.04),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Obx(() => Text(
-                                    "${cardController.unit_count} ${cardController.unitType.text} ₪${materiale.UnitNetPrice.toInt() * cardController.unit_count * materiale.countByUnitType(cardController.unitType)}",
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: MyColors.blue_00458C,
-                                    ),
-                                  )),
-                              Icon(
-                                Icons.arrow_drop_down_outlined,
-                                color: MyColors.blue_00458C,
-                              )
-                            ],
-                          ))))),
-          InkWell(
-            onTap: () {
-              cardController.increaseCount();
-            },
-            child: Container(
-              height: 44,
-              width: Get.width * 0.17,
-              decoration: BoxDecoration(
-                  color: MyColors.blue_007AFE,
-                  borderRadius: BorderRadius.all(Radius.circular(25))),
-              child: Icon(
-                Icons.add_outlined,
-                color: Colors.white,
-              ),
-            ),
-          ),
-          InkWell(
-              onTap: () {
-                cardController.decreaseCount();
-              },
-              child: Container(
-                height: 44,
-                width: Get.width * 0.17,
-                decoration: BoxDecoration(
-                    color: MyColors.blue_E8EEF6,
-                    borderRadius: BorderRadius.all(Radius.circular(25))),
-                child: Icon(
-                  Icons.remove,
-                  color: MyColors.blue_00458C,
-                ),
-              ))
-        ],
-      ),
-    );
   }
 }
