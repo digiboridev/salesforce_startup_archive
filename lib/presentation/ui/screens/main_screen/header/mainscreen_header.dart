@@ -226,6 +226,9 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                   width: Get.width * 0.03,
                 ),
                 Icon(Icons.search),
+                SizedBox(
+                  width: Get.width * 0.03,
+                ),
                 Expanded(
                     child: TextField(
                   controller: searchController.textEditingController,
@@ -238,7 +241,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                     //isDense: true,
                     alignLabelWithHint: true,
 
-                    labelText: 'Search product',
+                    labelText: 'Search product'.tr,
                     labelStyle: TextStyle(color: Colors.black.withOpacity(0.6)),
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: InputBorder.none,

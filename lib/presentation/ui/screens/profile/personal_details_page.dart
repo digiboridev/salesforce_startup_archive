@@ -43,7 +43,7 @@ class PersonalDetailsPage extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
                 child: Text(
-                  'Personal details',
+                  'Personal details'.tr,
                   style: TextStyle(
                     fontSize: Get.width * 0.05,
                   ),
@@ -58,35 +58,35 @@ class PersonalDetailsPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Name: ' + userDataState.userData.contactName,
+                      '${'Name'.tr}: ' + userDataState.userData.contactName,
                       style: TextStyle(fontSize: Get.width * 0.04),
                     ),
                     SizedBox(
                       height: Get.width * 0.01,
                     ),
                     Text(
-                      'First name: ' + userDataState.userData.contactFirstName,
+                      '${'First name'.tr}: ' + userDataState.userData.contactFirstName,
                       style: TextStyle(fontSize: Get.width * 0.04),
                     ),
                     SizedBox(
                       height: Get.width * 0.01,
                     ),
                     Text(
-                      'Last name: ' + userDataState.userData.contactLastName,
+                      '${'Last name'.tr}: ' + userDataState.userData.contactLastName,
                       style: TextStyle(fontSize: Get.width * 0.04),
                     ),
                     SizedBox(
                       height: Get.width * 0.01,
                     ),
                     Text(
-                      'Phone: ' + userDataState.userData.contactMobile,
+                      '${'Phone'.tr}: ' + userDataState.userData.contactMobile,
                       style: TextStyle(fontSize: Get.width * 0.04),
                     ),
                     SizedBox(
                       height: Get.width * 0.01,
                     ),
                     Text(
-                      'Email: ' + userDataState.userData.contactEmail,
+                      '${'Email'.tr}: ' + userDataState.userData.contactEmail,
                       style: TextStyle(fontSize: Get.width * 0.04),
                     ),
                   ],

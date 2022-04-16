@@ -34,7 +34,7 @@ class Loader extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text('User loading error'),
+                Text('User loading error'.tr),
                 SizedBox(
                   height: Get.width * 0.06,
                 ),
@@ -51,7 +51,7 @@ class Loader extends StatelessWidget {
                     padding: EdgeInsets.symmetric(
                         horizontal: Get.width * 0.1,
                         vertical: Get.width * 0.03),
-                    child: Text('try again'),
+                    child: Text('try again'.tr),
                   ),
                 )
               ],
@@ -63,10 +63,10 @@ class Loader extends StatelessWidget {
       if (userDataState is UserDataAskLegalDocState) {
         return LegalDocScreen(
           legalDocLink: userDataState.legalDoc,
-          buttonText: 'Understood',
+          buttonText: 'Understood'.tr,
           callback: () {
             if (!connectionService.hasConnection) {
-              Get.snackbar('Error', 'No internet',
+              Get.snackbar('Error'.tr, 'No internet'.tr,
                   backgroundColor: Colors.amber);
               return;
             }
@@ -89,7 +89,7 @@ class Loader extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text('Customer loading error'),
+                  Text('Customer loading error'.tr),
                   SizedBox(
                     height: Get.width * 0.06,
                   ),
@@ -107,7 +107,7 @@ class Loader extends StatelessWidget {
                       padding: EdgeInsets.symmetric(
                           horizontal: Get.width * 0.1,
                           vertical: Get.width * 0.03),
-                      child: Text('try again'),
+                      child: Text('try again'.tr),
                     ),
                   )
                 ],

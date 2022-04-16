@@ -28,7 +28,7 @@ class SearchScreen extends StatelessWidget {
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            'Search results',
+                            'Search results'.tr,
                             style: TextStyle(
                               fontSize: Get.width * 0.05,
                             ),
@@ -44,10 +44,10 @@ class SearchScreen extends StatelessWidget {
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                'Found: ' +
+                                '${'Found'.tr}: ' +
                                     searchController.findedMaterials.length
                                         .toString() +
-                                    ' Results of ' +
+                                    ' ${'Results of'.tr} ' +
                                     searchController.textEditingController.text,
                                 style: TextStyle(
                                   fontSize: Get.width * 0.04,
@@ -72,7 +72,7 @@ class SearchScreen extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.all(Get.width * 0.05),
                     child: Text(
-                      'No results were found for this product but we have similar products',
+                      'No results were found for this product but we have similar products'.tr,
                       style: TextStyle(
                           color: Colors.black, fontSize: Get.width * 0.04),
                     ),

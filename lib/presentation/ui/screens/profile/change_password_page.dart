@@ -47,7 +47,7 @@ class ChangePasswordPage extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
                 child: Text(
-                  'Password change',
+                  'Password change'.tr,
                   style: TextStyle(
                     fontSize: Get.width * 0.05,
                   ),
@@ -60,12 +60,12 @@ class ChangePasswordPage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
                 child: TextFormField(
                   validator: (val) {
-                    if (val == null || val.isEmpty) return 'Empty';
+                    if (val == null || val.isEmpty) return 'Empty'.tr;
                     return null;
                   },
                   controller: _oldPass,
                   decoration: InputDecoration(
-                    hintText: 'Current password',
+                    hintText: 'Current password'.tr,
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Color(0xff003E7E)),
                     ),
@@ -83,11 +83,11 @@ class ChangePasswordPage extends StatelessWidget {
                 child: TextFormField(
                   controller: _pass,
                   validator: (val) {
-                    if (val == null || val.isEmpty) return 'Empty';
+                    if (val == null || val.isEmpty) return 'Empty'.tr;
                     return null;
                   },
                   decoration: InputDecoration(
-                    hintText: 'New password',
+                    hintText: 'New password'.tr,
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Color(0xff003E7E)),
                     ),
@@ -105,12 +105,12 @@ class ChangePasswordPage extends StatelessWidget {
                 child: TextFormField(
                   controller: _confirmPass,
                   validator: (val) {
-                    if (val == null || val.isEmpty) return 'Empty';
-                    if (val != _pass.text) return 'Passwords are not the same';
+                    if (val == null || val.isEmpty) return 'Empty'.tr;
+                    if (val != _pass.text) return 'Passwords are not the same'.tr;
                     return null;
                   },
                   decoration: InputDecoration(
-                    hintText: 'New password again',
+                    hintText: 'New password again'.tr,
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Color(0xff003E7E)),
                     ),
@@ -137,7 +137,7 @@ class ChangePasswordPage extends StatelessWidget {
                               BorderRadius.circular(Get.width * 0.06)),
                       padding: EdgeInsets.symmetric(vertical: Get.width * 0.03),
                       child: Text(
-                        'Cancel',
+                        'Cancel'.tr,
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -147,7 +147,7 @@ class ChangePasswordPage extends StatelessWidget {
                       FocusScope.of(context).unfocus();
                       bool valid = _form.currentState!.validate();
                       if (!connectionService.hasConnection) {
-                        Get.snackbar('Error', 'Restricted for offline mode');
+                        Get.snackbar('Error'.tr, 'Restricted for offline mode'.tr);
                         return;
                       }
                       if (valid) {
@@ -164,7 +164,7 @@ class ChangePasswordPage extends StatelessWidget {
                               BorderRadius.circular(Get.width * 0.06)),
                       padding: EdgeInsets.symmetric(vertical: Get.width * 0.03),
                       child: Text(
-                        'Save',
+                        'Save'.tr,
                         style: TextStyle(color: Colors.white),
                       ),
                     ),

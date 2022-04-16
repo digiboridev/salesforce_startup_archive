@@ -57,7 +57,7 @@ class _CatalogLoaderState extends State<CatalogLoader>
                     padding: EdgeInsets.symmetric(
                         horizontal: Get.width * 0.1,
                         vertical: Get.width * 0.03),
-                    child: Text('try again'),
+                    child: Text('try again'.tr),
                   ),
                 )
               ],

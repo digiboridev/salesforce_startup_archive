@@ -40,7 +40,7 @@ class ChangeLanguagePage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
               child: Text(
-                'Choose language',
+                'Choose language'.tr,
                 style: TextStyle(
                   fontSize: Get.width * 0.05,
                 ),
@@ -70,7 +70,7 @@ class ChangeLanguagePage extends StatelessWidget {
                                 width: Get.width * 0.02,
                               ),
                               Text(
-                                e.languageString,
+                                e.languageString.tr,
                                 style: TextStyle(fontSize: Get.width * 0.04),
                               ),
                             ],

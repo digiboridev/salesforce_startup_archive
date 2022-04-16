@@ -22,6 +22,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final ConnectionService connectionService = Get.find();
 
+  int dealsPosition = 0;
+  Widget dealsCard = Container();
+
   @override
   Widget build(BuildContext context) {
     return buildBody();
@@ -60,19 +63,37 @@ class _HomePageState extends State<HomePage> {
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
+            buildDeals(
+                materials: getDeals.toList(),
+                header: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Deals'.tr,
+                      style: TextStyle(
+                        fontSize: Get.width * 0.045,
+                      ),
+                    ),
+                    Text(
+                      'All Deals'.tr,
+                      style: TextStyle(
+                          fontSize: Get.width * 0.045, color: Colors.blue),
+                    ),
+                  ],
+                )),
             buildIItemsRow(
                 materials: getRecomendedProducts.take(4).toList(),
                 header: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Recomended for you',
+                      'Recomended for you'.tr,
                       style: TextStyle(
                         fontSize: Get.width * 0.045,
                       ),
                     ),
                     Text(
-                      'All recomended',
+                      'All recomended'.tr,
                       style: TextStyle(
                           fontSize: Get.width * 0.045, color: Colors.blue),
                     ),
@@ -87,13 +108,13 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'New Products',
+                      'New Products'.tr,
                       style: TextStyle(
                         fontSize: Get.width * 0.045,
                       ),
                     ),
                     Text(
-                      'To all newcomers',
+                      'To all newcomers'.tr,
                       style: TextStyle(
                           fontSize: Get.width * 0.045, color: Colors.blue),
                     ),
@@ -108,13 +129,13 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'You may be missing',
+                      'You may be missing'.tr,
                       style: TextStyle(
                         fontSize: Get.width * 0.045,
                       ),
                     ),
                     Text(
-                      'List of deficiencies',
+                      'List of deficiencies'.tr,
                       style: TextStyle(
                           fontSize: Get.width * 0.045, color: Colors.blue),
                     ),
@@ -124,6 +145,119 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  Widget buildDeals(
+      {required List<Materiale> materials, required Widget header}) {
+    buildDealsCard(materiale: materials[dealsPosition]);
+    return Container(
+        color: Colors.white,
+        child: Column(children: [
+          SizedBox(
+            height: Get.width * 0.05,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: Get.width * 0.05),
+            child: header,
+          ),
+          SizedBox(
+            height: Get.width * 0.02,
+          ),
+          Divider(),
+          SizedBox(
+            height: Get.width * 0.02,
+          ),
+          SizedBox(
+              width: Get.width,
+              child: Container(
+                  height: 108,
+                  width: Get.width * 0.2,
+                  child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: materials.length,
+                      scrollDirection: Axis.horizontal,
+                      padding: EdgeInsets.only(left: 8.0),
+                      itemBuilder: (BuildContext context, int index) {
+                        return Column(
+                          children: [
+                            Container(
+                                padding: EdgeInsets.only(
+                                    left: Get.width * 0.02,
+                                    right: Get.width * 0.02,
+                                    top: Get.width * 0.02),
+                                width: Get.width / 4,
+                                child: InkWell(
+                                    onTap: () {
+                                      dealsPosition = index;
+                                      buildDealsCard(
+                                          materiale:
+                                              materials[index]);
+                                      setState(() {
+                                        dealsPosition;
+                                        dealsCard;
+                                      });
+                                    },
+                                    child: Container(
+                                      height: Get.width * 0.2,
+                                      width: Get.width * 0.2,
+                                      decoration: BoxDecoration(
+                                          border: dealsPosition == index
+                                              ? Border.all(
+                                                  color: MyColors.blue_00458C)
+                                              : null,
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.circular(
+                                              Get.width * 0.02),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.black
+                                                    .withOpacity(0.15),
+                                                blurRadius: Get.width * 0.01,
+                                                spreadRadius: 1)
+                                          ]),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          CachedImage(
+                                              Url: materials[index].ImageUrl,
+                                              width: Get.width * 0.15,
+                                              height: Get.width * 0.15),
+                                        ],
+                                      ),
+                                    ))),
+                            Visibility(
+                                visible: index == dealsPosition,
+                                child: ClipPath(
+                                    clipper: CustomTriangleClipper(),
+                                    child: Container(
+                                      width: 15,
+                                      height: 10,
+                                      decoration: BoxDecoration(
+                                          color: MyColors.blue_00458C),
+                                    )))
+                          ],
+                        );
+                      }))),
+          dealsCard,
+          SizedBox(
+            height: Get.width * 0.02,
+          ),
+        ]));
+  }
+
+  void buildDealsCard({required Materiale materiale}) {
+    dealsCard = Container(
+        decoration: BoxDecoration(boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: Get.width * 0.07,
+              spreadRadius: 1)
+        ]),
+        key: ObjectKey(materiale.hashCode),
+        child: MaterialCard(materiale: materiale, controller: Get.find()));
   }
 
   Widget buildIItemsRow(
@@ -195,5 +329,21 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+  }
+}
+
+class CustomTriangleClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    final path = Path();
+    path.lineTo(size.width, 0.0);
+    path.lineTo(size.width / 2, size.height);
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    return false;
   }
 }

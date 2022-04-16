@@ -51,7 +51,7 @@ class BottomBar extends StatelessWidget {
                               height: Get.width * 0.01,
                             ),
                             Text(
-                              'Order',
+                              'Order'.tr,
                               style: TextStyle(
                                   color: bottomBarController
                                               .currentPageIndex.value ==
@@ -79,7 +79,7 @@ class BottomBar extends StatelessWidget {
                               height: Get.width * 0.01,
                             ),
                             Text(
-                              'Catalog',
+                              'Catalog'.tr,
                               style: TextStyle(
                                   color: bottomBarController
                                               .currentPageIndex.value ==
@@ -109,7 +109,7 @@ class BottomBar extends StatelessWidget {
                               height: Get.width * 0.01,
                             ),
                             Text(
-                              'Favorites',
+                              'Favorites'.tr,
                               style: TextStyle(
                                   color: bottomBarController
                                               .currentPageIndex.value ==
@@ -137,7 +137,7 @@ class BottomBar extends StatelessWidget {
                               height: Get.width * 0.01,
                             ),
                             Text(
-                              'Home',
+                              'Home'.tr,
                               style: TextStyle(
                                   color: bottomBarController
                                               .currentPageIndex.value ==

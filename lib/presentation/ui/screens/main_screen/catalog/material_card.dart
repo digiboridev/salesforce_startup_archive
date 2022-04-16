@@ -149,7 +149,7 @@ class MaterialCardState extends State<MaterialCard> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "Quantity",
+                                      "Quantity".tr,
                                       style: TextStyle(
                                           color: MyColors.blue_0050A2,
                                           fontSize: 12),
@@ -158,7 +158,7 @@ class MaterialCardState extends State<MaterialCard> {
                                       height: Get.width * 0.02,
                                     ),
                                     Text(
-                                      "${materiale.countByUnitType(materiale.avaliableUnitTtypes.first)} units per ${materiale.avaliableUnitTtypes.first.text}",
+                                      "${materiale.countByUnitType(materiale.avaliableUnitTtypes.first)} ${'units per'.tr} ${materiale.avaliableUnitTtypes.first.text}",
                                       style: TextStyle(
                                           color: MyColors.blue_0571E0,
                                           fontSize: 12),
@@ -183,7 +183,7 @@ class MaterialCardState extends State<MaterialCard> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Text("Price per Unit׳",
+                                            Text("Price per Unit".tr,
                                                 style: TextStyle(
                                                     color: MyColors.blue_0050A2,
                                                     fontSize: 12)),
@@ -316,7 +316,7 @@ class MaterialCardState extends State<MaterialCard> {
                       Row(
                         children: [
                           Text(
-                            "Recommended quantity: ",
+                            "${'Recommended quantity'.tr}: ",
                             style: TextStyle(
                                 color: MyColors.blue_003E83, fontSize: 12),
                           ),
@@ -328,7 +328,7 @@ class MaterialCardState extends State<MaterialCard> {
                       ),
                       Row(
                         children: [
-                          Text("Minimum order: ",
+                          Text("${'Minimum order'.tr}: ",
                               style: TextStyle(
                                   color: MyColors.blue_003E83, fontSize: 12)),
                           Text(

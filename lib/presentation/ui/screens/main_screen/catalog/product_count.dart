@@ -17,15 +17,7 @@ class ProductCountState extends State<ProductCount> {
   late CatalogPageController controller = Get.find();
   late TextEditingController textEditingController;
   FocusNode focusNode = FocusNode();
-  // List<String> box_list = ['Pallet', 'Carton', 'Inner', 'Unit'];
-  // List<Widget> box_widget_list = [];
-  // bool palletSelect = true;
-  // bool cartonSelect = false;
-  // bool innerSelect = false;
-  // bool unitSelect = false;
-  // String boxType = '';
-  // String new_type = '';
-  // int unit_count = 0;
+
 
   StreamSubscription? _countSub;
   @override

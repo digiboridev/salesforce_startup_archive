@@ -140,7 +140,7 @@ class _CatalogPageState extends State<CatalogPage> {
           )
         : Container(
             child: Center(
-              child: Text("No data"),
+              child: Text("No data".tr),
             ),
           );
   }
@@ -172,7 +172,7 @@ class _CatalogPageState extends State<CatalogPage> {
           )
         : Container(
             child: Center(
-              child: Text("No data"),
+              child: Text("No data".tr),
             ),
           );
   }
@@ -200,7 +200,7 @@ class _CatalogPageState extends State<CatalogPage> {
                       horizontal: Get.width * 0.03,
                       vertical: Get.width * 0.015),
                   child: Text(
-                    'Brands',
+                    'Brands'.tr,
                     style: TextStyle(color: Colors.white),
                   )),
             ),
@@ -221,7 +221,7 @@ class _CatalogPageState extends State<CatalogPage> {
                       horizontal: Get.width * 0.03,
                       vertical: Get.width * 0.015),
                   child: Text(
-                    'Families',
+                    'Families'.tr,
                     style: TextStyle(color: Colors.white),
                   )),
             ),
@@ -254,7 +254,7 @@ class _CatalogPageState extends State<CatalogPage> {
                   DropdownMenuItem<Hierarchy>(
                     value: null,
                     child: Text(
-                      'All',
+                      'All'.tr,
                       style: TextStyle(fontSize: 20),
                     ),
                   )

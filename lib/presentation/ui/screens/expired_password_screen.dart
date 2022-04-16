@@ -38,7 +38,7 @@ class ExpiredPasswordScreen extends StatelessWidget {
                         padding:
                             EdgeInsets.symmetric(horizontal: Get.width * 0.06),
                         child: Text(
-                          'Password change',
+                          'Password change'.tr,
                           style: TextStyle(
                             fontSize: Get.width * 0.05,
                           ),
@@ -52,12 +52,12 @@ class ExpiredPasswordScreen extends StatelessWidget {
                             EdgeInsets.symmetric(horizontal: Get.width * 0.06),
                         child: TextFormField(
                           validator: (val) {
-                            if (val == null || val.isEmpty) return 'Empty';
+                            if (val == null || val.isEmpty) return 'Empty'.tr;
                             return null;
                           },
                           controller: _oldPass,
                           decoration: InputDecoration(
-                            hintText: 'Current password',
+                            hintText: 'Current password'.tr,
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Color(0xff003E7E)),
                             ),
@@ -76,11 +76,11 @@ class ExpiredPasswordScreen extends StatelessWidget {
                         child: TextFormField(
                           controller: _pass,
                           validator: (val) {
-                            if (val == null || val.isEmpty) return 'Empty';
+                            if (val == null || val.isEmpty) return 'Empty'.tr;
                             return null;
                           },
                           decoration: InputDecoration(
-                            hintText: 'New password',
+                            hintText: 'New password'.tr,
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Color(0xff003E7E)),
                             ),
@@ -99,13 +99,13 @@ class ExpiredPasswordScreen extends StatelessWidget {
                         child: TextFormField(
                           controller: _confirmPass,
                           validator: (val) {
-                            if (val == null || val.isEmpty) return 'Empty';
+                            if (val == null || val.isEmpty) return 'Empty'.tr;
                             if (val != _pass.text)
-                              return 'Passwords are not the same';
+                              return 'Passwords are not the same'.tr;
                             return null;
                           },
                           decoration: InputDecoration(
-                            hintText: 'New password again',
+                            hintText: 'New password again'.tr,
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Color(0xff003E7E)),
                             ),
@@ -125,7 +125,7 @@ class ExpiredPasswordScreen extends StatelessWidget {
                               bool valid = _form.currentState!.validate();
                               if (!connectionService.hasConnection) {
                                 Get.snackbar(
-                                    'Error', 'Restricted for offline mode');
+                                    'Error'.tr, 'Restricted for offline mode'.tr);
                                 return;
                               }
                               if (valid) {
@@ -145,7 +145,7 @@ class ExpiredPasswordScreen extends StatelessWidget {
                               padding: EdgeInsets.symmetric(
                                   vertical: Get.width * 0.03),
                               child: Text(
-                                'Change',
+                                'Change'.tr,
                                 style: TextStyle(color: Colors.white),
                               ),
                             ),

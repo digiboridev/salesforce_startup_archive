@@ -42,7 +42,7 @@ class ProductOptionsState extends State<ProductOptions>{
               decoration:
           BoxDecoration(color: MyColors.orange_FF8800,
           borderRadius: BorderRadius.all(Radius.circular(15))),
-            child: Text("Hot sale", style: TextStyle(color: Colors.white,
+            child: Text("Hot sale".tr, style: TextStyle(color: Colors.white,
             fontSize: 8),),)),
         Visibility(visible: isNew,
             child: Container(
@@ -53,7 +53,7 @@ class ProductOptionsState extends State<ProductOptions>{
               decoration:
               BoxDecoration(color: MyColors.blue_00458C,
                   borderRadius: BorderRadius.all(Radius.circular(15))),
-              child: Text("New", style: TextStyle(color: Colors.white,
+              child: Text("New".tr, style: TextStyle(color: Colors.white,
                   fontSize: 12),),)),
         Visibility(
           visible: isFrozen,

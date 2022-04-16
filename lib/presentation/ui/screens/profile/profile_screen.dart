@@ -56,7 +56,7 @@ class ProfileScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Personal details'),
+                        Text('Personal details'.tr),
                         Icon(Icons.arrow_forward)
                       ],
                     ),
@@ -78,7 +78,7 @@ class ProfileScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Choose language'),
+                        Text('Choose language'.tr),
                         Icon(Icons.arrow_forward)
                       ],
                     ),
@@ -100,7 +100,7 @@ class ProfileScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Change password'),
+                        Text('Change password'.tr),
                         Icon(Icons.arrow_forward)
                       ],
                     ),
@@ -129,7 +129,7 @@ class ProfileScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Terms an conditions'),
+                        Text('Terms an conditions'.tr),
                         Icon(Icons.arrow_forward)
                       ],
                     ),
@@ -148,7 +148,7 @@ class ProfileScreen extends StatelessWidget {
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [Text('Log out'), Icon(Icons.logout)],
+                      children: [Text('Log out'.tr), Icon(Icons.logout)],
                     ),
                   ),
                 )
