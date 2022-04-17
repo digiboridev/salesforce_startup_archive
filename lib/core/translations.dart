@@ -61,17 +61,37 @@ class Trs extends Translations {
           'Brands':'Brands',
           'Families':'Families',
           'All':'All',
-
-
-
-
-
-
-
+          'We will update as soon as it returns to stock':'We will update as soon as it returns to stock',
+          'Not in stock, update when he gets back?':'Not in stock, update when he gets back?',
+          'Alternative product':'Alternative product',
+          'Back to original product':'Back to original product',
+          'free pallets added!':'free pallets added!',
+          'This product was partially supplied, supplied':'This product was partially supplied, supplied',
+          'Supplied!':'Supplied!',
+          'Here will come an error message':'Here will come an error message',
+          'You may be\nmissing!':'You may be\nmissing!',
+          'Zero':'Zero',
+          'Unit':'Unit',
+          'Inner':'Inner',
+          'Carton':'Carton',
+          'Palete':'Palete',
+          'units in':'units in',
+          'More results':'More results',
+          'Code':'Code',
+          'Barcode':'Barcode',
+          'About the product':'About the product',
+          'The Rabbinical Society':'The Rabbinical Society',
+          'Shop':'Shop',
+          'Get':'Get',
+          'Substitutes for this product':'Substitutes for this product',
 
 
 
         },
+
+
+
+
         'he': {
           'hello': 'Hallo 123',
           'Hebrew':"עברית",
@@ -130,7 +150,29 @@ class Trs extends Translations {
           'Brands':'מותגים',
           'Families':'משפחות',
           'All':'את כל',
-
+          'We will update as soon as it returns to stock':'נעדכן חוזר למלאי',
+          'Not in stock, update when he gets back?':'לא במלאי, לעדכן כשיחזור?',
+          'Alternative product':'למוצר  חלופי',
+          'Back to original product':'חזרה למוצר המקורי',
+          'free pallets added!':'התווספו לך  משטחים חינם !',
+          'This product was partially supplied, supplied':'מוצר זה סופק באופן',
+          'Supplied!':'סופק!',
+          'Here will come an error message':'פה תבוא הודעת שגיאה ',
+          'You may be\nmissing!':"יתכן שחסר \nאצלך!",
+          'Zero':'אפס',
+          'Unit':'יח׳',
+          'Inner':'Inner',
+          'Carton':'משטח',
+          'Palete':'קרטון',
+          'units in':'יח׳',
+          'More results':'עוד תוצאות',
+          'Code':'מק"ט',
+          'Barcode':'ברקוד',
+          'About the product':'על המוצר',
+          'The Rabbinical Society':'בד״צ אגוד הרבנים',
+          'Shop':'קנו',
+          'Get':'קבלו',
+          'Substitutes for this product':'תחליפים למוצר זה',
         }
       };
 }

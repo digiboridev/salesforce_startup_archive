@@ -139,7 +139,7 @@ class ProductCountScreenState extends State<ProductCountScreen> {
                                 });
                               },
                               child: boxTypes(
-                                  text: e.text,
+                                  text: "${e.text.tr}",
                                   isSelect:
                                       e.runtimeType == unitType.runtimeType));
                         }).toList(),
@@ -234,12 +234,12 @@ class ProductCountScreenState extends State<ProductCountScreen> {
                           children: [
                             Row(children: [
                               Text(
-                                "Quantity ",
+                                "${'Quantity'.tr} ",
                                 style: TextStyle(
                                     fontSize: 17, color: MyColors.blue_0050A2),
                               ),
                               Text(
-                                  "${widget.material.countByUnitType(unitType).toString()} units in ${unitType.text}",
+                                  "${widget.material.countByUnitType(unitType).toString().tr} ${'units in'.tr} ${unitType.text.tr}",
                                   style: TextStyle(
                                       fontSize: 20,
                                       color: MyColors.blue_0571E0)),
@@ -249,7 +249,7 @@ class ProductCountScreenState extends State<ProductCountScreen> {
                                   textEditingController.text = 0.toString();
                                 },
                                 child: Text(
-                                  "Zero",
+                                  "Zero".tr,
                                   style: TextStyle(
                                       color: MyColors.gray_707070,
                                       decoration: TextDecoration.underline,

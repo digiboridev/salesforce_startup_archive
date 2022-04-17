@@ -18,7 +18,8 @@ class NormalMaterialComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(
-          left: Get.width * 0.04, right: Get.width * 0.03, bottom: 15),
+          left: Get.width * 0.04,
+          right: Get.width * 0.04, bottom: 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -30,30 +31,30 @@ class NormalMaterialComponent extends StatelessWidget {
                 color: MyColors.blue_003E7E,
               ),
               Padding(
-                  padding: EdgeInsets.only(left: Get.width * 0.02),
+                  padding: EdgeInsets.only(left: Get.width * 0.02, right: Get.width * 0.02),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [
                           Text(
-                            "Recommended quantity: ",
+                            "${'Recommended quantity'.tr}: ",
                             style: TextStyle(
                                 color: MyColors.blue_003E83, fontSize: 12),
                           ),
                           Text(
-                              "${materiale.AverageQty} ${materiale.salesUnitType.text}",
+                              "${materiale.AverageQty} ${materiale.salesUnitType.text.tr}",
                               style: TextStyle(
                                   color: MyColors.blue_003E83, fontSize: 12))
                         ],
                       ),
                       Row(
                         children: [
-                          Text("Minimum order: ",
+                          Text("${'Minimum order'.tr}: ",
                               style: TextStyle(
                                   color: MyColors.blue_003E83, fontSize: 12)),
                           Text(
-                              "${materiale.MinimumOrderQuantity} ${materiale.salesUnitType.text}",
+                              "${materiale.MinimumOrderQuantity} ${materiale.salesUnitType.text.tr}",
                               style: TextStyle(
                                   color: MyColors.blue_003E83, fontSize: 12))
                         ],

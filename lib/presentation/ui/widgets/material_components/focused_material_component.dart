@@ -57,7 +57,7 @@ class FocusedMaterialComponent extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Obx(() => Text(
-                                    "${materialCountController.unit_count} ${materialCountController.unitType.text} ₪${materiale.UnitNetPrice.toInt() * materialCountController.unit_count * materiale.countByUnitType(materialCountController.unitType)}",
+                                    "${materialCountController.unit_count} ${materialCountController.unitType.text.tr} ₪${materiale.UnitNetPrice.toInt() * materialCountController.unit_count * materiale.countByUnitType(materialCountController.unitType)}",
                                     style: TextStyle(
                                       fontSize: 12,
                                       color: MyColors.blue_00458C,

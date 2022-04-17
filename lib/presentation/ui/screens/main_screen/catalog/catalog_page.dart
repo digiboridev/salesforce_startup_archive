@@ -223,7 +223,7 @@ class _CatalogPageState extends State<CatalogPage> {
                       horizontal: Get.width * 0.03,
                       vertical: Get.width * 0.015),
                   child: Text(
-                    'Brands',
+                    'Brands'.tr,
                     style: TextStyle(color: Colors.white),
                   )),
             ),
@@ -242,7 +242,7 @@ class _CatalogPageState extends State<CatalogPage> {
                       horizontal: Get.width * 0.03,
                       vertical: Get.width * 0.015),
                   child: Text(
-                    'Families',
+                    'Families'.tr,
                     style: TextStyle(color: Colors.white),
                   )),
             ),

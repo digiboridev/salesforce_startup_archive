@@ -360,7 +360,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
             child: Padding(
               padding: EdgeInsets.all(Get.width * 0.05),
               child: Text(
-                'More results',
+                'More results'.tr,
                 style: TextStyle(color: Colors.white),
               ),
             ),

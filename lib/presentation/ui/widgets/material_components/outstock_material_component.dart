@@ -26,22 +26,24 @@ class OutStockMaterialComponent extends StatelessWidget {
             child: isUpdate
                 ? Padding(
                     padding: EdgeInsets.only(
-                        left: Get.width * 0.05, right: Get.width * 0.05),
+                        left: Get.width * 0.03, right: Get.width * 0.03),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "We'll update as soon as it's back in stock",
-                          style: TextStyle(color: Colors.white),
+                          "We will update as soon as it returns to stock".tr,
+                          style: TextStyle(color: Colors.white, fontSize: 12),
                         ),
+                        SizedBox(width: Get.width*0.01,),
                         Icon(
                           Icons.check,
                           color: Colors.white,
+                          size: 20,
                         ),
                       ],
                     ))
                 : Text(
-                    "Not in stock, update when he gets back?",
+                    "Not in stock, update when he gets back?".tr,
                     style: TextStyle(color: Colors.white),
                   ),
           )

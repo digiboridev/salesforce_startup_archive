@@ -6,9 +6,15 @@ import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/cart_t
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalog_page_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/product_options.dart';
 import 'package:***REMOVED***/presentation/ui/screens/material_screen.dart';
+import 'package:***REMOVED***/presentation/ui/widgets/material_components/alternate_material_component.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/material_components/focused_material_component.dart';
+import 'package:***REMOVED***/presentation/ui/widgets/material_components/insight_material_component.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/material_components/normal_material_component.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/material_components/outstock_material_component.dart';
+import 'package:***REMOVED***/presentation/ui/widgets/material_components/success_material_component.dart';
+import 'package:***REMOVED***/presentation/ui/widgets/material_components/system_error_matrial_component.dart';
+import 'package:***REMOVED***/presentation/ui/widgets/material_components/tracking_material_component.dart';
+import 'package:***REMOVED***/presentation/ui/widgets/material_components/upsale_material_component.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -107,7 +113,7 @@ class MaterialCardState extends State<MaterialCard> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "Quantity",
+                                      "Quantity".tr,
                                       style: TextStyle(
                                           color: MyColors.blue_0050A2,
                                           fontSize: 12),
@@ -116,7 +122,7 @@ class MaterialCardState extends State<MaterialCard> {
                                       height: Get.width * 0.02,
                                     ),
                                     Text(
-                                      "${widget.materiale.countByUnitType(widget.materiale.avaliableUnitTtypes.first)} units per ${widget.materiale.avaliableUnitTtypes.first.text}",
+                                      "${widget.materiale.countByUnitType(widget.materiale.avaliableUnitTtypes.first)} ${'units per'.tr} ${widget.materiale.avaliableUnitTtypes.first.text.tr}",
                                       style: TextStyle(
                                           color: MyColors.blue_0571E0,
                                           fontSize: 12),
@@ -141,7 +147,7 @@ class MaterialCardState extends State<MaterialCard> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Text("Price per Unit׳",
+                                            Text("Price per Unit".tr,
                                                 style: TextStyle(
                                                     color: MyColors.blue_0050A2,
                                                     fontSize: 12)),
@@ -217,8 +223,8 @@ class MaterialCardState extends State<MaterialCard> {
               ],
             ),
             Positioned(
-              top: -(Get.width * 0.025),
-              right: -(Get.width * 0.025),
+              top: -(Get.width * 0.05),
+              right: -(Get.width * 0.020),
               child: Container(
                 width: Get.width * 0.1,
                 height: Get.width * 0.1,
@@ -240,7 +246,8 @@ class MaterialCardState extends State<MaterialCard> {
                 child: ProductOptions(
                     isHotSale: widget.materiale.IsHotSale,
                     isNew: widget.materiale.IsNew,
-                    isFrozen: widget.materiale.IsFrozen),
+                    isFrozen: widget.materiale.IsFrozen,
+                    optionType: ProductOptions.CARD_TYPE,),
               ),
             )
           ],

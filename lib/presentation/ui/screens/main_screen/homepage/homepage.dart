@@ -257,7 +257,7 @@ class _HomePageState extends State<HomePage> {
               spreadRadius: 1)
         ]),
         key: ObjectKey(materiale.hashCode),
-        child: MaterialCard(materiale: materiale, controller: Get.find()));
+        child: MaterialCard(materiale: materiale,));
   }
 
   Widget buildIItemsRow(
