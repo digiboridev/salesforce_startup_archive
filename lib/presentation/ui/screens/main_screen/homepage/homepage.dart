@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             buildDeals(
-                materials: getDeals.toList(),
+                materials: getDeals.take(4).toList(),
                 header: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -190,8 +190,7 @@ class _HomePageState extends State<HomePage> {
                                     onTap: () {
                                       dealsPosition = index;
                                       buildDealsCard(
-                                          materiale:
-                                              materials[index]);
+                                          materiale: materials[index]);
                                       setState(() {
                                         dealsPosition;
                                         dealsCard;
@@ -256,8 +255,10 @@ class _HomePageState extends State<HomePage> {
               blurRadius: Get.width * 0.07,
               spreadRadius: 1)
         ]),
-        key: ObjectKey(materiale.hashCode),
-        child: MaterialCard(materiale: materiale,));
+        // key: ObjectKey(materiale.hashCode),
+        child: MaterialCard(
+          materiale: materiale,
+        ));
   }
 
   Widget buildIItemsRow(
