@@ -141,8 +141,8 @@ class CustomerController extends GetxController {
       defaultDialog();
 
       // load data
-      _selectedCustomer.value = await _getCustomerAndCache.call(
-          GetCustomerAndCacheParams(customerSAP: _selectedCustomerSAP.value!));
+      _selectedCustomer.value = await _getCustomerAndCache
+          .call(GetCustomerAndCacheParams(customerSAP: customerSAP));
 
       // Switch
       _selectedCustomerSAP.value = customerSAP;

@@ -203,13 +203,16 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                     child: Container(
                       // color: Colors.red,
                       width: Get.width,
-                      height: Get.width * 0.07,
+                      height: Get.width * 0.06,
                       child: Stack(
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset('assets/images/header_tile.png'),
+                              Image.asset(
+                                'assets/images/header_tile.png',
+                                width: Get.width * 0.4,
+                              ),
                             ],
                           ),
                           Positioned.fill(
@@ -570,13 +573,16 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                 child: Container(
                   // color: Colors.red,
                   width: Get.width,
-                  height: Get.width * 0.07,
+                  height: Get.width * 0.06,
                   child: Stack(
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset('assets/images/header_tile.png'),
+                          Image.asset(
+                            'assets/images/header_tile.png',
+                            width: Get.width * 0.4,
+                          ),
                         ],
                       ),
                       Positioned.fill(
@@ -661,8 +667,10 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                       padding: EdgeInsets.all(Get.width * 0.01),
                       child: GestureDetector(
                         onTap: () {
-                          customerController.switchCustomer(
-                              customerSAP: e.customerSAPNumber);
+                          customerController
+                              .switchCustomer(customerSAP: e.customerSAPNumber)
+                              .then((value) =>
+                                  mainScreeenHeaderController.hide());
                         },
                         child: Container(
                             padding: EdgeInsets.all(Get.width * 0.04),
@@ -704,13 +712,16 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
           child: Container(
             // color: Colors.red,
             width: Get.width,
-            height: Get.width * 0.07,
+            height: Get.width * 0.06,
             child: Stack(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset('assets/images/header_tile.png'),
+                    Image.asset(
+                      'assets/images/header_tile.png',
+                      width: Get.width * 0.4,
+                    ),
                   ],
                 ),
                 Positioned.fill(
