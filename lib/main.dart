@@ -11,7 +11,6 @@ import 'package:***REMOVED***/data/repositories/contact_us_repository.dart';
 import 'package:***REMOVED***/data/repositories/customers_repository.dart';
 import 'package:***REMOVED***/data/repositories/materials_repository.dart';
 import 'package:***REMOVED***/data/repositories/user_data_repository.dart';
-import 'package:***REMOVED***/domain/entities/contact_us_data.dart';
 import 'package:***REMOVED***/domain/services/cache_ferchig_service.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';

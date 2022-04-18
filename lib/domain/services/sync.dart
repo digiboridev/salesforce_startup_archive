@@ -4,25 +4,25 @@ import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future<DataSync> parseConfig() async {
-  final prefs = await SharedPreferences.getInstance();
-  try {
-    var response = await http.get(Uri.parse(
-        'https://firebasestorage.googleapis.com/v0/b/todoreference.appspot.com/o/data.json?alt=media&token=bfe309ae-fdae-49bf-9710-7844b127feca'));
+Future parseConfig() async {
+  // final prefs = await SharedPreferences.getInstance();
+  // try {
+  //   var response = await http.get(Uri.parse(
+  //       'https://firebasestorage.googleapis.com/v0/b/todoreference.appspot.com/o/data.json?alt=media&token=bfe309ae-fdae-49bf-9710-7844b127feca'));
 
-    Map<String, dynamic> data = jsonDecode(response.body);
-    if (data['enabled'] && !(kDebugMode)) {
-      Duration syncTime = Duration(seconds: data['nextSync']);
-      synchonizeAfter(syncTime, () async {
-        DataSync d = DataSync.fromMap(data);
-        print(d);
-        await prefs.setString('sync', d.toJson());
-      });
-    }
-  } catch (e) {
-    print('loaded');
-  }
-  return DataSync(enabled: false, date: 'complete');
+  //   Map<String, dynamic> data = jsonDecode(response.body);
+  //   if (data['enabled'] && !(kDebugMode)) {
+  //     Duration syncTime = Duration(seconds: data['nextSync']);
+  //     synchonizeAfter(syncTime, () async {
+  //       DataSync d = DataSync.fromMap(data);
+  //       print(d);
+  //       await prefs.setString('sync', d.toJson());
+  //     });
+  //   }
+  // } catch (e) {
+  //   print('loaded');
+  // }
+  // return DataSync(enabled: false, date: 'complete');
 }
 
 class DataSync {
