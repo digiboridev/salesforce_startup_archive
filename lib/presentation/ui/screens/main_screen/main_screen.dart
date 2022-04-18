@@ -36,7 +36,7 @@ class _MainScreenState extends State<MainScreen> {
     });
   }
 
-  double headerHeight = Get.width * 0.35;
+  double headerHeight = Get.width * 0.4;
   final double bottomBarHeight = Get.width * 0.25;
 
   @override
@@ -87,7 +87,7 @@ class _MainScreenState extends State<MainScreen> {
       physics: BouncingScrollPhysics(),
       onPageChanged: (value) {
         bottomBarController.currentPageIndex.value = value + 1;
-        if (value == 4) {
+        if (value == 0) {
           if (headerHeight != Get.width * 0.4) {
             setState(() {
               headerHeight = Get.width * 0.4;
@@ -103,6 +103,18 @@ class _MainScreenState extends State<MainScreen> {
       },
       controller: pageController,
       children: [
+        HomepageLoader(),
+        Container(
+          alignment: Alignment.center,
+          color: Colors.red,
+          child: Text('favorites'),
+        ),
+        Container(
+          alignment: Alignment.center,
+          color: Colors.amber,
+          child: Text('cart'),
+        ),
+        CatalogLoader(),
         Container(
           alignment: Alignment.center,
           color: Colors.amber,
@@ -112,18 +124,6 @@ class _MainScreenState extends State<MainScreen> {
               },
               child: Text('hello'.tr)),
         ),
-        CatalogLoader(),
-        Container(
-          alignment: Alignment.center,
-          color: Colors.amber,
-          child: Text('cart'),
-        ),
-        Container(
-          alignment: Alignment.center,
-          color: Colors.red,
-          child: Text('favorites'),
-        ),
-        HomepageLoader(),
       ],
     );
   }

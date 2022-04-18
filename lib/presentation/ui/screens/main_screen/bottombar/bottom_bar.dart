@@ -43,15 +43,15 @@ class BottomBar extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             bottomBarController.currentPageIndex.value == 1
-                                ? Image.asset('assets/icons/orders_active.png',
+                                ? Image.asset('assets/icons/home_active.png',
                                     height: Get.width * 0.06)
-                                : Image.asset('assets/icons/orders.png',
+                                : Image.asset('assets/icons/home.png',
                                     height: Get.width * 0.06),
                             SizedBox(
                               height: Get.width * 0.01,
                             ),
                             Text(
-                              'Order'.tr,
+                              'Home'.tr,
                               style: TextStyle(
                                   color: bottomBarController
                                               .currentPageIndex.value ==
@@ -71,15 +71,15 @@ class BottomBar extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             bottomBarController.currentPageIndex.value == 2
-                                ? Image.asset('assets/icons/catalog_active.png',
+                                ? Image.asset('assets/icons/fav_active.png',
                                     height: Get.width * 0.06)
-                                : Image.asset('assets/icons/catalog.png',
+                                : Image.asset('assets/icons/fav.png',
                                     height: Get.width * 0.06),
                             SizedBox(
                               height: Get.width * 0.01,
                             ),
                             Text(
-                              'Catalog'.tr,
+                              'Favorites'.tr,
                               style: TextStyle(
                                   color: bottomBarController
                                               .currentPageIndex.value ==
@@ -101,15 +101,15 @@ class BottomBar extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             bottomBarController.currentPageIndex.value == 4
-                                ? Image.asset('assets/icons/fav_active.png',
+                                ? Image.asset('assets/icons/catalog_active.png',
                                     height: Get.width * 0.06)
-                                : Image.asset('assets/icons/fav.png',
+                                : Image.asset('assets/icons/catalog.png',
                                     height: Get.width * 0.06),
                             SizedBox(
                               height: Get.width * 0.01,
                             ),
                             Text(
-                              'Favorites'.tr,
+                              'Catalog'.tr,
                               style: TextStyle(
                                   color: bottomBarController
                                               .currentPageIndex.value ==
@@ -129,15 +129,15 @@ class BottomBar extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             bottomBarController.currentPageIndex.value == 5
-                                ? Image.asset('assets/icons/home_active.png',
+                                ? Image.asset('assets/icons/orders_active.png',
                                     height: Get.width * 0.06)
-                                : Image.asset('assets/icons/home.png',
+                                : Image.asset('assets/icons/orders.png',
                                     height: Get.width * 0.06),
                             SizedBox(
                               height: Get.width * 0.01,
                             ),
                             Text(
-                              'Home'.tr,
+                              'Order'.tr,
                               style: TextStyle(
                                   color: bottomBarController
                                               .currentPageIndex.value ==

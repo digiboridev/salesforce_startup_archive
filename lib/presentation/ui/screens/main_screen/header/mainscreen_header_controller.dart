@@ -21,7 +21,7 @@ class MainScreeenHeaderController extends GetxController {
   // Change some parameters on various pages
   handlePageIndex({required int pageIndex}) {
     switch (pageIndex) {
-      case 5:
+      case 1:
         enableBrunchSelection.value = true;
         break;
       default:
@@ -37,11 +37,19 @@ class MainScreeenHeaderController extends GetxController {
   }
 
   showContactus() async {
+    if (mainScreeenHeaderState.value is MSHShowContactus) {
+      hide();
+      return;
+    }
     await hideAnother();
     mainScreeenHeaderState.value = MSHShowContactus();
   }
 
   showBrunchSelection() async {
+    if (mainScreeenHeaderState.value is MSHShowBrunch) {
+      hide();
+      return;
+    }
     await hideAnother();
     mainScreeenHeaderState.value = MSHShowBrunch();
   }
