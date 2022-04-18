@@ -10,7 +10,6 @@ import 'package:***REMOVED***/domain/usecases/set_selected_customer_sap.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller_states.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/dialogs/default_dialog.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CustomerController extends GetxController {

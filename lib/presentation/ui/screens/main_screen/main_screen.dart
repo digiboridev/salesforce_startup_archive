@@ -49,7 +49,7 @@ class _MainScreenState extends State<MainScreen> {
               children: [
                 Padding(
                   padding: EdgeInsets.only(
-                      top: headerHeight, bottom: bottomBarHeight * 0.3),
+                      top: Get.width * 0.35, bottom: bottomBarHeight * 0.3),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
