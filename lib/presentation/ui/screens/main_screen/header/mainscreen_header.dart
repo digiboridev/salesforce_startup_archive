@@ -172,19 +172,75 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                     child: buildContact(),
                   ),
                 )),
-            Obx(() => AnimatedContainer(
-                  decoration: BoxDecoration(color: Colors.transparent),
-                  clipBehavior: Clip.antiAlias,
-                  duration: Duration(milliseconds: 200),
-                  curve: Curves.easeInOut,
-                  height: mainScreeenHeaderController
-                          .mainScreeenHeaderState.value is MSHShowBrunch
-                      ? Get.width
-                      : 0,
-                  child: OverflowBox(
-                    minHeight: 0,
-                    child: buildBranchSelection(),
+            Obx(
+              () => AnimatedContainer(
+                decoration: BoxDecoration(color: Colors.transparent),
+                clipBehavior: Clip.antiAlias,
+                duration: Duration(milliseconds: 200),
+                curve: Curves.easeInOut,
+                height: mainScreeenHeaderController.mainScreeenHeaderState.value
+                        is MSHShowBrunch
+                    ? Get.width
+                    : 0,
+                child: OverflowBox(
+                  minHeight: 0,
+                  child: Column(
+                    children: [
+                      buildBranchSelection(),
+                    ],
                   ),
+                ),
+              ),
+            ),
+            Obx(() => AnimatedCrossFade(
+                  firstChild: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        mainScreeenHeaderController.showBrunchSelection();
+                        searchFocusNode.unfocus();
+                      });
+                    },
+                    child: Container(
+                      // color: Colors.red,
+                      width: Get.width,
+                      height: Get.width * 0.07,
+                      child: Stack(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset('assets/images/header_tile.png'),
+                            ],
+                          ),
+                          Positioned.fill(
+                            top: -Get.width * 0.03,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.keyboard_arrow_down,
+                                  color: Colors.white,
+                                  size: Get.width * 0.08,
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  secondChild: SizedBox(),
+                  crossFadeState:
+                      mainScreeenHeaderController.enableBrunchSelection.value &&
+                              mainScreeenHeaderController
+                                  .mainScreeenHeaderState.value is MSHShowCommon
+                          ? CrossFadeState.showFirst
+                          : CrossFadeState.showSecond,
+                  duration: Duration(milliseconds: 010),
+                  firstCurve: Curves.easeOut,
+                  secondCurve: Curves.easeOut,
+                  reverseDuration: Duration(milliseconds: 200),
                 )),
           ]),
         )),
@@ -374,131 +430,168 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
     return contactusController.obx(
       (state) {
         if (state is ContactUsData) {
-          return Container(
-            height: Get.width,
-            color: Color(0xff00458C),
-            child: Column(
-              children: [
-                Expanded(
-                  child: SingleChildScrollView(
-                    physics: BouncingScrollPhysics(),
-                    child: Column(
-                      children: [
-                        Container(
-                          height: Get.width * 0.2,
-                          decoration: BoxDecoration(
-                              color: Color(0xff0250A0),
-                              borderRadius:
-                                  BorderRadius.circular(Get.width * 0.02)),
-                          margin: EdgeInsets.symmetric(
-                              horizontal: Get.width * 0.06),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: Get.width * 0.06),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Center(
-                                  child: Text(
-                                    'Our focus is open',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Center(
-                                  child: Text(
-                                    state.openingHoursString,
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: Get.width * 0.02,
-                        ),
-                        ...state.contactOptionsList.map((e) {
-                          return Column(
-                            children: [
-                              Container(
-                                height: Get.width * 0.25,
-                                decoration: BoxDecoration(
-                                    color: Color(0xff0250A0),
-                                    borderRadius: BorderRadius.circular(
-                                        Get.width * 0.02)),
-                                margin: EdgeInsets.symmetric(
-                                    horizontal: Get.width * 0.06),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: Get.width * 0.02),
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: Get.width * 0.02),
-                                      child: Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          e.description,
-                                          style: TextStyle(color: Colors.white),
-                                        ),
+          return Column(
+            children: [
+              Container(
+                height: Get.width - Get.width * 0.07,
+                color: Color(0xff00458C),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: SingleChildScrollView(
+                        physics: BouncingScrollPhysics(),
+                        child: Column(
+                          children: [
+                            Container(
+                              height: Get.width * 0.2,
+                              decoration: BoxDecoration(
+                                  color: Color(0xff0250A0),
+                                  borderRadius:
+                                      BorderRadius.circular(Get.width * 0.02)),
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: Get.width * 0.06),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: Get.width * 0.06),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Center(
+                                      child: Text(
+                                        'Our focus is open',
+                                        style: TextStyle(color: Colors.white),
                                       ),
                                     ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                  ),
+                                  Expanded(
+                                    child: Center(
+                                      child: Text(
+                                        state.openingHoursString,
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: Get.width * 0.02,
+                            ),
+                            ...state.contactOptionsList.map((e) {
+                              return Column(
+                                children: [
+                                  Container(
+                                    height: Get.width * 0.25,
+                                    decoration: BoxDecoration(
+                                        color: Color(0xff0250A0),
+                                        borderRadius: BorderRadius.circular(
+                                            Get.width * 0.02)),
+                                    margin: EdgeInsets.symmetric(
+                                        horizontal: Get.width * 0.06),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: Get.width * 0.02),
+                                    child: Column(
                                       children: [
-                                        GestureDetector(
-                                          onTap: () {
-                                            launch('mailto:${e.email}');
-                                          },
-                                          child: Image.asset(
-                                            'assets/icons/contact_mail.png',
-                                            width: Get.width * 0.15,
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: Get.width * 0.02),
+                                          child: Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: Text(
+                                              e.description,
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ),
                                           ),
                                         ),
-                                        SizedBox(
-                                          width: Get.width * 0.05,
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            launch('${e.whatsAppLink}');
-                                          },
-                                          child: Image.asset(
-                                            'assets/icons/contact_messanger.png',
-                                            width: Get.width * 0.15,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: Get.width * 0.05,
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            launch('tel:${e.phoneNumber}');
-                                          },
-                                          child: Image.asset(
-                                            'assets/icons/contact_phone.png',
-                                            width: Get.width * 0.15,
-                                          ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () {
+                                                launch('mailto:${e.email}');
+                                              },
+                                              child: Image.asset(
+                                                'assets/icons/contact_mail.png',
+                                                width: Get.width * 0.15,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: Get.width * 0.05,
+                                            ),
+                                            GestureDetector(
+                                              onTap: () {
+                                                launch('${e.whatsAppLink}');
+                                              },
+                                              child: Image.asset(
+                                                'assets/icons/contact_messanger.png',
+                                                width: Get.width * 0.15,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: Get.width * 0.05,
+                                            ),
+                                            GestureDetector(
+                                              onTap: () {
+                                                launch('tel:${e.phoneNumber}');
+                                              },
+                                              child: Image.asset(
+                                                'assets/icons/contact_phone.png',
+                                                width: Get.width * 0.15,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: Get.width * 0.02,
-                              ),
-                            ],
-                          );
-                        }),
-                      ],
+                                  ),
+                                  SizedBox(
+                                    height: Get.width * 0.02,
+                                  ),
+                                ],
+                              );
+                            }),
+                          ],
+                        ),
+                      ),
                     ),
+                    // buildHideBottom()
+                  ],
+                ),
+              ),
+              GestureDetector(
+                onTap: () => mainScreeenHeaderController.hide(),
+                child: Container(
+                  // color: Colors.red,
+                  width: Get.width,
+                  height: Get.width * 0.07,
+                  child: Stack(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset('assets/images/header_tile.png'),
+                        ],
+                      ),
+                      Positioned.fill(
+                        top: -Get.width * 0.03,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.keyboard_arrow_up,
+                              color: Colors.white,
+                              size: Get.width * 0.08,
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
                   ),
                 ),
-                buildHideBottom()
-              ],
-            ),
+              )
+            ],
           );
         } else {
           return SizedBox();
@@ -536,64 +629,103 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
   }
 
   Widget buildBranchSelection() {
-    return Container(
-      height: Get.width * 1,
-      color: Color(0xff00458C),
-      child: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: Get.width * 0.04),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'All branches:',
-                style: TextStyle(color: Colors.white),
+    return Column(
+      children: [
+        Container(
+          height: Get.width * 1 - Get.width * 0.07,
+          color: Color(0xff00458C),
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: Get.width * 0.04),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'All branches:',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
               ),
+              Expanded(
+                  child: Container(
+                child: ListView(
+                  physics: BouncingScrollPhysics(),
+                  children: customerController.relatedConsumers.map((e) {
+                    return Padding(
+                      padding: EdgeInsets.all(Get.width * 0.01),
+                      child: GestureDetector(
+                        onTap: () {
+                          customerController.switchCustomer(
+                              customerSAP: e.customerSAPNumber);
+                        },
+                        child: Container(
+                            padding: EdgeInsets.all(Get.width * 0.04),
+                            decoration: BoxDecoration(
+                                color: Colors.blue[800],
+                                borderRadius:
+                                    BorderRadius.circular(Get.width * 0.02)),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  e.customerId,
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                Text(
+                                  e.customerName,
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                Text(
+                                  e.customerAddress,
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ],
+                            )),
+                      ),
+                    );
+                  }).toList(),
+                ),
+              )),
+              // buildHideBottom(),
+              SizedBox(
+                height: Get.width * 0.03,
+              )
+            ],
+          ),
+        ),
+        GestureDetector(
+          onTap: () => mainScreeenHeaderController.hide(),
+          child: Container(
+            // color: Colors.red,
+            width: Get.width,
+            height: Get.width * 0.07,
+            child: Stack(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset('assets/images/header_tile.png'),
+                  ],
+                ),
+                Positioned.fill(
+                  top: -Get.width * 0.03,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(
+                        Icons.keyboard_arrow_up,
+                        color: Colors.white,
+                        size: Get.width * 0.08,
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
           ),
-          Expanded(
-              child: Container(
-            child: ListView(
-              physics: BouncingScrollPhysics(),
-              children: customerController.relatedConsumers.map((e) {
-                return Padding(
-                  padding: EdgeInsets.all(Get.width * 0.01),
-                  child: GestureDetector(
-                    onTap: () {
-                      customerController.switchCustomer(
-                          customerSAP: e.customerSAPNumber);
-                    },
-                    child: Container(
-                        padding: EdgeInsets.all(Get.width * 0.04),
-                        decoration: BoxDecoration(
-                            color: Colors.blue[800],
-                            borderRadius:
-                                BorderRadius.circular(Get.width * 0.02)),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              e.customerId,
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            Text(
-                              e.customerName,
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            Text(
-                              e.customerAddress,
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ],
-                        )),
-                  ),
-                );
-              }).toList(),
-            ),
-          )),
-          buildHideBottom()
-        ],
-      ),
+        )
+      ],
     );
   }
 

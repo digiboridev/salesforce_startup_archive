@@ -63,6 +63,9 @@ class _HomePageState extends State<HomePage> {
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
+            SizedBox(
+              height: Get.width * 0.16,
+            ),
             buildDeals(
                 materials: getDeals.take(4).toList(),
                 header: Row(
