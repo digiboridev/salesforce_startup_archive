@@ -126,7 +126,7 @@ class _LegalDocScreenState extends State<LegalDocScreen> {
               GestureDetector(
                 onTap: () => widget.callback(),
                 child: Icon(
-                  Icons.arrow_back,
+                  Icons.keyboard_arrow_right,
                   color: Colors.white,
                 ),
               ),

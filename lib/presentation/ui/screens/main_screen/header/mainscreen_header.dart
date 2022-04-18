@@ -281,7 +281,10 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                 SizedBox(
                   width: Get.width * 0.03,
                 ),
-                Icon(Icons.search),
+                Image.asset(
+                  'assets/icons/search.png',
+                  width: Get.width * 0.04,
+                ),
                 SizedBox(
                   width: Get.width * 0.03,
                 ),
@@ -310,7 +313,10 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                     contentPadding: EdgeInsets.all(0),
                   ),
                 )),
-                Icon(Icons.scuba_diving_sharp),
+                Image.asset(
+                  'assets/icons/barcode.png',
+                  width: Get.width * 0.06,
+                ),
                 SizedBox(
                   width: Get.width * 0.03,
                 ),

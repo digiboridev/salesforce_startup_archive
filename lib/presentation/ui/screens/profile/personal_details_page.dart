@@ -65,14 +65,16 @@ class PersonalDetailsPage extends StatelessWidget {
                       height: Get.width * 0.01,
                     ),
                     Text(
-                      '${'First name'.tr}: ' + userDataState.userData.contactFirstName,
+                      '${'First name'.tr}: ' +
+                          userDataState.userData.contactFirstName,
                       style: TextStyle(fontSize: Get.width * 0.04),
                     ),
                     SizedBox(
                       height: Get.width * 0.01,
                     ),
                     Text(
-                      '${'Last name'.tr}: ' + userDataState.userData.contactLastName,
+                      '${'Last name'.tr}: ' +
+                          userDataState.userData.contactLastName,
                       style: TextStyle(fontSize: Get.width * 0.04),
                     ),
                     SizedBox(
@@ -131,7 +133,7 @@ class PersonalDetailsPage extends StatelessWidget {
                   Get.back();
                 },
                 child: Icon(
-                  Icons.arrow_back,
+                  Icons.keyboard_arrow_right,
                   color: Colors.white,
                 ),
               ),

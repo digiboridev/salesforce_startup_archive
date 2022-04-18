@@ -122,7 +122,7 @@ class _CatalogPageState extends State<CatalogPage> {
                           color:
                               catalogPageController.selectedClassification == e
                                   ? Color(0xff00458C)
-                                  : Colors.grey,
+                                  : Color(0xffC6D3E2),
                           borderRadius:
                               BorderRadius.circular(Get.width * 0.04)),
                       margin:
@@ -132,7 +132,12 @@ class _CatalogPageState extends State<CatalogPage> {
                           vertical: Get.width * 0.015),
                       child: Text(
                         e.Display,
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                            color:
+                                catalogPageController.selectedClassification ==
+                                        e
+                                    ? Colors.white
+                                    : Color(0xff00458C)),
                       )),
                 );
               }).toList(),
@@ -216,7 +221,7 @@ class _CatalogPageState extends State<CatalogPage> {
                               catalogPageController.state
                                   is ShowMaterialsByBrand
                           ? Color(0xff00458C)
-                          : Colors.grey,
+                          : Color(0xffC6D3E2),
                       borderRadius: BorderRadius.circular(Get.width * 0.04)),
                   margin: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
                   padding: EdgeInsets.symmetric(
@@ -224,7 +229,12 @@ class _CatalogPageState extends State<CatalogPage> {
                       vertical: Get.width * 0.015),
                   child: Text(
                     'Brands'.tr,
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                        color: catalogPageController.state is ShowBrands ||
+                                catalogPageController.state
+                                    is ShowMaterialsByBrand
+                            ? Colors.white
+                            : Color(0xff00458C)),
                   )),
             ),
             GestureDetector(
@@ -235,7 +245,7 @@ class _CatalogPageState extends State<CatalogPage> {
                               catalogPageController.state
                                   is ShowMaterialsByFamily
                           ? Color(0xff00458C)
-                          : Colors.grey,
+                          : Color(0xffC6D3E2),
                       borderRadius: BorderRadius.circular(Get.width * 0.04)),
                   margin: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
                   padding: EdgeInsets.symmetric(
@@ -243,7 +253,12 @@ class _CatalogPageState extends State<CatalogPage> {
                       vertical: Get.width * 0.015),
                   child: Text(
                     'Families'.tr,
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                        color: catalogPageController.state is ShowFamilies ||
+                                catalogPageController.state
+                                    is ShowMaterialsByFamily
+                            ? Colors.white
+                            : Color(0xff00458C)),
                   )),
             ),
             Spacer(),

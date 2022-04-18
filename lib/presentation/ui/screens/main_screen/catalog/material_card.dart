@@ -232,7 +232,7 @@ class MaterialCardState extends State<MaterialCard> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(Get.width * 0.1)),
                 child: CartTopIcon(
-                  type: CartTopIcon.menu_type,
+                  type: CartTopIcon.favorite_type,
                 ),
               ),
             ),
@@ -244,10 +244,11 @@ class MaterialCardState extends State<MaterialCard> {
                 width: Get.width * 0.1,
                 height: Get.width * 0.2,
                 child: ProductOptions(
-                    isHotSale: widget.materiale.IsHotSale,
-                    isNew: widget.materiale.IsNew,
-                    isFrozen: widget.materiale.IsFrozen,
-                    optionType: ProductOptions.CARD_TYPE,),
+                  isHotSale: widget.materiale.IsHotSale,
+                  isNew: widget.materiale.IsNew,
+                  isFrozen: widget.materiale.IsFrozen,
+                  optionType: ProductOptions.CARD_TYPE,
+                ),
               ),
             )
           ],

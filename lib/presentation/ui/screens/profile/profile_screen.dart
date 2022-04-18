@@ -190,7 +190,7 @@ class ProfileScreen extends StatelessWidget {
                   Get.back();
                 },
                 child: Icon(
-                  Icons.arrow_back,
+                  Icons.keyboard_arrow_right,
                   color: Colors.white,
                 ),
               ),

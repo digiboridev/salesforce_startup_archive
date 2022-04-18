@@ -78,7 +78,7 @@ class ProductCountScreenState extends State<ProductCountScreen> {
                   });
                 },
                 child: Icon(
-                  Icons.arrow_back,
+                  Icons.keyboard_arrow_right,
                   color: Colors.white,
                 ),
               ),

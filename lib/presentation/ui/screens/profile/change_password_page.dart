@@ -106,7 +106,8 @@ class ChangePasswordPage extends StatelessWidget {
                   controller: _confirmPass,
                   validator: (val) {
                     if (val == null || val.isEmpty) return 'Empty'.tr;
-                    if (val != _pass.text) return 'Passwords are not the same'.tr;
+                    if (val != _pass.text)
+                      return 'Passwords are not the same'.tr;
                     return null;
                   },
                   decoration: InputDecoration(
@@ -147,7 +148,8 @@ class ChangePasswordPage extends StatelessWidget {
                       FocusScope.of(context).unfocus();
                       bool valid = _form.currentState!.validate();
                       if (!connectionService.hasConnection) {
-                        Get.snackbar('Error'.tr, 'Restricted for offline mode'.tr);
+                        Get.snackbar(
+                            'Error'.tr, 'Restricted for offline mode'.tr);
                         return;
                       }
                       if (valid) {
@@ -211,7 +213,7 @@ class ChangePasswordPage extends StatelessWidget {
                   Get.back();
                 },
                 child: Icon(
-                  Icons.arrow_back,
+                  Icons.keyboard_arrow_right,
                   color: Colors.white,
                 ),
               ),
