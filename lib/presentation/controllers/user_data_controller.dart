@@ -37,7 +37,7 @@ class UserDataController extends GetxController {
   UserDataState get userDataState => _userDataState.value;
   Rx<UserDataState> get userDataStateStream => _userDataState;
 
-  late StreamSubscription _sub;
+  StreamSubscription? _sub;
 
   @override
   void onReady() {
@@ -48,9 +48,10 @@ class UserDataController extends GetxController {
   @override
   void onClose() {
     super.onClose();
-    if (_sub is StreamSubscription) _sub.cancel();
+    if (_sub is StreamSubscription) _sub!.cancel();
   }
 
+  // Load last user data state and start listen to changes
   bindToAuthEvent() async {
     AuthData? d = await _sfsdkService.authData;
     handleAuthData(authData: d);
@@ -61,6 +62,7 @@ class UserDataController extends GetxController {
     });
   }
 
+  // Reloads user data if new data not equal to old one
   handleAuthData({required AuthData? authData}) {
     if (_authData.value != authData) {
       _authData.value = authData;
@@ -70,21 +72,33 @@ class UserDataController extends GetxController {
   }
 
   Future loadUserData() async {
+    // Return to initial state, null means  the user log outed
     if (_authData.value == null) {
       _userDataState.value = UserDataInitialState();
     }
+
+    // emit loading state
     _userDataState.value = UserDataLoadingState();
+
+    // Load user data
     try {
       UserData userData = await _getUserDataAndCache(GetUserDataAndCacheParams(
           userId: _authData.value!.userId,
           hasConnection: _connectionService.hasConnection));
+
+      // emmit accept legaldoc state if not
       if (!userData.hasAcceptedLegalDoc) {
         _userDataState.value =
             UserDataAskLegalDocState(legalDoc: userData.legalDoc);
-      } else if (!userData.didChangePassword) {
+      }
+      // emmit change password state if needed
+      else if (!userData.didChangePassword) {
         _userDataState.value = UserDataChangePasswordState();
-      } else {
+      }
+      // load complete
+      else {
         _userDataState.value = UserDataCommonState(userData: userData);
+        // Set locale based on user data
         setLocale();
 
         // Register in cache fetching service
@@ -95,6 +109,7 @@ class UserDataController extends GetxController {
         _cacheFetchingService.registerEvent(cacheUpdateEvent: cacheUpdateEvent);
       }
     } catch (e) {
+      // emit error state
       print(e);
       _userDataState.value = UserDataLoadingErrorState(msg: e.toString());
     }
