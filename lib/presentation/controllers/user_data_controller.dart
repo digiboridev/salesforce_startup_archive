@@ -2,10 +2,10 @@ import 'dart:async';
 import 'package:***REMOVED***/core/languages.dart';
 import 'package:***REMOVED***/domain/services/cache_ferchig_service.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
-import 'package:***REMOVED***/domain/usecases/accept_legal_doc.dart';
-import 'package:***REMOVED***/domain/usecases/change_language.dart';
-import 'package:***REMOVED***/domain/usecases/change_password.dart';
-import 'package:***REMOVED***/domain/usecases/get_userdata_sync_time.dart';
+import 'package:***REMOVED***/domain/usecases/user/accept_legal_doc.dart';
+import 'package:***REMOVED***/domain/usecases/user/change_language.dart';
+import 'package:***REMOVED***/domain/usecases/user/change_password.dart';
+import 'package:***REMOVED***/domain/usecases/user/get_userdata_sync_time.dart';
 import 'package:***REMOVED***/domain/usecases/usecase.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller_states.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/dialogs/default_dialog.dart';
@@ -14,7 +14,7 @@ import 'package:get/get.dart';
 import 'package:***REMOVED***/domain/entities/auth_data.dart';
 import 'package:***REMOVED***/domain/entities/user_data.dart';
 import 'package:***REMOVED***/domain/services/sf_sdk_service.dart';
-import 'package:***REMOVED***/domain/usecases/get_userdata_and_cache.dart';
+import 'package:***REMOVED***/domain/usecases/user/get_userdata_and_cache.dart';
 
 class UserDataController extends GetxController {
   // dependencies

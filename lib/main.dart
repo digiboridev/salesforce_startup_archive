@@ -14,18 +14,18 @@ import 'package:***REMOVED***/data/repositories/user_data_repository.dart';
 import 'package:***REMOVED***/domain/services/cache_ferchig_service.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
-import 'package:***REMOVED***/domain/usecases/accept_legal_doc.dart';
-import 'package:***REMOVED***/domain/usecases/change_language.dart';
-import 'package:***REMOVED***/domain/usecases/change_password.dart';
+import 'package:***REMOVED***/domain/usecases/user/accept_legal_doc.dart';
+import 'package:***REMOVED***/domain/usecases/user/change_language.dart';
+import 'package:***REMOVED***/domain/usecases/user/change_password.dart';
 import 'package:***REMOVED***/domain/usecases/get_contactus_and_cache.dart';
-import 'package:***REMOVED***/domain/usecases/get_customer_and_cache.dart';
-import 'package:***REMOVED***/domain/usecases/get_customer_sync_time.dart';
-import 'package:***REMOVED***/domain/usecases/get_materials_and_cache.dart';
-import 'package:***REMOVED***/domain/usecases/get_materials_sync_time.dart';
-import 'package:***REMOVED***/domain/usecases/get_selected_customer_sap.dart';
-import 'package:***REMOVED***/domain/usecases/get_userdata_and_cache.dart';
-import 'package:***REMOVED***/domain/usecases/get_userdata_sync_time.dart';
-import 'package:***REMOVED***/domain/usecases/set_selected_customer_sap.dart';
+import 'package:***REMOVED***/domain/usecases/customer/get_customer_and_cache.dart';
+import 'package:***REMOVED***/domain/usecases/customer/get_customer_sync_time.dart';
+import 'package:***REMOVED***/domain/usecases/materials/get_materials_and_cache.dart';
+import 'package:***REMOVED***/domain/usecases/materials/get_materials_sync_time.dart';
+import 'package:***REMOVED***/domain/usecases/customer/get_selected_customer_sap.dart';
+import 'package:***REMOVED***/domain/usecases/user/get_userdata_and_cache.dart';
+import 'package:***REMOVED***/domain/usecases/user/get_userdata_sync_time.dart';
+import 'package:***REMOVED***/domain/usecases/customer/set_selected_customer_sap.dart';
 import 'package:***REMOVED***/presentation/controllers/contactus_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
@@ -114,5 +114,3 @@ Future initControllers() async {
   Get.put(ContactusController(), permanent: true);
   print('All controllers started...');
 }
-
-//test

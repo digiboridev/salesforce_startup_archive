@@ -1,11 +1,11 @@
 import 'package:***REMOVED***/domain/services/cache_ferchig_service.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
-import 'package:***REMOVED***/domain/usecases/get_materials_sync_time.dart';
+import 'package:***REMOVED***/domain/usecases/materials/get_materials_sync_time.dart';
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_states.dart';
 import 'package:get/get.dart';
 import 'package:***REMOVED***/domain/entities/materials/materials_catalog.dart';
-import 'package:***REMOVED***/domain/usecases/get_materials_and_cache.dart';
+import 'package:***REMOVED***/domain/usecases/materials/get_materials_and_cache.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
 
 class MaterialsCatalogController extends GetxController {

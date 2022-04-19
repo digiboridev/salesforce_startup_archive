@@ -1,5 +1,5 @@
 import 'package:***REMOVED***/presentation/controllers/search_controller.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/material_card.dart';
+import 'package:***REMOVED***/presentation/ui/widgets/material_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

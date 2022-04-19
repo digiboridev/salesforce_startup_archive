@@ -37,31 +37,29 @@ class _CatalogLoaderState extends State<CatalogLoader>
         );
       } else if (state is MCSLoadingError) {
         return Container(
-          child: Center(
-            child: Column(
-              children: [
-                Text('Materials loading error'),
-                SizedBox(
-                  height: Get.width * 0.06,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Materials loading error'),
+              SizedBox(
+                height: Get.width * 0.06,
+              ),
+              Text(state.errorMsg),
+              SizedBox(
+                height: Get.width * 0.06,
+              ),
+              GestureDetector(
+                onTap: () => materialsCatalogController.loadCatalog(),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.amber,
+                      borderRadius: BorderRadius.circular(Get.width * 0.06)),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: Get.width * 0.1, vertical: Get.width * 0.03),
+                  child: Text('try again'.tr),
                 ),
-                Text(state.errorMsg),
-                SizedBox(
-                  height: Get.width * 0.06,
-                ),
-                GestureDetector(
-                  onTap: () => materialsCatalogController.loadCatalog(),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.amber,
-                        borderRadius: BorderRadius.circular(Get.width * 0.06)),
-                    padding: EdgeInsets.symmetric(
-                        horizontal: Get.width * 0.1,
-                        vertical: Get.width * 0.03),
-                    child: Text('try again'.tr),
-                  ),
-                )
-              ],
-            ),
+              )
+            ],
           ),
         );
       } else {
