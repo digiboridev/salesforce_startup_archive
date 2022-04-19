@@ -100,7 +100,9 @@ class CustomerController extends GetxController {
 
       // load data
       _selectedCustomer.value = await _getCustomerAndCache.call(
-          GetCustomerAndCacheParams(customerSAP: _selectedCustomerSAP.value!));
+          GetCustomerAndCacheParams(
+              customerSAP: _selectedCustomerSAP.value!,
+              hasConnetrion: _connectionService.hasConnection));
 
       // Register in cache fetching service
       CacheUpdateEvent cacheUpdateEvent = CacheUpdateEvent(
@@ -120,8 +122,9 @@ class CustomerController extends GetxController {
 
   Future updateCustomerData() async {
     try {
-      Customer c = await _getCustomerAndCache.call(
-          GetCustomerAndCacheParams(customerSAP: _selectedCustomerSAP.value!));
+      Customer c = await _getCustomerAndCache.call(GetCustomerAndCacheParams(
+          customerSAP: _selectedCustomerSAP.value!,
+          hasConnetrion: _connectionService.hasConnection));
       _selectedCustomer.value = c;
     } catch (e) {
       Get.snackbar('Error', e.toString());
@@ -140,8 +143,10 @@ class CustomerController extends GetxController {
       defaultDialog();
 
       // load data
-      _selectedCustomer.value = await _getCustomerAndCache
-          .call(GetCustomerAndCacheParams(customerSAP: customerSAP));
+      _selectedCustomer.value = await _getCustomerAndCache.call(
+          GetCustomerAndCacheParams(
+              customerSAP: customerSAP,
+              hasConnetrion: _connectionService.hasConnection));
 
       // Switch
       _selectedCustomerSAP.value = customerSAP;

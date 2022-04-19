@@ -568,41 +568,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                   ],
                 ),
               ),
-              GestureDetector(
-                onTap: () => mainScreeenHeaderController.hide(),
-                child: Container(
-                  // color: Colors.red,
-                  width: Get.width,
-                  height: Get.width * 0.06,
-                  child: Stack(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'assets/images/header_tile.png',
-                            width: Get.width * 0.4,
-                          ),
-                        ],
-                      ),
-                      Positioned.fill(
-                        top: -Get.width * 0.03,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.keyboard_arrow_up,
-                              color: Colors.white,
-                              size: Get.width * 0.08,
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              )
+              buildHideBottom()
             ],
           );
         } else {
@@ -707,41 +673,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
             ],
           ),
         ),
-        GestureDetector(
-          onTap: () => mainScreeenHeaderController.hide(),
-          child: Container(
-            // color: Colors.red,
-            width: Get.width,
-            height: Get.width * 0.06,
-            child: Stack(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/images/header_tile.png',
-                      width: Get.width * 0.4,
-                    ),
-                  ],
-                ),
-                Positioned.fill(
-                  top: -Get.width * 0.03,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Icon(
-                        Icons.keyboard_arrow_up,
-                        color: Colors.white,
-                        size: Get.width * 0.08,
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-        )
+        buildHideBottom()
       ],
     );
   }
@@ -750,12 +682,35 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
     return GestureDetector(
       onTap: () => mainScreeenHeaderController.hide(),
       child: Container(
-        width: Get.width,
         // color: Colors.red,
-        child: Icon(
-          Icons.arrow_drop_up_outlined,
-          color: Colors.white,
-          size: Get.width * 0.08,
+        width: Get.width,
+        height: Get.width * 0.06,
+        child: Stack(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'assets/images/header_tile.png',
+                  width: Get.width * 0.4,
+                ),
+              ],
+            ),
+            Positioned.fill(
+              top: -Get.width * 0.03,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(
+                    Icons.keyboard_arrow_up,
+                    color: Colors.white,
+                    size: Get.width * 0.08,
+                  ),
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );

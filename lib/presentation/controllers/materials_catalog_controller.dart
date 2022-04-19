@@ -1,4 +1,5 @@
 import 'package:***REMOVED***/domain/services/cache_ferchig_service.dart';
+import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
 import 'package:***REMOVED***/domain/usecases/get_materials_sync_time.dart';
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_states.dart';
@@ -12,6 +13,7 @@ class MaterialsCatalogController extends GetxController {
   CustomerController _customerController = Get.find();
   CacheFetchingService _cacheFetchingService = Get.find();
   ImageCachingService _imageCachingService = Get.find();
+  ConnectionService _connectionService = Get.find();
 
   // usecases
   GetMaterialsAndCache _getMaterialsAndCache = Get.find();
@@ -33,8 +35,10 @@ class MaterialsCatalogController extends GetxController {
   Future loadCatalog() async {
     materialsCatalogState.value = MCSLoading();
     try {
-      MaterialsCatalog catalog = await _getMaterialsAndCache
-          .call(_customerController.selectedCustomerSAP!);
+      MaterialsCatalog catalog = await _getMaterialsAndCache.call(
+          GetMaterialsAndCacheParams(
+              customerSAP: _customerController.selectedCustomerSAP!,
+              hasConnection: _connectionService.hasConnection));
       materialsCatalogState.value = MCSCommon(catalog: catalog);
 
       // Register in cache fetching service
@@ -59,8 +63,10 @@ class MaterialsCatalogController extends GetxController {
 
   Future updateCatalog() async {
     try {
-      MaterialsCatalog catalog = await _getMaterialsAndCache
-          .call(_customerController.selectedCustomerSAP!);
+      MaterialsCatalog catalog = await _getMaterialsAndCache.call(
+          GetMaterialsAndCacheParams(
+              customerSAP: _customerController.selectedCustomerSAP!,
+              hasConnection: _connectionService.hasConnection));
       materialsCatalogState.value = MCSCommon(catalog: catalog);
     } catch (e) {
       print('Update catalog error' + e.toString());

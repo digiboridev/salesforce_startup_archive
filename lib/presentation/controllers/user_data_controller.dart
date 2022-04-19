@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:***REMOVED***/core/languages.dart';
 import 'package:***REMOVED***/domain/services/cache_ferchig_service.dart';
+import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/domain/usecases/accept_legal_doc.dart';
 import 'package:***REMOVED***/domain/usecases/change_language.dart';
 import 'package:***REMOVED***/domain/usecases/change_password.dart';
@@ -19,6 +20,7 @@ class UserDataController extends GetxController {
   // dependencies
   SFSDKService _sfsdkService = SFSDKService();
   CacheFetchingService _cacheFetchingService = Get.find();
+  ConnectionService _connectionService = Get.find();
 
   // usecases
   GetUserDataAndCache _getUserDataAndCache = Get.find();
@@ -73,7 +75,9 @@ class UserDataController extends GetxController {
     }
     _userDataState.value = UserDataLoadingState();
     try {
-      UserData userData = await _getUserDataAndCache(_authData.value!.userId);
+      UserData userData = await _getUserDataAndCache(GetUserDataAndCacheParams(
+          userId: _authData.value!.userId,
+          hasConnection: _connectionService.hasConnection));
       if (!userData.hasAcceptedLegalDoc) {
         _userDataState.value =
             UserDataAskLegalDocState(legalDoc: userData.legalDoc);
@@ -104,7 +108,10 @@ class UserDataController extends GetxController {
     UserDataState oldState = _userDataState.value;
     if (oldState is UserDataCommonState) {
       try {
-        UserData userData = await _getUserDataAndCache(_authData.value!.userId);
+        UserData userData = await _getUserDataAndCache(
+            GetUserDataAndCacheParams(
+                userId: _authData.value!.userId,
+                hasConnection: _connectionService.hasConnection));
         _userDataState.value = UserDataCommonState(userData: userData);
 
         setLocale();

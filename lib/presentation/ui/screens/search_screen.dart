@@ -70,7 +70,8 @@ class SearchScreen extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.all(Get.width * 0.05),
                     child: Text(
-                      'No results were found for this product but we have similar products'.tr,
+                      'No results were found for this product but we have similar products'
+                          .tr,
                       style: TextStyle(
                           color: Colors.black, fontSize: Get.width * 0.04),
                     ),

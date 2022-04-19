@@ -32,16 +32,8 @@ class AuthData extends Equatable {
   @override
   List<Object> get props {
     return [
-      communityUrl,
-      loginUrl,
-      identityUrl,
-      userAgent,
-      accessToken,
-      communityId,
       userId,
       orgId,
-      refreshToken,
-      instanceUrl,
     ];
   }
 }
