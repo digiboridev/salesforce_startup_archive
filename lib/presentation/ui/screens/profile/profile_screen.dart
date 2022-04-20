@@ -57,7 +57,7 @@ class ProfileScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text('Personal details'.tr),
-                        Icon(Icons.arrow_forward)
+                        Icon(Icons.keyboard_arrow_right)
                       ],
                     ),
                   ),
@@ -79,7 +79,7 @@ class ProfileScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text('Choose language'.tr),
-                        Icon(Icons.arrow_forward)
+                        Icon(Icons.keyboard_arrow_right)
                       ],
                     ),
                   ),
@@ -101,7 +101,7 @@ class ProfileScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text('Change password'.tr),
-                        Icon(Icons.arrow_forward)
+                        Icon(Icons.keyboard_arrow_right)
                       ],
                     ),
                   ),
@@ -130,7 +130,7 @@ class ProfileScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text('Terms an conditions'.tr),
-                        Icon(Icons.arrow_forward)
+                        Icon(Icons.keyboard_arrow_right)
                       ],
                     ),
                   ),
@@ -148,7 +148,11 @@ class ProfileScreen extends StatelessWidget {
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [Text('Log out'.tr), Icon(Icons.logout)],
+                      children: [
+                        Text('Log out'.tr),
+                        Transform.rotate(
+                            angle: 1.6, child: Icon(Icons.power_settings_new))
+                      ],
                     ),
                   ),
                 )
