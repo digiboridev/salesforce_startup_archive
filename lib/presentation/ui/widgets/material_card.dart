@@ -217,15 +217,23 @@ class MaterialCardState extends State<MaterialCard> {
             ),
             Positioned(
               top: -(Get.width * 0.05),
-              right: -(Get.width * 0.020),
-              child: Container(
-                width: Get.width * 0.1,
-                height: Get.width * 0.1,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(Get.width * 0.1)),
-                child: CartTopIcon(
-                  type: CartTopIcon.favorite_type,
+              left: -Get.width * 0.02,
+              child: SizedBox(
+                width: Get.width,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      width: Get.width * 0.1,
+                      height: Get.width * 0.1,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(Get.width * 0.1)),
+                      child: CartTopIcon(
+                        type: CartTopIcon.favorite_type,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

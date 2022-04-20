@@ -395,22 +395,30 @@ class _MaterialScreenState extends State<MaterialScreen> {
                   getMaterialComponent(),
                 ],
               )),
-          Container(
-            margin: EdgeInsets.only(
-                right: Get.width * 0.06, left: Get.width * 0.06),
-            width: Get.width * 0.09,
-            height: Get.width * 0.09,
-            decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.grey.shade300,
-                      spreadRadius: 1,
-                      blurRadius: 5)
-                ],
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(Get.width * 0.1)),
-            child: CartTopIcon(
-              type: CartTopIcon.favorite_select_type,
+          SizedBox(
+            width: Get.width,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(
+                      right: Get.width * 0.06, left: Get.width * 0.06),
+                  width: Get.width * 0.09,
+                  height: Get.width * 0.09,
+                  decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.shade300,
+                            spreadRadius: 1,
+                            blurRadius: 5)
+                      ],
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(Get.width * 0.1)),
+                  child: CartTopIcon(
+                    type: CartTopIcon.favorite_select_type,
+                  ),
+                ),
+              ],
             ),
           ),
         ],

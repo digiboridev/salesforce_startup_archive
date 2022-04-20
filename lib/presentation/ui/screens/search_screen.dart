@@ -1,4 +1,5 @@
 import 'package:***REMOVED***/presentation/controllers/search_controller.dart';
+import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/mainscreen_header_controller.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/material_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,6 +7,7 @@ import 'package:get/get.dart';
 class SearchScreen extends StatelessWidget {
   SearchScreen({Key? key}) : super(key: key);
   final SearchController searchController = Get.find();
+  MainScreeenHeaderController mainScreeenHeaderController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +16,10 @@ class SearchScreen extends StatelessWidget {
       child: SizedBox.expand(
         child: Obx(() => Column(
               children: [
+                if (mainScreeenHeaderController.enableBrunchSelection.value)
+                  SizedBox(
+                    height: Get.width * 0.08,
+                  ),
                 if (searchController.findedMaterials.isNotEmpty)
                   Column(
                     children: [
@@ -76,13 +82,13 @@ class SearchScreen extends StatelessWidget {
                           color: Colors.black, fontSize: Get.width * 0.04),
                     ),
                   ),
-                Obx(() => Expanded(
-                    child: ListView(
-                        children: searchController.findedMaterials
-                            .map((element) => MaterialCard(
-                                  materiale: element,
-                                ))
-                            .toList()))),
+                // Obx(() => Expanded(
+                //     child: ListView(
+                //         children: searchController.findedMaterials
+                //             .map((element) => MaterialCard(
+                //                   materiale: element,
+                //                 ))
+                //             .toList()))),
                 if (searchController.findedMaterials.isEmpty &&
                     searchController.findedSimilarMaterials.isNotEmpty)
                   Container(
@@ -101,42 +107,7 @@ class SearchScreen extends StatelessWidget {
                           color: Colors.black, fontSize: Get.width * 0.04),
                     ),
                   ),
-                if (searchController.findedMaterials.isEmpty &&
-                    searchController.findedSimilarMaterials.isNotEmpty)
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: Get.width * 0.05),
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      searchController
-                          .getCatalog()!
-                          .families
-                          .firstWhere((element) =>
-                              element.SFId ==
-                              searchController
-                                  .findedSimilarMaterials.first.FamilyId)
-                          .Display,
-                      style: TextStyle(
-                          color: Colors.black, fontSize: Get.width * 0.04),
-                    ),
-                  ),
-                if (searchController.findedMaterials.isEmpty &&
-                    searchController.findedSimilarMaterials.isNotEmpty)
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: Get.width * 0.05),
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      searchController
-                          .getCatalog()!
-                          .families
-                          .firstWhere((element) =>
-                              element.SFId ==
-                              searchController
-                                  .findedSimilarMaterials.first.FamilyId)
-                          .Display,
-                      style: TextStyle(
-                          color: Colors.black, fontSize: Get.width * 0.04),
-                    ),
-                  ),
+
                 if (searchController.findedMaterials.isEmpty &&
                     searchController.findedSimilarMaterials.isNotEmpty)
                   Expanded(

@@ -93,6 +93,28 @@ class PersonalDetailsPage extends StatelessWidget {
                     ),
                   ],
                 ),
+              ),
+              Spacer(),
+              GestureDetector(
+                onTap: () => Get.back(),
+                child: Container(
+                  width: Get.width,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      color: Color(0xff00458C),
+                      borderRadius: BorderRadius.circular(Get.width * 0.06)),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: Get.width * 0.1, vertical: Get.width * 0.03),
+                  margin: EdgeInsets.symmetric(
+                      horizontal: Get.width * 0.1, vertical: Get.width * 0.03),
+                  child: Text(
+                    'Close',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: Get.width * 0.08,
               )
             ],
           ),

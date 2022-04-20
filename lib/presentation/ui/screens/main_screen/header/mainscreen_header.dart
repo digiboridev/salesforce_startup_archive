@@ -262,7 +262,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
             },
             child: Container(
               decoration: BoxDecoration(
-                  color: Color(0xffEEE4F2),
+                  color: Colors.white.withOpacity(0.8),
                   borderRadius: BorderRadius.circular(Get.width * 0.1)),
               width: Get.width * 0.1,
               height: Get.width * 0.1,
@@ -277,7 +277,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
           child: Container(
             height: Get.width * 0.1,
             decoration: BoxDecoration(
-                color: Color(0xffEEE4F2),
+                color: Colors.white.withOpacity(0.8),
                 borderRadius: BorderRadius.circular(Get.width * 0.1)),
             child: Row(
               children: [
@@ -426,7 +426,8 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
               padding: EdgeInsets.all(Get.width * 0.05),
               child: Text(
                 'More results'.tr,
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(
+                    color: Colors.white, decoration: TextDecoration.underline),
               ),
             ),
           )

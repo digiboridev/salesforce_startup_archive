@@ -122,7 +122,7 @@ class _CatalogPageState extends State<CatalogPage> {
                           color:
                               catalogPageController.selectedClassification == e
                                   ? Color(0xff00458C)
-                                  : Color(0xffC6D3E2),
+                                  : Color(0xff00458C).withOpacity(0.2),
                           borderRadius:
                               BorderRadius.circular(Get.width * 0.04)),
                       margin:
@@ -137,7 +137,7 @@ class _CatalogPageState extends State<CatalogPage> {
                                 catalogPageController.selectedClassification ==
                                         e
                                     ? Colors.white
-                                    : Color(0xff00458C)),
+                                    : Color(0xff003E7E)),
                       )),
                 );
               }).toList(),
@@ -221,7 +221,7 @@ class _CatalogPageState extends State<CatalogPage> {
                               catalogPageController.state
                                   is ShowMaterialsByBrand
                           ? Color(0xff00458C)
-                          : Color(0xffC6D3E2),
+                          : Color(0xff00458C).withOpacity(0.2),
                       borderRadius: BorderRadius.circular(Get.width * 0.04)),
                   margin: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
                   padding: EdgeInsets.symmetric(
@@ -234,7 +234,7 @@ class _CatalogPageState extends State<CatalogPage> {
                                 catalogPageController.state
                                     is ShowMaterialsByBrand
                             ? Colors.white
-                            : Color(0xff00458C)),
+                            : Color(0xff003E7E)),
                   )),
             ),
             GestureDetector(
@@ -245,7 +245,7 @@ class _CatalogPageState extends State<CatalogPage> {
                               catalogPageController.state
                                   is ShowMaterialsByFamily
                           ? Color(0xff00458C)
-                          : Color(0xffC6D3E2),
+                          : Color(0xff00458C).withOpacity(0.2),
                       borderRadius: BorderRadius.circular(Get.width * 0.04)),
                   margin: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
                   padding: EdgeInsets.symmetric(
@@ -258,7 +258,7 @@ class _CatalogPageState extends State<CatalogPage> {
                                 catalogPageController.state
                                     is ShowMaterialsByFamily
                             ? Colors.white
-                            : Color(0xff00458C)),
+                            : Color(0xff003E7E)),
                   )),
             ),
             Spacer(),
