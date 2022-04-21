@@ -1,8 +1,13 @@
+import 'dart:math';
+
+import 'package:***REMOVED***/core/languages.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../../../core/colors.dart';
 
 class ChangeLanguagePage extends StatelessWidget {
   ChangeLanguagePage({Key? key}) : super(key: key);
@@ -10,9 +15,11 @@ class ChangeLanguagePage extends StatelessWidget {
   final CustomerController customerController = Get.find();
   final UserDataController userDataController = Get.find();
   final MaterialsCatalogController materialsCatalogController = Get.find();
+  late Rx<Languages> selectLanguage;
 
   @override
   Widget build(BuildContext context) {
+    selectLanguage = userDataController.currentLanguage.obs;
     print(userDataController.avaliableLanguages);
     return Scaffold(
       backgroundColor: Colors.grey[300],
@@ -55,15 +62,14 @@ class ChangeLanguagePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: userDataController.avaliableLanguages.map((e) {
                   return GestureDetector(
-                    onTap: () => userDataController
-                        .changeLanguage(lang: e)
-                        .then((value) =>
-                            materialsCatalogController.loadCatalog()),
+                    onTap: (){
+                      selectLanguage.value = e;
+                    },
                     child: Padding(
                       padding: EdgeInsets.symmetric(vertical: Get.width * 0.01),
                       child: Obx(() => Row(
                             children: [
-                              userDataController.currentLanguage == e
+                              selectLanguage.value == e
                                   ? Icon(Icons.stop_circle_outlined)
                                   : Icon(Icons.circle_outlined),
                               SizedBox(
@@ -79,7 +85,61 @@ class ChangeLanguagePage extends StatelessWidget {
                   );
                 }).toList(),
               ),
-            )
+
+            ),
+            Spacer(),
+            Padding(
+                padding: EdgeInsets.only(
+                  left: Get.width * 0.06,
+                  right: Get.width * 0.06,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: Container(
+                        width: Get.width / 2.4,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: MyColors.gray_EAF2FA,
+                            borderRadius:
+                            BorderRadius.circular(Get.width * 0.06)),
+                        padding: EdgeInsets.symmetric(
+                          vertical: Get.width * 0.03,
+                        ),
+                        child: Text(
+                          'Cancel'.tr,
+                          style: TextStyle(color: MyColors.blue_003E7E),
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        setLanguage();
+                      },
+                      child: Container(
+                        width: Get.width / 2.4,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: Color(0xff00458C),
+                            borderRadius:
+                            BorderRadius.circular(Get.width * 0.06)),
+                        padding:
+                        EdgeInsets.symmetric(vertical: Get.width * 0.03),
+                        child: Text(
+                          'Save'.tr,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
+                )),
+            SizedBox(
+              height: Get.width * 0.06,
+            ),
           ],
         ),
       ),
@@ -123,8 +183,15 @@ class ChangeLanguagePage extends StatelessWidget {
             ],
           ),
           Spacer(),
+
         ],
       ),
     );
+  }
+  void setLanguage(){
+  userDataController
+      .changeLanguage(lang: selectLanguage.value)
+       .then((value) =>
+        materialsCatalogController.loadCatalog());
   }
 }

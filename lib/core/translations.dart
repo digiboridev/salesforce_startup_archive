@@ -84,6 +84,14 @@ class Trs extends Translations {
           'Shop':'Shop',
           'Get':'Get',
           'Substitutes for this product':'Substitutes for this product',
+          'Password condition':'Passwords must contain at least 8 characters, 1 capital letter, 1 small letter, a number and a special character',
+          'Current':'Current',
+          'Password display in asterisks':'Password display in asterisks',
+          'For details please contact the hotline':'For details please contact the hotline',
+          'Passwords must not match':'Passwords must not match',
+          'New password is not match':'New password is not match',
+          'password is empty':'password is empty'
+
 
 
 
@@ -173,6 +181,13 @@ class Trs extends Translations {
           'Shop':'קנו',
           'Get':'קבלו',
           'Substitutes for this product':'תחליפים למוצר זה',
+          'Password condition':'הסיסמא צריכה להכיל לפחות 8 תווים אות 1 גדולה אות 1 קטנה מספר ותוו מיוחד',
+          'Current':'נוכחי',
+          'Password display in asterisks':'הסיסמא מוצגת בכוכביות',
+          'For details please contact the hotline':'לפרטים נא להתקשר לקוו החם שלנו',
+          'Passwords must not match':'הסיסמאות צריכות להיות שונות אחת מהשניה',
+          'New password is not match':'הסיסמא החדשה אינה תואמת',
+          'password is empty':'הסיסמא ריקה'
         }
       };
 }

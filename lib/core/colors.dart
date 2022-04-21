@@ -22,6 +22,7 @@ class MyColors{
   static const red_C82B2B = Color(0xFFC82B2B);
   static const gray_B5C0CD = Color(0xFFB5C0CD);
   static const blue_6DA5EC = Color(0xFF6DA5EC);
+  static const gray_EAF2FA = Color(0xFFEAF2FA);
 
 
 
