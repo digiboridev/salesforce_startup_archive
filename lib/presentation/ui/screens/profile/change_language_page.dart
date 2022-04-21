@@ -1,5 +1,6 @@
-import 'dart:math';
 
+
+import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/core/languages.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
@@ -7,19 +8,26 @@ import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../core/colors.dart';
 
-class ChangeLanguagePage extends StatelessWidget {
-  ChangeLanguagePage({Key? key}) : super(key: key);
+class ChangeLanguagePage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => ChangeLanguagePageState();
 
+}
+class ChangeLanguagePageState extends State<ChangeLanguagePage> {
   final CustomerController customerController = Get.find();
   final UserDataController userDataController = Get.find();
   final MaterialsCatalogController materialsCatalogController = Get.find();
-  late Rx<Languages> selectLanguage;
+  late Languages selectLanguage;
+
+  @override
+  void initState() {
+    selectLanguage = userDataController.currentLanguage;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    selectLanguage = userDataController.currentLanguage.obs;
     print(userDataController.avaliableLanguages);
     return Scaffold(
       backgroundColor: Colors.grey[300],
@@ -63,13 +71,15 @@ class ChangeLanguagePage extends StatelessWidget {
                 children: userDataController.avaliableLanguages.map((e) {
                   return GestureDetector(
                     onTap: (){
-                      selectLanguage.value = e;
+                      setState(() {
+                      selectLanguage = e;
+                      });
                     },
                     child: Padding(
                       padding: EdgeInsets.symmetric(vertical: Get.width * 0.01),
-                      child: Obx(() => Row(
+                      child:  Row(
                             children: [
-                              selectLanguage.value == e
+                              selectLanguage == e
                                   ? Icon(Icons.stop_circle_outlined)
                                   : Icon(Icons.circle_outlined),
                               SizedBox(
@@ -81,7 +91,7 @@ class ChangeLanguagePage extends StatelessWidget {
                               ),
                             ],
                           )),
-                    ),
+
                   );
                 }).toList(),
               ),
@@ -190,7 +200,7 @@ class ChangeLanguagePage extends StatelessWidget {
   }
   void setLanguage(){
   userDataController
-      .changeLanguage(lang: selectLanguage.value)
+      .changeLanguage(lang: selectLanguage)
        .then((value) =>
         materialsCatalogController.loadCatalog());
   }

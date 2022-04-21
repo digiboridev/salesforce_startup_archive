@@ -286,8 +286,8 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                                 newPass: _pass.text,
                                 confirmPass: _confirmPass.text)) {
                               closePassError();
-                              // userDataController.changePassword(
-                              //   oldPass: _oldPass.text, newPass: _pass.text);
+                               userDataController.changePassword(
+                                 oldPass: _oldPass.text, newPass: _pass.text);
                             }
                           }
                         },
@@ -381,6 +381,9 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
 
   String passIsCorrect({required String? pass, required String field_type}) {
     if (pass != null && pass.isNotEmpty) {
+      if(field_type == 'Current'.tr){
+        return '';
+      }
       if (validationPassword(pass: pass)) {
         return '';
       } else {
