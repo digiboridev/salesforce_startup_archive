@@ -167,7 +167,11 @@ class ProfileScreen extends StatelessWidget {
   Container buildHeader() {
     return Container(
       height: Get.width * 0.3,
-      color: Color(0xff00458C),
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Color(0xff0D63BB), Color(0xff00458C)])),
       padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
       child: Column(
         children: [

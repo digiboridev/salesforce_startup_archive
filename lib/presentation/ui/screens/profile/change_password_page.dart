@@ -26,8 +26,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
   );
   String passError = '';
   bool showAsterisks = true;
-  final String password_condition =
-      'Password condition'.tr;
+  final String password_condition = 'Password condition'.tr;
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +110,8 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                   obscureText: showAsterisks,
                   controller: _pass,
                   validator: (val) {
-                    return passIsCorrect(pass: val, field_type: 'New'.tr).isEmpty
+                    return passIsCorrect(pass: val, field_type: 'New'.tr)
+                            .isEmpty
                         ? null
                         : '';
                   },
@@ -139,7 +139,8 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                   obscureText: showAsterisks,
                   controller: _confirmPass,
                   validator: (val) {
-                    return passIsCorrect(pass: val, field_type: 'New'.tr).isEmpty
+                    return passIsCorrect(pass: val, field_type: 'New'.tr)
+                            .isEmpty
                         ? null
                         : '';
                   },
@@ -286,8 +287,8 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                                 newPass: _pass.text,
                                 confirmPass: _confirmPass.text)) {
                               closePassError();
-                               userDataController.changePassword(
-                                 oldPass: _oldPass.text, newPass: _pass.text);
+                              userDataController.changePassword(
+                                  oldPass: _oldPass.text, newPass: _pass.text);
                             }
                           }
                         },
@@ -321,7 +322,11 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
   Container buildHeader() {
     return Container(
       height: Get.width * 0.3,
-      color: Color(0xff00458C),
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Color(0xff0D63BB), Color(0xff00458C)])),
       padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
       child: Column(
         children: [
@@ -381,7 +386,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
 
   String passIsCorrect({required String? pass, required String field_type}) {
     if (pass != null && pass.isNotEmpty) {
-      if(field_type == 'Current'.tr){
+      if (field_type == 'Current'.tr) {
         return '';
       }
       if (validationPassword(pass: pass)) {
