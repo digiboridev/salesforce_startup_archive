@@ -2,6 +2,7 @@ import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
 import 'package:***REMOVED***/presentation/controllers/material_count_controller.dart';
+import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/cart_top_icon.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/product_options.dart';
 import 'package:***REMOVED***/presentation/ui/screens/material_screen.dart';
@@ -21,6 +22,7 @@ class MaterialCard extends StatefulWidget {
 
 class MaterialCardState extends State<MaterialCard> {
   late MaterialCountController materialCountController;
+  UserDataController userDataController = Get.find();
 
   @override
   void initState() {
@@ -148,11 +150,27 @@ class MaterialCardState extends State<MaterialCard> {
                                               height: Get.width * 0.02,
                                             ),
                                             Row(children: [
-                                              Text(
-                                                "${widget.materiale.UnitNetPrice}",
-                                                style: TextStyle(
-                                                    color: MyColors.blue_0571E0,
-                                                    fontSize: 12),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    userDataController
+                                                        .currencyKey,
+                                                    style: TextStyle(
+                                                        color: MyColors
+                                                            .blue_0571E0,
+                                                        fontSize: 12),
+                                                  ),
+                                                  Text(
+                                                    "${widget.materiale.UnitNetPrice}",
+                                                    style: TextStyle(
+                                                        color: MyColors
+                                                            .blue_0571E0,
+                                                        fontSize: 12),
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                width: Get.width * 0.01,
                                               ),
                                               Container(
                                                   width: 50,
@@ -167,11 +185,22 @@ class MaterialCardState extends State<MaterialCard> {
                                                                   left:
                                                                       Get.width *
                                                                           0.00),
-                                                          child: Text(
-                                                            "${widget.materiale.UnitPrice}",
-                                                            style: TextStyle(
-                                                                color: MyColors
-                                                                    .gray_8B9298),
+                                                          child: Row(
+                                                            children: [
+                                                              Text(
+                                                                userDataController
+                                                                    .currencyKey,
+                                                                style: TextStyle(
+                                                                    color: MyColors
+                                                                        .gray_8B9298),
+                                                              ),
+                                                              Text(
+                                                                "${widget.materiale.UnitPrice}",
+                                                                style: TextStyle(
+                                                                    color: MyColors
+                                                                        .gray_8B9298),
+                                                              ),
+                                                            ],
                                                           )),
                                                       Container(
                                                         alignment:

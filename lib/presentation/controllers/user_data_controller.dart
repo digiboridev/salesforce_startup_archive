@@ -183,6 +183,15 @@ class UserDataController extends GetxController {
     }
   }
 
+  String get currencyKey {
+    var state = _userDataState.value;
+    if (state is UserDataCommonState) {
+      return state.userData.currencyKey;
+    } else {
+      throw Exception('Operation denied');
+    }
+  }
+
   Future changeLanguage({required Languages lang}) async {
     try {
       defaultDialog();
