@@ -1,6 +1,7 @@
 import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
+import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/material_count_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/cart_top_icon.dart';
@@ -22,7 +23,9 @@ class MaterialCard extends StatefulWidget {
 
 class MaterialCardState extends State<MaterialCard> {
   late MaterialCountController materialCountController;
+
   UserDataController userDataController = Get.find();
+  CustomerController customerController = Get.find();
 
   @override
   void initState() {
@@ -37,6 +40,18 @@ class MaterialCardState extends State<MaterialCard> {
     super.dispose();
     Get.delete<MaterialCountController>(
         tag: widget.materiale.hashCode.toString());
+  }
+
+  bool get hidePrices {
+    return customerController.selectedCustomer!.hidePrices;
+  }
+
+  num priceWithVAT({required num price}) {
+    if (customerController.selectedCustomer!.showPriceWithVAT) {
+      return price + customerController.selectedCustomer!.vat;
+    } else {
+      return price;
+    }
   }
 
   @override
@@ -138,95 +153,106 @@ class MaterialCardState extends State<MaterialCard> {
                                           width: 1,
                                           color: Colors.grey,
                                         ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text("Price per Unit".tr,
-                                                style: TextStyle(
-                                                    color: MyColors.blue_0050A2,
-                                                    fontSize: 12)),
-                                            SizedBox(
-                                              height: Get.width * 0.02,
-                                            ),
-                                            Row(children: [
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    userDataController
-                                                        .currencyKey,
-                                                    style: TextStyle(
-                                                        color: MyColors
-                                                            .blue_0571E0,
-                                                        fontSize: 12),
-                                                  ),
-                                                  Text(
-                                                    "${widget.materiale.UnitNetPrice}",
-                                                    style: TextStyle(
-                                                        color: MyColors
-                                                            .blue_0571E0,
-                                                        fontSize: 12),
-                                                  ),
-                                                ],
-                                              ),
+                                        if (!hidePrices)
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text("Price per Unit".tr,
+                                                  style: TextStyle(
+                                                      color:
+                                                          MyColors.blue_0050A2,
+                                                      fontSize: 12)),
                                               SizedBox(
-                                                width: Get.width * 0.01,
+                                                height: Get.width * 0.02,
                                               ),
-                                              Container(
-                                                  width: 50,
-                                                  child: Stack(
-                                                    alignment:
-                                                        Alignment.topCenter,
-                                                    fit: StackFit.loose,
-                                                    children: [
-                                                      Padding(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  left:
-                                                                      Get.width *
-                                                                          0.00),
-                                                          child: Row(
-                                                            children: [
-                                                              Text(
-                                                                userDataController
-                                                                    .currencyKey,
-                                                                style: TextStyle(
-                                                                    color: MyColors
-                                                                        .gray_8B9298),
-                                                              ),
-                                                              Text(
-                                                                "${widget.materiale.UnitPrice}",
-                                                                style: TextStyle(
-                                                                    color: MyColors
-                                                                        .gray_8B9298),
-                                                              ),
-                                                            ],
-                                                          )),
-                                                      Container(
-                                                        alignment:
-                                                            Alignment.center,
-                                                        height: 2.4,
-                                                        //width: Get.width*0.11,
-                                                        margin: EdgeInsets.only(
-                                                            top: 7,
-                                                            left: 5,
-                                                            right: 5),
-                                                        color: Colors.white,
-                                                        child: Container(
-                                                          height: 0.8,
-                                                          // width: Get.width*0.13,
+                                              Row(children: [
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      userDataController
+                                                          .currencyKey,
+                                                      style: TextStyle(
                                                           color: MyColors
-                                                              .gray_8B9298,
+                                                              .blue_0571E0,
+                                                          fontSize: 12),
+                                                    ),
+                                                    Text(
+                                                      priceWithVAT(
+                                                              price: widget
+                                                                  .materiale
+                                                                  .UnitNetPrice)
+                                                          .toString(),
+                                                      style: TextStyle(
+                                                          color: MyColors
+                                                              .blue_0571E0,
+                                                          fontSize: 12),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  width: Get.width * 0.01,
+                                                ),
+                                                Container(
+                                                    width: 50,
+                                                    child: Stack(
+                                                      alignment:
+                                                          Alignment.topCenter,
+                                                      fit: StackFit.loose,
+                                                      children: [
+                                                        Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    left: Get
+                                                                            .width *
+                                                                        0.00),
+                                                            child: Row(
+                                                              children: [
+                                                                Text(
+                                                                  userDataController
+                                                                      .currencyKey,
+                                                                  style: TextStyle(
+                                                                      color: MyColors
+                                                                          .gray_8B9298),
+                                                                ),
+                                                                Text(
+                                                                  priceWithVAT(
+                                                                          price: widget
+                                                                              .materiale
+                                                                              .UnitPrice)
+                                                                      .toString(),
+                                                                  style: TextStyle(
+                                                                      color: MyColors
+                                                                          .gray_8B9298),
+                                                                ),
+                                                              ],
+                                                            )),
+                                                        Container(
+                                                          alignment:
+                                                              Alignment.center,
+                                                          height: 2.4,
+                                                          //width: Get.width*0.11,
                                                           margin:
-                                                              EdgeInsets.all(
-                                                                  0.5),
+                                                              EdgeInsets.only(
+                                                                  top: 7,
+                                                                  left: 5,
+                                                                  right: 5),
+                                                          color: Colors.white,
+                                                          child: Container(
+                                                            height: 0.8,
+                                                            // width: Get.width*0.13,
+                                                            color: MyColors
+                                                                .gray_8B9298,
+                                                            margin:
+                                                                EdgeInsets.all(
+                                                                    0.5),
+                                                          ),
                                                         ),
-                                                      ),
-                                                    ],
-                                                  ))
-                                            ]),
-                                          ],
-                                        ),
+                                                      ],
+                                                    ))
+                                              ]),
+                                            ],
+                                          ),
                                       ],
                                     ))
                               ],
