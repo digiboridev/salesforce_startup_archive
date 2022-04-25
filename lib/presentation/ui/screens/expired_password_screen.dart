@@ -1,168 +1,314 @@
+import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
+import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
+import 'package:***REMOVED***/presentation/ui/widgets/custom_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ExpiredPasswordScreen extends StatelessWidget {
+class ExpiredPasswordScreen extends StatefulWidget {
   ExpiredPasswordScreen({Key? key}) : super(key: key);
 
+  @override
+  State<ExpiredPasswordScreen> createState() => _ExpiredPasswordScreenState();
+}
+
+class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
+  final CustomerController customerController = Get.find();
   final UserDataController userDataController = Get.find();
   final ConnectionService connectionService = Get.find();
 
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
-  final TextEditingController _oldPass = TextEditingController();
   final TextEditingController _pass = TextEditingController();
   final TextEditingController _confirmPass = TextEditingController();
+  final UnderlineInputBorder fieldBorder = UnderlineInputBorder(
+    borderSide: BorderSide(color: Color(0xff003E7E)),
+  );
+  String passError = '';
+  bool showAsterisks = true;
+  final String password_condition = 'Password condition'.tr;
+
+  bool validationPassword({required String? pass}) {
+    String pattern =
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+    final RegExp regExp = RegExp(pattern);
+    return regExp.hasMatch(pass ?? ' ');
+  }
+
+  void showPassError({required String error}) {
+    setState(() {
+      passError = error;
+    });
+  }
+
+  void closePassError() {
+    setState(() {
+      passError = '';
+    });
+  }
+
+  String passIsCorrect({required String? pass, required String field_type}) {
+    if (pass != null && pass.isNotEmpty) {
+      if (field_type == 'Current'.tr) {
+        return '';
+      }
+      if (validationPassword(pass: pass)) {
+        return '';
+      } else {
+        showPassError(error: password_condition);
+        return 'Error'.tr;
+      }
+    } else {
+      showPassError(error: '${field_type} ${'password is empty'.tr}');
+      return 'Error'.tr;
+    }
+  }
+
+  bool validationPassForSave({required newPass, required confirmPass}) {
+    if (newPass != confirmPass) {
+      showPassError(error: 'New password is not match'.tr);
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
           child: SizedBox.expand(
         child: Column(
-          children: [
-            buildHeader(),
-            Expanded(
-              child: Container(
-                width: Get.width,
-                color: Colors.white,
-                child: Form(
-                  key: _form,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: Get.width * 0.06,
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: Get.width * 0.06),
-                        child: Text(
-                          'Password change'.tr,
-                          style: TextStyle(
-                            fontSize: Get.width * 0.05,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: Get.width * 0.06,
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: Get.width * 0.06),
-                        child: TextFormField(
-                          validator: (val) {
-                            if (val == null || val.isEmpty) return 'Empty'.tr;
-                            return null;
-                          },
-                          controller: _oldPass,
-                          decoration: InputDecoration(
-                            hintText: 'Current password'.tr,
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xff003E7E)),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xff003E7E)),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: Get.width * 0.06,
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: Get.width * 0.06),
-                        child: TextFormField(
-                          controller: _pass,
-                          validator: (val) {
-                            if (val == null || val.isEmpty) return 'Empty'.tr;
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                            hintText: 'New password'.tr,
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xff003E7E)),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xff003E7E)),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: Get.width * 0.06,
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: Get.width * 0.06),
-                        child: TextFormField(
-                          controller: _confirmPass,
-                          validator: (val) {
-                            if (val == null || val.isEmpty) return 'Empty'.tr;
-                            if (val != _pass.text)
-                              return 'Passwords are not the same'.tr;
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                            hintText: 'New password again'.tr,
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xff003E7E)),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xff003E7E)),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Spacer(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              FocusScope.of(context).unfocus();
-                              bool valid = _form.currentState!.validate();
-                              if (!connectionService.hasConnection) {
-                                Get.snackbar(
-                                    'Error'.tr, 'Restricted for offline mode'.tr);
-                                return;
-                              }
-                              if (valid) {
-                                userDataController.changePassword(
-                                    oldPass: _oldPass.text,
-                                    newPass: _pass.text,
-                                    onlogin: true);
-                              }
-                            },
-                            child: Container(
-                              width: Get.width * 0.3,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                  color: Color(0xff00458C),
-                                  borderRadius:
-                                      BorderRadius.circular(Get.width * 0.06)),
-                              padding: EdgeInsets.symmetric(
-                                  vertical: Get.width * 0.03),
-                              child: Text(
-                                'Change'.tr,
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: Get.width * 0.06,
-                      ),
-                    ],
+          children: [buildHeader(), buildBody(context)],
+        ),
+      )),
+    );
+  }
+
+  Widget buildBody(BuildContext context) {
+    return Expanded(
+      child: Container(
+        width: Get.width,
+        color: Colors.white,
+        child: Form(
+          key: _form,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: Get.width * 0.06,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
+                child: Text(
+                  '🌞Good morning,'.tr,
+                  style: TextStyle(
+                    fontSize: Get.width * 0.06,
                   ),
                 ),
               ),
-            )
-          ],
+              SizedBox(
+                height: Get.width * 0.01,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
+                child: Text(
+                  'The password you entered is expired'.tr,
+                  style: TextStyle(
+                    fontSize: Get.width * 0.04,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: Get.width * 0.06,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
+                child: TextFormField(
+                  maxLength: 20,
+                  obscureText: showAsterisks,
+                  controller: _pass,
+                  validator: (val) {
+                    return passIsCorrect(pass: val, field_type: 'New'.tr)
+                            .isEmpty
+                        ? null
+                        : '';
+                  },
+                  decoration: InputDecoration(
+                      counterText: '',
+                      errorText: '',
+                      errorStyle: TextStyle(
+                        color: Colors.transparent,
+                        fontSize: 0,
+                      ),
+                      hintText: 'New password'.tr,
+                      enabledBorder: fieldBorder,
+                      focusedBorder: fieldBorder,
+                      errorBorder: fieldBorder,
+                      focusedErrorBorder: fieldBorder),
+                ),
+              ),
+              SizedBox(
+                height: Get.width * 0.06,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
+                child: TextFormField(
+                  maxLength: 20,
+                  obscureText: showAsterisks,
+                  controller: _confirmPass,
+                  validator: (val) {
+                    return passIsCorrect(pass: val, field_type: 'New'.tr)
+                            .isEmpty
+                        ? null
+                        : '';
+                  },
+                  decoration: InputDecoration(
+                      counterText: '',
+                      errorText: '',
+                      errorStyle: TextStyle(
+                        color: Colors.transparent,
+                        fontSize: 0,
+                      ),
+                      hintText: 'New password again'.tr,
+                      enabledBorder: fieldBorder,
+                      errorBorder: fieldBorder,
+                      focusedBorder: fieldBorder,
+                      focusedErrorBorder: fieldBorder),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                    left: Get.width * 0.06,
+                    right: Get.width * 0.06,
+                    top: Get.width * 0.07),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Password display in asterisks'.tr,
+                      style:
+                          TextStyle(color: MyColors.blue_003E7E, fontSize: 20),
+                    ),
+                    CustomSwitch(
+                        key: UniqueKey(),
+                        value: showAsterisks,
+                        enableColor: MyColors.blue_003E7E,
+                        disableColor: MyColors.gray_707070,
+                        width: Get.width * 0.1,
+                        height: Get.width * 0.1,
+                        switchHeight: Get.width * 0.05,
+                        switchWidth: Get.width * 0.05,
+                        onChanged: (value) {
+                          setState(() {
+                            showAsterisks = !showAsterisks;
+                          });
+                        })
+                  ],
+                ),
+              ),
+              Flexible(
+                  flex: 1,
+                  fit: FlexFit.tight,
+                  child: Container(
+                      width: Get.width,
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.only(
+                          left: Get.width * 0.06, right: Get.width * 0.06),
+                      child: Center(
+                          child: Visibility(
+                              visible: passError.isNotEmpty,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.error,
+                                    color: Colors.red,
+                                  ),
+                                  SizedBox(
+                                    width: Get.width * 0.01,
+                                  ),
+                                  Container(
+                                      width: Get.width * 0.6,
+                                      child: Text(
+                                        passError,
+                                        style: TextStyle(
+                                            color: Colors.red, fontSize: 20),
+                                      ))
+                                ],
+                              ))))),
+              Container(
+                width: Get.width,
+                alignment: Alignment.center,
+                child: GestureDetector(
+                  onTap: () {
+                    FocusScope.of(context).unfocus();
+                    bool valid = _form.currentState!.validate();
+
+                    if (!connectionService.hasConnection) {
+                      Get.snackbar(
+                          'Error'.tr, 'Restricted for offline mode'.tr);
+                      return;
+                    }
+                    if (valid) {
+                      if (validationPassForSave(
+                          newPass: _pass.text,
+                          confirmPass: _confirmPass.text)) {
+                        closePassError();
+                        userDataController.changePassword(
+                            oldPass: '', newPass: _pass.text, onlogin: true);
+                      }
+                    }
+                  },
+                  child: Container(
+                    width: Get.width / 1.4,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: Color(0xff00458C),
+                        borderRadius: BorderRadius.circular(Get.width * 0.06)),
+                    padding: EdgeInsets.symmetric(vertical: Get.width * 0.03),
+                    child: Text(
+                      'Send'.tr,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: Get.width * 0.04,
+              ),
+              Container(
+                width: Get.width,
+                alignment: Alignment.center,
+                child: GestureDetector(
+                  onTap: () {
+                    userDataController.logout();
+                  },
+                  child: Container(
+                    width: Get.width / 2.4,
+                    alignment: Alignment.center,
+                    // decoration: BoxDecoration(
+                    //     color: MyColors.gray_EAF2FA,
+                    //     borderRadius: BorderRadius.circular(Get.width * 0.06)),
+                    padding: EdgeInsets.symmetric(
+                      vertical: Get.width * 0.03,
+                    ),
+                    child: Text(
+                      'Back to the login screen'.tr,
+                      style: TextStyle(color: MyColors.blue_003E7E),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: Get.width * 0.06,
+              ),
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 

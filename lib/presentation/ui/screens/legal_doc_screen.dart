@@ -25,6 +25,7 @@ class _LegalDocScreenState extends State<LegalDocScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
           child: Stack(
         children: [
@@ -32,25 +33,29 @@ class _LegalDocScreenState extends State<LegalDocScreen> {
             children: [
               buildHeader(),
               Expanded(
-                  child: WebView(
-                javascriptMode: JavascriptMode.unrestricted,
-                initialUrl: widget.legalDocLink.toString(),
-                onPageFinished: (url) {
-                  print(url);
-                },
-                onPageStarted: (url) {
-                  print(url);
-                },
-                onProgress: (progress) {
-                  print(progress);
-                },
-                onWebResourceError: (e) {
-                  print(e);
-                  setState(() => error = true);
-                },
-                onWebViewCreated: (controller) {
-                  webViewController = controller;
-                },
+                  child: Padding(
+                padding: EdgeInsets.all(Get.width * 0.06),
+                child: WebView(
+                  zoomEnabled: false,
+                  javascriptMode: JavascriptMode.unrestricted,
+                  initialUrl: widget.legalDocLink.toString(),
+                  onPageFinished: (url) {
+                    print(url);
+                  },
+                  onPageStarted: (url) {
+                    print(url);
+                  },
+                  onProgress: (progress) {
+                    print(progress);
+                  },
+                  onWebResourceError: (e) {
+                    print(e);
+                    setState(() => error = true);
+                  },
+                  onWebViewCreated: (controller) {
+                    webViewController = controller;
+                  },
+                ),
               )),
               GestureDetector(
                 onTap: () => widget.callback(),
