@@ -77,6 +77,8 @@ class UserDataController extends GetxController {
       _userDataState.value = UserDataInitialState();
     }
 
+    _sfsdkService.checkVersion();
+
     // emit loading state
     _userDataState.value = UserDataLoadingState();
 
