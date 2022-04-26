@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller_states.dart';
@@ -37,64 +38,74 @@ class PersonalDetailsPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: Get.width * 0.06,
-              ),
+              Spacer(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
                 child: Text(
                   'Personal details'.tr,
                   style: TextStyle(
-                    fontSize: Get.width * 0.05,
-                  ),
+                      fontSize: Get.width * 0.06, color: MyColors.blue_003E7E),
                 ),
               ),
-              SizedBox(
-                height: Get.width * 0.06,
+              Spacer(
+                flex: 2,
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      '${'Name'.tr}: ' + userDataState.userData.contactName,
-                      style: TextStyle(fontSize: Get.width * 0.04),
-                    ),
+                    buildRow(
+                        text1: 'First name'.tr,
+                        text2: userDataState.userData.contactFirstName),
                     SizedBox(
-                      height: Get.width * 0.01,
+                      height: Get.width * 0.12,
                     ),
-                    Text(
-                      '${'First name'.tr}: ' +
-                          userDataState.userData.contactFirstName,
-                      style: TextStyle(fontSize: Get.width * 0.04),
-                    ),
+                    buildRow(
+                        text1: 'Last name'.tr,
+                        text2: userDataState.userData.contactLastName),
                     SizedBox(
-                      height: Get.width * 0.01,
+                      height: Get.width * 0.12,
                     ),
-                    Text(
-                      '${'Last name'.tr}: ' +
-                          userDataState.userData.contactLastName,
-                      style: TextStyle(fontSize: Get.width * 0.04),
-                    ),
+                    buildRow(
+                        text1: 'Phone'.tr,
+                        text2: userDataState.userData.contactMobile),
                     SizedBox(
-                      height: Get.width * 0.01,
+                      height: Get.width * 0.12,
                     ),
-                    Text(
-                      '${'Phone'.tr}: ' + userDataState.userData.contactMobile,
-                      style: TextStyle(fontSize: Get.width * 0.04),
-                    ),
-                    SizedBox(
-                      height: Get.width * 0.01,
-                    ),
-                    Text(
-                      '${'Email'.tr}: ' + userDataState.userData.contactEmail,
-                      style: TextStyle(fontSize: Get.width * 0.04),
-                    ),
+                    buildRow(
+                        text1: 'Email'.tr,
+                        text2: userDataState.userData.contactEmail),
                   ],
                 ),
               ),
-              Spacer(),
+              Spacer(
+                flex: 5,
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                  left: Get.width * 0.06,
+                  right: Get.width * 0.06,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/icons/phone.png',
+                      width: Get.width * 0.03,
+                      height: Get.width * 0.03,
+                    ),
+                    SizedBox(
+                      width: Get.width * 0.01,
+                    ),
+                    Container(
+                        child: Text(
+                      'For details please contact the hotline'.tr,
+                      style: TextStyle(color: MyColors.blue_003E7E),
+                    ))
+                  ],
+                ),
+              ),
+              SizedBox(height: Get.width * 0.04),
               GestureDetector(
                 onTap: () => Get.back(),
                 child: Container(
@@ -123,6 +134,33 @@ class PersonalDetailsPage extends StatelessWidget {
     } else {
       return SizedBox();
     }
+  }
+
+  Container buildRow({
+    required String text1,
+    required String text2,
+  }) {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: Get.width * 0.01),
+      decoration: BoxDecoration(
+          border: Border(
+              bottom: BorderSide(
+                  color: MyColors.blue_003E7E, width: Get.width * 0.003))),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            text1,
+            style: TextStyle(
+                fontSize: Get.width * 0.042, color: MyColors.blue_003E7E),
+          ),
+          Text(
+            text2,
+            style: TextStyle(fontSize: Get.width * 0.042, color: Colors.grey),
+          ),
+        ],
+      ),
+    );
   }
 
   Container buildHeader() {

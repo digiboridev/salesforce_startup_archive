@@ -78,8 +78,14 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
                         child: Row(
                           children: [
                             selectLanguage == e
-                                ? Icon(Icons.stop_circle_outlined)
-                                : Icon(Icons.circle_outlined),
+                                ? Image.asset(
+                                    'assets/icons/radio_s.png',
+                                    width: Get.width * 0.05,
+                                  )
+                                : Image.asset(
+                                    'assets/icons/radio.png',
+                                    width: Get.width * 0.05,
+                                  ),
                             SizedBox(
                               width: Get.width * 0.02,
                             ),
