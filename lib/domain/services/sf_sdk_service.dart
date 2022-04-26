@@ -30,7 +30,7 @@ class SFSDKService {
 
     try {
       Map<String, dynamic> response = await SalesforcePlugin.sendRequest(
-        endPoint: ***REMOVED***Endpoint,
+        endPoint: ***REMOVED***,
         path: '/DiplomatAppVersion/V2/Android',
         method: 'GET',
       ) as Map<String, dynamic>;
