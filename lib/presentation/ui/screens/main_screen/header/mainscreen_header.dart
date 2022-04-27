@@ -28,6 +28,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
 
   FocusNode searchFocusNode = FocusNode();
   bool searchHasFocus = false;
+  String searchBranchCondition = '';
 
   @override
   void initState() {
@@ -55,7 +56,10 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
           return AnimatedContainer(
             curve: Curves.easeInOut,
             duration: Duration(milliseconds: 300),
-            height: widget.headerHeight,
+            height: mainScreeenHeaderController.mainScreeenHeaderState.value
+                    is! MSHShowContactus
+                ? widget.headerHeight
+                : widget.headerHeight / 1.5,
             // color: Colors.red,
             decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -107,37 +111,42 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                 Spacer(
                   flex: 1,
                 ),
-                searchBar(),
+                if (mainScreeenHeaderController.mainScreeenHeaderState.value
+                    is! MSHShowContactus)
+                  searchBar(),
                 Spacer(
                   flex: 1,
                 ),
-                AnimatedContainer(
-                  curve: Curves.easeInOut,
-                  duration: Duration(milliseconds: 300),
-                  height:
-                      mainScreeenHeaderController.enableBrunchSelection.value
-                          ? Get.width * 0.05
-                          : 0,
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        mainScreeenHeaderController.showBrunchSelection();
-                        searchFocusNode.unfocus();
-                      });
-                    },
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Obx(() => Text(
-                            'Brunch: ' +
-                                customerController
-                                    .selectedCustomer!.customerName,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: Get.width * 0.035),
-                          )),
+                if (mainScreeenHeaderController.mainScreeenHeaderState.value
+                    is! MSHShowContactus)
+                  AnimatedContainer(
+                    curve: Curves.easeInOut,
+                    duration: Duration(milliseconds: 300),
+                    height:
+                        mainScreeenHeaderController.enableBrunchSelection.value
+                            ? Get.width * 0.05
+                            : 0,
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          searchBranchCondition = '';
+                          mainScreeenHeaderController.showBrunchSelection();
+                          searchFocusNode.unfocus();
+                        });
+                      },
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Obx(() => Text(
+                              'Brunch: ' +
+                                  customerController
+                                      .selectedCustomer!.customerName,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: Get.width * 0.035),
+                            )),
+                      ),
                     ),
                   ),
-                ),
                 SizedBox(
                   height: Get.width * 0.04,
                 ),
@@ -278,60 +287,122 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
           SizedBox(
             width: Get.width * 0.015,
           ),
-        Expanded(
-          child: Container(
-            height: Get.width * 0.1,
-            decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.8),
-                borderRadius: BorderRadius.circular(Get.width * 0.1)),
-            child: Row(
-              children: [
-                SizedBox(
-                  width: Get.width * 0.03,
-                ),
-                Image.asset(
-                  'assets/icons/search.png',
-                  width: Get.width * 0.04,
-                ),
-                SizedBox(
-                  width: Get.width * 0.03,
-                ),
-                Expanded(
-                    child: TextField(
-                  controller: searchController.textEditingController,
-                  focusNode: searchFocusNode,
-                  keyboardType: TextInputType.name,
-                  onChanged: (value) {},
-                  textAlignVertical: TextAlignVertical.top,
-                  decoration: InputDecoration(
-                    isCollapsed: true,
-                    //isDense: true,
-                    alignLabelWithHint: true,
-
-                    labelText: 'Search product'.tr,
-                    labelStyle: TextStyle(color: Colors.black.withOpacity(0.6)),
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
-                    border: InputBorder.none,
-
-                    focusedBorder: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                    errorBorder: InputBorder.none,
-
-                    disabledBorder: InputBorder.none,
-                    contentPadding: EdgeInsets.all(0),
+        if (mainScreeenHeaderController.mainScreeenHeaderState.value
+            is MSHShowBrunch)
+          Expanded(
+            child: Container(
+              height: Get.width * 0.1,
+              decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.8),
+                  borderRadius: BorderRadius.circular(Get.width * 0.1)),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: Get.width * 0.03,
                   ),
-                )),
-                Image.asset(
-                  'assets/icons/barcode.png',
-                  width: Get.width * 0.06,
-                ),
-                SizedBox(
-                  width: Get.width * 0.03,
-                ),
-              ],
+                  Image.asset(
+                    'assets/icons/search.png',
+                    width: Get.width * 0.04,
+                  ),
+                  SizedBox(
+                    width: Get.width * 0.03,
+                  ),
+                  Expanded(
+                      child: TextField(
+                    key: Key('searchbranch'),
+                    // controller: searchController.textEditingController,
+                    // focusNode: searchFocusNode,
+                    keyboardType: TextInputType.name,
+                    onChanged: (value) {
+                      setState(() {
+                        searchBranchCondition = value;
+                      });
+                    },
+                    textAlignVertical: TextAlignVertical.top,
+                    decoration: InputDecoration(
+                      isCollapsed: true,
+                      //isDense: true,
+                      alignLabelWithHint: true,
+
+                      labelText: 'Search branch'.tr,
+                      labelStyle:
+                          TextStyle(color: Colors.black.withOpacity(0.6)),
+                      floatingLabelBehavior: FloatingLabelBehavior.never,
+                      border: InputBorder.none,
+
+                      focusedBorder: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      errorBorder: InputBorder.none,
+
+                      disabledBorder: InputBorder.none,
+                      contentPadding: EdgeInsets.all(0),
+                    ),
+                  )),
+                  SizedBox(
+                    width: Get.width * 0.03,
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
+        if (mainScreeenHeaderController.mainScreeenHeaderState.value
+            is! MSHShowBrunch)
+          Expanded(
+            child: Container(
+              height: Get.width * 0.1,
+              decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.8),
+                  borderRadius: BorderRadius.circular(Get.width * 0.1)),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: Get.width * 0.03,
+                  ),
+                  Image.asset(
+                    'assets/icons/search.png',
+                    width: Get.width * 0.04,
+                  ),
+                  SizedBox(
+                    width: Get.width * 0.03,
+                  ),
+                  Expanded(
+                      child: TextField(
+                    key: Key('searchproduct'),
+                    controller: searchController.textEditingController,
+                    focusNode: searchFocusNode,
+                    keyboardType: TextInputType.name,
+                    onChanged: (value) {},
+                    textAlignVertical: TextAlignVertical.top,
+                    decoration: InputDecoration(
+                      isCollapsed: true,
+                      //isDense: true,
+                      alignLabelWithHint: true,
+
+                      labelText: 'Search product'.tr,
+                      labelStyle:
+                          TextStyle(color: Colors.black.withOpacity(0.6)),
+                      floatingLabelBehavior: FloatingLabelBehavior.never,
+                      border: InputBorder.none,
+
+                      focusedBorder: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      errorBorder: InputBorder.none,
+
+                      disabledBorder: InputBorder.none,
+                      contentPadding: EdgeInsets.all(0),
+                    ),
+                  )),
+                  Image.asset(
+                    'assets/icons/barcode.png',
+                    width: Get.width * 0.06,
+                  ),
+                  SizedBox(
+                    width: Get.width * 0.03,
+                  ),
+                ],
+              ),
+            ),
+          ),
       ],
     );
   }
@@ -634,7 +705,11 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                   child: Container(
                 child: ListView(
                   physics: BouncingScrollPhysics(),
-                  children: customerController.relatedConsumers.map((e) {
+                  children: customerController.relatedConsumers
+                      .where((element) => element.customerName
+                          .toLowerCase()
+                          .contains(searchBranchCondition.toLowerCase()))
+                      .map((e) {
                     return Padding(
                       padding: EdgeInsets.all(Get.width * 0.01),
                       child: GestureDetector(

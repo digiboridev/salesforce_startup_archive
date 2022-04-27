@@ -19,6 +19,7 @@ class SearchController extends GetxController {
     textEditingController.addListener(() {
       if (textEditingController.text.isEmpty) {
         findedMaterials.clear();
+        findedSimilarMaterials.clear();
         return;
       }
       List<Materiale> finded = getMaterials()

@@ -29,7 +29,7 @@ class CustomerController extends GetxController {
 
   // variables
   RxList<RelatedConsumer> _relatedConsumers = RxList();
-  List get relatedConsumers => _relatedConsumers;
+  List<RelatedConsumer> get relatedConsumers => _relatedConsumers;
 
   RxnString _selectedCustomerSAP = RxnString();
   String? get selectedCustomerSAP => _selectedCustomerSAP.value;

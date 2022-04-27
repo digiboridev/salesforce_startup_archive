@@ -3,17 +3,22 @@ import 'package:***REMOVED***/data/datasouces/contact_us_local_datasource.dart';
 import 'package:***REMOVED***/data/datasouces/contact_us_remote_datasource.dart';
 import 'package:***REMOVED***/data/datasouces/customers_local_datasource.dart';
 import 'package:***REMOVED***/data/datasouces/customers_remote_datasource.dart';
+import 'package:***REMOVED***/data/datasouces/favorites_local_datasource.dart';
+import 'package:***REMOVED***/data/datasouces/favorites_remote_datasource.dart';
 import 'package:***REMOVED***/data/datasouces/materials_local_datasource.dart';
 import 'package:***REMOVED***/data/datasouces/materials_remote_datasource.dart';
 import 'package:***REMOVED***/data/datasouces/user_data_local_datasource.dart';
 import 'package:***REMOVED***/data/datasouces/user_data_remote_datasource.dart';
 import 'package:***REMOVED***/data/repositories/contact_us_repository.dart';
 import 'package:***REMOVED***/data/repositories/customers_repository.dart';
+import 'package:***REMOVED***/data/repositories/favorites_repository.dart';
 import 'package:***REMOVED***/data/repositories/materials_repository.dart';
 import 'package:***REMOVED***/data/repositories/user_data_repository.dart';
 import 'package:***REMOVED***/domain/services/cache_ferchig_service.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
+import 'package:***REMOVED***/domain/usecases/favorites/get_favorites_and_cache.dart';
+import 'package:***REMOVED***/domain/usecases/favorites/get_favorites_sync_time.dart';
 import 'package:***REMOVED***/domain/usecases/user/accept_legal_doc.dart';
 import 'package:***REMOVED***/domain/usecases/user/change_language.dart';
 import 'package:***REMOVED***/domain/usecases/user/change_password.dart';
@@ -74,6 +79,10 @@ Future injectDependency() async {
       materialsLocalDataSource: MaterialsLocalDataSourceImpl(),
       materialsRemoteDatasource: MaterialsRemoteDatasourceImpl()));
 
+  FavoritesRepository favoritesRepository = Get.put(FavoritesRepositoryImpl(
+      favoritesRemoteDatasource: FavoritesRemoteDatasourceImpl(),
+      favoritesLocalDatasource: FavoritesLocalDatasourceImpl()));
+
   // Use cases
   //-- userdata
   Get.put<GetUserDataAndCache>(GetUserDataAndCache(userDataRepository));
@@ -94,6 +103,10 @@ Future injectDependency() async {
   //-- materials
   Get.put<GetMaterialsAndCache>(GetMaterialsAndCache(materialsRepository));
   Get.put<GetMaterialsSyncTime>(GetMaterialsSyncTime(materialsRepository));
+
+  // Favorites
+  Get.put<GetFavoritesAndCache>(GetFavoritesAndCache(favoritesRepository));
+  Get.put<GetFavoritesSyncTime>(GetFavoritesSyncTime(favoritesRepository));
 
   print('injected dependencies...');
 }
