@@ -1,3 +1,5 @@
+import 'package:***REMOVED***/domain/entities/materials/alternative_item.dart';
+import 'package:***REMOVED***/domain/entities/materials/material.dart';
 import 'package:***REMOVED***/domain/services/cache_ferchig_service.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
@@ -75,5 +77,18 @@ class MaterialsCatalogController extends GetxController {
 
   Future<DateTime> getLastSync() async {
     return _getMaterialsSyncTime.call(_customerController.selectedCustomerSAP!);
+  }
+
+  List<Materiale> getAlternativeMaterials(
+      {required List<AlternativeItem> altItems}) {
+    MaterialsCatalogState state = materialsCatalogState.value;
+    if (state is MCSCommon) {
+      return state.catalog.materials
+          .where(
+              (element) => altItems.map((e) => e.SFId).contains(element.SFId))
+          .toList();
+    } else {
+      throw Exception('Operation denied');
+    }
   }
 }
