@@ -1,6 +1,7 @@
 import 'package:***REMOVED***/domain/entities/materials/brand.dart';
 import 'package:***REMOVED***/domain/entities/materials/classification.dart';
 import 'package:***REMOVED***/domain/entities/materials/family.dart';
+import 'package:***REMOVED***/domain/entities/materials/hierarchy.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
 import 'package:***REMOVED***/domain/entities/materials/materials_catalog.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalog_page_states.dart';
@@ -23,7 +24,10 @@ class CatalogPageController extends GetxController {
   late final Rx<CatalogPageState> _state;
   CatalogPageState get state => _state.value;
 
-  // Classification variables
+  // variables
+
+  List<Hierarchy> get hierarhys => _materialsCatalog.value.hierarchys;
+
   List<Classification> get getClassifications =>
       _materialsCatalog.value.classifications;
 
@@ -85,26 +89,69 @@ class CatalogPageController extends GetxController {
   onBrandSelect({required Brand brand}) {
     assert(_selectedClassification.value != null);
 
+    List<Materiale> materials = _materialsByClassification.where((element) {
+      if (element.BrandId == brand.SFId) {
+        return true;
+      }
+      return false;
+    }).toList();
+
+    Set<Hierarchy> avaliableHierarhys = Set();
+
+    materials.where((m) => m.Hierarchy4 != null).forEach((mm) {
+      Hierarchy? h = hierarhys.firstWhereOrNull((h) => h.SFId == mm);
+      if (h != null) {
+        avaliableHierarhys.add(h);
+      }
+    });
+
     _state.value = ShowMaterialsByBrand(
         brand: brand,
-        materials: _materialsByClassification.where((element) {
-          if (element.BrandId == brand.SFId) {
-            return true;
-          }
-          return false;
-        }).toList());
+        avaliableHierarhys: avaliableHierarhys.toList(),
+        materials: materials,
+        hierarhyFilter: null,
+        showFilter: false);
   }
 
   onFamilySelect({required Family family}) {
     assert(_selectedClassification.value != null);
 
+    List<Materiale> materials = _materialsByClassification.where((element) {
+      if (element.FamilyId == family.SFId) {
+        return true;
+      }
+      return false;
+    }).toList();
+
+    Set<Hierarchy> avaliableHierarhys = Set();
+
+    materials.where((m) => m.Hierarchy4 != null).forEach((mm) {
+      Hierarchy? h = hierarhys.firstWhereOrNull((h) => h.SFId == mm);
+      if (h != null) {
+        avaliableHierarhys.add(h);
+      }
+    });
+
     _state.value = ShowMaterialsByFamily(
         family: family,
-        materials: _materialsByClassification.where((element) {
-          if (element.FamilyId == family.SFId) {
-            return true;
-          }
-          return false;
-        }).toList());
+        materials: materials,
+        avaliableHierarhys: avaliableHierarhys.toList(),
+        hierarhyFilter: null,
+        showFilter: false);
+  }
+
+  onFilterClick() {
+    var oldState = state;
+    if (oldState is HierarhableMaterials) {
+      _state.value = oldState.copyWith(showFilter: !oldState.showFilter);
+    }
+  }
+
+  changeHierarhyFilter({required Hierarchy? hierarchy}) {
+    var oldState = state;
+
+    if (oldState is HierarhableMaterials) {
+      _state.value = oldState.copyWith(hierarhyFilter: hierarchy);
+    }
   }
 }

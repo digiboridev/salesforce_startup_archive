@@ -78,7 +78,7 @@ class UserDataController extends GetxController {
       _userDataState.value = UserDataInitialState();
     }
 
-    AppVersionService.checkVersion();
+    // AppVersionService.checkVersion();
 
     // emit loading state
     _userDataState.value = UserDataLoadingState();

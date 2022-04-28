@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/domain/entities/materials/brand.dart';
 import 'package:***REMOVED***/domain/entities/materials/family.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
@@ -43,39 +44,133 @@ class _CatalogPageState extends State<CatalogPage> {
     return Obx(() {
       return Container(
         width: Get.width,
-        child: Column(
+        child: Stack(
           children: [
-            buildClassificationRow(),
-            AnimatedCrossFade(
-                firstChild: SizedBox(),
-                secondChild: buildBrandsOrFamilySelection(),
-                crossFadeState: catalogPageController.state is ShowAllMaterials
-                    ? CrossFadeState.showFirst
-                    : CrossFadeState.showSecond,
-                duration: Duration(milliseconds: 300)),
-            Expanded(
-              child: AnimatedSwitcher(
-                switchInCurve: Curves.easeOut,
-                key: Key('asd'),
-                duration: Duration(milliseconds: 300),
-                child: content,
-                transitionBuilder: (child, animation) {
-                  final offsetAnimation = Tween(
-                    begin: const Offset(1.0, 0.0),
-                    end: const Offset(0.0, 0.0),
-                  ).animate(animation);
-                  return ClipRect(
-                    child: SlideTransition(
-                      position: offsetAnimation,
-                      child: child,
-                    ),
-                  );
-                },
-              ),
+            Column(
+              children: [
+                buildClassificationRow(),
+                AnimatedCrossFade(
+                    firstChild: SizedBox(),
+                    secondChild: buildBrandsOrFamilySelection(),
+                    crossFadeState:
+                        catalogPageController.state is ShowAllMaterials
+                            ? CrossFadeState.showFirst
+                            : CrossFadeState.showSecond,
+                    duration: Duration(milliseconds: 300)),
+                Expanded(
+                  child: AnimatedSwitcher(
+                    switchInCurve: Curves.easeOut,
+                    duration: Duration(milliseconds: 300),
+                    child: content,
+                    transitionBuilder: (child, animation) {
+                      final offsetAnimation = Tween(
+                        begin: const Offset(1.0, 0.0),
+                        end: const Offset(0.0, 0.0),
+                      ).animate(animation);
+                      return ClipRect(
+                        child: SlideTransition(
+                          position: offsetAnimation,
+                          child: child,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
+            buildFilterOverlay()
           ],
         ),
       );
+    });
+  }
+
+  Builder buildFilterOverlay() {
+    return Builder(builder: (context) {
+      CatalogPageState state = catalogPageController.state;
+      if (state is HierarhableMaterials && state.showFilter) {
+        return Container(
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(Get.width * 0.03),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black.withOpacity(0.2),
+                    spreadRadius: Get.width * 0.01,
+                    blurRadius: Get.width * 0.03)
+              ],
+            ),
+            margin: EdgeInsets.only(
+                top: Get.width * 0.18,
+                left: Get.width * 0.06,
+                right: Get.width * 0.06,
+                bottom: Get.width * 0.3),
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: Get.width * 0.03, vertical: Get.width * 0.02),
+                  child: Row(
+                    children: [
+                      Text(
+                        'Filter by',
+                        style: TextStyle(
+                            color: MyColors.blue_003E7E,
+                            fontSize: Get.width * 0.04),
+                      ),
+                      Spacer(),
+                      GestureDetector(
+                        onTap: () => catalogPageController.onFilterClick(),
+                        child: Icon(
+                          Icons.close_rounded,
+                          color: MyColors.blue_003E7E,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: ListView(
+                    physics: BouncingScrollPhysics(),
+                    children: state.avaliableHierarhys.map((e) {
+                      return Builder(builder: (context) {
+                        bool selected = false;
+                        CatalogPageState state = catalogPageController.state;
+                        if (state is HierarhableMaterials) {
+                          if (state.hierarhyFilter == e) {
+                            selected = true;
+                          }
+                        }
+
+                        return GestureDetector(
+                          onTap: () => catalogPageController
+                              .changeHierarhyFilter(hierarchy: e),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: Get.width * 0.03,
+                                vertical: Get.width * 0.02),
+                            child: Text(
+                              e.Display,
+                              style: TextStyle(
+                                  color: selected
+                                      ? Colors.blue
+                                      : MyColors.blue_003E7E,
+                                  fontSize: Get.width * 0.036),
+                            ),
+                          ),
+                        );
+                      });
+                    }).toList(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      } else {
+        return SizedBox();
+      }
     });
   }
 
@@ -94,12 +189,12 @@ class _CatalogPageState extends State<CatalogPage> {
 
     if (state is ShowMaterialsByBrand) {
       return buildMaterialsByBrand(
-          materials: state.materials, brand: state.brand);
+          materials: state.materialsByFilter, brand: state.brand);
     }
 
     if (state is ShowMaterialsByFamily) {
       return buildMaterialsByFamily(
-          materials: state.materials, family: state.family);
+          materials: state.materialsByFilter, family: state.family);
     }
 
     return SizedBox();
@@ -262,6 +357,24 @@ class _CatalogPageState extends State<CatalogPage> {
                   )),
             ),
             Spacer(),
+            Builder(builder: (context) {
+              CatalogPageState state = catalogPageController.state;
+              if (state is HierarhableMaterials &&
+                  state.avaliableHierarhys.isNotEmpty) {
+                return GestureDetector(
+                    onTap: () {
+                      catalogPageController.onFilterClick();
+                    },
+                    child: Text(state.hierarhyFilter != null
+                        ? state.hierarhyFilter!.Display
+                        : 'Filtering'));
+              } else {
+                return SizedBox();
+              }
+            }),
+            SizedBox(
+              width: Get.width * 0.06,
+            )
           ],
         ));
   }
@@ -284,7 +397,6 @@ class _CatalogPageState extends State<CatalogPage> {
   Widget buildMaterialsByBrand(
       {required List<Materiale> materials, required Brand brand}) {
     return Container(
-      key: UniqueKey(),
       child: Column(
         children: [
           CachedImage(
@@ -292,15 +404,19 @@ class _CatalogPageState extends State<CatalogPage> {
               width: Get.width * 0.15,
               height: Get.width * 0.15),
           Expanded(
-            child: ListView(
-              physics: BouncingScrollPhysics(),
-              cacheExtent: Get.height * 2,
-              children: materials.map((e) {
-                return MaterialCard(
-                  materiale: e,
-                );
-              }).toList(),
-            ),
+            child: materials.isEmpty
+                ? Center(
+                    child: Text('No materials'),
+                  )
+                : ListView(
+                    physics: BouncingScrollPhysics(),
+                    cacheExtent: Get.height * 2,
+                    children: materials.map((e) {
+                      return MaterialCard(
+                        materiale: e,
+                      );
+                    }).toList(),
+                  ),
           ),
         ],
       ),
@@ -310,7 +426,6 @@ class _CatalogPageState extends State<CatalogPage> {
   Widget buildMaterialsByFamily(
       {required List<Materiale> materials, required Family family}) {
     return Container(
-      key: UniqueKey(),
       child: Column(
         children: [
           CachedImage(
@@ -318,15 +433,19 @@ class _CatalogPageState extends State<CatalogPage> {
               width: Get.width * 0.15,
               height: Get.width * 0.15),
           Expanded(
-            child: ListView(
-              physics: BouncingScrollPhysics(),
-              cacheExtent: Get.height * 2,
-              children: materials.map((e) {
-                return MaterialCard(
-                  materiale: e,
-                );
-              }).toList(),
-            ),
+            child: materials.isEmpty
+                ? Center(
+                    child: Text('No materials'),
+                  )
+                : ListView(
+                    physics: BouncingScrollPhysics(),
+                    cacheExtent: Get.height * 2,
+                    children: materials.map((e) {
+                      return MaterialCard(
+                        materiale: e,
+                      );
+                    }).toList(),
+                  ),
           ),
         ],
       ),
