@@ -26,292 +26,301 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
   );
   String passError = '';
   bool showAsterisks = true;
-  final String password_condition =
-      'Password condition'.tr;
+  final String password_condition = 'Password condition'.tr;
 
   @override
   Widget build(BuildContext context) {
     print(userDataController.avaliableLanguages);
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      // resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
       body: SafeArea(
-          child: SingleChildScrollView(
-              physics: NeverScrollableScrollPhysics(),
-              child: Container(
-                color: Colors.white,
-                height: Get.height * 0.95,
-                width: Get.width,
-                child: Column(
-                  children: [buildHeader(), buildBody(context)],
-                ),
-              ))),
+          child: SizedBox.expand(
+        child: Column(
+          children: [buildHeader(), buildBody(context)],
+        ),
+      )),
     );
   }
 
   Widget buildBody(BuildContext context) {
     print(userDataController.currentLanguage);
     return Expanded(
-      child: Container(
-        width: Get.width,
-        color: Colors.white,
-        child: Form(
-          key: _form,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: Get.width * 0.06,
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
-                child: Text(
-                  'Password change'.tr,
-                  style: TextStyle(
-                    fontSize: Get.width * 0.05,
+      child: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Container(
+          width: Get.width,
+          height: Get.height - Get.width * 0.4,
+          color: Colors.white,
+          child: Form(
+            key: _form,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Spacer(),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
+                  child: Text(
+                    'Password change'.tr,
+                    style: TextStyle(
+                      fontSize: Get.width * 0.05,
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: Get.width * 0.06,
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
-                child: TextFormField(
-                  maxLength: 20,
-                  obscureText: showAsterisks,
-                  validator: (val) {
-                    return passIsCorrect(pass: val, field_type: 'Current'.tr)
-                            .isEmpty
-                        ? null
-                        : '';
-                  },
-                  controller: _oldPass,
-                  decoration: InputDecoration(
-                      counterText: '',
-                      errorText: '',
-                      errorStyle: TextStyle(
-                        color: Colors.transparent,
-                        fontSize: 0,
-                      ),
-                      hintText: 'Current password'.tr,
-                      enabledBorder: fieldBorder,
-                      focusedBorder: fieldBorder,
-                      errorBorder: fieldBorder,
-                      focusedErrorBorder: fieldBorder),
+                Spacer(
+                  flex: 2,
                 ),
-              ),
-              SizedBox(
-                height: Get.width * 0.06,
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
-                child: TextFormField(
-                  maxLength: 20,
-                  obscureText: showAsterisks,
-                  controller: _pass,
-                  validator: (val) {
-                    return passIsCorrect(pass: val, field_type: 'New'.tr).isEmpty
-                        ? null
-                        : '';
-                  },
-                  decoration: InputDecoration(
-                      counterText: '',
-                      errorText: '',
-                      errorStyle: TextStyle(
-                        color: Colors.transparent,
-                        fontSize: 0,
-                      ),
-                      hintText: 'New password'.tr,
-                      enabledBorder: fieldBorder,
-                      focusedBorder: fieldBorder,
-                      errorBorder: fieldBorder,
-                      focusedErrorBorder: fieldBorder),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
+                  child: TextFormField(
+                    maxLength: 20,
+                    obscureText: showAsterisks,
+                    validator: (val) {
+                      return passIsCorrect(pass: val, field_type: 'Current'.tr)
+                              .isEmpty
+                          ? null
+                          : '';
+                    },
+                    controller: _oldPass,
+                    decoration: InputDecoration(
+                        counterText: '',
+                        errorText: '',
+                        errorStyle: TextStyle(
+                          color: Colors.transparent,
+                          fontSize: 0,
+                        ),
+                        hintText: 'Current password'.tr,
+                        hintStyle: TextStyle(
+                            fontSize: Get.width * 0.042,
+                            color: MyColors.blue_003E7E),
+                        enabledBorder: fieldBorder,
+                        focusedBorder: fieldBorder,
+                        errorBorder: fieldBorder,
+                        focusedErrorBorder: fieldBorder),
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: Get.width * 0.06,
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
-                child: TextFormField(
-                  maxLength: 20,
-                  obscureText: showAsterisks,
-                  controller: _confirmPass,
-                  validator: (val) {
-                    return passIsCorrect(pass: val, field_type: 'New'.tr).isEmpty
-                        ? null
-                        : '';
-                  },
-                  decoration: InputDecoration(
-                      counterText: '',
-                      errorText: '',
-                      errorStyle: TextStyle(
-                        color: Colors.transparent,
-                        fontSize: 0,
-                      ),
-                      hintText: 'New password again'.tr,
-                      enabledBorder: fieldBorder,
-                      errorBorder: fieldBorder,
-                      focusedBorder: fieldBorder,
-                      focusedErrorBorder: fieldBorder),
+                SizedBox(
+                  height: Get.width * 0.06,
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                    left: Get.width * 0.06,
-                    right: Get.width * 0.06,
-                    top: Get.width * 0.07),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Password display in asterisks'.tr,
-                      style:
-                          TextStyle(color: MyColors.blue_003E7E, fontSize: 20),
-                    ),
-                    CustomSwitch(
-                        key: UniqueKey(),
-                        value: showAsterisks,
-                        enableColor: MyColors.blue_003E7E,
-                        disableColor: MyColors.gray_707070,
-                        width: Get.width * 0.1,
-                        height: Get.width * 0.1,
-                        switchHeight: Get.width * 0.05,
-                        switchWidth: Get.width * 0.05,
-                        onChanged: (value) {
-                          setState(() {
-                            showAsterisks = !showAsterisks;
-                          });
-                        })
-                  ],
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
+                  child: TextFormField(
+                    maxLength: 20,
+                    obscureText: showAsterisks,
+                    controller: _pass,
+                    validator: (val) {
+                      return passIsCorrect(pass: val, field_type: 'New'.tr)
+                              .isEmpty
+                          ? null
+                          : '';
+                    },
+                    decoration: InputDecoration(
+                        counterText: '',
+                        errorText: '',
+                        errorStyle: TextStyle(
+                          color: Colors.transparent,
+                          fontSize: 0,
+                        ),
+                        hintText: 'New password'.tr,
+                        hintStyle: TextStyle(
+                            fontSize: Get.width * 0.042,
+                            color: MyColors.blue_003E7E),
+                        enabledBorder: fieldBorder,
+                        focusedBorder: fieldBorder,
+                        errorBorder: fieldBorder,
+                        focusedErrorBorder: fieldBorder),
+                  ),
                 ),
-              ),
-              Flexible(
-                  flex: 1,
-                  fit: FlexFit.tight,
-                  child: Container(
-                      width: Get.width,
-                      alignment: Alignment.center,
-                      margin: EdgeInsets.only(
-                          left: Get.width * 0.06, right: Get.width * 0.06),
-                      child: Center(
-                          child: Visibility(
-                              visible: passError.isNotEmpty,
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.error,
-                                    color: Colors.red,
-                                  ),
-                                  SizedBox(
-                                    width: Get.width * 0.01,
-                                  ),
-                                  Container(
-                                      width: Get.width * 0.6,
-                                      child: Text(
-                                        passError,
-                                        style: TextStyle(
-                                            color: Colors.red, fontSize: 20),
-                                      ))
-                                ],
-                              ))))),
-              Padding(
-                padding: EdgeInsets.only(
-                    left: Get.width * 0.06,
-                    right: Get.width * 0.06,
-                    bottom: Get.width * 0.12),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/icons/phone.png',
-                      width: Get.width * 0.03,
-                      height: Get.width * 0.03,
-                    ),
-                    SizedBox(
-                      width: Get.width * 0.01,
-                    ),
-                    Container(
-                        child: Text(
-                      'For details please contact the hotline'.tr,
-                      style: TextStyle(color: MyColors.blue_003E7E),
-                    ))
-                  ],
+                SizedBox(
+                  height: Get.width * 0.06,
                 ),
-              ),
-              Padding(
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
+                  child: TextFormField(
+                    maxLength: 20,
+                    obscureText: showAsterisks,
+                    controller: _confirmPass,
+                    validator: (val) {
+                      return passIsCorrect(pass: val, field_type: 'New'.tr)
+                              .isEmpty
+                          ? null
+                          : '';
+                    },
+                    decoration: InputDecoration(
+                        counterText: '',
+                        errorText: '',
+                        errorStyle: TextStyle(
+                          color: Colors.transparent,
+                          fontSize: 0,
+                        ),
+                        hintText: 'New password again'.tr,
+                        hintStyle: TextStyle(
+                            fontSize: Get.width * 0.042,
+                            color: MyColors.blue_003E7E),
+                        enabledBorder: fieldBorder,
+                        errorBorder: fieldBorder,
+                        focusedBorder: fieldBorder,
+                        focusedErrorBorder: fieldBorder),
+                  ),
+                ),
+                Padding(
                   padding: EdgeInsets.only(
-                    left: Get.width * 0.06,
-                    right: Get.width * 0.06,
-                  ),
+                      left: Get.width * 0.06,
+                      right: Get.width * 0.06,
+                      top: Get.width * 0.07),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      GestureDetector(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: Container(
-                          width: Get.width / 2.4,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              color: MyColors.gray_EAF2FA,
-                              borderRadius:
-                                  BorderRadius.circular(Get.width * 0.06)),
-                          padding: EdgeInsets.symmetric(
-                            vertical: Get.width * 0.03,
-                          ),
-                          child: Text(
-                            'Cancel'.tr,
-                            style: TextStyle(color: MyColors.blue_003E7E),
-                          ),
-                        ),
+                      Text(
+                        'Password display in asterisks'.tr,
+                        style: TextStyle(
+                            color: MyColors.blue_003E7E, fontSize: 20),
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          FocusScope.of(context).unfocus();
-                          bool valid = _form.currentState!.validate();
-
-                          if (!connectionService.hasConnection) {
-                            Get.snackbar(
-                                'Error'.tr, 'Restricted for offline mode'.tr);
-                            return;
-                          }
-                          if (valid) {
-                            if (validationPassForSave(
-                                oldPass: _oldPass.text,
-                                newPass: _pass.text,
-                                confirmPass: _confirmPass.text)) {
-                              closePassError();
-                               userDataController.changePassword(
-                                 oldPass: _oldPass.text, newPass: _pass.text);
-                            }
-                          }
-                        },
-                        child: Container(
-                          width: Get.width / 2.4,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              color: Color(0xff00458C),
-                              borderRadius:
-                                  BorderRadius.circular(Get.width * 0.06)),
-                          padding:
-                              EdgeInsets.symmetric(vertical: Get.width * 0.03),
-                          child: Text(
-                            'Save'.tr,
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
+                      CustomSwitch(
+                          key: UniqueKey(),
+                          value: showAsterisks,
+                          enableColor: MyColors.blue_003E7E,
+                          disableColor: Color(0xffD4DCE4),
+                          width: Get.width * 0.1,
+                          height: Get.width * 0.1,
+                          switchHeight: Get.width * 0.05,
+                          switchWidth: Get.width * 0.05,
+                          onChanged: (value) {
+                            setState(() {
+                              showAsterisks = !showAsterisks;
+                            });
+                          })
                     ],
-                  )),
-              SizedBox(
-                height: Get.width * 0.06,
-              ),
-            ],
+                  ),
+                ),
+                Flexible(
+                    flex: 4,
+                    fit: FlexFit.tight,
+                    child: Container(
+                        width: Get.width,
+                        alignment: Alignment.center,
+                        margin: EdgeInsets.only(
+                            left: Get.width * 0.06, right: Get.width * 0.06),
+                        child: Center(
+                            child: Visibility(
+                                visible: passError.isNotEmpty,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.error,
+                                      color: Colors.red,
+                                    ),
+                                    SizedBox(
+                                      width: Get.width * 0.01,
+                                    ),
+                                    Container(
+                                        width: Get.width * 0.6,
+                                        child: Text(
+                                          passError,
+                                          style: TextStyle(
+                                              color: Colors.red, fontSize: 20),
+                                        ))
+                                  ],
+                                ))))),
+                Padding(
+                  padding: EdgeInsets.only(
+                      left: Get.width * 0.06,
+                      right: Get.width * 0.06,
+                      bottom: Get.width * 0.12),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/icons/phone.png',
+                        width: Get.width * 0.03,
+                        height: Get.width * 0.03,
+                      ),
+                      SizedBox(
+                        width: Get.width * 0.01,
+                      ),
+                      Container(
+                          child: Text(
+                        'For details please contact the hotline'.tr,
+                        style: TextStyle(color: MyColors.blue_003E7E),
+                      ))
+                    ],
+                  ),
+                ),
+                Padding(
+                    padding: EdgeInsets.only(
+                      left: Get.width * 0.06,
+                      right: Get.width * 0.06,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Get.back();
+                          },
+                          child: Container(
+                            width: Get.width / 2.4,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                color: MyColors.gray_EAF2FA,
+                                borderRadius:
+                                    BorderRadius.circular(Get.width * 0.06)),
+                            padding: EdgeInsets.symmetric(
+                              vertical: Get.width * 0.03,
+                            ),
+                            child: Text(
+                              'Cancel'.tr,
+                              style: TextStyle(color: MyColors.blue_003E7E),
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            FocusScope.of(context).unfocus();
+                            bool valid = _form.currentState!.validate();
+
+                            if (!connectionService.hasConnection) {
+                              Get.snackbar(
+                                  'Error'.tr, 'Restricted for offline mode'.tr);
+                              return;
+                            }
+                            if (valid) {
+                              if (validationPassForSave(
+                                  oldPass: _oldPass.text,
+                                  newPass: _pass.text,
+                                  confirmPass: _confirmPass.text)) {
+                                closePassError();
+                                userDataController.changePassword(
+                                    oldPass: _oldPass.text,
+                                    newPass: _pass.text);
+                              }
+                            }
+                          },
+                          child: Container(
+                            width: Get.width / 2.4,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                color: Color(0xff00458C),
+                                borderRadius:
+                                    BorderRadius.circular(Get.width * 0.06)),
+                            padding: EdgeInsets.symmetric(
+                                vertical: Get.width * 0.03),
+                            child: Text(
+                              'Save'.tr,
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )),
+                SizedBox(
+                  height: Get.width * 0.06,
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -321,7 +330,11 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
   Container buildHeader() {
     return Container(
       height: Get.width * 0.3,
-      color: Color(0xff00458C),
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Color(0xff0D63BB), Color(0xff00458C)])),
       padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
       child: Column(
         children: [
@@ -381,7 +394,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
 
   String passIsCorrect({required String? pass, required String field_type}) {
     if (pass != null && pass.isNotEmpty) {
-      if(field_type == 'Current'.tr){
+      if (field_type == 'Current'.tr) {
         return '';
       }
       if (validationPassword(pass: pass)) {

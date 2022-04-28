@@ -1,5 +1,3 @@
-
-
 import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/core/languages.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
@@ -8,12 +6,11 @@ import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class ChangeLanguagePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => ChangeLanguagePageState();
-
 }
+
 class ChangeLanguagePageState extends State<ChangeLanguagePage> {
   final CustomerController customerController = Get.find();
   final UserDataController userDataController = Get.find();
@@ -70,32 +67,37 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: userDataController.avaliableLanguages.map((e) {
                   return GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       setState(() {
-                      selectLanguage = e;
+                        selectLanguage = e;
                       });
                     },
                     child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: Get.width * 0.01),
-                      child:  Row(
-                            children: [
-                              selectLanguage == e
-                                  ? Icon(Icons.stop_circle_outlined)
-                                  : Icon(Icons.circle_outlined),
-                              SizedBox(
-                                width: Get.width * 0.02,
-                              ),
-                              Text(
-                                e.languageString.tr,
-                                style: TextStyle(fontSize: Get.width * 0.04),
-                              ),
-                            ],
-                          )),
-
+                        padding:
+                            EdgeInsets.symmetric(vertical: Get.width * 0.01),
+                        child: Row(
+                          children: [
+                            selectLanguage == e
+                                ? Image.asset(
+                                    'assets/icons/radio_s.png',
+                                    width: Get.width * 0.05,
+                                  )
+                                : Image.asset(
+                                    'assets/icons/radio.png',
+                                    width: Get.width * 0.05,
+                                  ),
+                            SizedBox(
+                              width: Get.width * 0.02,
+                            ),
+                            Text(
+                              e.languageString.tr,
+                              style: TextStyle(fontSize: Get.width * 0.04),
+                            ),
+                          ],
+                        )),
                   );
                 }).toList(),
               ),
-
             ),
             Spacer(),
             Padding(
@@ -116,7 +118,7 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
                         decoration: BoxDecoration(
                             color: MyColors.gray_EAF2FA,
                             borderRadius:
-                            BorderRadius.circular(Get.width * 0.06)),
+                                BorderRadius.circular(Get.width * 0.06)),
                         padding: EdgeInsets.symmetric(
                           vertical: Get.width * 0.03,
                         ),
@@ -136,9 +138,9 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
                         decoration: BoxDecoration(
                             color: Color(0xff00458C),
                             borderRadius:
-                            BorderRadius.circular(Get.width * 0.06)),
+                                BorderRadius.circular(Get.width * 0.06)),
                         padding:
-                        EdgeInsets.symmetric(vertical: Get.width * 0.03),
+                            EdgeInsets.symmetric(vertical: Get.width * 0.03),
                         child: Text(
                           'Save'.tr,
                           style: TextStyle(color: Colors.white),
@@ -159,7 +161,11 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
   Container buildHeader() {
     return Container(
       height: Get.width * 0.3,
-      color: Color(0xff00458C),
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Color(0xff0D63BB), Color(0xff00458C)])),
       padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
       child: Column(
         children: [
@@ -197,10 +203,10 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
       ),
     );
   }
-  void setLanguage(){
-  userDataController
-      .changeLanguage(lang: selectLanguage)
-       .then((value) =>
-        materialsCatalogController.loadCatalog());
+
+  void setLanguage() {
+    userDataController
+        .changeLanguage(lang: selectLanguage)
+        .then((value) => materialsCatalogController.loadCatalog());
   }
 }

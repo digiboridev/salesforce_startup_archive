@@ -9,7 +9,7 @@ abstract class ContactUsRepository {
   Future setLocalContactUs({required ContactUsData contactUsData});
 }
 
-class ContactUsRepositoryImpl extends ContactUsRepository {
+class ContactUsRepositoryImpl implements ContactUsRepository {
   final ContactUsRemoteDatasource contactUsRemoteDatasource;
   final ContactUsLocalDatasource contactUsLocalDatasource;
 
@@ -18,12 +18,15 @@ class ContactUsRepositoryImpl extends ContactUsRepository {
     required this.contactUsLocalDatasource,
   });
 
+  @override
   Future<ContactUsData> get getRemoteContactUs =>
       contactUsRemoteDatasource.getContactUs;
 
+  @override
   Future<ContactUsData> get getLocalContactUs =>
       contactUsLocalDatasource.getContactUs;
 
+  @override
   Future setLocalContactUs({required ContactUsData contactUsData}) =>
       contactUsLocalDatasource.setContactUs(
           contactUsataModel: ContactUsataModel.fromEntity(contactUsData));

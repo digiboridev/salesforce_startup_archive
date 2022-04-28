@@ -50,7 +50,7 @@ class GetMaterialsAndCache
         return true;
       }
     } catch (e) {
-      print('No user data cache');
+      print('No materials cache');
     }
     return false;
   }

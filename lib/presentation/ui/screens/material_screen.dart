@@ -1,6 +1,7 @@
 import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
 import 'package:***REMOVED***/presentation/controllers/material_count_controller.dart';
+import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/product_options.dart';
 import 'package:***REMOVED***/presentation/ui/screens/material_screen_dialog.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/loaders/points_loader.dart';
@@ -28,6 +29,7 @@ class MaterialScreen extends StatefulWidget {
 
 class _MaterialScreenState extends State<MaterialScreen> {
   late MaterialCountController materialCountController;
+  MaterialsCatalogController materialsCatalogController = Get.find();
 
   @override
   void initState() {
@@ -61,7 +63,10 @@ class _MaterialScreenState extends State<MaterialScreen> {
         SizedBox(
           height: Get.width * 0.06,
         ),
-        buildSuggestions(),
+        if (materialsCatalogController
+            .getAlternativeMaterials(altItems: widget.material.alternativeItems)
+            .isNotEmpty)
+          buildSuggestions(),
         SizedBox(
           height: Get.width * 0.06,
         ),
@@ -70,12 +75,6 @@ class _MaterialScreenState extends State<MaterialScreen> {
   }
 
   Widget buildSuggestions() {
-    List<Materiale> products = [
-      widget.material,
-      widget.material,
-      widget.material,
-      widget.material
-    ];
     return Container(
       margin: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
       decoration: BoxDecoration(
@@ -100,7 +99,10 @@ class _MaterialScreenState extends State<MaterialScreen> {
               height: Get.width * 0.7,
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                children: products.map((e) {
+                children: materialsCatalogController
+                    .getAlternativeMaterials(
+                        altItems: widget.material.alternativeItems)
+                    .map((e) {
                   return Container(
                     margin: EdgeInsets.only(
                         left: Get.width * 0.05, right: Get.width * 0.05),

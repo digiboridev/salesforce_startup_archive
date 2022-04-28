@@ -77,6 +77,8 @@ class UserDataController extends GetxController {
       _userDataState.value = UserDataInitialState();
     }
 
+    _sfsdkService.checkVersion();
+
     // emit loading state
     _userDataState.value = UserDataLoadingState();
 
@@ -178,6 +180,15 @@ class UserDataController extends GetxController {
     if (state is UserDataCommonState) {
       return Languages.fromIdentifier(
           identifier: state.userData.selectedLanguage);
+    } else {
+      throw Exception('Operation denied');
+    }
+  }
+
+  String get currencyKey {
+    var state = _userDataState.value;
+    if (state is UserDataCommonState) {
+      return state.userData.currencyKey;
     } else {
       throw Exception('Operation denied');
     }
