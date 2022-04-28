@@ -193,7 +193,6 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
             ],
           ),
           Spacer(),
-
         ],
       ),
     );
