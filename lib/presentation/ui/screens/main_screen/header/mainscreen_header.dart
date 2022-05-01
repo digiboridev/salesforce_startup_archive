@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/domain/entities/contact_us_data.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
 import 'package:***REMOVED***/presentation/controllers/contactus_controller.dart';
@@ -65,7 +66,8 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                 gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [Color(0xff0D63BB), Color(0xff00458C)])),
+                    colors: [MyColors.blue_0D63BB,
+                      Color(0xff00458C)])),
             padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
             child: Column(
               children: [
@@ -136,13 +138,17 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                       },
                       child: Align(
                         alignment: Alignment.centerLeft,
-                        child: Obx(() => Text(
-                              'Brunch: ' +
-                                  customerController
-                                      .selectedCustomer!.customerName,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: Get.width * 0.035),
+                        child: Obx(() => RichText(text: TextSpan(
+                          text:  'Brunch: ',
+                            style: TextStyle(
+                                color: Colors.white.withOpacity(0.77),
+                                fontSize: Get.width * 0.035),
+                          children: [TextSpan(text: customerController
+                              .selectedCustomer!.customerName,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: Get.width * 0.035),)]
+                        ),
                             )),
                       ),
                     ),
@@ -529,33 +535,35 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                         child: Column(
                           children: [
                             Container(
-                              height: Get.width * 0.2,
                               decoration: BoxDecoration(
-                                  color: Color(0xff0250A0),
+                                  color: MyColors.blue_0250A0,
                                   borderRadius:
                                       BorderRadius.circular(Get.width * 0.02)),
                               margin: EdgeInsets.symmetric(
                                   horizontal: Get.width * 0.06),
                               padding: EdgeInsets.symmetric(
-                                  horizontal: Get.width * 0.06),
+                                vertical: Get.width*0.025,
+                                  horizontal: Get.width * 0.025),
                               child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
-                                    child: Center(
-                                      child: Text(
+                                    child: Text(
                                         'Our focus is open',
-                                        style: TextStyle(color: Colors.white),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                          fontSize: 18,
+                                            color: Colors.white),
                                       ),
-                                    ),
                                   ),
                                   Expanded(
-                                    child: Center(
-                                      child: Text(
+                                    child: Text(
                                         state.openingHoursString,
-                                        style: TextStyle(color: Colors.white),
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                            color: Colors.white),
                                       ),
                                     ),
-                                  )
                                 ],
                               ),
                             ),
@@ -566,7 +574,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                               return Column(
                                 children: [
                                   Container(
-                                    height: Get.width * 0.25,
+                                   // height: Get.width * 0.25,
                                     decoration: BoxDecoration(
                                         color: Color(0xff0250A0),
                                         borderRadius: BorderRadius.circular(
@@ -574,7 +582,8 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                                     margin: EdgeInsets.symmetric(
                                         horizontal: Get.width * 0.06),
                                     padding: EdgeInsets.symmetric(
-                                        horizontal: Get.width * 0.02),
+                                        horizontal: Get.width * 0.03,
+                                   ),
                                     child: Column(
                                       children: [
                                         Padding(
@@ -585,11 +594,13 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                                             child: Text(
                                               e.description,
                                               style: TextStyle(
+                                                fontSize: 18,fontWeight: FontWeight.w500,
                                                   color: Colors.white),
                                             ),
                                           ),
                                         ),
-                                        Row(
+                                        Padding(padding: EdgeInsets.only(bottom:Get.width*0.05),
+                              child:Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
                                           children: [
@@ -627,6 +638,9 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                                               ),
                                             ),
                                           ],
+                                        )),
+                                        SizedBox(
+                                          width: Get.width * 0.2,
                                         ),
                                       ],
                                     ),
@@ -684,69 +698,115 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
   }
 
   Widget buildBranchSelection() {
+    ScrollController _scrollController = ScrollController();
     return Column(
       children: [
         Container(
           height: Get.width * 1 - Get.width * 0.07,
-          color: Color(0xff00458C),
+          color: MyColors.blue_00458C,
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: Get.width * 0.04),
+                padding: EdgeInsets.symmetric(
+                  horizontal: Get.width * 0.06,
+                ),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'All branches:',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(fontSize: 16,
+                        color: Colors.white.withOpacity(0.77)),
                   ),
                 ),
               ),
+              SizedBox(
+                height: Get.width * 0.02,
+              ),
               Expanded(
                   child: Container(
-                child: ListView(
-                  physics: BouncingScrollPhysics(),
-                  children: customerController.relatedConsumers
-                      .where((element) => element.customerName
-                          .toLowerCase()
-                          .contains(searchBranchCondition.toLowerCase()))
-                      .map((e) {
-                    return Padding(
-                      padding: EdgeInsets.all(Get.width * 0.01),
-                      child: GestureDetector(
-                        onTap: () {
-                          customerController
-                              .switchCustomer(customerSAP: e.customerSAPNumber)
-                              .then((value) =>
-                                  mainScreeenHeaderController.hide());
-                        },
-                        child: Container(
-                            padding: EdgeInsets.all(Get.width * 0.04),
-                            decoration: BoxDecoration(
-                                color: Colors.blue[800],
-                                borderRadius:
-                                    BorderRadius.circular(Get.width * 0.02)),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  e.customerId,
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                Text(
-                                  e.customerName,
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                Text(
-                                  e.customerAddress,
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ],
-                            )),
-                      ),
-                    );
-                  }).toList(),
-                ),
-              )),
+                    padding: EdgeInsets.symmetric(horizontal: Get.width*0.02),
+                      color: MyColors.blue_00458C,
+                      child: Theme(
+                          data: ThemeData(
+                            scrollbarTheme: ScrollbarThemeData(
+                              thumbColor:
+                              MaterialStateProperty.all(MyColors.blue_5584B2),
+                              radius: const Radius.circular(10),
+                            )
+                          ),
+                          child: Scrollbar(
+                            isAlwaysShown: true,
+                            controller: _scrollController,
+                            child: ListView(
+                              controller: _scrollController,
+                              physics: BouncingScrollPhysics(),
+                              children: customerController.relatedConsumers
+                                  .where((element) => element.customerName
+                                      .toLowerCase()
+                                      .contains(
+                                          searchBranchCondition.toLowerCase()))
+                                  .map((e) {
+                                return Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: Get.width * 0.03,
+                                    vertical: Get.width * 0.02,
+                                  ),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      customerController
+                                          .switchCustomer(
+                                              customerSAP: e.customerSAPNumber)
+                                          .then((value) =>
+                                              mainScreeenHeaderController
+                                                  .hide());
+                                    },
+                                    child: Container(
+                                        padding:
+                                            EdgeInsets.all(Get.width * 0.04),
+                                        decoration: BoxDecoration(
+                                            color: MyColors.blue_0250A0,
+                                            borderRadius: BorderRadius.circular(
+                                                Get.width * 0.02)),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              e.customerId,
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                            Container(
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: Get.width * 0.025),
+                                              height: Get.width * 0.002,
+                                              width: Get.width,
+                                              color: MyColors.blue_00458C,
+                                            ),
+                                            Text(
+                                              e.customerName,
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                            Container(
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: Get.width * 0.025),
+                                              height: Get.width * 0.002,
+                                              width: Get.width,
+                                              color: MyColors.blue_00458C,
+                                            ),
+                                            Text(
+                                              e.customerAddress,
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                          ],
+                                        )),
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+                          )))),
               // buildHideBottom(),
               SizedBox(
                 height: Get.width * 0.03,

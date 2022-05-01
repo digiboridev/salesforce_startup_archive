@@ -90,14 +90,9 @@ class Trs extends Translations {
           'For details please contact the hotline':'For details please contact the hotline',
           'Passwords must not match':'Passwords must not match',
           'New password is not match':'New password is not match',
-          'password is empty':'password is empty'
-
-
-
-
+          'password is empty':'password is empty',
+          'Cancellation':'Cancellation',
         },
-
-
 
 
         'he': {
@@ -187,7 +182,8 @@ class Trs extends Translations {
           'For details please contact the hotline':'לפרטים נא להתקשר לקוו החם שלנו',
           'Passwords must not match':'הסיסמאות צריכות להיות שונות אחת מהשניה',
           'New password is not match':'הסיסמא החדשה אינה תואמת',
-          'password is empty':'הסיסמא ריקה'
+          'password is empty':'הסיסמא ריקה',
+          'Cancellation':'ביטול'
         }
       };
 }

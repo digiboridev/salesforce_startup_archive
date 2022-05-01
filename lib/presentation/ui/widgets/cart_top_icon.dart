@@ -42,7 +42,8 @@ class CartTopIconState extends State<CartTopIcon> {
   Widget getFavorite() {
     return Padding(
         padding:
-            EdgeInsets.only(left: Get.width * 0.02, right: Get.width * 0.02),
+            EdgeInsets.only(left: Get.width * 0.03,
+                right: Get.width * 0.03),
         child: Image.asset(
           "assets/icons/favorite.png",
         ));

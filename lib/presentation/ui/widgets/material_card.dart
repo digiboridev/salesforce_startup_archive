@@ -150,6 +150,7 @@ class MaterialCardState extends State<MaterialCard> {
                                     visible: (widget.materiale.UnitPrice != 0 &&
                                         !hidePrices),
                                     child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text("Price per Unit".tr,
                                             style: TextStyle(
@@ -239,7 +240,8 @@ class MaterialCardState extends State<MaterialCard> {
             ),
             Positioned(
               top: -(Get.width * 0.05),
-              left: -Get.width * 0.02,
+              left: Get.width * 0,
+              right: Get.width * 0,
               child: SizedBox(
                 width: Get.width,
                 child: Row(
@@ -249,6 +251,8 @@ class MaterialCardState extends State<MaterialCard> {
                       width: Get.width * 0.1,
                       height: Get.width * 0.1,
                       decoration: BoxDecoration(
+                        boxShadow: [BoxShadow(color: Colors.grey.shade300,
+                        spreadRadius: 1, blurRadius: 10)],
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(Get.width * 0.1)),
                       child: CartTopIcon(

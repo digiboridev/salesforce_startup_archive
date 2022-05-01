@@ -26,6 +26,7 @@ class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
   );
   String passError = '';
   bool showAsterisks = true;
+  bool isCorrect = false;
   final String password_condition = 'Password condition'.tr;
 
   bool validationPassword({required String? pass}) {
@@ -50,9 +51,13 @@ class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
   String passIsCorrect({required String? pass, required String field_type}) {
     if (pass != null && pass.isNotEmpty) {
       if (field_type == 'Current'.tr) {
+        validationPassForSave(confirmPass: _confirmPass.text,
+            newPass: _pass.text);
         return '';
       }
       if (validationPassword(pass: pass)) {
+        validationPassForSave(confirmPass: _confirmPass.text,
+            newPass: _pass.text);
         return '';
       } else {
         showPassError(error: password_condition);
@@ -67,8 +72,15 @@ class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
   bool validationPassForSave({required newPass, required confirmPass}) {
     if (newPass != confirmPass) {
       showPassError(error: 'New password is not match'.tr);
+      setState(() {
+        isCorrect = false;
+      });
       return false;
     } else {
+      closePassError();
+      setState(() {
+        isCorrect = true;
+      });
       return true;
     }
   }
@@ -129,6 +141,10 @@ class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
                   maxLength: 20,
                   obscureText: showAsterisks,
                   controller: _pass,
+                  onChanged: (text){
+                    passIsCorrect(pass: text, field_type: 'New'.tr)
+                        .isEmpty;
+                  },
                   validator: (val) {
                     return passIsCorrect(pass: val, field_type: 'New'.tr)
                             .isEmpty
@@ -158,6 +174,10 @@ class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
                   maxLength: 20,
                   obscureText: showAsterisks,
                   controller: _confirmPass,
+                  onChanged: (text){
+                    passIsCorrect(pass: text, field_type: 'Confirm'.tr)
+                        .isEmpty;
+                  },
                   validator: (val) {
                     return passIsCorrect(pass: val, field_type: 'New'.tr)
                             .isEmpty
@@ -266,7 +286,7 @@ class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
                     width: Get.width / 1.4,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                        color: Color(0xff00458C),
+                        color: isCorrect?Color(0xff00458C):MyColors.blue_D5DDE5,
                         borderRadius: BorderRadius.circular(Get.width * 0.06)),
                     padding: EdgeInsets.symmetric(vertical: Get.width * 0.03),
                     child: Text(

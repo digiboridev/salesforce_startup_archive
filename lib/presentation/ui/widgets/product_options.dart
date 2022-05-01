@@ -41,6 +41,7 @@ class ProductOptionsState extends State<ProductOptions> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
         buildSale(),
+         SizedBox(height: Get.width*0.01,),
          buildNew(),
          buildFrozen()
         ],

@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/core/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -30,12 +31,19 @@ class _LegalDocScreenState extends State<LegalDocScreen> {
           child: Stack(
         children: [
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               buildHeader(),
+              SizedBox(height: Get.width*0.1,),
+              Padding(padding: EdgeInsets.symmetric(horizontal: Get.width*0.05),
+                child:Text('Terms of Use',
+              style: TextStyle(color: MyColors.blue_003E7E,
+              fontSize: 26),)),
               Expanded(
                   child: Padding(
                 padding: EdgeInsets.all(Get.width * 0.06),
                 child: WebView(
+
                   zoomEnabled: false,
                   javascriptMode: JavascriptMode.unrestricted,
                   initialUrl: widget.legalDocLink.toString(),
@@ -57,6 +65,7 @@ class _LegalDocScreenState extends State<LegalDocScreen> {
                   },
                 ),
               )),
+
               GestureDetector(
                 onTap: () => widget.callback(),
                 child: Container(

@@ -123,7 +123,7 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
                           vertical: Get.width * 0.03,
                         ),
                         child: Text(
-                          'Cancel'.tr,
+                          'Cancellation'.tr,
                           style: TextStyle(color: MyColors.blue_003E7E),
                         ),
                       ),

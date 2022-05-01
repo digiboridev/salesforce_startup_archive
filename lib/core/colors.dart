@@ -5,10 +5,16 @@ class MyColors{
   static const blue_0050A2 = Color(0xFF0050A2);
   static const blue_0571E0 = Color(0xFF0571E0);
   static const blue_003E83 = Color(0xFF003E83);
+  static const blue_054383 = Color(0xFF054383);
+  static const blue_5584B2 = Color(0xFF5584B2);
+  static const blue_0D63BB = Color(0xFF0D63BB);
+  static const blue_D5DDE5 = Color(0xFFD5DDE5);
+
   static const gray_8B9298 = Color(0xFF8B9298);
   static const gray_707070 = Color(0xFF707070);
   static const blue_007AFE = Color(0xFF007AFE);
   static const blue_00458C = Color(0xFF00458C);
+  static const blue_0250A0 = Color(0xFF0250A0);
   static const blue_E8EEF6 = Color(0xFFE8EEF6);
   static const pink_FF268E = Color(0xFFFF268E);
   static const yellow_FF268E = Color(0xFFFFBD00);
