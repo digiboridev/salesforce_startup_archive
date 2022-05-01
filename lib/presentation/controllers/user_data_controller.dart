@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:***REMOVED***/core/languages.dart';
+import 'package:***REMOVED***/domain/services/app_version_service.dart';
 import 'package:***REMOVED***/domain/services/cache_ferchig_service.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/domain/usecases/user/accept_legal_doc.dart';
@@ -77,7 +78,7 @@ class UserDataController extends GetxController {
       _userDataState.value = UserDataInitialState();
     }
 
-    _sfsdkService.checkVersion();
+    // AppVersionService.checkVersion();
 
     // emit loading state
     _userDataState.value = UserDataLoadingState();

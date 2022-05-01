@@ -1,7 +1,7 @@
 name: ***REMOVED***
 description: ***REMOVED*** app.
 
-version: 0.0.16+16
+version: 0.0.17+17
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
@@ -23,6 +23,7 @@ dependencies:
   equatable: ^2.0.3
   webview_flutter: ^3.0.0
   url_launcher: ^6.0.20
+  package_info_plus: ^1.4.2
 
 dev_dependencies:
   # change_app_package_name: ^1.0.0
