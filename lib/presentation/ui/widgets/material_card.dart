@@ -1,5 +1,6 @@
 import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
+import 'package:***REMOVED***/domain/entities/materials/unit_types.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/material_count_controller.dart';
@@ -30,7 +31,11 @@ class MaterialCardState extends State<MaterialCard> {
   @override
   void initState() {
     materialCountController = Get.put(
-        MaterialCountController(material: widget.materiale),
+        MaterialCountController(
+            material: widget.materiale,
+            onChange: (int count, UnitType unitType) async {
+              print('MaterialCard');
+            }),
         tag: widget.materiale.hashCode.toString());
     super.initState();
   }
