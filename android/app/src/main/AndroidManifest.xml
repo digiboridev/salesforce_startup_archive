@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.mvpup.***REMOVED***">
+    package="***REMOVED***.qa">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.BLUETOOTH"/>
@@ -9,8 +9,8 @@
         receive the messages and registration result. This must be of
         the format <app-package-name>.C2D_MESSAGE for it to work.
     -->
-    <permission android:name="com.mvpup.***REMOVED***.C2D_MESSAGE" android:protectionLevel="signature" />
-    <uses-permission android:name="com.mvpup.***REMOVED***.C2D_MESSAGE" />
+    <permission android:name="***REMOVED***.qa.C2D_MESSAGE" android:protectionLevel="signature" />
+    <uses-permission android:name="***REMOVED***.qa.C2D_MESSAGE" />
 
     <application
         android:name=".MainApplication"
