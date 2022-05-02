@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 class SearchScreen extends StatelessWidget {
   SearchScreen({Key? key}) : super(key: key);
   final SearchController searchController = Get.find();
-  MainScreeenHeaderController mainScreeenHeaderController = Get.find();
+  final MainScreeenHeaderController mainScreeenHeaderController = Get.find();
 
   @override
   Widget build(BuildContext context) {

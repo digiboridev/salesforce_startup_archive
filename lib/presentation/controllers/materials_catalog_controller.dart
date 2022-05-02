@@ -35,6 +35,11 @@ class MaterialsCatalogController extends GetxController {
   }
 
   Future loadCatalog() async {
+    if (_customerController.selectedCustomerSAP == null) {
+      materialsCatalogState.value = MCSInitial();
+      return;
+    }
+
     materialsCatalogState.value = MCSLoading();
     try {
       MaterialsCatalog catalog = await _getMaterialsAndCache.call(

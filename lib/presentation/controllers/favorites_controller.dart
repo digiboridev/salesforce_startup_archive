@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/domain/entities/favorites/favorite_list.dart';
 import 'package:***REMOVED***/domain/services/cache_ferchig_service.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/domain/usecases/favorites/get_favorites_and_cache.dart';
@@ -23,12 +24,44 @@ class FavoritesController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    load();
+    loadFavorites();
     // Listen to customer changes
     _customerController.selectedCustomerSAPStream.listen((String? customerSAP) {
-      load();
+      loadFavorites();
     });
   }
 
-  Future load() async {}
+  Future loadFavorites() async {
+    if (_customerController.selectedCustomerSAP == null) {
+      _state.value = FSInitial();
+      return;
+    }
+
+    _state.value = FSLoading();
+    try {
+      List<FavoriteList> favoriteLists = await _getFavoritesAndCache.call(
+          GetFavoritesAndCacheParams(
+              customerSAP: _customerController.selectedCustomerSAP!,
+              hasConnection: _connectionService.hasConnection));
+
+      _state.value = FSCommon(favoriteLists: favoriteLists);
+
+      // Register in cache fetching service
+      CacheUpdateEvent cacheUpdateEvent = CacheUpdateEvent(
+          tag: 'catalog',
+          updateActionCallback: updateFavorites,
+          lastUpdateTimeCallback: getLastSync);
+      _cacheFetchingService.registerEvent(cacheUpdateEvent: cacheUpdateEvent);
+    } catch (e) {
+      print('Load favorites error' + e.toString());
+      _state.value =
+          FSLoadingError(errorMsg: 'Load catalog error' + e.toString());
+    }
+  }
+
+  Future updateFavorites() async {}
+
+  Future<DateTime> getLastSync() async {
+    return _getFavoritesSyncTime.call(_customerController.selectedCustomerSAP!);
+  }
 }

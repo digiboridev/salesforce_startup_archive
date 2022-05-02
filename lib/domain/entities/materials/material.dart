@@ -134,7 +134,7 @@ class Materiale extends Equatable {
       Barcode,
       AverageQty,
       alternativeItems,
-      didSubscribedToInventoryAlert
+      // didSubscribedToInventoryAlert
     ];
   }
 

@@ -1,6 +1,5 @@
 import 'package:***REMOVED***/domain/entities/materials/brand.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

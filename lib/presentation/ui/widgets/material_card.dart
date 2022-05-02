@@ -150,7 +150,8 @@ class MaterialCardState extends State<MaterialCard> {
                                     visible: (widget.materiale.UnitPrice != 0 &&
                                         !hidePrices),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text("Price per Unit".tr,
                                             style: TextStyle(
@@ -251,8 +252,12 @@ class MaterialCardState extends State<MaterialCard> {
                       width: Get.width * 0.1,
                       height: Get.width * 0.1,
                       decoration: BoxDecoration(
-                        boxShadow: [BoxShadow(color: Colors.grey.shade300,
-                        spreadRadius: 1, blurRadius: 10)],
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey.shade300,
+                                spreadRadius: 1,
+                                blurRadius: 10)
+                          ],
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(Get.width * 0.1)),
                       child: CartTopIcon(
@@ -282,12 +287,11 @@ class MaterialCardState extends State<MaterialCard> {
         ),
       ),
     );
-    ;
   }
 
   Widget getMaterialComponent() {
     return Obx(() {
-      var asd = materialCountController.unit_count;
+      print(materialCountController.unit_count);
       if (!widget.materiale.IsInStock) {
         return OutStockMaterialComponent(
           isUpdate: widget.materiale.didSubscribedToInventoryAlert,

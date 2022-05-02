@@ -1,19 +1,16 @@
 import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
+import 'package:***REMOVED***/domain/services/image_caching_service.dart';
 import 'package:***REMOVED***/presentation/controllers/material_count_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
+import 'package:***REMOVED***/presentation/ui/widgets/cart_top_icon.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/product_options.dart';
 import 'package:***REMOVED***/presentation/ui/screens/material_screen_dialog.dart';
-import 'package:***REMOVED***/presentation/ui/widgets/loaders/points_loader.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/material_components/focused_material_component.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/material_components/normal_material_component.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/material_components/outstock_material_component.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../domain/services/image_caching_service.dart';
-import '../widgets/cart_top_icon.dart';
 
 class MaterialScreen extends StatefulWidget {
   final Materiale material;

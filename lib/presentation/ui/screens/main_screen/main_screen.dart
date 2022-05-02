@@ -3,7 +3,7 @@ import 'package:***REMOVED***/presentation/controllers/search_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalog_loader.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/favorites/favorites_page.dart';
+import 'package:***REMOVED***/presentation/ui/screens/main_screen/favorites/favorites_loader.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/mainscreen_header.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/homepage/homepage_loader.dart';
 import 'package:***REMOVED***/presentation/ui/screens/search_screen.dart';
@@ -105,7 +105,7 @@ class _MainScreenState extends State<MainScreen> {
       controller: pageController,
       children: [
         HomepageLoader(),
-        FavoritesPage(),
+        FavoritesLoader(),
         Container(
           alignment: Alignment.center,
           color: Colors.amber,

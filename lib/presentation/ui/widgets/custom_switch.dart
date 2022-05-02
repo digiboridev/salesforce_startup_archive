@@ -1,5 +1,4 @@
 import 'package:***REMOVED***/core/colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomSwitch extends StatefulWidget {

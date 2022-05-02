@@ -24,9 +24,6 @@ class CustomerController extends GetxController {
   GetCustomerAndCache _getCustomerAndCache = Get.find();
   GetCustomerSyncTime _getCustomerSyncTime = Get.find();
 
-  // Any non autocloseable streams
-  List<StreamSubscription> _subs = [];
-
   // variables
   RxList<RelatedConsumer> _relatedConsumers = RxList();
   List<RelatedConsumer> get relatedConsumers => _relatedConsumers;
@@ -47,17 +44,8 @@ class CustomerController extends GetxController {
     // Listen to user data
     handleUserDataState(
         userDataState: _userDataController.userDataStateStream.value);
-    StreamSubscription userDataSub = _userDataController.userDataStateStream
+    _userDataController.userDataStateStream
         .listen((event) => handleUserDataState(userDataState: event));
-
-    _subs.add(userDataSub);
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-    // Cancel all stream on dispose
-    _subs.forEach((sub) => sub.cancel());
   }
 
   // Update all on user data change
