@@ -90,14 +90,14 @@ class UserDataController extends GetxController {
           hasConnection: _connectionService.hasConnection));
 
       // emmit accept legaldoc state if not
-      //
+
       if (!userData.hasAcceptedLegalDoc) {
         _userDataState.value =
             UserDataAskLegalDocState(legalDoc: userData.legalDoc);
       }
       // emmit change password state if needed
-      //!userData.didChangePassword
-      else if (userData.didChangePassword) {
+
+      else if (!userData.didChangePassword) {
         _userDataState.value = UserDataChangePasswordState();
       }
       // load complete

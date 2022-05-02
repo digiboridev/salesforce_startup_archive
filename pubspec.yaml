@@ -1,7 +1,7 @@
 name: ***REMOVED***
 description: ***REMOVED*** app.
 
-version: 0.0.17+17
+version: 0.0.18+18
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
