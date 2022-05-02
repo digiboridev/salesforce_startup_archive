@@ -31,12 +31,14 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
   Widget build(BuildContext context) {
     print(userDataController.avaliableLanguages);
     return Scaffold(
-      // resizeToAvoidBottomInset: true,
-      backgroundColor: Colors.white,
+      backgroundColor: MyColors.blue_003E7E,
       body: SafeArea(
-          child: SizedBox.expand(
-        child: Column(
-          children: [buildHeader(), buildBody(context)],
+          child: Container(
+        color: Color(0xffF4F4F6),
+        child: SizedBox.expand(
+          child: Column(
+            children: [buildHeader(), buildBody(context)],
+          ),
         ),
       )),
     );

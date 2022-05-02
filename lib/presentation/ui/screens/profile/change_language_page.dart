@@ -27,11 +27,14 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
   Widget build(BuildContext context) {
     print(userDataController.avaliableLanguages);
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: MyColors.blue_003E7E,
       body: SafeArea(
-          child: SizedBox.expand(
-        child: Column(
-          children: [buildHeader(), buildBody()],
+          child: Container(
+        color: Color(0xffF4F4F6),
+        child: SizedBox.expand(
+          child: Column(
+            children: [buildHeader(), buildBody()],
+          ),
         ),
       )),
     );

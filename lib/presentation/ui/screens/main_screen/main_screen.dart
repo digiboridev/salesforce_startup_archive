@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/search_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar.dart';
@@ -43,41 +44,44 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xffF4F4F6),
+        backgroundColor: MyColors.blue_003E7E,
         body: SafeArea(
-          child: SizedBox.expand(
-            child: Stack(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(
-                      top: Get.width * 0.35, bottom: bottomBarHeight * 0.3),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Expanded(
-                        child: Obx(() {
-                          return Stack(
-                            children: [
-                              buildPageView(),
-                              if (searchController.showSearch.value)
-                                SearchScreen()
-                            ],
-                          );
-                        }),
-                      ),
-                    ],
+          child: Container(
+            color: Color(0xffF4F4F6),
+            child: SizedBox.expand(
+              child: Stack(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                        top: Get.width * 0.35, bottom: bottomBarHeight * 0.3),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Expanded(
+                          child: Obx(() {
+                            return Stack(
+                              children: [
+                                buildPageView(),
+                                if (searchController.showSearch.value)
+                                  SearchScreen()
+                              ],
+                            );
+                          }),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Positioned(
-                  bottom: 0,
-                  child: BottomBar(
-                    bottomBarHeight: bottomBarHeight,
+                  Positioned(
+                    bottom: 0,
+                    child: BottomBar(
+                      bottomBarHeight: bottomBarHeight,
+                    ),
                   ),
-                ),
-                MainScreenHeader(
-                  headerHeight: headerHeight,
-                )
-              ],
+                  MainScreenHeader(
+                    headerHeight: headerHeight,
+                  )
+                ],
+              ),
             ),
           ),
         ));

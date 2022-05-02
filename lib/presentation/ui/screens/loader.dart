@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/presentation/controllers/contactus_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
@@ -28,33 +29,38 @@ class Loader extends StatelessWidget {
 
       if (userDataState is UserDataLoadingErrorState) {
         return Scaffold(
+          backgroundColor: MyColors.blue_003E7E,
           body: SafeArea(
-              child: SizedBox.expand(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text('User loading error'.tr),
-                SizedBox(
-                  height: Get.width * 0.06,
-                ),
-                Text(userDataState.msg),
-                SizedBox(
-                  height: Get.width * 0.06,
-                ),
-                GestureDetector(
-                  onTap: () => userDataController.loadUserData(),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.amber,
-                        borderRadius: BorderRadius.circular(Get.width * 0.06)),
-                    padding: EdgeInsets.symmetric(
-                        horizontal: Get.width * 0.1,
-                        vertical: Get.width * 0.03),
-                    child: Text('try again'.tr),
+              child: Container(
+            color: Color(0xffF4F4F6),
+            child: SizedBox.expand(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text('User loading error'.tr),
+                  SizedBox(
+                    height: Get.width * 0.06,
                   ),
-                )
-              ],
+                  Text(userDataState.msg),
+                  SizedBox(
+                    height: Get.width * 0.06,
+                  ),
+                  GestureDetector(
+                    onTap: () => userDataController.loadUserData(),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.amber,
+                          borderRadius:
+                              BorderRadius.circular(Get.width * 0.06)),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: Get.width * 0.1,
+                          vertical: Get.width * 0.03),
+                      child: Text('try again'.tr),
+                    ),
+                  )
+                ],
+              ),
             ),
           )),
         );
@@ -83,34 +89,38 @@ class Loader extends StatelessWidget {
       if (userDataState is UserDataCommonState) {
         if (customerController.customerLoadingError is String) {
           return Scaffold(
+            backgroundColor: MyColors.blue_003E7E,
             body: SafeArea(
-                child: SizedBox.expand(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text('Customer loading error'.tr),
-                  SizedBox(
-                    height: Get.width * 0.06,
-                  ),
-                  Text(customerController.customerLoadingError!),
-                  SizedBox(
-                    height: Get.width * 0.06,
-                  ),
-                  GestureDetector(
-                    onTap: () => customerController.loadCustomers(),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.amber,
-                          borderRadius:
-                              BorderRadius.circular(Get.width * 0.06)),
-                      padding: EdgeInsets.symmetric(
-                          horizontal: Get.width * 0.1,
-                          vertical: Get.width * 0.03),
-                      child: Text('try again'.tr),
+                child: Container(
+              color: Color(0xffF4F4F6),
+              child: SizedBox.expand(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text('Customer loading error'.tr),
+                    SizedBox(
+                      height: Get.width * 0.06,
                     ),
-                  )
-                ],
+                    Text(customerController.customerLoadingError!),
+                    SizedBox(
+                      height: Get.width * 0.06,
+                    ),
+                    GestureDetector(
+                      onTap: () => customerController.loadCustomers(),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.amber,
+                            borderRadius:
+                                BorderRadius.circular(Get.width * 0.06)),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: Get.width * 0.1,
+                            vertical: Get.width * 0.03),
+                        child: Text('try again'.tr),
+                      ),
+                    )
+                  ],
+                ),
               ),
             )),
           );
@@ -136,7 +146,10 @@ class JustLoadingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: CircularProgressIndicator()),
+      backgroundColor: MyColors.blue_003E7E,
+      body: Container(
+          color: Color(0xffF4F4F6),
+          child: Center(child: CircularProgressIndicator())),
     );
   }
 }

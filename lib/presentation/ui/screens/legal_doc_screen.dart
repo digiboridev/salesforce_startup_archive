@@ -26,88 +26,97 @@ class _LegalDocScreenState extends State<LegalDocScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: MyColors.blue_003E7E,
       body: SafeArea(
-          child: Stack(
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              buildHeader(),
-              SizedBox(height: Get.width*0.1,),
-              Padding(padding: EdgeInsets.symmetric(horizontal: Get.width*0.05),
-                child:Text('Terms of Use',
-              style: TextStyle(color: MyColors.blue_003E7E,
-              fontSize: 26),)),
-              Expanded(
-                  child: Padding(
-                padding: EdgeInsets.all(Get.width * 0.06),
-                child: WebView(
-
-                  zoomEnabled: false,
-                  javascriptMode: JavascriptMode.unrestricted,
-                  initialUrl: widget.legalDocLink.toString(),
-                  onPageFinished: (url) {
-                    print(url);
-                  },
-                  onPageStarted: (url) {
-                    print(url);
-                  },
-                  onProgress: (progress) {
-                    print(progress);
-                  },
-                  onWebResourceError: (e) {
-                    print(e);
-                    setState(() => error = true);
-                  },
-                  onWebViewCreated: (controller) {
-                    webViewController = controller;
-                  },
+          child: Container(
+        color: Color(0xffF4F4F6),
+        child: Stack(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                buildHeader(),
+                SizedBox(
+                  height: Get.width * 0.1,
                 ),
-              )),
-
-              GestureDetector(
-                onTap: () => widget.callback(),
-                child: Container(
-                  width: Get.width,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: Color(0xff00458C),
-                      borderRadius: BorderRadius.circular(Get.width * 0.06)),
-                  padding: EdgeInsets.symmetric(
-                      horizontal: Get.width * 0.3, vertical: Get.width * 0.03),
-                  margin: EdgeInsets.symmetric(
-                      horizontal: Get.width * 0.1, vertical: Get.width * 0.03),
-                  child: Text(
-                    widget.buttonText,
-                    style: TextStyle(color: Colors.white),
+                Padding(
+                    padding: EdgeInsets.symmetric(horizontal: Get.width * 0.05),
+                    child: Text(
+                      'Terms of Use',
+                      style:
+                          TextStyle(color: MyColors.blue_003E7E, fontSize: 26),
+                    )),
+                Expanded(
+                    child: Padding(
+                  padding: EdgeInsets.all(Get.width * 0.06),
+                  child: WebView(
+                    zoomEnabled: false,
+                    javascriptMode: JavascriptMode.unrestricted,
+                    initialUrl: widget.legalDocLink.toString(),
+                    onPageFinished: (url) {
+                      print(url);
+                    },
+                    onPageStarted: (url) {
+                      print(url);
+                    },
+                    onProgress: (progress) {
+                      print(progress);
+                    },
+                    onWebResourceError: (e) {
+                      print(e);
+                      setState(() => error = true);
+                    },
+                    onWebViewCreated: (controller) {
+                      webViewController = controller;
+                    },
                   ),
-                ),
-              ),
-            ],
-          ),
-          if (error)
-            Positioned(
-              right: Get.width * 0.06,
-              bottom: Get.width * 0.3,
-              child: GestureDetector(
-                onTap: () {
-                  if (webViewController != null) {
-                    setState(() => error = false);
-                    webViewController!.reload();
-                  }
-                },
-                child: Container(
+                )),
+                GestureDetector(
+                  onTap: () => widget.callback(),
+                  child: Container(
+                    width: Get.width,
+                    alignment: Alignment.center,
                     decoration: BoxDecoration(
-                        color: Colors.blue[200],
+                        color: Color(0xff00458C),
                         borderRadius: BorderRadius.circular(Get.width * 0.06)),
                     padding: EdgeInsets.symmetric(
-                        horizontal: Get.width * 0.03,
+                        horizontal: Get.width * 0.3,
                         vertical: Get.width * 0.03),
-                    child: Icon(Icons.replay_rounded)),
-              ),
-            )
-        ],
+                    margin: EdgeInsets.symmetric(
+                        horizontal: Get.width * 0.1,
+                        vertical: Get.width * 0.03),
+                    child: Text(
+                      widget.buttonText,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            if (error)
+              Positioned(
+                right: Get.width * 0.06,
+                bottom: Get.width * 0.3,
+                child: GestureDetector(
+                  onTap: () {
+                    if (webViewController != null) {
+                      setState(() => error = false);
+                      webViewController!.reload();
+                    }
+                  },
+                  child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.blue[200],
+                          borderRadius:
+                              BorderRadius.circular(Get.width * 0.06)),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: Get.width * 0.03,
+                          vertical: Get.width * 0.03),
+                      child: Icon(Icons.replay_rounded)),
+                ),
+              )
+          ],
+        ),
       )),
     );
   }

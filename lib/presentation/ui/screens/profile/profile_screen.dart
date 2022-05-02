@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/profile/change_language_page.dart';
@@ -16,11 +17,14 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: MyColors.blue_003E7E,
       body: SafeArea(
-          child: SizedBox.expand(
-        child: Column(
-          children: [buildHeader(), buildBody()],
+          child: Container(
+        color: Color(0xffF4F4F6),
+        child: SizedBox.expand(
+          child: Column(
+            children: [buildHeader(), buildBody()],
+          ),
         ),
       )),
     );

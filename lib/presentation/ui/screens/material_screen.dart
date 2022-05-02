@@ -44,11 +44,14 @@ class _MaterialScreenState extends State<MaterialScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffF4F4F6),
+      backgroundColor: MyColors.blue_003E7E,
       body: SafeArea(
-          child: SizedBox.expand(
-        child: Column(
-          children: [buildHeader(), Expanded(child: buildBody())],
+          child: Container(
+        color: Color(0xffF4F4F6),
+        child: SizedBox.expand(
+          child: Column(
+            children: [buildHeader(), Expanded(child: buildBody())],
+          ),
         ),
       )),
     );
