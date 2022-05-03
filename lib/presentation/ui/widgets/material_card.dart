@@ -272,22 +272,7 @@ class MaterialCardState extends State<MaterialCard> {
                           ],
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(Get.width * 0.1)),
-                      child: Obx(() {
-                        if (favoritesController.isMaterialInFavorite(
-                            material: widget.materiale)) {
-                          return CartTopIcon(
-                            type: CartTopIcon.favorite_select_type,
-                          );
-                        } else {
-                          return GestureDetector(
-                            onTap: () => favoritesController.addItemToAllList(
-                                material: widget.materiale),
-                            child: CartTopIcon(
-                              type: CartTopIcon.favorite_type,
-                            ),
-                          );
-                        }
-                      }),
+                      child: buildTopIcon(),
                     ),
                   ],
                 ),
@@ -314,22 +299,48 @@ class MaterialCardState extends State<MaterialCard> {
     );
   }
 
+  Widget buildTopIcon() {
+    if (widget.insideFavorites) {
+      return CartTopIcon(
+        type: CartTopIcon.menu_type,
+      );
+    } else {
+      return Obx(() {
+        if (favoritesController.isMaterialInFavorite(
+            material: widget.materiale)) {
+          return CartTopIcon(
+            type: CartTopIcon.favorite_select_type,
+          );
+        } else {
+          return GestureDetector(
+            onTap: () => favoritesController.addItemToAllList(
+                material: widget.materiale),
+            child: CartTopIcon(
+              type: CartTopIcon.favorite_type,
+            ),
+          );
+        }
+      });
+    }
+  }
+
   Widget getMaterialComponent() {
-    return Obx(() {
-      print(materialCountController.unit_count);
-      if (!widget.materiale.IsInStock) {
-        return OutStockMaterialComponent(
-          isUpdate: widget.materiale.didSubscribedToInventoryAlert,
-        );
-      } else if (materialCountController.unit_count > 0) {
-        return FocusedMaterialComponent(
-            materialCountController: materialCountController,
-            materiale: widget.materiale);
-      } else {
-        return NormalMaterialComponent(
-            materiale: widget.materiale,
-            materialCountController: materialCountController);
-      }
-    });
+    if (!widget.materiale.IsInStock) {
+      return OutStockMaterialComponent(
+        isUpdate: widget.materiale.didSubscribedToInventoryAlert,
+      );
+    } else {
+      return Obx(() {
+        if (materialCountController.unit_count > 0) {
+          return FocusedMaterialComponent(
+              materialCountController: materialCountController,
+              materiale: widget.materiale);
+        } else {
+          return NormalMaterialComponent(
+              materiale: widget.materiale,
+              materialCountController: materialCountController);
+        }
+      });
+    }
   }
 }

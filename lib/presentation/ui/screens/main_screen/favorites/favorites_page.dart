@@ -79,6 +79,19 @@ class _FavoritesPageState extends State<FavoritesPage> {
             height: Get.width * 0.01,
           ),
           buildListsRow(),
+          SizedBox(
+            height: Get.width * 0.01,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [Text('Add the entire list to cart'), Icon(Icons.sort)],
+            ),
+          ),
+          SizedBox(
+            height: Get.width * 0.01,
+          ),
           Expanded(child: Container(
             child: Obx(() {
               MaterialsCatalogState mcState =
@@ -101,7 +114,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                         insideFavorites: true,
                       );
                     } else {
-                      return Text(e.materialNumber);
+                      return Text('INVALID MATERIAL');
                     }
                   }).toList(),
                 );
@@ -130,25 +143,42 @@ class _FavoritesPageState extends State<FavoritesPage> {
                   selectedListIndex = widget.favoriteLists.indexOf(e);
                 });
               },
-              child: Container(
-                  decoration: BoxDecoration(
-                      color:
-                          selectedListIndex == widget.favoriteLists.indexOf(e)
+              child: Stack(
+                children: [
+                  Container(
+                      decoration: BoxDecoration(
+                          color: selectedListIndex ==
+                                  widget.favoriteLists.indexOf(e)
                               ? Color(0xff00458C)
                               : Color(0xff00458C).withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(Get.width * 0.04)),
-                  margin: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: Get.width * 0.03,
-                  ),
-                  alignment: Alignment.center,
-                  child: Text(e.listName,
-                      style: TextStyle(
-                        color:
-                            selectedListIndex == widget.favoriteLists.indexOf(e)
+                          borderRadius:
+                              BorderRadius.circular(Get.width * 0.04)),
+                      margin:
+                          EdgeInsets.symmetric(horizontal: Get.width * 0.01),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: Get.width * 0.03,
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(e.listName,
+                          style: TextStyle(
+                            color: selectedListIndex ==
+                                    widget.favoriteLists.indexOf(e)
                                 ? Colors.white
                                 : Color(0xff003E7E),
-                      ))),
+                          ))),
+                  Positioned.fill(
+                      child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                          color: Colors.yellow,
+                          child: Text(e.favoriteItems.length.toString())),
+                    ],
+                  ))
+                ],
+              ),
             );
           }).toList(),
         ));

@@ -135,23 +135,23 @@ class _MaterialScreenState extends State<MaterialScreen> {
   }
 
   Widget getMaterialComponent() {
-    return Obx(() {
-      print(materialCountController.unit_count);
-      if (!widget.material.IsInStock) {
-        return OutStockMaterialComponent(
-          isUpdate: widget.material.didSubscribedToInventoryAlert,
-        );
-      }
-      if (materialCountController.unit_count > 0) {
-        return FocusedMaterialComponent(
-            materialCountController: materialCountController,
-            materiale: widget.material);
-      } else {
-        return NormalMaterialComponent(
-            materiale: widget.material,
-            materialCountController: materialCountController);
-      }
-    });
+    if (!widget.material.IsInStock) {
+      return OutStockMaterialComponent(
+        isUpdate: widget.material.didSubscribedToInventoryAlert,
+      );
+    } else {
+      return Obx(() {
+        if (materialCountController.unit_count > 0) {
+          return FocusedMaterialComponent(
+              materialCountController: materialCountController,
+              materiale: widget.material);
+        } else {
+          return NormalMaterialComponent(
+              materiale: widget.material,
+              materialCountController: materialCountController);
+        }
+      });
+    }
   }
 
   Container buildMaterial() {

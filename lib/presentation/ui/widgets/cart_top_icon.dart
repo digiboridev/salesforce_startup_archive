@@ -14,17 +14,9 @@ class CartTopIcon extends StatefulWidget {
 }
 
 class CartTopIconState extends State<CartTopIcon> {
-  late String type;
-
-  @override
-  void initState() {
-    type = widget.type;
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
-    switch (type) {
+    switch (widget.type) {
       case CartTopIcon.favorite_type:
         return getFavorite();
       case CartTopIcon.favorite_select_type:

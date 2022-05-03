@@ -1,4 +1,5 @@
 import 'package:***REMOVED***/core/translations.dart';
+import 'package:***REMOVED***/data/datasouces/cart_local_datasource.dart';
 import 'package:***REMOVED***/data/datasouces/contact_us_local_datasource.dart';
 import 'package:***REMOVED***/data/datasouces/contact_us_remote_datasource.dart';
 import 'package:***REMOVED***/data/datasouces/customers_local_datasource.dart';
@@ -9,6 +10,7 @@ import 'package:***REMOVED***/data/datasouces/materials_local_datasource.dart';
 import 'package:***REMOVED***/data/datasouces/materials_remote_datasource.dart';
 import 'package:***REMOVED***/data/datasouces/user_data_local_datasource.dart';
 import 'package:***REMOVED***/data/datasouces/user_data_remote_datasource.dart';
+import 'package:***REMOVED***/data/repositories/cart_repository.dart';
 import 'package:***REMOVED***/data/repositories/contact_us_repository.dart';
 import 'package:***REMOVED***/data/repositories/customers_repository.dart';
 import 'package:***REMOVED***/data/repositories/favorites_repository.dart';
@@ -83,6 +85,9 @@ Future injectDependency() async {
   FavoritesRepository favoritesRepository = Get.put(FavoritesRepositoryImpl(
       favoritesRemoteDatasource: FavoritesRemoteDatasourceImpl(),
       favoritesLocalDatasource: FavoritesLocalDatasourceImpl()));
+
+  CartRepository cartRepository = Get.put(
+      CartRepositoryImpl(cartLocalDatasource: CartLocalDatasourceImpl()));
 
   // Use cases
   //-- userdata
