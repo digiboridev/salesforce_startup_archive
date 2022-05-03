@@ -65,7 +65,8 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
               height: Get.width * 0.06,
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
+              padding: EdgeInsets.symmetric(
+                  horizontal: Get.width * 0.06,),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: userDataController.avaliableLanguages.map((e) {
@@ -77,7 +78,8 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
                     },
                     child: Padding(
                         padding:
-                            EdgeInsets.symmetric(vertical: Get.width * 0.01),
+                            EdgeInsets.symmetric(
+                                vertical: Get.width * 0.06),
                         child: Row(
                           children: [
                             selectLanguage == e

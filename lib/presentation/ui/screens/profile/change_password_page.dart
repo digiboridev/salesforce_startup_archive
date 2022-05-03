@@ -65,7 +65,9 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                   child: Text(
                     'Password change'.tr,
                     style: TextStyle(
-                      fontSize: Get.width * 0.05,
+                      color: MyColors.blue_003E7E,
+
+                      fontSize: Get.width * 0.08,
                     ),
                   ),
                 ),
