@@ -2,7 +2,6 @@ import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/domain/entities/materials/brand.dart';
 import 'package:***REMOVED***/domain/entities/materials/family.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
-import 'package:***REMOVED***/domain/entities/materials/unit_types.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/brand_card.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalog_page_states.dart';

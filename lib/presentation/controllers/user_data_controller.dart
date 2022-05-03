@@ -71,6 +71,8 @@ class UserDataController extends GetxController {
     print(_authData);
   }
 
+  // Perform full load with loading states
+  // Uses for initial loading, or auth changes
   Future loadUserData() async {
     // Return to initial state, null means  the user log outed
     if (_authData.value == null) {
@@ -120,10 +122,7 @@ class UserDataController extends GetxController {
     }
   }
 
-  Future<DateTime> getLastSync() async {
-    return _getUserDataSyncTime.call(_authData.value!.userId);
-  }
-
+  // Perform only update of data, without side states
   Future updateUserData() async {
     UserDataState oldState = _userDataState.value;
     if (oldState is UserDataCommonState) {
@@ -140,6 +139,10 @@ class UserDataController extends GetxController {
         print(e);
       }
     }
+  }
+
+  Future<DateTime> getLastSync() async {
+    return _getUserDataSyncTime.call(_authData.value!.userId);
   }
 
   setLocale() {

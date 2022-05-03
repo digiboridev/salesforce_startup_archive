@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 // Loader provides view functionality of initial loading process
-// Handle loading state of core controllers and prsent usercases of retry load and legal doc acceptation
+// Handle loading state of core controllers and prsent usercases of retry, load and legal doc acceptation
 class Loader extends StatelessWidget {
   final UserDataController userDataController = Get.find();
   final CustomerController customerController = Get.find();

@@ -34,6 +34,8 @@ class MaterialsCatalogController extends GetxController {
     });
   }
 
+  // Perform full load with loading states
+  // Uses for initial loading, or auth changes
   Future loadCatalog() async {
     if (_customerController.selectedCustomerSAP == null) {
       materialsCatalogState.value = MCSInitial();
@@ -42,10 +44,12 @@ class MaterialsCatalogController extends GetxController {
 
     materialsCatalogState.value = MCSLoading();
     try {
+      // Load catalog data
       MaterialsCatalog catalog = await _getMaterialsAndCache.call(
           GetMaterialsAndCacheParams(
               customerSAP: _customerController.selectedCustomerSAP!,
               hasConnection: _connectionService.hasConnection));
+      // emmit state
       materialsCatalogState.value = MCSCommon(catalog: catalog);
 
       // Register in cache fetching service
@@ -68,6 +72,7 @@ class MaterialsCatalogController extends GetxController {
     }
   }
 
+  // Perform only update of data, without side states
   Future updateCatalog() async {
     try {
       MaterialsCatalog catalog = await _getMaterialsAndCache.call(

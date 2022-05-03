@@ -1,5 +1,4 @@
 import 'package:***REMOVED***/core/colors.dart';
-import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/search_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar_controller.dart';
@@ -19,9 +18,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  MaterialsCatalogController materialsCatalogController =
-      Get.put(MaterialsCatalogController());
-
   late final BottomBarController bottomBarController;
   late final PageController pageController;
   SearchController searchController = Get.put(SearchController());

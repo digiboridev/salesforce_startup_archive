@@ -36,6 +36,7 @@ import 'package:***REMOVED***/domain/usecases/customer/set_selected_customer_sap
 import 'package:***REMOVED***/presentation/controllers/contactus_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/favorites_controller.dart';
+import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/loader.dart';
 import 'package:flutter/material.dart';
@@ -131,6 +132,8 @@ Future initControllers() async {
   Get.put(UserDataController(), permanent: true);
   Get.put(CustomerController(), permanent: true);
   Get.put(ContactusController(), permanent: true);
+  Get.put(MaterialsCatalogController(), permanent: true);
   Get.put(FavoritesController(), permanent: true);
+
   print('All controllers started...');
 }
