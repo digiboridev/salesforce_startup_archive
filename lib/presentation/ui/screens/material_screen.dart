@@ -1,6 +1,5 @@
 import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
-import 'package:***REMOVED***/domain/entities/materials/unit_types.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
 import 'package:***REMOVED***/presentation/controllers/material_count_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
@@ -34,10 +33,8 @@ class _MaterialScreenState extends State<MaterialScreen> {
     super.initState();
     materialCountController = Get.put(
         MaterialCountController(
-            material: widget.material,
-            onChange: (int count, UnitType unitType) async {
-              print('MaT SCREEN');
-            }),
+          material: widget.material,
+        ),
         tag: widget.material.hashCode.toString());
   }
 

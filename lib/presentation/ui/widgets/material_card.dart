@@ -3,6 +3,7 @@ import 'package:***REMOVED***/domain/entities/materials/material.dart';
 import 'package:***REMOVED***/domain/entities/materials/unit_types.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
+import 'package:***REMOVED***/presentation/controllers/favorites_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/material_count_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/cart_top_icon.dart';
@@ -16,7 +17,12 @@ import 'package:get/get.dart';
 
 class MaterialCard extends StatefulWidget {
   final Materiale materiale;
-  const MaterialCard({Key? key, required this.materiale}) : super(key: key);
+  final bool insideFavorites;
+  MaterialCard({
+    Key? key,
+    required this.materiale,
+    this.insideFavorites = false,
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => MaterialCardState();
@@ -27,15 +33,14 @@ class MaterialCardState extends State<MaterialCard> {
 
   UserDataController userDataController = Get.find();
   CustomerController customerController = Get.find();
+  FavoritesController favoritesController = Get.find();
 
   @override
   void initState() {
     materialCountController = Get.put(
         MaterialCountController(
-            material: widget.materiale,
-            onChange: (int count, UnitType unitType) async {
-              print('MaterialCard');
-            }),
+          material: widget.materiale,
+        ),
         tag: widget.materiale.hashCode.toString());
     super.initState();
   }
@@ -63,11 +68,13 @@ class MaterialCardState extends State<MaterialCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(
-            () => MaterialScreen(
-                  material: widget.materiale,
-                ),
-            transition: Transition.cupertino);
+        if (!widget.insideFavorites) {
+          Get.to(
+              () => MaterialScreen(
+                    material: widget.materiale,
+                  ),
+              transition: Transition.cupertino);
+        }
       },
       child: Container(
         decoration: BoxDecoration(
@@ -265,9 +272,22 @@ class MaterialCardState extends State<MaterialCard> {
                           ],
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(Get.width * 0.1)),
-                      child: CartTopIcon(
-                        type: CartTopIcon.favorite_type,
-                      ),
+                      child: Obx(() {
+                        if (favoritesController.isMaterialInFavorite(
+                            material: widget.materiale)) {
+                          return CartTopIcon(
+                            type: CartTopIcon.favorite_select_type,
+                          );
+                        } else {
+                          return GestureDetector(
+                            onTap: () => favoritesController.addItemToAllList(
+                                material: widget.materiale),
+                            child: CartTopIcon(
+                              type: CartTopIcon.favorite_type,
+                            ),
+                          );
+                        }
+                      }),
                     ),
                   ],
                 ),

@@ -4,20 +4,13 @@ import 'package:get/get.dart';
 
 class MaterialCountController extends GetxController {
   final Materiale material;
-  final Future Function(int count, UnitType unitType) onChange;
 
   MaterialCountController({
     required this.material,
-    required this.onChange,
-    int? initialCount,
-    UnitType? initialUnitType,
   }) {
-    _unit_count = RxInt(initialCount ?? 0);
-    if (initialUnitType is UnitType) {
-      _unitType = Rx(initialUnitType);
-    } else {
-      _unitType = Rx(material.avaliableUnitTtypes.first);
-    }
+    _unit_count = RxInt(0);
+
+    _unitType = Rx(material.avaliableUnitTtypes.first);
   }
 
   late final Rx<UnitType> _unitType;

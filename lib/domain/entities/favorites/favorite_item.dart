@@ -19,4 +19,18 @@ class FavoriteItem extends Equatable {
   String toString() {
     return 'FavoriteItem(materialNumber: $materialNumber, sFId: $sFId, unit: $unit, quantity: $quantity)';
   }
+
+  FavoriteItem copyWith({
+    String? materialNumber,
+    String? sFId,
+    String? unit,
+    num? quantity,
+  }) {
+    return FavoriteItem(
+      materialNumber: materialNumber ?? this.materialNumber,
+      sFId: sFId ?? this.sFId,
+      unit: unit ?? this.unit,
+      quantity: quantity ?? this.quantity,
+    );
+  }
 }

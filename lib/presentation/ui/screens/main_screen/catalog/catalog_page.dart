@@ -2,6 +2,7 @@ import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/domain/entities/materials/brand.dart';
 import 'package:***REMOVED***/domain/entities/materials/family.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
+import 'package:***REMOVED***/domain/entities/materials/unit_types.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/brand_card.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalog_page_states.dart';
@@ -400,12 +401,12 @@ class _CatalogPageState extends State<CatalogPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(padding:
-          EdgeInsets.symmetric(horizontal: Get.width*0.025),
-              child:CachedImage(
-              Url: brand.ImageUrl,
-              width: Get.width * 0.15,
-              height: Get.width * 0.15)),
+          Padding(
+              padding: EdgeInsets.symmetric(horizontal: Get.width * 0.025),
+              child: CachedImage(
+                  Url: brand.ImageUrl,
+                  width: Get.width * 0.15,
+                  height: Get.width * 0.15)),
           Expanded(
             child: materials.isEmpty
                 ? Center(
@@ -432,17 +433,20 @@ class _CatalogPageState extends State<CatalogPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-      Padding(padding:
-      EdgeInsets.symmetric(horizontal: Get.width*0.025),
-      child:Row(children: [CachedImage(
-              Url: family.ImageUrl,
-              width: Get.width * 0.15,
-              height: Get.width * 0.15),
-        Text(family.Display, style: TextStyle(
-          color: MyColors.blue_003E7E,
-          fontSize: 24
-        ),)
-      ],)),
+          Padding(
+              padding: EdgeInsets.symmetric(horizontal: Get.width * 0.025),
+              child: Row(
+                children: [
+                  CachedImage(
+                      Url: family.ImageUrl,
+                      width: Get.width * 0.15,
+                      height: Get.width * 0.15),
+                  Text(
+                    family.Display,
+                    style: TextStyle(color: MyColors.blue_003E7E, fontSize: 24),
+                  )
+                ],
+              )),
           Expanded(
             child: materials.isEmpty
                 ? Center(

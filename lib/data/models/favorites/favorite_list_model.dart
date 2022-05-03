@@ -6,16 +6,22 @@ class FavoriteListModel extends FavoriteList {
   @override
   final List<FavoriteItemModel> favoriteItems;
 
-  FavoriteListModel(
-      {required String sFId,
-      required String listName,
-      required List<FavoriteItemModel> this.favoriteItems})
-      : super(sFId: sFId, listName: listName, favoriteItems: favoriteItems);
+  FavoriteListModel({
+    required String sFId,
+    required String listName,
+    required bool isAllList,
+    required List<FavoriteItemModel> this.favoriteItems,
+  }) : super(
+            sFId: sFId,
+            listName: listName,
+            favoriteItems: favoriteItems,
+            isAllList: isAllList);
 
   Map<String, dynamic> toMap() {
     return {
       'SFId': sFId,
-      'listName': listName,
+      'listName': isAllList,
+      'IsAllList': listName,
       'FavoriteItems': favoriteItems.map((x) => x.toMap()).toList(),
     };
   }
@@ -24,6 +30,7 @@ class FavoriteListModel extends FavoriteList {
     return FavoriteListModel(
       sFId: map['SFId'],
       listName: map['listName'],
+      isAllList: map['IsAllList'],
       favoriteItems: List<FavoriteItemModel>.from(
           map['FavoriteItems']?.map((x) => FavoriteItemModel.fromMap(x)) ??
               const []),
@@ -34,6 +41,7 @@ class FavoriteListModel extends FavoriteList {
     return FavoriteListModel(
       sFId: favoriteList.sFId,
       listName: favoriteList.listName,
+      isAllList: favoriteList.isAllList,
       favoriteItems: favoriteList.favoriteItems
           .map((e) => FavoriteItemModel.fromEntity(e))
           .toList(),
