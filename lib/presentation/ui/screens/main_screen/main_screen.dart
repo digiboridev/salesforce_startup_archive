@@ -2,6 +2,7 @@ import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/presentation/controllers/search_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar_controller.dart';
+import 'package:***REMOVED***/presentation/ui/screens/main_screen/cart/cart_page.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalog_loader.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/favorites/favorites_loader.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/mainscreen_header.dart';
@@ -35,7 +36,7 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   double headerHeight = Get.width * 0.4;
-  final double bottomBarHeight = Get.width * 0.25;
+  final double bottomBarHeight = Get.width * 0.3;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,7 @@ class _MainScreenState extends State<MainScreen> {
                 children: [
                   Padding(
                     padding: EdgeInsets.only(
-                        top: Get.width * 0.35, bottom: bottomBarHeight * 0.3),
+                        top: Get.width * 0.35, bottom: bottomBarHeight * 0.5),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -106,11 +107,7 @@ class _MainScreenState extends State<MainScreen> {
       children: [
         HomepageLoader(),
         FavoritesLoader(),
-        Container(
-          alignment: Alignment.center,
-          color: Colors.amber,
-          child: Text('cart'),
-        ),
+        CartPage(),
         CatalogLoader(),
         Container(
           alignment: Alignment.center,

@@ -19,6 +19,8 @@ import 'package:***REMOVED***/data/repositories/user_data_repository.dart';
 import 'package:***REMOVED***/domain/services/cache_ferchig_service.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
+import 'package:***REMOVED***/domain/usecases/cart/get_cart_items.dart';
+import 'package:***REMOVED***/domain/usecases/cart/set_cart_items.dart';
 import 'package:***REMOVED***/domain/usecases/favorites/get_favorites_and_cache.dart';
 import 'package:***REMOVED***/domain/usecases/favorites/get_favorites_sync_time.dart';
 import 'package:***REMOVED***/domain/usecases/user/accept_legal_doc.dart';
@@ -33,6 +35,7 @@ import 'package:***REMOVED***/domain/usecases/customer/get_selected_customer_sap
 import 'package:***REMOVED***/domain/usecases/user/get_userdata_and_cache.dart';
 import 'package:***REMOVED***/domain/usecases/user/get_userdata_sync_time.dart';
 import 'package:***REMOVED***/domain/usecases/customer/set_selected_customer_sap.dart';
+import 'package:***REMOVED***/presentation/controllers/cart_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/contactus_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/favorites_controller.dart';
@@ -115,6 +118,10 @@ Future injectDependency() async {
   Get.put<GetFavoritesAndCache>(GetFavoritesAndCache(favoritesRepository));
   Get.put<GetFavoritesSyncTime>(GetFavoritesSyncTime(favoritesRepository));
 
+  // Cart
+  Get.put<GetCartItems>(GetCartItems(cartRepository));
+  Get.put<SetCartItems>(SetCartItems(cartRepository));
+
   print('injected dependencies...');
 }
 
@@ -134,6 +141,7 @@ Future initControllers() async {
   Get.put(ContactusController(), permanent: true);
   Get.put(MaterialsCatalogController(), permanent: true);
   Get.put(FavoritesController(), permanent: true);
+  Get.put(CartController(), permanent: true);
 
   print('All controllers started...');
 }

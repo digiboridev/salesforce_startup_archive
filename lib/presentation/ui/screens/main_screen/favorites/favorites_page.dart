@@ -72,7 +72,12 @@ class _FavoritesPageState extends State<FavoritesPage> {
             padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Text('Favorites'), Icon(Icons.abc)],
+              children: [
+                Text('Favorites'),
+                GestureDetector(
+                    onTap: () => Get.snackbar('Error', 'Not implemented'),
+                    child: Icon(Icons.abc))
+              ],
             ),
           ),
           SizedBox(
@@ -82,52 +87,85 @@ class _FavoritesPageState extends State<FavoritesPage> {
           SizedBox(
             height: Get.width * 0.01,
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Text('Add the entire list to cart'), Icon(Icons.sort)],
-            ),
-          ),
-          SizedBox(
-            height: Get.width * 0.01,
-          ),
-          Expanded(child: Container(
-            child: Obx(() {
-              MaterialsCatalogState mcState =
-                  materialsCatalogController.materialsCatalogState.value;
-
-              if (selectedListIndex is int && mcState is MCSCommon) {
-                FavoriteList listToShow =
-                    widget.favoriteLists.elementAt(selectedListIndex!);
-
-                return ListView(
-                  physics: BouncingScrollPhysics(),
-                  children: listToShow.favoriteItems.map((e) {
-                    Materiale? m = mcState.catalog.materials.firstWhereOrNull(
-                      (element) => element.MaterialNumber == e.materialNumber,
-                    );
-
-                    if (m is Materiale) {
-                      return MaterialCard(
-                        materiale: m,
-                        insideFavorites: true,
-                      );
-                    } else {
-                      return Text('INVALID MATERIAL');
-                    }
-                  }).toList(),
-                );
-              } else {
-                return Center(
-                  child: Text('No data'),
-                );
-              }
-            }),
-          ))
+          selectedListIndex is int
+              ? Expanded(
+                  child: Column(
+                    children: [
+                      buildListControll(),
+                      SizedBox(
+                        height: Get.width * 0.01,
+                      ),
+                      Expanded(
+                          child: Container(
+                        child: buildItemsList(),
+                      )),
+                    ],
+                  ),
+                )
+              : Expanded(
+                  child: Center(
+                  child: Text('Select list'),
+                ))
         ],
       ),
     );
+  }
+
+  Padding buildListControll() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          GestureDetector(
+              onTap: () => Get.snackbar('Error', 'Not implemented'),
+              child: Text('Add the entire list to cart')),
+          GestureDetector(
+              onTap: () => Get.snackbar('Error', 'Not implemented'),
+              child: Icon(Icons.sort))
+        ],
+      ),
+    );
+  }
+
+  Widget buildItemsList() {
+    return Obx(() {
+      MaterialsCatalogState mcState =
+          materialsCatalogController.materialsCatalogState.value;
+
+      if (mcState is MCSCommon) {
+        FavoriteList listToShow =
+            widget.favoriteLists.elementAt(selectedListIndex!);
+
+        if (listToShow.favoriteItems.isEmpty) {
+          return Center(
+            child: Text('Empty list'),
+          );
+        }
+
+        return ListView(
+          physics: BouncingScrollPhysics(),
+          children: listToShow.favoriteItems.map((e) {
+            Materiale? m = mcState.catalog.materials.firstWhereOrNull(
+              (element) => element.MaterialNumber == e.materialNumber,
+            );
+
+            if (m is Materiale) {
+              return MaterialCard(
+                materiale: m,
+                insideFavorites: true,
+              );
+            } else {
+              return Text('INVALID MATERIAL');
+            }
+          }).toList(),
+        );
+      } else {
+        return Center(
+          child: Text('Waiting catalog'),
+        );
+      }
+    });
   }
 
   Widget buildListsRow() {

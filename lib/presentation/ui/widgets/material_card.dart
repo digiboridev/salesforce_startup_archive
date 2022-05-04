@@ -1,7 +1,9 @@
 import 'package:***REMOVED***/core/colors.dart';
+import 'package:***REMOVED***/domain/entities/cart_item.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
 import 'package:***REMOVED***/domain/entities/materials/unit_types.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
+import 'package:***REMOVED***/presentation/controllers/cart_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/favorites_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/material_count_controller.dart';
@@ -29,28 +31,29 @@ class MaterialCard extends StatefulWidget {
 }
 
 class MaterialCardState extends State<MaterialCard> {
-  late MaterialCountController materialCountController;
+  // late MaterialCountController materialCountController;
+  CartController cartController = Get.find();
 
   UserDataController userDataController = Get.find();
   CustomerController customerController = Get.find();
   FavoritesController favoritesController = Get.find();
 
-  @override
-  void initState() {
-    materialCountController = Get.put(
-        MaterialCountController(
-          material: widget.materiale,
-        ),
-        tag: widget.materiale.hashCode.toString());
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   materialCountController = Get.put(
+  //       MaterialCountController(
+  //         material: widget.materiale,
+  //       ),
+  //       tag: widget.materiale.hashCode.toString());
+  //   super.initState();
+  // }
 
-  @override
-  void dispose() {
-    super.dispose();
-    Get.delete<MaterialCountController>(
-        tag: widget.materiale.hashCode.toString());
-  }
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   Get.delete<MaterialCountController>(
+  //       tag: widget.materiale.hashCode.toString());
+  // }
 
   bool get hidePrices {
     return customerController.selectedCustomer!.hidePrices;
@@ -331,14 +334,19 @@ class MaterialCardState extends State<MaterialCard> {
       );
     } else {
       return Obx(() {
-        if (materialCountController.unit_count > 0) {
+        print(cartController.cartItems);
+        CartItem? cartItem = cartController.getItemByNumber(
+            materialNumber: widget.materiale.MaterialNumber);
+
+        if (cartItem is CartItem) {
           return FocusedMaterialComponent(
-              materialCountController: materialCountController,
-              materiale: widget.materiale);
+            materiale: widget.materiale,
+            cartItem: cartItem,
+          );
         } else {
           return NormalMaterialComponent(
-              materiale: widget.materiale,
-              materialCountController: materialCountController);
+            materiale: widget.materiale,
+          );
         }
       });
     }

@@ -1,7 +1,8 @@
 import 'package:***REMOVED***/core/colors.dart';
+import 'package:***REMOVED***/domain/entities/cart_item.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
-import 'package:***REMOVED***/presentation/controllers/material_count_controller.dart';
+import 'package:***REMOVED***/presentation/controllers/cart_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/cart_top_icon.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/product_options.dart';
@@ -25,18 +26,8 @@ class MaterialScreen extends StatefulWidget {
 }
 
 class _MaterialScreenState extends State<MaterialScreen> {
-  late MaterialCountController materialCountController;
   MaterialsCatalogController materialsCatalogController = Get.find();
-
-  @override
-  void initState() {
-    super.initState();
-    materialCountController = Get.put(
-        MaterialCountController(
-          material: widget.material,
-        ),
-        tag: widget.material.hashCode.toString());
-  }
+  CartController cartController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -141,14 +132,18 @@ class _MaterialScreenState extends State<MaterialScreen> {
       );
     } else {
       return Obx(() {
-        if (materialCountController.unit_count > 0) {
+        CartItem? cartItem = cartController.getItemByNumber(
+            materialNumber: widget.material.MaterialNumber);
+
+        if (cartItem is CartItem) {
           return FocusedMaterialComponent(
-              materialCountController: materialCountController,
-              materiale: widget.material);
+            materiale: widget.material,
+            cartItem: cartItem,
+          );
         } else {
           return NormalMaterialComponent(
-              materiale: widget.material,
-              materialCountController: materialCountController);
+            materiale: widget.material,
+          );
         }
       });
     }

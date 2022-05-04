@@ -1,19 +1,21 @@
 import 'package:***REMOVED***/core/colors.dart';
+import 'package:***REMOVED***/domain/entities/cart_item.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
 import 'package:***REMOVED***/domain/entities/materials/unit_types.dart';
-import 'package:***REMOVED***/presentation/controllers/material_count_controller.dart';
+import 'package:***REMOVED***/presentation/controllers/cart_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/product_count_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FocusedMaterialComponent extends StatelessWidget {
-  const FocusedMaterialComponent({
+  FocusedMaterialComponent({
     Key? key,
-    required this.materialCountController,
     required this.materiale,
+    required this.cartItem,
   }) : super(key: key);
 
-  final MaterialCountController materialCountController;
+  final CartController cartController = Get.find();
+  final CartItem cartItem;
   final Materiale materiale;
 
   @override
@@ -28,15 +30,22 @@ class FocusedMaterialComponent extends StatelessWidget {
               onTap: () async {
                 Map<UnitType, int>? d = await Get.to<Map<UnitType, int>>(
                     () => ProductCountScreen(
-                          initialCount: materialCountController.unit_count,
+                          initialCount: cartItem.quantity.toInt(),
                           material: materiale,
-                          initialUnitType: materialCountController.unitType,
+                          initialUnitType: cartItem.salesUnitType,
                         ),
                     transition: Transition.circularReveal);
 
                 if (d != null) {
-                  materialCountController.setCountManual(count: d.values.first);
-                  materialCountController.setUnitType(unitType: d.keys.first);
+                  if (d.values.first < 1) {
+                    cartController.removeItem(
+                        materialNumber: materiale.MaterialNumber);
+                  } else {
+                    cartController.setItem(
+                        materialNumber: materiale.MaterialNumber,
+                        unit: d.keys.first,
+                        quantity: d.values.first);
+                  }
                 }
               },
               child: Container(
@@ -56,13 +65,13 @@ class FocusedMaterialComponent extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Obx(() => Text(
-                                    "${materialCountController.unit_count} ${materialCountController.unitType.text.tr} ₪${materiale.UnitNetPrice.toInt() * materialCountController.unit_count * materiale.countByUnitType(materialCountController.unitType)}",
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: MyColors.blue_00458C,
-                                    ),
-                                  )),
+                              Text(
+                                "${cartItem.quantity} ${cartItem.salesUnitType.text.tr} ₪${materiale.UnitNetPrice.toInt() * cartItem.quantity * materiale.countByUnitType(cartItem.salesUnitType)}",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: MyColors.blue_00458C,
+                                ),
+                              ),
                               Icon(
                                 Icons.arrow_drop_down_outlined,
                                 color: MyColors.blue_00458C,
@@ -71,7 +80,11 @@ class FocusedMaterialComponent extends StatelessWidget {
                           ))))),
           InkWell(
             onTap: () {
-              materialCountController.increaseCount();
+              int count = (cartItem.quantity + 1).toInt();
+              cartController.setItem(
+                  materialNumber: materiale.MaterialNumber,
+                  unit: cartItem.salesUnitType,
+                  quantity: count);
             },
             child: Container(
               height: 44,
@@ -87,7 +100,17 @@ class FocusedMaterialComponent extends StatelessWidget {
           ),
           InkWell(
               onTap: () {
-                materialCountController.decreaseCount();
+                int count = (cartItem.quantity - 1).toInt();
+
+                if (count < 1) {
+                  cartController.removeItem(
+                      materialNumber: materiale.MaterialNumber);
+                } else {
+                  cartController.setItem(
+                      materialNumber: materiale.MaterialNumber,
+                      unit: cartItem.salesUnitType,
+                      quantity: count);
+                }
               },
               child: Container(
                 height: 44,

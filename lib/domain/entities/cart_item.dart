@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+import 'materials/unit_types.dart';
+
 class CartItem extends Equatable {
   final String materialNumber;
   final String unit;
@@ -10,6 +12,10 @@ class CartItem extends Equatable {
     required this.unit,
     required this.quantity,
   });
+
+  UnitType get salesUnitType {
+    return UnitType.fromSalesUnit(unit);
+  }
 
   @override
   List<Object> get props => [materialNumber, unit, quantity];
