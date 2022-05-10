@@ -94,10 +94,9 @@ class CartPageState extends State<CartPage> {
               )),
           cartController.cartItems.isEmpty
               ? Expanded(
-                  child: Center(
-                  child:Container()
-                  //buildEmptyCard(),
-                ))
+                  child: Center(child: Container()
+                      //buildEmptyCard(),
+                      ))
               : Expanded(
                   child: Container(
                   child: buildItemsList(),
@@ -139,16 +138,21 @@ class CartPageState extends State<CartPage> {
                 decoration: TextDecoration.underline,
                 fontSize: 17),
           ),
-          SizedBox(height: Get.width*0.06,),
+          SizedBox(
+            height: Get.width * 0.06,
+          ),
           Container(
             width: Get.width,
-            margin: EdgeInsets.symmetric(horizontal: Get.width*0.06,),
-            padding: EdgeInsets.symmetric(horizontal: Get.width*0.05,
-                vertical: Get.width*0.06),
+            margin: EdgeInsets.symmetric(
+              horizontal: Get.width * 0.06,
+            ),
+            padding: EdgeInsets.symmetric(
+                horizontal: Get.width * 0.05, vertical: Get.width * 0.06),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+<<<<<<< HEAD
               Text("Next delivery".tr, style: TextStyle(
                   color: MyColors.blue_003E7E,
                   fontSize: 20, fontWeight: FontWeight.bold),),
@@ -172,20 +176,69 @@ class CartPageState extends State<CartPage> {
             decoration: BoxDecoration(
                 color: Colors.white,
                 boxShadow: [
+=======
+                Text(
+                  "Next delivery",
+                  style: TextStyle(
+                      color: MyColors.blue_003E7E,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: Get.width * 0.025,
+                ),
+                Text(
+                  "Wednesday 21.3.21",
+                  style: TextStyle(color: MyColors.blue_003E7E, fontSize: 17),
+                ),
+                Text(
+                  "Minimum order 1,500 NIS",
+                  style: TextStyle(color: MyColors.blue_003E7E, fontSize: 17),
+                ),
+                SizedBox(
+                  height: Get.width * 0.025,
+                ),
+                Text(
+                  "Frozen: Wednesday 21.3.21",
+                  style: TextStyle(color: MyColors.blue_003E7E, fontSize: 17),
+                ),
+                Text(
+                  "Minimum order 1,500 NIS",
+                  style: TextStyle(color: MyColors.blue_003E7E, fontSize: 17),
+                ),
+                SizedBox(
+                  height: Get.width * 0.025,
+                ),
+              ],
+            ),
+            decoration: BoxDecoration(color: Colors.white, boxShadow: [
+>>>>>>> b070be3f8aa96c8e0e075431ffd8e92d6ee75fe4
               BoxShadow(
                   color: Colors.grey.shade300, spreadRadius: 1, blurRadius: 10)
             ]),
           ),
-          SizedBox(height: Get.width*0.1,),
-
+          SizedBox(
+            height: Get.width * 0.1,
+          ),
           Container(
             alignment: Alignment.center,
-            margin: EdgeInsets.symmetric(horizontal: Get.width*0.06),
-            padding: EdgeInsets.symmetric(vertical: Get.width*0.025),
+            margin: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
+            padding: EdgeInsets.symmetric(vertical: Get.width * 0.025),
             width: MediaQuery.of(context).size.width,
+<<<<<<< HEAD
             child: Text("Catalog".tr, style: TextStyle(color: Colors.white, fontSize: 22),),
             decoration: BoxDecoration(color: MyColors.blue_00458C,
                 borderRadius: BorderRadius.circular(20)),)
+=======
+            child: Text(
+              "Catalog",
+              style: TextStyle(color: Colors.white, fontSize: 22),
+            ),
+            decoration: BoxDecoration(
+                color: MyColors.blue_00458C,
+                borderRadius: BorderRadius.circular(20)),
+          )
+>>>>>>> b070be3f8aa96c8e0e075431ffd8e92d6ee75fe4
         ],
       ),
     );
@@ -261,25 +314,40 @@ class CartPageState extends State<CartPage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(3, (index) {
-            return Container(
-              alignment: Alignment.center,
-              child: Column(
-                children: [
-                  Image.asset(
-                    imgList[index],
-                    height: 26,
-                    width: 26,
-                    color: MyColors.blue_0571E0,
-                  ),
-                  SizedBox(
-                    height: Get.width * 0.01,
-                  ),
-                  Text(
-                    descriptionList[index],
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: MyColors.blue_003E83, fontSize: 12),
-                  )
-                ],
+            return GestureDetector(
+              onTap: () {
+                if (index == 0) {
+                  cartController.cleanCart();
+                }
+
+                if (index == 1) {
+                  Get.snackbar('Error', 'Not implemented');
+                }
+                if (index == 2) {
+                  bottomBarController.changePage(newPageIndex: 4);
+                }
+              },
+              child: Container(
+                alignment: Alignment.center,
+                child: Column(
+                  children: [
+                    Image.asset(
+                      imgList[index],
+                      height: 26,
+                      width: 26,
+                      color: MyColors.blue_0571E0,
+                    ),
+                    SizedBox(
+                      height: Get.width * 0.01,
+                    ),
+                    Text(
+                      descriptionList[index],
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(color: MyColors.blue_003E83, fontSize: 12),
+                    )
+                  ],
+                ),
               ),
             );
           }),
@@ -301,24 +369,25 @@ class CartPageState extends State<CartPage> {
       ],
     );
   }
-  Widget buildSaveShoppingList(){
-      return Container(
-        padding: EdgeInsets.symmetric(horizontal: Get.width*0.06,
-            vertical:Get.width*0.05),
-        width: Get.width,
-        decoration: BoxDecoration(
 
-            boxShadow: [
-              BoxShadow(color: Colors.grey.shade300,
-                  spreadRadius: 1, blurRadius: 10)],
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(25),
-                topRight: Radius.circular(25))
-        ),
-        child: Column(children: [
+  Widget buildSaveShoppingList() {
+    return Container(
+      padding: EdgeInsets.symmetric(
+          horizontal: Get.width * 0.06, vertical: Get.width * 0.05),
+      width: Get.width,
+      decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey.shade300, spreadRadius: 1, blurRadius: 10)
+          ],
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(25), topRight: Radius.circular(25))),
+      child: Column(
+        children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
+<<<<<<< HEAD
             children: [Text("Saving as a shopping list".tr,
               style: TextStyle(color: MyColors.blue_003E7E,
                   fontSize: 26),),],),
@@ -347,13 +416,44 @@ class CartPageState extends State<CartPage> {
                     borderSide: BorderSide(color:
                     MyColors.blue_003E7E))
 
+=======
+            children: [
+              Text(
+                "Saving as a shopping list",
+                style: TextStyle(color: MyColors.blue_003E7E, fontSize: 26),
+              ),
+            ],
+          ),
+          Text(
+            "The list will be kept in the preferred area",
+            style: TextStyle(color: MyColors.blue_003E7E, fontSize: 17),
+          ),
+          SizedBox(
+            height: Get.width * 0.04,
+          ),
+          Container(
+            child: TextFormField(
+              textAlign: TextAlign.center,
+              decoration: InputDecoration(
+                  hintStyle:
+                      TextStyle(color: MyColors.blue_003E7E, fontSize: 18),
+                  hintText: "List Name",
+                  border: UnderlineInputBorder(
+                      borderSide: BorderSide(color: MyColors.blue_003E7E)),
+                  enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: MyColors.blue_003E7E)),
+                  focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: MyColors.blue_003E7E))),
+>>>>>>> b070be3f8aa96c8e0e075431ffd8e92d6ee75fe4
             ),
           ),
+          SizedBox(
+            height: Get.width * 0.1,
           ),
-          SizedBox(height: Get.width*0.1,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+<<<<<<< HEAD
               Flexible(child:
               Container(
 
@@ -371,16 +471,52 @@ class CartPageState extends State<CartPage> {
               Flexible(child:
 
               Container(
+=======
+              Flexible(
+                  child: Container(
+>>>>>>> b070be3f8aa96c8e0e075431ffd8e92d6ee75fe4
                 alignment: Alignment.center,
-                padding: EdgeInsets.symmetric(vertical: Get.width*0.03, ),
-                decoration: BoxDecoration(color:
-                MyColors.blue_E8EEF6,
+                padding: EdgeInsets.symmetric(
+                  vertical: Get.width * 0.03,
+                ),
+                decoration: BoxDecoration(
+                    color: MyColors.blue_00458C,
                     borderRadius: BorderRadius.all(Radius.circular(27))),
+<<<<<<< HEAD
                 child: Text("Cancellation".tr, style: TextStyle(
                     fontSize: 20, color: MyColors.blue_00458C
                 ),),
 
               ))],)
         ],),);
+=======
+                child: Text(
+                  "Continue",
+                  style: TextStyle(fontSize: 20, color: Colors.white),
+                ),
+              )),
+              SizedBox(
+                width: Get.width * 0.02,
+              ),
+              Flexible(
+                  child: Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.symmetric(
+                  vertical: Get.width * 0.03,
+                ),
+                decoration: BoxDecoration(
+                    color: MyColors.blue_E8EEF6,
+                    borderRadius: BorderRadius.all(Radius.circular(27))),
+                child: Text(
+                  "Cancellation",
+                  style: TextStyle(fontSize: 20, color: MyColors.blue_00458C),
+                ),
+              ))
+            ],
+          )
+        ],
+      ),
+    );
+>>>>>>> b070be3f8aa96c8e0e075431ffd8e92d6ee75fe4
   }
 }
