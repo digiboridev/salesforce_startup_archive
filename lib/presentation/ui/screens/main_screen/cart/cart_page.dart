@@ -39,7 +39,7 @@ class CartPageState extends State<CartPage> {
                           Row(
                             children: [
                               Text(
-                                'Shopping cart',
+                                'Shopping cart'.tr,
                                 style: TextStyle(
                                     color: MyColors.blue_003E7E, fontSize: 24),
                               )
@@ -51,7 +51,7 @@ class CartPageState extends State<CartPage> {
                           Row(
                             children: [
                               Text(
-                                "Next delivery",
+                                "Next delivery".tr,
                                 style: TextStyle(
                                     color: MyColors.blue_003E7E,
                                     fontSize: 12,
@@ -126,14 +126,14 @@ class CartPageState extends State<CartPage> {
             height: Get.width * 0.04,
           ),
           Text(
-            "Your shopping cart is empty",
+            "Your shopping cart is empty".tr,
             style: TextStyle(color: MyColors.blue_003E7E, fontSize: 24),
           ),
           SizedBox(
             height: Get.width * 0.04,
           ),
           Text(
-            "To start an order from the recommended list",
+            "To start an order from the recommended list".tr,
             style: TextStyle(
                 color: MyColors.blue_003E7E,
                 decoration: TextDecoration.underline,
@@ -149,7 +149,7 @@ class CartPageState extends State<CartPage> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-              Text("Next delivery", style: TextStyle(
+              Text("Next delivery".tr, style: TextStyle(
                   color: MyColors.blue_003E7E,
                   fontSize: 20, fontWeight: FontWeight.bold),),
               SizedBox(height: Get.width*0.025,),
@@ -183,7 +183,7 @@ class CartPageState extends State<CartPage> {
             margin: EdgeInsets.symmetric(horizontal: Get.width*0.06),
             padding: EdgeInsets.symmetric(vertical: Get.width*0.025),
             width: MediaQuery.of(context).size.width,
-            child: Text("Catalog", style: TextStyle(color: Colors.white, fontSize: 22),),
+            child: Text("Catalog".tr, style: TextStyle(color: Colors.white, fontSize: 22),),
             decoration: BoxDecoration(color: MyColors.blue_00458C,
                 borderRadius: BorderRadius.circular(20)),)
         ],
@@ -238,7 +238,7 @@ class CartPageState extends State<CartPage> {
         );
       } else {
         return Center(
-          child: Text('No data'),
+          child: Text('No data'.tr),
         );
       }
     });
@@ -251,9 +251,9 @@ class CartPageState extends State<CartPage> {
       'assets/icons/add_product.png',
     ];
     List<String> descriptionList = [
-      "Emptying\nAll Basket",
-      "Save\nAs a shopping list",
-      " Add Products\nFrom the catalog"
+      "Emptying All Basket".tr,
+      "Save As a shopping list".tr,
+      "Add Products From the catalog".tr
     ];
     return Container(
         margin: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
@@ -319,11 +319,11 @@ class CartPageState extends State<CartPage> {
         child: Column(children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [Text("Saving as a shopping list",
+            children: [Text("Saving as a shopping list".tr,
               style: TextStyle(color: MyColors.blue_003E7E,
                   fontSize: 26),),],),
 
-          Text("The list will be kept in the preferred area",
+          Text("The list will be kept in the preferred area".tr,
             style: TextStyle(
                 color: MyColors.blue_003E7E,
                 fontSize: 17),),
@@ -336,7 +336,7 @@ class CartPageState extends State<CartPage> {
 
                 hintStyle: TextStyle(color: MyColors.blue_003E7E,
                     fontSize: 18),
-                hintText: "List Name",
+                hintText: "List Name".tr,
                 border: UnderlineInputBorder(
                     borderSide: BorderSide(color:
                     MyColors.blue_003E7E)),
@@ -362,7 +362,7 @@ class CartPageState extends State<CartPage> {
             decoration: BoxDecoration(color:
             MyColors.blue_00458C,
                 borderRadius: BorderRadius.all(Radius.circular(27))),
-            child: Text("Continue", style: TextStyle(
+            child: Text("Continue".tr, style: TextStyle(
                 fontSize: 20, color: Colors.white
             ),),
 
@@ -376,7 +376,7 @@ class CartPageState extends State<CartPage> {
                 decoration: BoxDecoration(color:
                 MyColors.blue_E8EEF6,
                     borderRadius: BorderRadius.all(Radius.circular(27))),
-                child: Text("Cancellation", style: TextStyle(
+                child: Text("Cancellation".tr, style: TextStyle(
                     fontSize: 20, color: MyColors.blue_00458C
                 ),),
 

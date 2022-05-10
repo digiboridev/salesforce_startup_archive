@@ -69,17 +69,7 @@ class MaterialCardState extends State<MaterialCard> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        if (!widget.insideFavorites) {
-          Get.to(
-              () => MaterialScreen(
-                    material: widget.materiale,
-                  ),
-              transition: Transition.cupertino);
-        }
-      },
-      child: Container(
+    return  Container(
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(Get.width * 0.04))),
@@ -91,7 +81,17 @@ class MaterialCardState extends State<MaterialCard> {
         child: Stack(
           clipBehavior: Clip.none,
           children: [
-            Column(
+            GestureDetector(
+            onTap: () {
+    if (!widget.insideFavorites) {
+    Get.to(
+    () => MaterialScreen(
+    material: widget.materiale,
+    ),
+    transition: Transition.cupertino);
+    }
+    },
+      child: Column(
               children: [
                 SizedBox(
                   height: Get.width * 0.05,
@@ -253,7 +253,7 @@ class MaterialCardState extends State<MaterialCard> {
                     // height: Get.width * 0.05,
                     ),
               ],
-            ),
+            )),
             Positioned(
               top: -(Get.width * 0.05),
               left: Get.width * 0,
@@ -298,8 +298,7 @@ class MaterialCardState extends State<MaterialCard> {
             )
           ],
         ),
-      ),
-    );
+      );
   }
 
   Widget buildTopIcon() {
@@ -318,9 +317,11 @@ class MaterialCardState extends State<MaterialCard> {
           return GestureDetector(
             onTap: () => favoritesController.addItemToAllList(
                 material: widget.materiale),
-            child: CartTopIcon(
+            child: Container(
+              color: Colors.tealAccent,
+                child: CartTopIcon(
               type: CartTopIcon.favorite_type,
-            ),
+            )),
           );
         }
       });

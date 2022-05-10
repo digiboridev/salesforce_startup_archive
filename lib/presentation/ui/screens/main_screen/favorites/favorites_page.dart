@@ -81,7 +81,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
             padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Text('Favorites',
+              children: [Text('Favorites'.tr,
                 style: TextStyle(fontSize: 24,
                     color: MyColors.blue_003E7E),),
                 Image.asset("assets/icons/favorites_list.png",
@@ -138,7 +138,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
               width: Get.width * 0.07, height: Get.width * 0.07,),
               Padding(padding: EdgeInsets.symmetric(horizontal:
               Get.width * 0.01),
-                  child: Text("Add the entire list to cart",
+                  child: Text("Add the entire list to cart".tr,
                     style: TextStyle(color: MyColors.blue_003E83,
                         fontSize: 14),))
             ],),
@@ -148,7 +148,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                   child: Image.asset("assets/icons/favorites_sort.png",
                     width: Get.width * 0.06, height: Get.width * 0.06,
                   )),
-              Text("Sorting",
+              Text("Sorting".tr,
                 style: TextStyle(color: MyColors.blue_003E83,
                     fontSize: 16),)
 
@@ -305,7 +305,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
       mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-      Text("Belongs on the list",
+      Text("Belongs on the list".tr,
       style: TextStyle(color: MyColors.blue_003E7E,
       fontSize: 24),),
       Text("Jacobs Kosher Passover Nescafe with Kernels",
@@ -358,7 +358,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
             borderRadius: BorderRadius.circular(20),
             color: MyColors.blue_00458C,
           ),
-          child: Text("Save", style: TextStyle(
+          child: Text("Save".tr, style: TextStyle(
             color: Colors.white,
             fontSize: 22
           ),),
@@ -386,14 +386,14 @@ class _FavoritesPageState extends State<FavoritesPage> {
           height: Get.width*0.06,width: Get.width*0.8,
         ),),
       SizedBox(height: Get.width*0.03,),
-      Text("No product transfer yet\nTo this list",
+      Text("No product transfer yet To this list".tr,
         textAlign: TextAlign.center,
         style:
         TextStyle(color: MyColors.blue_003E7E,
         fontSize: Get.width*0.06),),
       SizedBox(height: Get.width*0.03,),
 
-      Text("Save your products on the page\nFavorites by clicking on -",
+      Text("Save your products on the page Favorites by clicking on -".tr,
         textAlign: TextAlign.center,
         style:
         TextStyle(color: MyColors.blue_003E7E,
@@ -412,7 +412,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
         ),
       SizedBox(height: Get.width*0.03,),
 
-      Text("On the favorites page, click on -",
+      Text("On the favorites page, click on -".tr,
         textAlign: TextAlign.center,
         style:
         TextStyle(color: MyColors.blue_003E7E,
@@ -433,7 +433,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
 
       SizedBox(height: Get.width*0.03,),
 
-      Text("Let you move the\nproduct\nTo one of the lists you opened",
+      Text("Let you move the\nproduct\nTo one of the lists you opened".tr,
         textAlign: TextAlign.center,
         style:
         TextStyle(color: MyColors.blue_003E7E,
@@ -447,7 +447,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
         Image.asset("assets/icons/deleted_list.png",
         width: Get.width*0.03,
           height: Get.width*0.03,),
-        Text("Delete the list", style: TextStyle(
+        Text("Delete the list".tr, style: TextStyle(
             color: MyColors.blue_00458C,
             fontSize: Get.width*0.03,
         decoration: TextDecoration.underline),)
@@ -475,7 +475,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
     child: Column(children: [
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [Text("New shopping list",
+        children: [Text("New shopping list".tr,
       style: TextStyle(color: MyColors.blue_003E7E,
       fontSize: 26),),
       Image.asset("assets/icons/close.png",
@@ -484,12 +484,12 @@ class _FavoritesPageState extends State<FavoritesPage> {
       Container(child:
         TextFormField(
           decoration: InputDecoration(
-            labelText: "List Name",
+            labelText: "List Name".tr,
             labelStyle: TextStyle(color: MyColors.blue_003E7E,
             fontSize: 17),
             hintStyle: TextStyle(color: MyColors.blue_003E7E,
             fontSize: 20),
-            hintText: "Sample: Breakfast products",
+            hintText: "Sample: Breakfast products".tr,
             border: UnderlineInputBorder(
                 borderSide: BorderSide(color:
             MyColors.blue_003E7E)),
@@ -512,7 +512,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
         MyColors.blue_00458C,
         borderRadius: BorderRadius.all(Radius.circular(27))),
         
-        child: Text("Save", style: TextStyle(
+        child: Text("Save".tr, style: TextStyle(
         fontSize: 20, color: Colors.white
       ),),
 
@@ -554,7 +554,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
            children: [
            Image.asset("assets/icons/have_new_list.png",
            width: Get.width*0.07, height: Get.width*0.07,),
-           Text("Good, you've made a new list!",
+           Text("Good, you've made a new list!".tr,
            style: TextStyle(color: Colors.white,
            fontSize: 18),),
            Image.asset("assets/icons/have_new_list.png",
@@ -570,7 +570,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
         style: TextStyle(color: MyColors.blue_003E7E,
         fontSize: 16, fontWeight: FontWeight.bold),),
           SizedBox(height: Get.width*0.05,),
-        Text("To fill out the list click on the three\npoints on the left side of the product",
+        Text("To fill out the list click on the three points on the left side of the product".tr,
           style:TextStyle(color: MyColors.blue_003E7E,
               fontSize: 16,)
         )

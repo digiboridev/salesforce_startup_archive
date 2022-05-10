@@ -79,7 +79,7 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
                     child: Padding(
                         padding:
                             EdgeInsets.symmetric(
-                                vertical: Get.width * 0.06),
+                                vertical: Get.width * 0.045),
                         child: Row(
                           children: [
                             selectLanguage == e

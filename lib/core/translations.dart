@@ -92,6 +92,34 @@ class Trs extends Translations {
           'New password is not match':'New password is not match',
           'password is empty':'password is empty',
           'Cancellation':'Cancellation',
+          'Add the entire list to cart':'Add the entire list to cart',
+          'Sorting':'Sorting',
+          'Belongs on the list':'Belongs on the list',
+          'Remove from favorites':'Remove from favorites',
+          'No product transfer yet To this list': 'No product transfer yet\nTo this list',
+          'Save your products on the page Favorites by clicking on -':'Save your products on the page\nFavorites by clicking on -',
+          'On the favorites page, click on -':'On the favorites page, click on -',
+          'Let you move the product To one of the lists you opened':'Let you move the\nproduct\nTo one of the lists you opened',
+          'Delete the list':'Delete the list',
+          'New shopping list':'New shopping list',
+          'List Name':'List Name',
+          'Sample: Breakfast products':'Sample: Breakfast products',
+          "Good, you've made a new list!":"Good, you've made a new list!",
+          'To fill out the list click on the three points on the left side of the product':'To fill out the list click on the three\npoints on the left side of the product',
+          'Shopping cart':'Shopping cart',
+          'Next delivery':'Next delivery',
+          'Your shopping cart is empty':'Your shopping cart is empty',
+          'To start an order from the recommended list':'To start an order from the recommended list',
+          'Emptying All Basket':'Emptying\nAll Basket',
+          'Save As a shopping list':'Save\nAs a shopping list',
+          'Add Products From the catalog':'Add Products\nFrom the catalog',
+          'Saving as a shopping list':'Saving as a shopping list',
+          'The list will be kept in the preferred area':'The list will be kept in the preferred area',
+          'Continue':'Continue',
+
+
+
+
         },
 
 
@@ -183,7 +211,32 @@ class Trs extends Translations {
           'Passwords must not match':'הסיסמאות צריכות להיות שונות אחת מהשניה',
           'New password is not match':'הסיסמא החדשה אינה תואמת',
           'password is empty':'הסיסמא ריקה',
-          'Cancellation':'ביטול'
+          'Cancellation':'ביטול',
+          'Add the entire list to cart':'הוספת כל הרשימה לסל',
+          'Sorting':'מיון',
+          'Belongs on the list':'שייך לרשימה',
+          'Remove from favorites':'הסרה מהמועדפים',
+          'No product transfer yet To this list':'עדיין לא העברת מוצרים \nלרשימה זו',
+          'Save your products on the page Favorites by clicking on -':'שומרים את המוצרים בעמוד\nהמועדפים באמצעות לחיצה על -',
+          'On the favorites page, click on -':'בעמוד המועדפים, לחיצה על -',
+          'Let you move the product To one of the lists you opened':'תאפשר\n לך להעביר את המוצר\לאחת מהרשימות שפתחת',
+          'Delete the list':'מחיקת\n הרשימה ',
+          'New shopping list':'רשימת קניות חדשה',
+          'List Name':'שם הרשימה',
+          'Sample: Breakfast products':'לדוגמא: מוצרי ארוחת בוקר',
+          "Good, you've made a new list!":"יופי, יצרתם רשימה חדשה!",
+          'To fill out the list click on the three points on the left side of the product':'כדי\n למלא את הרשימה לחצו על השלוש נקודות בצד שמאל של המוצר',
+          'Shopping cart':'סל קניות',
+          'Next delivery':'המשלוח הבא',
+          'Your shopping cart is empty':'סל הקניות שלך ריק',
+          'To start an order from the recommended list':'לתחילת הזמנה מהרשימה המומלצת',
+          'Emptying All Basket':'כל הסל\n כל הסל',
+          'Save As a shopping list':' שמירהכרשימת\n קניות',
+          'Add Products From the catalog':'מהקטלוג\n הוספת מוצרים',
+          'Saving as a shopping list':'שמירה כרשימת קניות',
+          'Continue':'המשך',
+          'The list will be kept in the preferred area':'הרשימה תשמר באזור המועדפים',
+
         }
       };
 }
