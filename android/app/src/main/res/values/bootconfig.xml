@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <!-- QA -->
+    <string name="remoteAccessConsumerKey" translatable="false">3MVG92H4TjwUcLlLvIMWkOuic3bII9pd.5HcJF9ystbw_UTotvYjP5xjIjZlQNULW4kcdpL5MXI1dTNo8ftGZ</string>
+    <string name="oauthRedirectURI" translatable="false">sfdc://success/android</string>
+    <string-array name="oauthScopes" translatable="false">
+        <item>api</item>
+        <item>web</item>
+    </string-array>
+    <string name="androidPushNotificationClientId" translatable="false">410929224280</string>
+</resources>
