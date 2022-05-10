@@ -317,11 +317,9 @@ class MaterialCardState extends State<MaterialCard> {
           return GestureDetector(
             onTap: () => favoritesController.addItemToAllList(
                 material: widget.materiale),
-            child: Container(
-              color: Colors.tealAccent,
-                child: CartTopIcon(
+            child: CartTopIcon(
               type: CartTopIcon.favorite_type,
-            )),
+            ),
           );
         }
       });
