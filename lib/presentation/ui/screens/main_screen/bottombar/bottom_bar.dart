@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/presentation/controllers/cart_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar_controller.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,6 @@ class BottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       return Container(
-        // color: Colors.red,
         width: Get.width,
         height: bottomBarHeight,
         child: Stack(
@@ -39,26 +39,6 @@ class BottomBar extends StatelessWidget {
                     firstChild: buildPricesRow(),
                     secondChild: buildButtonsRow(),
                   );
-                  // return AnimatedSwitcher(
-                  //   key: Key('value'),
-                  //   switchInCurve: Curves.easeOut,
-                  //   duration: Duration(milliseconds: 300),
-                  //   child: bottomBarController.showCount.value
-                  //       ? buildPricesRow()
-                  //       : buildButtonsRow(),
-                  //   transitionBuilder: (child, animation) {
-                  //     final offsetAnimation = Tween(
-                  //       begin: const Offset(1.0, 0.0),
-                  //       end: const Offset(0.0, 0.0),
-                  //     ).animate(animation);
-                  //     return ClipRect(
-                  //       child: SlideTransition(
-                  //         position: offsetAnimation,
-                  //         child: child,
-                  //       ),
-                  //     );
-                  //   },
-                  // );
                 }),
               ],
             ),
@@ -75,7 +55,7 @@ class BottomBar extends StatelessWidget {
                         decoration: BoxDecoration(
                             color:
                                 bottomBarController.currentPageIndex.value == 3
-                                    ? Color(0xff00458C)
+                                    ? MyColors.blue_00458C
                                     : Colors.blueGrey,
                             borderRadius:
                                 BorderRadius.circular(Get.width * 0.15)),
@@ -216,7 +196,7 @@ class BottomBar extends StatelessWidget {
                   'Home'.tr,
                   style: TextStyle(
                       color: bottomBarController.currentPageIndex.value == 1
-                          ? Color(0xff00458C)
+                          ? MyColors.blue_00458C
                           : Colors.grey),
                 ),
               ],
@@ -242,7 +222,7 @@ class BottomBar extends StatelessWidget {
                   'Favorites'.tr,
                   style: TextStyle(
                       color: bottomBarController.currentPageIndex.value == 2
-                          ? Color(0xff00458C)
+                          ? MyColors.blue_00458C
                           : Colors.grey),
                 ),
               ],
@@ -270,7 +250,7 @@ class BottomBar extends StatelessWidget {
                   'Catalog'.tr,
                   style: TextStyle(
                       color: bottomBarController.currentPageIndex.value == 4
-                          ? Color(0xff00458C)
+                          ? MyColors.blue_00458C
                           : Colors.grey),
                 ),
               ],
@@ -296,7 +276,7 @@ class BottomBar extends StatelessWidget {
                   'Order'.tr,
                   style: TextStyle(
                       color: bottomBarController.currentPageIndex.value == 5
-                          ? Color(0xff00458C)
+                          ? MyColors.blue_00458C
                           : Colors.grey),
                 ),
               ],

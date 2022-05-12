@@ -20,7 +20,7 @@ class CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xffF4F4F6),
+      color: MyColors.white_F4F4F6,
       width: Get.width,
       child: Column(
         children: [
@@ -94,10 +94,9 @@ class CartPageState extends State<CartPage> {
               )),
           cartController.cartItems.isEmpty
               ? Expanded(
-                  child: Center(
-                  child:Container()
-                  //buildEmptyCard(),
-                ))
+                  child: Center(child: Container()
+                      //buildEmptyCard(),
+                      ))
               : Expanded(
                   child: Container(
                   child: buildItemsList(),
@@ -139,53 +138,75 @@ class CartPageState extends State<CartPage> {
                 decoration: TextDecoration.underline,
                 fontSize: 17),
           ),
-          SizedBox(height: Get.width*0.06,),
+          SizedBox(
+            height: Get.width * 0.06,
+          ),
           Container(
             width: Get.width,
-            margin: EdgeInsets.symmetric(horizontal: Get.width*0.06,),
-            padding: EdgeInsets.symmetric(horizontal: Get.width*0.05,
-                vertical: Get.width*0.06),
+            margin: EdgeInsets.symmetric(
+              horizontal: Get.width * 0.06,
+            ),
+            padding: EdgeInsets.symmetric(
+                horizontal: Get.width * 0.05, vertical: Get.width * 0.06),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-              Text("Next delivery".tr, style: TextStyle(
-                  color: MyColors.blue_003E7E,
-                  fontSize: 20, fontWeight: FontWeight.bold),),
-              SizedBox(height: Get.width*0.025,),
-              Text("Wednesday 21.3.21", style: TextStyle(
-                  color: MyColors.blue_003E7E,
-                  fontSize: 17),),
-                Text("Minimum order 1,500 NIS", style: TextStyle(
-                    color: MyColors.blue_003E7E,
-                    fontSize: 17),),
-                SizedBox(height: Get.width*0.025,),
-                Text("Frozen: Wednesday 21.3.21", style: TextStyle(
-                    color: MyColors.blue_003E7E,
-                    fontSize: 17),),
-                Text("Minimum order 1,500 NIS", style: TextStyle(
-                    color: MyColors.blue_003E7E,
-                    fontSize: 17),),
-                SizedBox(height: Get.width*0.025,),
-
-            ],),
-            decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
+                Text(
+                  "Next delivery".tr,
+                  style: TextStyle(
+                      color: MyColors.blue_003E7E,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: Get.width * 0.025,
+                ),
+                Text(
+                  "Wednesday 21.3.21",
+                  style: TextStyle(color: MyColors.blue_003E7E, fontSize: 17),
+                ),
+                Text(
+                  "Minimum order 1,500 NIS",
+                  style: TextStyle(color: MyColors.blue_003E7E, fontSize: 17),
+                ),
+                SizedBox(
+                  height: Get.width * 0.025,
+                ),
+                Text(
+                  "Frozen: Wednesday 21.3.21",
+                  style: TextStyle(color: MyColors.blue_003E7E, fontSize: 17),
+                ),
+                Text(
+                  "Minimum order 1,500 NIS",
+                  style: TextStyle(color: MyColors.blue_003E7E, fontSize: 17),
+                ),
+                SizedBox(
+                  height: Get.width * 0.025,
+                ),
+              ],
+            ),
+            decoration: BoxDecoration(color: Colors.white, boxShadow: [
               BoxShadow(
                   color: Colors.grey.shade300, spreadRadius: 1, blurRadius: 10)
             ]),
           ),
-          SizedBox(height: Get.width*0.1,),
-
+          SizedBox(
+            height: Get.width * 0.1,
+          ),
           Container(
             alignment: Alignment.center,
-            margin: EdgeInsets.symmetric(horizontal: Get.width*0.06),
-            padding: EdgeInsets.symmetric(vertical: Get.width*0.025),
+            margin: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
+            padding: EdgeInsets.symmetric(vertical: Get.width * 0.025),
             width: MediaQuery.of(context).size.width,
-            child: Text("Catalog".tr, style: TextStyle(color: Colors.white, fontSize: 22),),
-            decoration: BoxDecoration(color: MyColors.blue_00458C,
-                borderRadius: BorderRadius.circular(20)),)
+            child: Text(
+              "Catalog".tr,
+              style: TextStyle(color: Colors.white, fontSize: 22),
+            ),
+            decoration: BoxDecoration(
+                color: MyColors.blue_00458C,
+                borderRadius: BorderRadius.circular(20)),
+          )
         ],
       ),
     );
@@ -244,8 +265,6 @@ class CartPageState extends State<CartPage> {
     });
   }
 
-
-
   Row buildCardControll() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -261,6 +280,7 @@ class CartPageState extends State<CartPage> {
       ],
     );
   }
+
   Widget buildActions() {
     List<String> imgList = [
       'assets/icons/deleted_list.png',
@@ -308,7 +328,7 @@ class CartPageState extends State<CartPage> {
                       descriptionList[index],
                       textAlign: TextAlign.center,
                       style:
-                      TextStyle(color: MyColors.blue_003E83, fontSize: 12),
+                          TextStyle(color: MyColors.blue_003E83, fontSize: 12),
                     )
                   ],
                 ),
@@ -317,86 +337,94 @@ class CartPageState extends State<CartPage> {
           }),
         ));
   }
-  Widget buildSaveShoppingList(){
-      return Container(
-        padding: EdgeInsets.symmetric(horizontal: Get.width*0.06,
-            vertical:Get.width*0.05),
-        width: Get.width,
-        decoration: BoxDecoration(
 
-            boxShadow: [
-              BoxShadow(color: Colors.grey.shade300,
-                  spreadRadius: 1, blurRadius: 10)],
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(25),
-                topRight: Radius.circular(25))
-        ),
-        child: Column(children: [
+  Widget buildSaveShoppingList() {
+    return Container(
+      padding: EdgeInsets.symmetric(
+          horizontal: Get.width * 0.06, vertical: Get.width * 0.05),
+      width: Get.width,
+      decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey.shade300, spreadRadius: 1, blurRadius: 10)
+          ],
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(25), topRight: Radius.circular(25))),
+      child: Column(
+        children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [Text("Saving as a shopping list".tr,
-              style: TextStyle(color: MyColors.blue_003E7E,
-                  fontSize: 26),),],),
-
-          Text("The list will be kept in the preferred area".tr,
-            style: TextStyle(
-                color: MyColors.blue_003E7E,
-                fontSize: 17),),
-
-          SizedBox(height: Get.width*0.04,),
-          Container(child:
-          TextFormField(
-            textAlign: TextAlign.center,
-            decoration: InputDecoration(
-
-                hintStyle: TextStyle(color: MyColors.blue_003E7E,
-                    fontSize: 18),
-                hintText: "List Name".tr,
-                border: UnderlineInputBorder(
-                    borderSide: BorderSide(color:
-                    MyColors.blue_003E7E)),
-                enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color:
-                    MyColors.blue_003E7E)),
-                focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color:
-                    MyColors.blue_003E7E))
-
+            children: [
+              Text(
+                "Saving as a shopping list".tr,
+                style: TextStyle(color: MyColors.blue_003E7E, fontSize: 26),
+              ),
+            ],
+          ),
+          Text(
+            "The list will be kept in the preferred area".tr,
+            style: TextStyle(color: MyColors.blue_003E7E, fontSize: 17),
+          ),
+          SizedBox(
+            height: Get.width * 0.04,
+          ),
+          Container(
+            child: TextFormField(
+              textAlign: TextAlign.center,
+              decoration: InputDecoration(
+                  hintStyle:
+                      TextStyle(color: MyColors.blue_003E7E, fontSize: 18),
+                  hintText: "List Name".tr,
+                  border: UnderlineInputBorder(
+                      borderSide: BorderSide(color: MyColors.blue_003E7E)),
+                  enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: MyColors.blue_003E7E)),
+                  focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: MyColors.blue_003E7E))),
             ),
           ),
+          SizedBox(
+            height: Get.width * 0.1,
           ),
-          SizedBox(height: Get.width*0.1,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Flexible(child:
-              Container(
-
-            alignment: Alignment.center,
-            padding: EdgeInsets.symmetric(vertical: Get.width*0.03,),
-            decoration: BoxDecoration(color:
-            MyColors.blue_00458C,
-                borderRadius: BorderRadius.all(Radius.circular(27))),
-            child: Text("Continue".tr, style: TextStyle(
-                fontSize: 20, color: Colors.white
-            ),),
-
-          )),
-              SizedBox(width: Get.width*0.02,),
-              Flexible(child:
-
-              Container(
+              Flexible(
+                  child: Container(
                 alignment: Alignment.center,
-                padding: EdgeInsets.symmetric(vertical: Get.width*0.03, ),
-                decoration: BoxDecoration(color:
-                MyColors.blue_E8EEF6,
+                padding: EdgeInsets.symmetric(
+                  vertical: Get.width * 0.03,
+                ),
+                decoration: BoxDecoration(
+                    color: MyColors.blue_00458C,
                     borderRadius: BorderRadius.all(Radius.circular(27))),
-                child: Text("Cancellation".tr, style: TextStyle(
-                    fontSize: 20, color: MyColors.blue_00458C
-                ),),
-
-              ))],)
-        ],),);
+                child: Text(
+                  "Continue".tr,
+                  style: TextStyle(fontSize: 20, color: Colors.white),
+                ),
+              )),
+              SizedBox(
+                width: Get.width * 0.02,
+              ),
+              Flexible(
+                  child: Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.symmetric(
+                  vertical: Get.width * 0.03,
+                ),
+                decoration: BoxDecoration(
+                    color: MyColors.blue_E8EEF6,
+                    borderRadius: BorderRadius.all(Radius.circular(27))),
+                child: Text(
+                  "Cancellation".tr,
+                  style: TextStyle(fontSize: 20, color: MyColors.blue_00458C),
+                ),
+              ))
+            ],
+          )
+        ],
+      ),
+    );
   }
 }
