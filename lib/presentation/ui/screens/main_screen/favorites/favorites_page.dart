@@ -29,12 +29,12 @@ class _FavoritesPageState extends State<FavoritesPage> {
   final CustomerController customerController = Get.find();
   final MaterialsCatalogController materialsCatalogController = Get.find();
   final FavoritesController favoritesController = Get.find();
-  final List<String> belongsList = ["Vegan",
-  "Frozen", "Just vegetables",
-    "Frozen Products",
-    "Breakfast Products",
-    "Dinner",
-    "Kosher"
+  final List<String> belongsList = ["Vegan".tr,
+  "Frozen".tr, "Just vegetables".tr,
+    "Frozen Products".tr,
+    "Breakfast Products".tr,
+    "Dinner".tr,
+    "Kosher".tr
   ];
   int? selectedListIndex;
 

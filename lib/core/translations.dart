@@ -116,6 +116,29 @@ class Trs extends Translations {
           'Saving as a shopping list':'Saving as a shopping list',
           'The list will be kept in the preferred area':'The list will be kept in the preferred area',
           'Continue':'Continue',
+          'Brunch':'Brunch',
+          'Search branch':'Search branch',
+          'Our focus is open':'Our focus is open',
+          'All brunches':'All brunches',
+          'Terms of Use':'Terms of Use',
+          'Close':'Close',
+          'No materials':'No materials',
+          'Filtering':'Filtering',
+          'Filter by':'Filter by',
+          'Not implemented':'Not implemented',
+          'Materials loading error':'Materials loading error',
+          'Favorites loading error':'Favorites loading error',
+          'Vegan':'Vegan',
+          'Just vegetables':'Just vegetables',
+          'Frozen Products':'Frozen Products',
+          'Breakfast Products':'Breakfast Products',
+          'Dinner':'Dinner',
+          'Kosher':'Kosher',
+          'Select list':'Select list',
+          'SALE!':'SALE!'
+
+
+
 
 
 
@@ -236,7 +259,26 @@ class Trs extends Translations {
           'Saving as a shopping list':'שמירה כרשימת קניות',
           'Continue':'המשך',
           'The list will be kept in the preferred area':'הרשימה תשמר באזור המועדפים',
-
+          'Brunch':'סניף',
+          'Search branch':'חיפוש סניף',
+          'Our focus is open':'מוקד שרות לקוחות',
+          'All brunches':'כל הסניפים',
+          'Terms of Use':'תנאי שימוש',
+          'Close':'סגור',
+          'No materials':'אין חומרים',
+          'Filtering':'סִנוּן',
+          'Filter by':'סנן לפי',
+          'Not implemented':'לא מיושם',
+          'Materials loading error':'שגיאת טעינת חומרים',
+          'Favorites loading error':'שגיאת טעינת מועדפים',
+          'Vegan':'טִבעוֹנִי',
+          'Just vegetables':'רק ירקות',
+          'Frozen Products':'מוצרים קפואים',
+          'Breakfast Products':'מוצרי ארוחת בוקר',
+          'Dinner':'אֲרוּחַת עֶרֶב',
+          'Kosher':'כשר',
+          'Select list':'בחר רשימה',
+          'SALE!':'מְכִירָה!'
         }
       };
 }

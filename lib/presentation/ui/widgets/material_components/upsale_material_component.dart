@@ -30,7 +30,7 @@ class UpsaleMaterialComponentState extends State<UpsaleMaterialComponent> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "SALE!",
+                  "SALE!".tr,
                   style: TextStyle(color: Colors.white, fontSize: 16),
                 ),
                 Padding(

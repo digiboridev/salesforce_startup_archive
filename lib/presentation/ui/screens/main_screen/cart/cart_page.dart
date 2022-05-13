@@ -73,7 +73,7 @@ class CartPageState extends State<CartPage> {
                                 color: MyColors.blue_003E7E,
                               ),
                               Text(
-                                "Frozen, Wednesday 21.3.21",
+                                "${'Frozen'}, Wednesday 21.3.21",
                                 style: TextStyle(
                                     color: MyColors.blue_003E7E, fontSize: 12),
                               ),
@@ -156,14 +156,14 @@ class CartPageState extends State<CartPage> {
               Text("Wednesday 21.3.21", style: TextStyle(
                   color: MyColors.blue_003E7E,
                   fontSize: 17),),
-                Text("Minimum order 1,500 NIS", style: TextStyle(
+                Text("${'Minimum order'.tr} 1,500 NIS", style: TextStyle(
                     color: MyColors.blue_003E7E,
                     fontSize: 17),),
                 SizedBox(height: Get.width*0.025,),
-                Text("Frozen: Wednesday 21.3.21", style: TextStyle(
+                Text("${'Frozen'}: Wednesday 21.3.21", style: TextStyle(
                     color: MyColors.blue_003E7E,
                     fontSize: 17),),
-                Text("Minimum order 1,500 NIS", style: TextStyle(
+                Text("${'Minimum order'.tr} 1,500 NIS", style: TextStyle(
                     color: MyColors.blue_003E7E,
                     fontSize: 17),),
                 SizedBox(height: Get.width*0.025,),
@@ -207,8 +207,8 @@ class CartPageState extends State<CartPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Dry'),
-                    Text('Price: ' +
+                    Text('Dry'.tr),
+                    Text('${'Price'.tr}: ' +
                         cartController.dryItemsPrice.toStringAsFixed(2) +
                         ' / ' +
                         cartController.totalPrice.toStringAsFixed(2))
@@ -224,8 +224,8 @@ class CartPageState extends State<CartPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Frozen'),
-                    Text('Price: ' +
+                    Text('Frozen'.tr),
+                    Text('${'Price'.tr}: ' +
                         cartController.frozenItemsPrice.toStringAsFixed(2) +
                         ' / ' +
                         cartController.totalPrice.toStringAsFixed(2))
@@ -251,7 +251,8 @@ class CartPageState extends State<CartPage> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         GestureDetector(
-            onTap: () => cartController.cleanCart(), child: Text('Clear')),
+            onTap: () => cartController.cleanCart(),
+            child: Text('Clear')),
         GestureDetector(
             onTap: () => Get.snackbar('Error', 'Not implemented'),
             child: Text('Save to fav')),
@@ -285,7 +286,7 @@ class CartPageState extends State<CartPage> {
                 }
 
                 if (index == 1) {
-                  Get.snackbar('Error', 'Not implemented');
+                  Get.snackbar('Error'.tr, 'Not implemented'.tr);
                 }
                 if (index == 2) {
                   bottomBarController.changePage(newPageIndex: 4);

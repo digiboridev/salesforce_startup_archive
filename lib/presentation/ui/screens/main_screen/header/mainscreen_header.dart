@@ -139,7 +139,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Obx(() => RichText(text: TextSpan(
-                          text:  'Brunch: ',
+                          text:  '${'Brunch'.tr}: ',
                             style: TextStyle(
                                 color: Colors.white.withOpacity(0.77),
                                 fontSize: Get.width * 0.035),
@@ -549,7 +549,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                                 children: [
                                   Expanded(
                                     child: Text(
-                                        'Our focus is open',
+                                        'Our focus is open'.tr,
                                         style: TextStyle(
                                             fontWeight: FontWeight.w500,
                                           fontSize: 18,
@@ -713,7 +713,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'All branches:',
+                    '${'All branches'.tr}:',
                     style: TextStyle(fontSize: 16,
                         color: Colors.white.withOpacity(0.77)),
                   ),
