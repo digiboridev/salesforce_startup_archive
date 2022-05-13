@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/core/assets.dart';
 import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/core/languages.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
@@ -30,7 +31,7 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
       backgroundColor: MyColors.blue_003E7E,
       body: SafeArea(
           child: Container(
-        color: Color(0xffF4F4F6),
+        color: MyColors.white_F4F4F6,
         child: SizedBox.expand(
           child: Column(
             children: [buildHeader(), buildBody()],
@@ -66,7 +67,8 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
             ),
             Padding(
               padding: EdgeInsets.symmetric(
-                  horizontal: Get.width * 0.06,),
+                horizontal: Get.width * 0.06,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: userDataController.avaliableLanguages.map((e) {
@@ -78,8 +80,7 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
                     },
                     child: Padding(
                         padding:
-                            EdgeInsets.symmetric(
-                                vertical: Get.width * 0.045),
+                            EdgeInsets.symmetric(vertical: Get.width * 0.045),
                         child: Row(
                           children: [
                             selectLanguage == e
@@ -141,7 +142,7 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
                         width: Get.width / 2.4,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                            color: Color(0xff00458C),
+                            color: MyColors.blue_00458C,
                             borderRadius:
                                 BorderRadius.circular(Get.width * 0.06)),
                         padding:
@@ -170,7 +171,7 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
           gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [Color(0xff0D63BB), Color(0xff00458C)])),
+              colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
       padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
       child: Column(
         children: [
@@ -181,14 +182,14 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
               Hero(
                 tag: 'contact_btn',
                 child: Image.asset(
-                  'assets/icons/contact.png',
+                  AssetImages.contactButton,
                   width: Get.width * 0.05,
                 ),
               ),
               Hero(
                 tag: 'logo',
                 child: Image.asset(
-                  'assets/images/***REMOVED***_logo.png',
+                  AssetImages.***REMOVED***Logo,
                   width: Get.width * 0.3,
                 ),
               ),

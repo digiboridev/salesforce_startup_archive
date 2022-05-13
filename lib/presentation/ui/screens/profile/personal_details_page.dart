@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/core/assets.dart';
 import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
@@ -18,7 +19,7 @@ class PersonalDetailsPage extends StatelessWidget {
       backgroundColor: MyColors.blue_003E7E,
       body: SafeArea(
           child: Container(
-        color: Color(0xffF4F4F6),
+        color: MyColors.white_F4F4F6,
         child: SizedBox.expand(
           child: Column(
             children: [buildHeader(), buildBody()],
@@ -115,7 +116,7 @@ class PersonalDetailsPage extends StatelessWidget {
                   width: Get.width,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                      color: Color(0xff00458C),
+                      color: MyColors.blue_00458C,
                       borderRadius: BorderRadius.circular(Get.width * 0.06)),
                   padding: EdgeInsets.symmetric(
                       horizontal: Get.width * 0.1, vertical: Get.width * 0.03),
@@ -173,7 +174,7 @@ class PersonalDetailsPage extends StatelessWidget {
           gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [Color(0xff0D63BB), Color(0xff00458C)])),
+              colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
       padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
       child: Column(
         children: [
@@ -184,14 +185,14 @@ class PersonalDetailsPage extends StatelessWidget {
               Hero(
                 tag: 'contact_btn',
                 child: Image.asset(
-                  'assets/icons/contact.png',
+                  AssetImages.contactButton,
                   width: Get.width * 0.05,
                 ),
               ),
               Hero(
                 tag: 'logo',
                 child: Image.asset(
-                  'assets/images/***REMOVED***_logo.png',
+                  AssetImages.***REMOVED***Logo,
                   width: Get.width * 0.3,
                 ),
               ),

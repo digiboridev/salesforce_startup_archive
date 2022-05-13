@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:***REMOVED***/domain/entities/customer.dart';
 import 'package:***REMOVED***/domain/entities/related_consumer.dart';
-import 'package:***REMOVED***/domain/services/cache_ferchig_service.dart';
+import 'package:***REMOVED***/domain/services/cache_fetching_service.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/domain/usecases/customer/get_customer_and_cache.dart';
 import 'package:***REMOVED***/domain/usecases/customer/get_customer_sync_time.dart';
