@@ -4,6 +4,7 @@ import 'package:***REMOVED***/core/languages.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -58,7 +59,8 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
               child: Text(
                 'Choose language'.tr,
                 style: TextStyle(
-                  fontSize: Get.width * 0.05,
+                  color: MyColors.blue_003E7E,
+                  fontSize: Get.width * 0.08,
                 ),
               ),
             ),
@@ -97,7 +99,10 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
                             ),
                             Text(
                               e.languageString.tr,
-                              style: TextStyle(fontSize: Get.width * 0.04),
+                              style: TextStyle(
+                                  fontSize: Get.width * 0.04,
+                              color: MyColors.blue_003E7E,
+                                  ),
                             ),
                           ],
                         )),

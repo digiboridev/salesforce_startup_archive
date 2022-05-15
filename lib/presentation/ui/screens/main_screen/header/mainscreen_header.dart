@@ -332,7 +332,9 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
 
                       labelText: 'Search branch'.tr,
                       labelStyle:
-                          TextStyle(color: Colors.black.withOpacity(0.6)),
+                          TextStyle(color:
+                          MyColors.blue_00458C,
+                              fontSize: 16),
                       floatingLabelBehavior: FloatingLabelBehavior.never,
                       border: InputBorder.none,
 
@@ -386,14 +388,14 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
 
                       labelText: 'Search product'.tr,
                       labelStyle:
-                          TextStyle(color: Colors.black.withOpacity(0.6)),
+                          TextStyle(color:
+                          MyColors.blue_00458C,
+                          fontSize: 16),
                       floatingLabelBehavior: FloatingLabelBehavior.never,
                       border: InputBorder.none,
-
                       focusedBorder: InputBorder.none,
                       enabledBorder: InputBorder.none,
                       errorBorder: InputBorder.none,
-
                       disabledBorder: InputBorder.none,
                       contentPadding: EdgeInsets.all(0),
                     ),

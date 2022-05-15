@@ -74,13 +74,16 @@ class _HomePageState extends State<HomePage> {
                     Text(
                       'Deals'.tr,
                       style: TextStyle(
-                        fontSize: Get.width * 0.045,
+                        color: MyColors.blue_003E7E,
+                        fontSize: Get.width * 0.055,
                       ),
                     ),
                     Text(
                       'All Deals'.tr,
                       style: TextStyle(
-                          fontSize: Get.width * 0.045, color: Colors.blue),
+                        decoration: TextDecoration.underline,
+                          fontSize: Get.width * 0.045,
+                          color: Colors.blue),
                     ),
                   ],
                 )),
@@ -92,13 +95,17 @@ class _HomePageState extends State<HomePage> {
                     Text(
                       'Recomended for you'.tr,
                       style: TextStyle(
-                        fontSize: Get.width * 0.045,
+                        color: MyColors.blue_003E7E,
+                        fontSize: Get.width * 0.055,
                       ),
                     ),
                     Text(
                       'All recomended'.tr,
                       style: TextStyle(
-                          fontSize: Get.width * 0.045, color: Colors.blue),
+                          decoration: TextDecoration.underline,
+                          fontSize: Get.width * 0.045,
+                          color: Colors.blue
+                         ),
                     ),
                   ],
                 )),
@@ -113,13 +120,16 @@ class _HomePageState extends State<HomePage> {
                     Text(
                       'New Products'.tr,
                       style: TextStyle(
-                        fontSize: Get.width * 0.045,
+                        color: MyColors.blue_003E7E,
+                        fontSize: Get.width * 0.055,
                       ),
                     ),
                     Text(
                       'To all newcomers'.tr,
                       style: TextStyle(
-                          fontSize: Get.width * 0.045, color: Colors.blue),
+                        decoration: TextDecoration.underline,
+                          fontSize: Get.width * 0.045,
+                          color: Colors.blue),
                     ),
                   ],
                 )),
@@ -134,12 +144,14 @@ class _HomePageState extends State<HomePage> {
                     Text(
                       'You may be missing'.tr,
                       style: TextStyle(
-                        fontSize: Get.width * 0.045,
+                        color: MyColors.blue_003E7E,
+                        fontSize: Get.width * 0.055,
                       ),
                     ),
                     Text(
                       'List of deficiencies'.tr,
                       style: TextStyle(
+                          decoration: TextDecoration.underline,
                           fontSize: Get.width * 0.045, color: Colors.blue),
                     ),
                   ],

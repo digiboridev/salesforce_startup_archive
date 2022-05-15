@@ -14,6 +14,8 @@ class ProfileScreen extends StatelessWidget {
 
   final CustomerController customerController = Get.find();
   final UserDataController userDataController = Get.find();
+  final TextStyle profileFieldStyle = TextStyle(color:
+  MyColors.blue_003E7E, fontSize: 20);
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +38,14 @@ class ProfileScreen extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(vertical: Get.width * 0.06),
+            padding: EdgeInsets.symmetric(
+                vertical: Get.width * 0.06,
+            horizontal: Get.width * 0.06),
             child: Text(
               customerController.selectedCustomer!.customerName,
               style: TextStyle(
-                fontSize: Get.width * 0.05,
+                color: MyColors.blue_003E7E,
+                fontSize: Get.width * 0.08,
               ),
             ),
           ),
@@ -61,7 +66,8 @@ class ProfileScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Personal details'.tr),
+                        Text('Personal details'.tr,
+                        style: profileFieldStyle,),
                         Icon(Icons.keyboard_arrow_right)
                       ],
                     ),
@@ -83,7 +89,8 @@ class ProfileScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Choose language'.tr),
+                        Text('Choose language'.tr,
+                            style: profileFieldStyle),
                         Icon(Icons.keyboard_arrow_right)
                       ],
                     ),
@@ -105,7 +112,8 @@ class ProfileScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Change password'.tr),
+                        Text('Change password'.tr,
+                            style: profileFieldStyle),
                         Icon(Icons.keyboard_arrow_right)
                       ],
                     ),
@@ -134,7 +142,8 @@ class ProfileScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Terms an conditions'.tr),
+                        Text('Terms an conditions'.tr,
+                            style: profileFieldStyle),
                         Icon(Icons.keyboard_arrow_right)
                       ],
                     ),
@@ -154,7 +163,8 @@ class ProfileScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Log out'.tr),
+                        Text('Log out'.tr,
+                            style: profileFieldStyle),
                         Transform.rotate(
                             angle: 1.6, child: Icon(Icons.power_settings_new))
                       ],

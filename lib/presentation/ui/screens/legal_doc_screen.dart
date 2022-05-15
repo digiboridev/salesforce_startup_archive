@@ -44,8 +44,9 @@ class _LegalDocScreenState extends State<LegalDocScreen> {
                     padding: EdgeInsets.symmetric(horizontal: Get.width * 0.05),
                     child: Text(
                       'Terms of Use'.tr,
-                      style:
-                          TextStyle(color: MyColors.blue_003E7E, fontSize: 26),
+                      style: TextStyle(
+                              color: MyColors.blue_003E7E,
+                              fontSize: 26,),
                     )),
                 Expanded(
                     child: Padding(
