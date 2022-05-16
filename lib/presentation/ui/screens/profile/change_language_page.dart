@@ -71,11 +71,11 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: userDataController.avaliableLanguages.map((e) {
+                children: userDataController.avaliableLanguages.map((language) {
                   return GestureDetector(
                     onTap: () {
                       setState(() {
-                        selectLanguage = e;
+                        selectLanguage = language;
                       });
                     },
                     child: Padding(
@@ -83,20 +83,20 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
                             EdgeInsets.symmetric(vertical: Get.width * 0.06),
                         child: Row(
                           children: [
-                            selectLanguage == e
+                            selectLanguage == language
                                 ? Image.asset(
-                                    'assets/icons/radio_s.png',
+                                    AssetImages.radio_s,
                                     width: Get.width * 0.05,
                                   )
                                 : Image.asset(
-                                    'assets/icons/radio.png',
+                                    AssetImages.radio,
                                     width: Get.width * 0.05,
                                   ),
                             SizedBox(
                               width: Get.width * 0.02,
                             ),
                             Text(
-                              e.languageString.tr,
+                              language.languageString.tr,
                               style: TextStyle(fontSize: Get.width * 0.04),
                             ),
                           ],

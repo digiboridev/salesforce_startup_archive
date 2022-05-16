@@ -17,7 +17,6 @@ class BottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       return Container(
-        // color: Colors.red,
         width: Get.width,
         height: bottomBarHeight,
         child: Stack(
@@ -45,9 +44,9 @@ class BottomBar extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             bottomBarController.currentPageIndex.value == 1
-                                ? Image.asset('assets/icons/home_active.png',
+                                ? Image.asset(AssetImages.home_active,
                                     height: Get.width * 0.06)
-                                : Image.asset('assets/icons/home.png',
+                                : Image.asset(AssetImages.home,
                                     height: Get.width * 0.06),
                             SizedBox(
                               height: Get.width * 0.01,
@@ -73,9 +72,9 @@ class BottomBar extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             bottomBarController.currentPageIndex.value == 2
-                                ? Image.asset('assets/icons/fav_active.png',
+                                ? Image.asset(AssetImages.fav_active,
                                     height: Get.width * 0.06)
-                                : Image.asset('assets/icons/fav.png',
+                                : Image.asset(AssetImages.fav,
                                     height: Get.width * 0.06),
                             SizedBox(
                               height: Get.width * 0.01,
@@ -103,9 +102,9 @@ class BottomBar extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             bottomBarController.currentPageIndex.value == 4
-                                ? Image.asset('assets/icons/catalog_active.png',
+                                ? Image.asset(AssetImages.catalog_active,
                                     height: Get.width * 0.06)
-                                : Image.asset('assets/icons/catalog.png',
+                                : Image.asset(AssetImages.catalog,
                                     height: Get.width * 0.06),
                             SizedBox(
                               height: Get.width * 0.01,
@@ -131,9 +130,9 @@ class BottomBar extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             bottomBarController.currentPageIndex.value == 5
-                                ? Image.asset('assets/icons/orders_active.png',
+                                ? Image.asset(AssetImages.orders_active,
                                     height: Get.width * 0.06)
-                                : Image.asset('assets/icons/orders.png',
+                                : Image.asset(AssetImages.orders,
                                     height: Get.width * 0.06),
                             SizedBox(
                               height: Get.width * 0.01,
@@ -172,7 +171,7 @@ class BottomBar extends StatelessWidget {
                       onTap: () {
                         bottomBarController.changePage(newPageIndex: 3);
                       },
-                      child: Image.asset('assets/icons/cart.png',
+                      child: Image.asset(AssetImages.cart,
                           width: Get.width * 0.06),
                     ))
               ],

@@ -237,7 +237,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(
-                        'assets/icons/phone.png',
+                        AssetImages.phone,
                         width: Get.width * 0.03,
                         height: Get.width * 0.03,
                       ),

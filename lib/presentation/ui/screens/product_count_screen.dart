@@ -164,7 +164,7 @@ class ProductCountScreenState extends State<ProductCountScreen> {
                           },
                           child: Container(
                             child: Image.asset(
-                              "assets/icons/plus.png",
+                              AssetImages.plus,
                               width: Get.width * 0.06,
                               height: Get.width * 0.06,
                             ),
@@ -211,7 +211,7 @@ class ProductCountScreenState extends State<ProductCountScreen> {
                           },
                           child: Container(
                             child: Image.asset(
-                              "assets/icons/minus.png",
+                              AssetImages.minus,
                               width: Get.width * 0.06,
                               height: Get.width * 0.06,
                             ),
