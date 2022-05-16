@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/core/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -85,8 +86,8 @@ class _FavoritesPageState extends State<FavoritesPage> {
                       decoration: BoxDecoration(
                           color: selectedListIndex ==
                                   widget.favoriteLists.indexOf(e)
-                              ? Color(0xff00458C)
-                              : Color(0xff00458C).withOpacity(0.2),
+                              ? MyColors.blue_00458C
+                              : MyColors.blue_00458C.withOpacity(0.2),
                           borderRadius:
                               BorderRadius.circular(Get.width * 0.04)),
                       margin:
@@ -99,7 +100,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                             color: selectedListIndex ==
                                     widget.favoriteLists.indexOf(e)
                                 ? Colors.white
-                                : Color(0xff003E7E),
+                                : MyColors.blue_003E7E,
                           ))),
                 );
               }).toList(),

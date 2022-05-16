@@ -1,3 +1,5 @@
+import 'package:***REMOVED***/core/assets.dart';
+import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,7 +33,7 @@ class BottomBar extends StatelessWidget {
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           fit: BoxFit.fill,
-                          image: AssetImage('assets/images/bottombar.png'))),
+                          image: AssetImage(AssetImages.bottombar))),
                   child: Row(
                     children: [
                       Spacer(),
@@ -56,7 +58,7 @@ class BottomBar extends StatelessWidget {
                                   color: bottomBarController
                                               .currentPageIndex.value ==
                                           1
-                                      ? Color(0xff00458C)
+                                      ? MyColors.blue_00458C
                                       : Colors.grey),
                             ),
                           ],
@@ -84,7 +86,7 @@ class BottomBar extends StatelessWidget {
                                   color: bottomBarController
                                               .currentPageIndex.value ==
                                           2
-                                      ? Color(0xff00458C)
+                                      ? MyColors.blue_00458C
                                       : Colors.grey),
                             ),
                           ],
@@ -114,7 +116,7 @@ class BottomBar extends StatelessWidget {
                                   color: bottomBarController
                                               .currentPageIndex.value ==
                                           4
-                                      ? Color(0xff00458C)
+                                      ? MyColors.blue_00458C
                                       : Colors.grey),
                             ),
                           ],
@@ -142,7 +144,7 @@ class BottomBar extends StatelessWidget {
                                   color: bottomBarController
                                               .currentPageIndex.value ==
                                           5
-                                      ? Color(0xff00458C)
+                                      ? MyColors.blue_00458C
                                       : Colors.grey),
                             ),
                           ],
@@ -163,7 +165,7 @@ class BottomBar extends StatelessWidget {
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                         color: bottomBarController.currentPageIndex.value == 3
-                            ? Color(0xff00458C)
+                            ? MyColors.blue_00458C
                             : Colors.blueGrey,
                         borderRadius: BorderRadius.circular(Get.width * 0.15)),
                     child: GestureDetector(

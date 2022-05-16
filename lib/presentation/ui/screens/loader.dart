@@ -32,7 +32,7 @@ class Loader extends StatelessWidget {
           backgroundColor: MyColors.blue_003E7E,
           body: SafeArea(
               child: Container(
-            color: Color(0xffF4F4F6),
+            color: MyColors.white_F4F4F6,
             child: SizedBox.expand(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -92,7 +92,7 @@ class Loader extends StatelessWidget {
             backgroundColor: MyColors.blue_003E7E,
             body: SafeArea(
                 child: Container(
-              color: Color(0xffF4F4F6),
+              color: MyColors.white_F4F4F6,
               child: SizedBox.expand(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -148,7 +148,7 @@ class JustLoadingScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: MyColors.blue_003E7E,
       body: Container(
-          color: Color(0xffF4F4F6),
+          color: MyColors.white_F4F4F6,
           child: Center(child: CircularProgressIndicator())),
     );
   }

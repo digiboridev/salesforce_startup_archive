@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/core/assets.dart';
 import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
@@ -21,7 +22,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
   final TextEditingController _pass = TextEditingController();
   final TextEditingController _confirmPass = TextEditingController();
   final UnderlineInputBorder fieldBorder = UnderlineInputBorder(
-    borderSide: BorderSide(color: Color(0xff003E7E)),
+    borderSide: BorderSide(color: MyColors.blue_003E7E),
   );
   String passError = '';
   bool showAsterisks = true;
@@ -34,7 +35,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
       backgroundColor: MyColors.blue_003E7E,
       body: SafeArea(
           child: Container(
-        color: Color(0xffF4F4F6),
+        color: MyColors.white_F4F4F6,
         child: SizedBox.expand(
           child: Column(
             children: [buildHeader(), buildBody(context)],
@@ -66,7 +67,6 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                     'Password change'.tr,
                     style: TextStyle(
                       color: MyColors.blue_003E7E,
-
                       fontSize: Get.width * 0.08,
                     ),
                   ),
@@ -184,7 +184,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                           key: UniqueKey(),
                           value: showAsterisks,
                           enableColor: MyColors.blue_003E7E,
-                          disableColor: Color(0xffD4DCE4),
+                          disableColor: MyColors.white_F4F4F6,
                           width: Get.width * 0.1,
                           height: Get.width * 0.1,
                           switchHeight: Get.width * 0.05,
@@ -306,7 +306,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                             width: Get.width / 2.4,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                                color: Color(0xff00458C),
+                                color: MyColors.blue_00458C,
                                 borderRadius:
                                     BorderRadius.circular(Get.width * 0.06)),
                             padding: EdgeInsets.symmetric(
@@ -337,7 +337,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
           gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [Color(0xff0D63BB), Color(0xff00458C)])),
+              colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
       padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
       child: Column(
         children: [
@@ -348,14 +348,14 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
               Hero(
                 tag: 'contact_btn',
                 child: Image.asset(
-                  'assets/icons/contact.png',
+                  AssetImages.contactButton,
                   width: Get.width * 0.05,
                 ),
               ),
               Hero(
                 tag: 'logo',
                 child: Image.asset(
-                  'assets/images/***REMOVED***_logo.png',
+                  AssetImages.***REMOVED***Logo,
                   width: Get.width * 0.3,
                 ),
               ),

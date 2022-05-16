@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/core/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:***REMOVED***/core/colors.dart';
@@ -37,7 +38,7 @@ class ProductCountScreenState extends State<ProductCountScreen> {
         backgroundColor: MyColors.blue_003E7E,
         body: SafeArea(
             child: Container(
-          color: Color(0xffF4F4F6),
+          color: MyColors.white_F4F4F6,
           child: SizedBox.expand(
             child: Column(
               children: [
@@ -52,7 +53,7 @@ class ProductCountScreenState extends State<ProductCountScreen> {
   Container buildHeader() {
     return Container(
       height: Get.width * 0.3,
-      color: Color(0xff00458C),
+      color: MyColors.blue_00458C,
       padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
       child: Column(
         children: [
@@ -63,14 +64,14 @@ class ProductCountScreenState extends State<ProductCountScreen> {
               Hero(
                 tag: 'contact_btn',
                 child: Image.asset(
-                  'assets/icons/contact.png',
+                  AssetImages.contactButton,
                   width: Get.width * 0.05,
                 ),
               ),
               Hero(
                 tag: 'logo',
                 child: Image.asset(
-                  'assets/images/***REMOVED***_logo.png',
+                  AssetImages.***REMOVED***Logo,
                   width: Get.width * 0.3,
                 ),
               ),
