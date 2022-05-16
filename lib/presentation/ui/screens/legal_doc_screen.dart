@@ -138,13 +138,19 @@ class _LegalDocScreenState extends State<LegalDocScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Hero(
-                tag: 'contact_btn',
-                child: Image.asset(
-                  AssetImages.contactButton,
-                  width: Get.width * 0.05,
+              GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Icon(
+                  Directionality.of(context) ==
+                      TextDirection.rtl ?
+                  Icons.keyboard_arrow_right
+                      : Icons.keyboard_arrow_left,
+                  color: Colors.white,
                 ),
               ),
+
               Hero(
                 tag: 'logo',
                 child: Image.asset(
@@ -152,11 +158,12 @@ class _LegalDocScreenState extends State<LegalDocScreen> {
                   width: Get.width * 0.3,
                 ),
               ),
-              GestureDetector(
-                onTap: () => widget.callback(),
-                child: Icon(
-                  Icons.keyboard_arrow_right,
-                  color: Colors.white,
+
+              Hero(
+                tag: 'contact_btn',
+                child: Image.asset(
+                  AssetImages.contactButton,
+                  width: Get.width * 0.05,
                 ),
               ),
             ],

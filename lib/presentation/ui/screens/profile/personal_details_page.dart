@@ -6,8 +6,13 @@ import 'package:***REMOVED***/presentation/controllers/user_data_controller_stat
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class PersonalDetailsPage extends StatelessWidget {
-  PersonalDetailsPage({Key? key}) : super(key: key);
+class PersonalDetailsPage extends StatefulWidget{
+  @override
+  State<StatefulWidget> createState() =>PersonalDetailsPageState();
+
+}
+class PersonalDetailsPageState extends State<PersonalDetailsPage> {
+
 
   final CustomerController customerController = Get.find();
   final UserDataController userDataController = Get.find();
@@ -160,7 +165,8 @@ class PersonalDetailsPage extends StatelessWidget {
           ),
           Text(
             text2,
-            style: TextStyle(fontSize: Get.width * 0.042, color: Colors.grey),
+            style: TextStyle(fontSize: Get.width * 0.042,
+                color: MyColors.blue_003E7E.withAlpha(50)),
           ),
         ],
       ),
@@ -182,13 +188,19 @@ class PersonalDetailsPage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Hero(
-                tag: 'contact_btn',
-                child: Image.asset(
-                  AssetImages.contactButton,
-                  width: Get.width * 0.05,
+              GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Icon(
+                  Directionality.of(context) ==
+                      TextDirection.rtl ?
+                  Icons.keyboard_arrow_right
+                      : Icons.keyboard_arrow_left,
+                  color: Colors.white,
                 ),
               ),
+
               Hero(
                 tag: 'logo',
                 child: Image.asset(
@@ -196,15 +208,14 @@ class PersonalDetailsPage extends StatelessWidget {
                   width: Get.width * 0.3,
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  Get.back();
-                },
-                child: Icon(
-                  Icons.keyboard_arrow_right,
-                  color: Colors.white,
+              Hero(
+                tag: 'contact_btn',
+                child: Image.asset(
+                  AssetImages.contactButton,
+                  width: Get.width * 0.05,
                 ),
               ),
+
             ],
           ),
           Spacer(),

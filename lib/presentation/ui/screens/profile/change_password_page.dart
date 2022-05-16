@@ -204,30 +204,33 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                         width: Get.width,
                         alignment: Alignment.center,
                         margin: EdgeInsets.only(
-                            left: Get.width * 0.06, right: Get.width * 0.06),
-                        child: Center(
+                            left: Get.width * 0.06,
+                            right: Get.width * 0.06),
+
                             child: Visibility(
                                 visible: passError.isNotEmpty,
                                 child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Icon(
-                                      Icons.error,
-                                      color: Colors.red,
-                                    ),
-                                    SizedBox(
-                                      width: Get.width * 0.01,
-                                    ),
-                                    Container(
-                                        width: Get.width * 0.6,
-                                        child: Text(
+
+                                        Icon(
+                                          Icons.error,
+                                          color: Colors.red,
+                                        ),
+                                    SizedBox(width:
+                                    Get.width*0.01,),
+
+                                    Flexible(child:Container(
+                                       // width: Get.width * 0.8,
+                                        child:
+                                         Text(
                                           passError,
                                           style: TextStyle(
-                                              color: Colors.red, fontSize: 20),
-                                        ))
+                                              color: Colors.red, fontSize: 17),
+                                        )))
                                   ],
-                                ))))),
+                                )))),
                 Padding(
                   padding: EdgeInsets.only(
                       left: Get.width * 0.06,
@@ -291,6 +294,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                               return;
                             }
                             if (valid) {
+
                               if (validationPassForSave(
                                   oldPass: _oldPass.text,
                                   newPass: _pass.text,
@@ -345,11 +349,16 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Hero(
-                tag: 'contact_btn',
-                child: Image.asset(
-                  AssetImages.contactButton,
-                  width: Get.width * 0.05,
+              GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Icon(
+                  Directionality.of(context) ==
+                      TextDirection.rtl ?
+                  Icons.keyboard_arrow_right
+                      : Icons.keyboard_arrow_left,
+                  color: Colors.white,
                 ),
               ),
               Hero(
@@ -359,15 +368,14 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                   width: Get.width * 0.3,
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  Get.back();
-                },
-                child: Icon(
-                  Icons.keyboard_arrow_right,
-                  color: Colors.white,
+              Hero(
+                tag: 'contact_btn',
+                child: Image.asset(
+                  AssetImages.contactButton,
+                  width: Get.width * 0.05,
                 ),
               ),
+
             ],
           ),
           Spacer(),

@@ -8,9 +8,13 @@ import 'package:***REMOVED***/presentation/ui/screens/profile/personal_details_p
 import 'package:***REMOVED***/presentation/ui/screens/legal_doc_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+class ProfileScreen extends StatefulWidget{
+  @override
+  State<StatefulWidget> createState() => ProfileScreenState();
 
-class ProfileScreen extends StatelessWidget {
-  ProfileScreen({Key? key}) : super(key: key);
+}
+class ProfileScreenState  extends State<ProfileScreen> {
+
 
   final CustomerController customerController = Get.find();
   final UserDataController userDataController = Get.find();
@@ -68,7 +72,8 @@ class ProfileScreen extends StatelessWidget {
                       children: [
                         Text('Personal details'.tr,
                         style: profileFieldStyle,),
-                        Icon(Icons.keyboard_arrow_right)
+                        Icon(Icons.keyboard_arrow_right,
+                        color:  MyColors.blue_003E7E,)
                       ],
                     ),
                   ),
@@ -91,7 +96,8 @@ class ProfileScreen extends StatelessWidget {
                       children: [
                         Text('Choose language'.tr,
                             style: profileFieldStyle),
-                        Icon(Icons.keyboard_arrow_right)
+                        Icon(Icons.keyboard_arrow_right,
+                          color:  MyColors.blue_003E7E,)
                       ],
                     ),
                   ),
@@ -114,7 +120,8 @@ class ProfileScreen extends StatelessWidget {
                       children: [
                         Text('Change password'.tr,
                             style: profileFieldStyle),
-                        Icon(Icons.keyboard_arrow_right)
+                        Icon(Icons.keyboard_arrow_right,
+                          color:  MyColors.blue_003E7E,)
                       ],
                     ),
                   ),
@@ -144,7 +151,8 @@ class ProfileScreen extends StatelessWidget {
                       children: [
                         Text('Terms an conditions'.tr,
                             style: profileFieldStyle),
-                        Icon(Icons.keyboard_arrow_right)
+                        Icon(Icons.keyboard_arrow_right,
+                          color:  MyColors.blue_003E7E,)
                       ],
                     ),
                   ),
@@ -192,15 +200,22 @@ class ProfileScreen extends StatelessWidget {
         children: [
           Spacer(),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Hero(
-                tag: 'contact_btn',
-                child: Image.asset(
-                  AssetImages.contactButton,
-                  width: Get.width * 0.05,
+              GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Icon(
+                  Directionality.of(context) ==
+                      TextDirection.rtl ?
+                  Icons.keyboard_arrow_right
+                      : Icons.keyboard_arrow_left,
+                  color: Colors.white,
                 ),
               ),
+
               Hero(
                 tag: 'logo',
                 child: Image.asset(
@@ -208,15 +223,14 @@ class ProfileScreen extends StatelessWidget {
                   width: Get.width * 0.3,
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  Get.back();
-                },
-                child: Icon(
-                  Icons.keyboard_arrow_right,
-                  color: Colors.white,
+              Hero(
+                tag: 'contact_btn',
+                child: Image.asset(
+                  AssetImages.contactButton,
+                  width: Get.width * 0.05,
                 ),
               ),
+
             ],
           ),
           Spacer(),

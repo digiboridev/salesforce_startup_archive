@@ -61,13 +61,19 @@ class ProductCountScreenState extends State<ProductCountScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Hero(
-                tag: 'contact_btn',
-                child: Image.asset(
-                  AssetImages.contactButton,
-                  width: Get.width * 0.05,
+              GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Icon(
+                  Directionality.of(context) ==
+                      TextDirection.rtl ?
+                  Icons.keyboard_arrow_right
+                      : Icons.keyboard_arrow_left,
+                  color: Colors.white,
                 ),
               ),
+
               Hero(
                 tag: 'logo',
                 child: Image.asset(
@@ -75,15 +81,11 @@ class ProductCountScreenState extends State<ProductCountScreen> {
                   width: Get.width * 0.3,
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  Get.back(result: {
-                    unitType: int.tryParse(textEditingController.text) ?? 0
-                  });
-                },
-                child: Icon(
-                  Icons.keyboard_arrow_right,
-                  color: Colors.white,
+              Hero(
+                tag: 'contact_btn',
+                child: Image.asset(
+                  AssetImages.contactButton,
+                  width: Get.width * 0.05,
                 ),
               ),
             ],

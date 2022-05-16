@@ -7,6 +7,7 @@ import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/brand_
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalog_page_states.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/families_card.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/material_card.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:***REMOVED***/domain/entities/materials/materials_catalog.dart';
@@ -202,6 +203,7 @@ class _CatalogPageState extends State<CatalogPage> {
 
   Widget buildClassificationRow() {
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: Get.width * 0.025),
         height: Get.width * 0.15,
         color: Colors.white,
         child: SingleChildScrollView(
@@ -243,7 +245,8 @@ class _CatalogPageState extends State<CatalogPage> {
     return brands.isNotEmpty
         ? Container(
             key: UniqueKey(),
-            margin: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
+            margin: EdgeInsets.symmetric(
+                horizontal: Get.width * 0.02),
             child: GridView.builder(
               cacheExtent: Get.height * 2,
               physics: BouncingScrollPhysics(),
@@ -305,7 +308,7 @@ class _CatalogPageState extends State<CatalogPage> {
     return Container(
         key: UniqueKey(),
         height: Get.width * 0.15,
-        margin: EdgeInsets.only(left: Get.width * 0.04),
+        margin: EdgeInsets.only(left: Get.width * 0.025),
         child: Row(
           children: [
             GestureDetector(
@@ -401,7 +404,8 @@ class _CatalogPageState extends State<CatalogPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-              padding: EdgeInsets.symmetric(horizontal: Get.width * 0.025),
+              padding: EdgeInsets.symmetric(
+                  horizontal: Get.width*0.04),
               child: CachedImage(
                   Url: brand.ImageUrl,
                   width: Get.width * 0.15,
@@ -433,7 +437,8 @@ class _CatalogPageState extends State<CatalogPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-              padding: EdgeInsets.symmetric(horizontal: Get.width * 0.025),
+              padding: EdgeInsets.symmetric(
+                  horizontal: Get.width * 0.025),
               child: Row(
                 children: [
                   CachedImage(
