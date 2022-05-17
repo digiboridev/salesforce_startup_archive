@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/presentation/controllers/search_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/mainscreen_header_controller.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/material_card.dart';
@@ -12,7 +13,7 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xffF4F4F6),
+      color: MyColors.white_F4F4F6,
       child: SizedBox.expand(
         child: Obx(() => Column(
               children: [
@@ -82,13 +83,6 @@ class SearchScreen extends StatelessWidget {
                           color: Colors.black, fontSize: Get.width * 0.04),
                     ),
                   ),
-                // Obx(() => Expanded(
-                //     child: ListView(
-                //         children: searchController.findedMaterials
-                //             .map((element) => MaterialCard(
-                //                   materiale: element,
-                //                 ))
-                //             .toList()))),
                 if (searchController.findedMaterials.isEmpty &&
                     searchController.findedSimilarMaterials.isNotEmpty)
                   Container(
@@ -107,7 +101,6 @@ class SearchScreen extends StatelessWidget {
                           color: Colors.black, fontSize: Get.width * 0.04),
                     ),
                   ),
-
                 if (searchController.findedMaterials.isEmpty &&
                     searchController.findedSimilarMaterials.isNotEmpty)
                   Expanded(

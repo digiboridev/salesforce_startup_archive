@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/core/asset_images.dart';
 import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/domain/entities/contact_us_data.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
@@ -66,8 +67,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                 gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [MyColors.blue_0D63BB,
-                      Color(0xff00458C)])),
+                    colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
             padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
             child: Column(
               children: [
@@ -87,7 +87,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                       child: Hero(
                         tag: 'contact_btn',
                         child: Image.asset(
-                          'assets/icons/contact.png',
+                          AssetImages.contactButton,
                           width: Get.width * 0.05,
                         ),
                       ),
@@ -95,7 +95,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                     Hero(
                       tag: 'logo',
                       child: Image.asset(
-                        'assets/images/***REMOVED***_logo.png',
+                        AssetImages.***REMOVED***Logo,
                         width: Get.width * 0.2,
                       ),
                     ),
@@ -105,7 +105,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                               transition: Transition.cupertino);
                         },
                         child: Image.asset(
-                          'assets/icons/settings.png',
+                          AssetImages.settings,
                           width: Get.width * 0.05,
                         ))
                   ],
@@ -138,17 +138,21 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                       },
                       child: Align(
                         alignment: Alignment.centerLeft,
-                        child: Obx(() => RichText(text: TextSpan(
-                          text:  'Brunch: ',
-                            style: TextStyle(
-                                color: Colors.white.withOpacity(0.77),
-                                fontSize: Get.width * 0.035),
-                          children: [TextSpan(text: customerController
-                              .selectedCustomer!.customerName,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: Get.width * 0.035),)]
-                        ),
+                        child: Obx(() => RichText(
+                              text: TextSpan(
+                                  text: 'Brunch: ',
+                                  style: TextStyle(
+                                      color: Colors.white.withOpacity(0.77),
+                                      fontSize: Get.width * 0.035),
+                                  children: [
+                                    TextSpan(
+                                      text: customerController
+                                          .selectedCustomer!.customerName,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: Get.width * 0.035),
+                                    )
+                                  ]),
                             )),
                       ),
                     ),
@@ -230,7 +234,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Image.asset(
-                                'assets/images/header_tile.png',
+                                AssetImages.header_tile,
                                 width: Get.width * 0.4,
                               ),
                             ],
@@ -307,7 +311,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                     width: Get.width * 0.03,
                   ),
                   Image.asset(
-                    'assets/icons/search.png',
+                    AssetImages.search,
                     width: Get.width * 0.04,
                   ),
                   SizedBox(
@@ -365,7 +369,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                     width: Get.width * 0.03,
                   ),
                   Image.asset(
-                    'assets/icons/search.png',
+                    AssetImages.search,
                     width: Get.width * 0.04,
                   ),
                   SizedBox(
@@ -399,7 +403,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                     ),
                   )),
                   Image.asset(
-                    'assets/icons/barcode.png',
+                    AssetImages.barcode,
                     width: Get.width * 0.06,
                   ),
                   SizedBox(
@@ -417,7 +421,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
     return Container(
       width: Get.width,
       // height: Get.height,
-      color: Color(0xff00458C),
+      color: MyColors.blue_00458C,
       child: Column(
         children: [
           if (searchController.findedMaterials.isNotEmpty)
@@ -526,7 +530,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
             children: [
               Container(
                 height: Get.width - Get.width * 0.07,
-                color: Color(0xff00458C),
+                color: MyColors.blue_00458C,
                 child: Column(
                   children: [
                     Expanded(
@@ -542,28 +546,28 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                               margin: EdgeInsets.symmetric(
                                   horizontal: Get.width * 0.06),
                               padding: EdgeInsets.symmetric(
-                                vertical: Get.width*0.025,
+                                  vertical: Get.width * 0.025,
                                   horizontal: Get.width * 0.025),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
                                     child: Text(
-                                        'Our focus is open',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w500,
+                                      'Our focus is open',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500,
                                           fontSize: 18,
-                                            color: Colors.white),
-                                      ),
+                                          color: Colors.white),
+                                    ),
                                   ),
                                   Expanded(
                                     child: Text(
-                                        state.openingHoursString,
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                            color: Colors.white),
-                                      ),
+                                      state.openingHoursString,
+                                      style: TextStyle(
+                                          fontSize: 12, color: Colors.white),
                                     ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -574,16 +578,16 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                               return Column(
                                 children: [
                                   Container(
-                                   // height: Get.width * 0.25,
+                                    // height: Get.width * 0.25,
                                     decoration: BoxDecoration(
-                                        color: Color(0xff0250A0),
+                                        color: MyColors.blue_0250A0,
                                         borderRadius: BorderRadius.circular(
                                             Get.width * 0.02)),
                                     margin: EdgeInsets.symmetric(
                                         horizontal: Get.width * 0.06),
                                     padding: EdgeInsets.symmetric(
-                                        horizontal: Get.width * 0.03,
-                                   ),
+                                      horizontal: Get.width * 0.03,
+                                    ),
                                     child: Column(
                                       children: [
                                         Padding(
@@ -594,51 +598,56 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                                             child: Text(
                                               e.description,
                                               style: TextStyle(
-                                                fontSize: 18,fontWeight: FontWeight.w500,
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w500,
                                                   color: Colors.white),
                                             ),
                                           ),
                                         ),
-                                        Padding(padding: EdgeInsets.only(bottom:Get.width*0.05),
-                              child:Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            GestureDetector(
-                                              onTap: () {
-                                                launch('mailto:${e.email}');
-                                              },
-                                              child: Image.asset(
-                                                'assets/icons/contact_mail.png',
-                                                width: Get.width * 0.15,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: Get.width * 0.05,
-                                            ),
-                                            GestureDetector(
-                                              onTap: () {
-                                                launch('${e.whatsAppLink}');
-                                              },
-                                              child: Image.asset(
-                                                'assets/icons/contact_messanger.png',
-                                                width: Get.width * 0.15,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: Get.width * 0.05,
-                                            ),
-                                            GestureDetector(
-                                              onTap: () {
-                                                launch('tel:${e.phoneNumber}');
-                                              },
-                                              child: Image.asset(
-                                                'assets/icons/contact_phone.png',
-                                                width: Get.width * 0.15,
-                                              ),
-                                            ),
-                                          ],
-                                        )),
+                                        Padding(
+                                            padding: EdgeInsets.only(
+                                                bottom: Get.width * 0.05),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    launch('mailto:${e.email}');
+                                                  },
+                                                  child: Image.asset(
+                                                    AssetImages.contact_mail,
+                                                    width: Get.width * 0.15,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: Get.width * 0.05,
+                                                ),
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    launch('${e.whatsAppLink}');
+                                                  },
+                                                  child: Image.asset(
+                                                    AssetImages
+                                                        .contact_messanger,
+                                                    width: Get.width * 0.15,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: Get.width * 0.05,
+                                                ),
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    launch(
+                                                        'tel:${e.phoneNumber}');
+                                                  },
+                                                  child: Image.asset(
+                                                    AssetImages.contact_phone,
+                                                    width: Get.width * 0.15,
+                                                  ),
+                                                ),
+                                              ],
+                                            )),
                                         SizedBox(
                                           width: Get.width * 0.2,
                                         ),
@@ -670,7 +679,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
         return Container(
           width: Get.width,
           height: Get.width,
-          color: Color(0xff00458C),
+          color: MyColors.blue_00458C,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -689,7 +698,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
       onLoading: Container(
         width: Get.width,
         height: Get.width,
-        color: Color(0xff00458C),
+        color: MyColors.blue_00458C,
         child: Center(
           child: CircularProgressIndicator(),
         ),
@@ -714,8 +723,8 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'All branches:',
-                    style: TextStyle(fontSize: 16,
-                        color: Colors.white.withOpacity(0.77)),
+                    style: TextStyle(
+                        fontSize: 16, color: Colors.white.withOpacity(0.77)),
                   ),
                 ),
               ),
@@ -724,16 +733,16 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
               ),
               Expanded(
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: Get.width*0.02),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: Get.width * 0.02),
                       color: MyColors.blue_00458C,
                       child: Theme(
                           data: ThemeData(
-                            scrollbarTheme: ScrollbarThemeData(
-                              thumbColor:
-                              MaterialStateProperty.all(MyColors.blue_5584B2),
-                              radius: const Radius.circular(10),
-                            )
-                          ),
+                              scrollbarTheme: ScrollbarThemeData(
+                            thumbColor:
+                                MaterialStateProperty.all(MyColors.blue_5584B2),
+                            radius: const Radius.circular(10),
+                          )),
                           child: Scrollbar(
                             isAlwaysShown: true,
                             controller: _scrollController,
@@ -807,7 +816,6 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                               }).toList(),
                             ),
                           )))),
-              // buildHideBottom(),
               SizedBox(
                 height: Get.width * 0.03,
               )
@@ -832,7 +840,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  'assets/images/header_tile.png',
+                  AssetImages.header_tile,
                   width: Get.width * 0.4,
                 ),
               ],

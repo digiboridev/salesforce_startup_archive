@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/core/asset_images.dart';
 import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
@@ -22,7 +23,7 @@ class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
   final TextEditingController _pass = TextEditingController();
   final TextEditingController _confirmPass = TextEditingController();
   final UnderlineInputBorder fieldBorder = UnderlineInputBorder(
-    borderSide: BorderSide(color: Color(0xff003E7E)),
+    borderSide: BorderSide(color: MyColors.blue_003E7E),
   );
   String passError = '';
   bool showAsterisks = true;
@@ -92,7 +93,7 @@ class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
       resizeToAvoidBottomInset: false,
       body: SafeArea(
           child: Container(
-        color: Color(0xffF4F4F6),
+        color: MyColors.white_F4F4F6,
         child: SizedBox.expand(
           child: Column(
             children: [buildHeader(), buildBody(context)],
@@ -289,7 +290,7 @@ class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                         color: isCorrect
-                            ? Color(0xff00458C)
+                            ? MyColors.blue_00458C
                             : MyColors.blue_D5DDE5,
                         borderRadius: BorderRadius.circular(Get.width * 0.06)),
                     padding: EdgeInsets.symmetric(vertical: Get.width * 0.03),
@@ -343,7 +344,7 @@ class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
           gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [Color(0xff0D63BB), Color(0xff00458C)])),
+              colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
       padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
       child: Column(
         children: [
@@ -354,7 +355,7 @@ class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
               Hero(
                 tag: 'logo',
                 child: Image.asset(
-                  'assets/images/***REMOVED***_logo.png',
+                  AssetImages.***REMOVED***Logo,
                   width: Get.width * 0.3,
                 ),
               ),

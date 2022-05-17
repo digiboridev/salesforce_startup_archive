@@ -40,7 +40,7 @@ class _HomepageLoaderState extends State<HomepageLoader>
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Materials loading error'),
+              Text('Materials loading error'.tr),
               SizedBox(
                 height: Get.width * 0.06,
               ),

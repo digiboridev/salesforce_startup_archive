@@ -1,5 +1,5 @@
 import 'package:***REMOVED***/domain/entities/favorites/favorite_list.dart';
-import 'package:***REMOVED***/domain/services/cache_ferchig_service.dart';
+import 'package:***REMOVED***/domain/services/cache_fetching_service.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/domain/usecases/favorites/get_favorites_and_cache.dart';
 import 'package:***REMOVED***/domain/usecases/favorites/get_favorites_sync_time.dart';

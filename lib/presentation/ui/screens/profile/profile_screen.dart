@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/core/asset_images.dart';
 import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
@@ -20,7 +21,7 @@ class ProfileScreen extends StatelessWidget {
       backgroundColor: MyColors.blue_003E7E,
       body: SafeArea(
           child: Container(
-        color: Color(0xffF4F4F6),
+        color: MyColors.white_F4F4F6,
         child: SizedBox.expand(
           child: Column(
             children: [buildHeader(), buildBody()],
@@ -175,7 +176,7 @@ class ProfileScreen extends StatelessWidget {
           gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [Color(0xff0D63BB), Color(0xff00458C)])),
+              colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
       padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
       child: Column(
         children: [
@@ -186,14 +187,14 @@ class ProfileScreen extends StatelessWidget {
               Hero(
                 tag: 'contact_btn',
                 child: Image.asset(
-                  'assets/icons/contact.png',
+                  AssetImages.contactButton,
                   width: Get.width * 0.05,
                 ),
               ),
               Hero(
                 tag: 'logo',
                 child: Image.asset(
-                  'assets/images/***REMOVED***_logo.png',
+                  AssetImages.***REMOVED***Logo,
                   width: Get.width * 0.3,
                 ),
               ),

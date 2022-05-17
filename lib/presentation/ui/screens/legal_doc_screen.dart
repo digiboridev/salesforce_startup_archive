@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/core/asset_images.dart';
 import 'package:***REMOVED***/core/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,7 +30,7 @@ class _LegalDocScreenState extends State<LegalDocScreen> {
       backgroundColor: MyColors.blue_003E7E,
       body: SafeArea(
           child: Container(
-        color: Color(0xffF4F4F6),
+        color: MyColors.white_F4F4F6,
         child: Stack(
           children: [
             Column(
@@ -77,7 +78,7 @@ class _LegalDocScreenState extends State<LegalDocScreen> {
                     width: Get.width,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                        color: Color(0xff00458C),
+                        color: MyColors.blue_00458C,
                         borderRadius: BorderRadius.circular(Get.width * 0.06)),
                     padding: EdgeInsets.symmetric(
                         horizontal: Get.width * 0.3,
@@ -128,7 +129,7 @@ class _LegalDocScreenState extends State<LegalDocScreen> {
           gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [Color(0xff0D63BB), Color(0xff00458C)])),
+              colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
       padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
       child: Column(
         children: [
@@ -139,14 +140,14 @@ class _LegalDocScreenState extends State<LegalDocScreen> {
               Hero(
                 tag: 'contact_btn',
                 child: Image.asset(
-                  'assets/icons/contact.png',
+                  AssetImages.contactButton,
                   width: Get.width * 0.05,
                 ),
               ),
               Hero(
                 tag: 'logo',
                 child: Image.asset(
-                  'assets/images/***REMOVED***_logo.png',
+                  AssetImages.***REMOVED***Logo,
                   width: Get.width * 0.3,
                 ),
               ),

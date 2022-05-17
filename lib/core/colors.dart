@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-class MyColors{
+abstract class MyColors {
   static const blue_003E7E = Color(0xFF003E7E);
   static const blue_0050A2 = Color(0xFF0050A2);
   static const blue_0571E0 = Color(0xFF0571E0);
@@ -29,24 +29,5 @@ class MyColors{
   static const gray_B5C0CD = Color(0xFFB5C0CD);
   static const blue_6DA5EC = Color(0xFF6DA5EC);
   static const gray_EAF2FA = Color(0xFFEAF2FA);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  static const white_F4F4F6 = Color(0xffF4F4F6);
 }

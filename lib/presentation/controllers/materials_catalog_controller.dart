@@ -1,6 +1,6 @@
 import 'package:***REMOVED***/domain/entities/materials/alternative_item.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
-import 'package:***REMOVED***/domain/services/cache_ferchig_service.dart';
+import 'package:***REMOVED***/domain/services/cache_fetching_service.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
 import 'package:***REMOVED***/domain/usecases/materials/get_materials_sync_time.dart';

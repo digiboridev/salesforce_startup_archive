@@ -1,3 +1,5 @@
+import 'package:***REMOVED***/core/asset_images.dart';
+import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,7 +17,6 @@ class BottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       return Container(
-        // color: Colors.red,
         width: Get.width,
         height: bottomBarHeight,
         child: Stack(
@@ -24,14 +25,13 @@ class BottomBar extends StatelessWidget {
               children: [
                 Container(
                   height: bottomBarHeight * 0.4,
-                  // color: Colors.blue.withOpacity(0.2),
                 ),
                 Container(
                   height: bottomBarHeight * 0.6,
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           fit: BoxFit.fill,
-                          image: AssetImage('assets/images/bottombar.png'))),
+                          image: AssetImage(AssetImages.bottombar))),
                   child: Row(
                     children: [
                       Spacer(),
@@ -43,9 +43,9 @@ class BottomBar extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             bottomBarController.currentPageIndex.value == 1
-                                ? Image.asset('assets/icons/home_active.png',
+                                ? Image.asset(AssetImages.home_active,
                                     height: Get.width * 0.06)
-                                : Image.asset('assets/icons/home.png',
+                                : Image.asset(AssetImages.home,
                                     height: Get.width * 0.06),
                             SizedBox(
                               height: Get.width * 0.01,
@@ -56,7 +56,7 @@ class BottomBar extends StatelessWidget {
                                   color: bottomBarController
                                               .currentPageIndex.value ==
                                           1
-                                      ? Color(0xff00458C)
+                                      ? MyColors.blue_00458C
                                       : Colors.grey),
                             ),
                           ],
@@ -71,9 +71,9 @@ class BottomBar extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             bottomBarController.currentPageIndex.value == 2
-                                ? Image.asset('assets/icons/fav_active.png',
+                                ? Image.asset(AssetImages.fav_active,
                                     height: Get.width * 0.06)
-                                : Image.asset('assets/icons/fav.png',
+                                : Image.asset(AssetImages.fav,
                                     height: Get.width * 0.06),
                             SizedBox(
                               height: Get.width * 0.01,
@@ -84,7 +84,7 @@ class BottomBar extends StatelessWidget {
                                   color: bottomBarController
                                               .currentPageIndex.value ==
                                           2
-                                      ? Color(0xff00458C)
+                                      ? MyColors.blue_00458C
                                       : Colors.grey),
                             ),
                           ],
@@ -101,9 +101,9 @@ class BottomBar extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             bottomBarController.currentPageIndex.value == 4
-                                ? Image.asset('assets/icons/catalog_active.png',
+                                ? Image.asset(AssetImages.catalog_active,
                                     height: Get.width * 0.06)
-                                : Image.asset('assets/icons/catalog.png',
+                                : Image.asset(AssetImages.catalog,
                                     height: Get.width * 0.06),
                             SizedBox(
                               height: Get.width * 0.01,
@@ -114,7 +114,7 @@ class BottomBar extends StatelessWidget {
                                   color: bottomBarController
                                               .currentPageIndex.value ==
                                           4
-                                      ? Color(0xff00458C)
+                                      ? MyColors.blue_00458C
                                       : Colors.grey),
                             ),
                           ],
@@ -129,9 +129,9 @@ class BottomBar extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             bottomBarController.currentPageIndex.value == 5
-                                ? Image.asset('assets/icons/orders_active.png',
+                                ? Image.asset(AssetImages.orders_active,
                                     height: Get.width * 0.06)
-                                : Image.asset('assets/icons/orders.png',
+                                : Image.asset(AssetImages.orders,
                                     height: Get.width * 0.06),
                             SizedBox(
                               height: Get.width * 0.01,
@@ -142,7 +142,7 @@ class BottomBar extends StatelessWidget {
                                   color: bottomBarController
                                               .currentPageIndex.value ==
                                           5
-                                      ? Color(0xff00458C)
+                                      ? MyColors.blue_00458C
                                       : Colors.grey),
                             ),
                           ],
@@ -163,14 +163,14 @@ class BottomBar extends StatelessWidget {
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                         color: bottomBarController.currentPageIndex.value == 3
-                            ? Color(0xff00458C)
+                            ? MyColors.blue_00458C
                             : Colors.blueGrey,
                         borderRadius: BorderRadius.circular(Get.width * 0.15)),
                     child: GestureDetector(
                       onTap: () {
                         bottomBarController.changePage(newPageIndex: 3);
                       },
-                      child: Image.asset('assets/icons/cart.png',
+                      child: Image.asset(AssetImages.cart,
                           width: Get.width * 0.06),
                     ))
               ],

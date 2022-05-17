@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/core/asset_images.dart';
 import 'package:***REMOVED***/core/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -30,7 +31,7 @@ class SystemErrorMaterialComponentState
             child: Row(
               children: [
                 Image.asset(
-                  "assets/icons/error.png",
+                  AssetImages.error,
                   height: 24,
                 ),
                 SizedBox(

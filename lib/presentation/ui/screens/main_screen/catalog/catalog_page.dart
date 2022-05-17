@@ -216,8 +216,8 @@ class _CatalogPageState extends State<CatalogPage> {
                       decoration: BoxDecoration(
                           color:
                               catalogPageController.selectedClassification == e
-                                  ? Color(0xff00458C)
-                                  : Color(0xff00458C).withOpacity(0.2),
+                                  ? MyColors.blue_00458C
+                                  : MyColors.blue_00458C.withOpacity(0.2),
                           borderRadius:
                               BorderRadius.circular(Get.width * 0.04)),
                       margin:
@@ -232,7 +232,7 @@ class _CatalogPageState extends State<CatalogPage> {
                                 catalogPageController.selectedClassification ==
                                         e
                                     ? Colors.white
-                                    : Color(0xff003E7E)),
+                                    : MyColors.blue_003E7E),
                       )),
                 );
               }).toList(),
@@ -296,7 +296,7 @@ class _CatalogPageState extends State<CatalogPage> {
           )
         : Container(
             child: Center(
-              child: Text("No data"),
+              child: Text("No data".tr),
             ),
           );
   }
@@ -315,8 +315,8 @@ class _CatalogPageState extends State<CatalogPage> {
                       color: catalogPageController.state is ShowBrands ||
                               catalogPageController.state
                                   is ShowMaterialsByBrand
-                          ? Color(0xff00458C)
-                          : Color(0xff00458C).withOpacity(0.2),
+                          ? MyColors.blue_00458C
+                          : MyColors.blue_00458C.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(Get.width * 0.04)),
                   margin: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
                   padding: EdgeInsets.symmetric(
@@ -329,7 +329,7 @@ class _CatalogPageState extends State<CatalogPage> {
                                 catalogPageController.state
                                     is ShowMaterialsByBrand
                             ? Colors.white
-                            : Color(0xff003E7E)),
+                            : MyColors.blue_003E7E),
                   )),
             ),
             GestureDetector(
@@ -339,8 +339,8 @@ class _CatalogPageState extends State<CatalogPage> {
                       color: catalogPageController.state is ShowFamilies ||
                               catalogPageController.state
                                   is ShowMaterialsByFamily
-                          ? Color(0xff00458C)
-                          : Color(0xff00458C).withOpacity(0.2),
+                          ? MyColors.blue_00458C
+                          : MyColors.blue_00458C.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(Get.width * 0.04)),
                   margin: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
                   padding: EdgeInsets.symmetric(
@@ -353,7 +353,7 @@ class _CatalogPageState extends State<CatalogPage> {
                                 catalogPageController.state
                                     is ShowMaterialsByFamily
                             ? Colors.white
-                            : Color(0xff003E7E)),
+                            : MyColors.blue_003E7E),
                   )),
             ),
             Spacer(),
@@ -400,16 +400,16 @@ class _CatalogPageState extends State<CatalogPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(padding:
-          EdgeInsets.symmetric(horizontal: Get.width*0.025),
-              child:CachedImage(
-              Url: brand.ImageUrl,
-              width: Get.width * 0.15,
-              height: Get.width * 0.15)),
+          Padding(
+              padding: EdgeInsets.symmetric(horizontal: Get.width * 0.025),
+              child: CachedImage(
+                  Url: brand.ImageUrl,
+                  width: Get.width * 0.15,
+                  height: Get.width * 0.15)),
           Expanded(
             child: materials.isEmpty
                 ? Center(
-                    child: Text('No materials'),
+                    child: Text('No materials'.tr),
                   )
                 : ListView(
                     physics: BouncingScrollPhysics(),
@@ -432,21 +432,24 @@ class _CatalogPageState extends State<CatalogPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-      Padding(padding:
-      EdgeInsets.symmetric(horizontal: Get.width*0.025),
-      child:Row(children: [CachedImage(
-              Url: family.ImageUrl,
-              width: Get.width * 0.15,
-              height: Get.width * 0.15),
-        Text(family.Display, style: TextStyle(
-          color: MyColors.blue_003E7E,
-          fontSize: 24
-        ),)
-      ],)),
+          Padding(
+              padding: EdgeInsets.symmetric(horizontal: Get.width * 0.025),
+              child: Row(
+                children: [
+                  CachedImage(
+                      Url: family.ImageUrl,
+                      width: Get.width * 0.15,
+                      height: Get.width * 0.15),
+                  Text(
+                    family.Display,
+                    style: TextStyle(color: MyColors.blue_003E7E, fontSize: 24),
+                  )
+                ],
+              )),
           Expanded(
             child: materials.isEmpty
                 ? Center(
-                    child: Text('No materials'),
+                    child: Text('No materials'.tr),
                   )
                 : ListView(
                     physics: BouncingScrollPhysics(),
