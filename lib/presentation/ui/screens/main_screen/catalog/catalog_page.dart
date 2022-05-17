@@ -449,7 +449,7 @@ class _CatalogPageState extends State<CatalogPage> {
           Expanded(
             child: materials.isEmpty
                 ? Center(
-                    child: Text('No materials'),
+                    child: Text('No materials'.tr),
                   )
                 : ListView(
                     physics: BouncingScrollPhysics(),

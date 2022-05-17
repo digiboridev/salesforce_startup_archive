@@ -38,7 +38,7 @@ class _FavoritesLoaderState extends State<FavoritesLoader>
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Favorites loading error'),
+              Text('Favorites loading error'.tr),
               SizedBox(
                 height: Get.width * 0.06,
               ),

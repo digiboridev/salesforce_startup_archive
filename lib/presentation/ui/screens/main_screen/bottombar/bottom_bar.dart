@@ -25,7 +25,6 @@ class BottomBar extends StatelessWidget {
               children: [
                 Container(
                   height: bottomBarHeight * 0.4,
-                  // color: Colors.blue.withOpacity(0.2),
                 ),
                 Container(
                   height: bottomBarHeight * 0.6,
