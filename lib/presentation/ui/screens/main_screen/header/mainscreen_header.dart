@@ -234,7 +234,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Image.asset(
-                                'assets/images/header_tile.png',
+                                AssetImages.header_tile,
                                 width: Get.width * 0.4,
                               ),
                             ],
@@ -816,7 +816,6 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                               }).toList(),
                             ),
                           )))),
-              // buildHideBottom(),
               SizedBox(
                 height: Get.width * 0.03,
               )
@@ -841,7 +840,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  'assets/images/header_tile.png',
+                  AssetImages.header_tile,
                   width: Get.width * 0.4,
                 ),
               ],

@@ -13,7 +13,6 @@ defaultDialog() => Get.defaultDialog(
     titlePadding: EdgeInsets.all(0),
     content: Container(
         alignment: Alignment.center,
-        //  margin: EdgeInsets.only(left: Get.width*0.05,right: Get.width*0.05),
         decoration: BoxDecoration(
             color: MyColors.blue_00458C,
             borderRadius: BorderRadius.all(Radius.circular(15))),
@@ -34,7 +33,6 @@ appVersionDialog({
       content: Container(
           padding: EdgeInsets.symmetric(vertical: Get.width * 0.06),
           alignment: Alignment.center,
-          //  margin: EdgeInsets.only(left: Get.width*0.05,right: Get.width*0.05),
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.all(Radius.circular(15))),
@@ -64,7 +62,7 @@ appVersionDialog({
                         vertical: Get.width * 0.02,
                         horizontal: Get.width * 0.03),
                     child: Text(
-                      'Update app',
+                      'Update app'.tr,
                       style: TextStyle(color: Colors.white),
                     )),
               )

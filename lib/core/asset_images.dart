@@ -27,4 +27,6 @@ abstract class AssetImages {
   static String get orders => 'assets/icons/orders.png';
   static String get orders_active => 'assets/icons/orders_active.png';
   static String get cart => 'assets/icons/cart.png';
+  static String get header_tile => 'assets/images/header_tile.png';
+  static String get success_back => 'assets/images/success_back.png';
 }
