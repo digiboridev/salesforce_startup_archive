@@ -59,6 +59,7 @@ main() async {
     // Keep in mind,locale will owerwrite by user controller based on language from api
     locale: Get.deviceLocale,
     fallbackLocale: Locale('he'),
+    theme: ThemeData(fontFamily: 'Almoni'),
     localizationsDelegates: [
       GlobalMaterialLocalizations.delegate, // uses `flutter_localizations`
       GlobalWidgetsLocalizations.delegate,
