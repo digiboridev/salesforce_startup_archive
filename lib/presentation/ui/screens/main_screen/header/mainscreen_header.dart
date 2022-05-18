@@ -7,7 +7,6 @@ import 'package:***REMOVED***/presentation/controllers/search_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/mainscreen_header_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/mainscreen_header_states.dart';
 import 'package:***REMOVED***/presentation/ui/screens/profile/profile_screen.dart';
-import 'package:***REMOVED***/presentation/ui/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -67,7 +66,8 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                 gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [MyColors.blue_0D63BB, Color(0xff00458C)])),
+                    colors: [MyColors.blue_0D63BB,
+                      Color(0xff00458C)])),
             padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
             child: Column(
               children: [
@@ -126,7 +126,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                     duration: Duration(milliseconds: 300),
                     height:
                         mainScreeenHeaderController.enableBrunchSelection.value
-                            ? Get.width * 0.06
+                            ? Get.width * 0.05
                             : 0,
                     child: GestureDetector(
                       onTap: () {
@@ -136,47 +136,20 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                           searchFocusNode.unfocus();
                         });
                       },
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Obx(() => RichText(
-                                  textAlign: TextAlign.left,
-                                  overflow: TextOverflow.ellipsis,
-                                  text: TextSpan(
-                                      text: customerController
-                                          .selectedCustomer!.customerName,
-                                      style: TextStyle(
-                                          color: Colors.white.withOpacity(0.77),
-                                          fontSize: Get.width * 0.035),
-                                      children: [
-                                        TextSpan(
-                                          text: customerController
-                                              .selectedCustomer!
-                                              .customerAddress,
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: Get.width * 0.035),
-                                        )
-                                      ]),
-                                )),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.circular(Get.width * 0.03),
-                                border: Border.all(
-                                    width: Get.width * 0.001,
-                                    color: Colors.white)),
-                            padding: EdgeInsets.symmetric(
-                                horizontal: Get.width * 0.03),
-                            child: Text(
-                              'Recomended List',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: Get.width * 0.035),
-                            ),
-                          )
-                        ],
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Obx(() => RichText(text: TextSpan(
+                          text:  '${'Brunch'.tr}: ',
+                            style: TextStyle(
+                                color: Colors.white.withOpacity(0.77),
+                                fontSize: Get.width * 0.035),
+                          children: [TextSpan(text: customerController
+                              .selectedCustomer!.customerName,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: Get.width * 0.035),)]
+                        ),
+                            )),
                       ),
                     ),
                   ),
@@ -359,7 +332,9 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
 
                       labelText: 'Search branch'.tr,
                       labelStyle:
-                          TextStyle(color: MyColors.blue_00458C, fontSize: 16),
+                          TextStyle(color:
+                          MyColors.blue_00458C,
+                              fontSize: 16),
                       floatingLabelBehavior: FloatingLabelBehavior.never,
                       border: InputBorder.none,
 
@@ -413,7 +388,9 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
 
                       labelText: 'Search product'.tr,
                       labelStyle:
-                          TextStyle(color: MyColors.blue_00458C, fontSize: 16),
+                          TextStyle(color:
+                          MyColors.blue_00458C,
+                          fontSize: 16),
                       floatingLabelBehavior: FloatingLabelBehavior.never,
                       border: InputBorder.none,
                       focusedBorder: InputBorder.none,
@@ -526,8 +503,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
             ),
           GestureDetector(
             onTap: () {
-              // searchController.showSearch.value = true;
-              Get.to(() => SearchScreen());
+              searchController.showSearch.value = true;
               mainScreeenHeaderController.hide();
             },
             child: Padding(
@@ -568,28 +544,28 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                               margin: EdgeInsets.symmetric(
                                   horizontal: Get.width * 0.06),
                               padding: EdgeInsets.symmetric(
-                                  vertical: Get.width * 0.025,
+                                vertical: Get.width*0.025,
                                   horizontal: Get.width * 0.025),
                               child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
                                     child: Text(
-                                      'Our focus is open'.tr,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w500,
+                                        'Our focus is open'.tr,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w500,
                                           fontSize: 18,
-                                          color: Colors.white),
-                                    ),
+                                            color: Colors.white),
+                                      ),
                                   ),
                                   Expanded(
                                     child: Text(
-                                      state.openingHoursString,
-                                      style: TextStyle(
-                                          fontSize: 12, color: Colors.white),
+                                        state.openingHoursString,
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                            color: Colors.white),
+                                      ),
                                     ),
-                                  ),
                                 ],
                               ),
                             ),
@@ -600,7 +576,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                               return Column(
                                 children: [
                                   Container(
-                                    // height: Get.width * 0.25,
+                                   // height: Get.width * 0.25,
                                     decoration: BoxDecoration(
                                         color: Color(0xff0250A0),
                                         borderRadius: BorderRadius.circular(
@@ -608,8 +584,8 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                                     margin: EdgeInsets.symmetric(
                                         horizontal: Get.width * 0.06),
                                     padding: EdgeInsets.symmetric(
-                                      horizontal: Get.width * 0.03,
-                                    ),
+                                        horizontal: Get.width * 0.03,
+                                   ),
                                     child: Column(
                                       children: [
                                         Padding(
@@ -620,55 +596,51 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                                             child: Text(
                                               e.description,
                                               style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w500,
+                                                fontSize: 18,fontWeight: FontWeight.w500,
                                                   color: Colors.white),
                                             ),
                                           ),
                                         ),
-                                        Padding(
-                                            padding: EdgeInsets.only(
-                                                bottom: Get.width * 0.05),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    launch('mailto:${e.email}');
-                                                  },
-                                                  child: Image.asset(
-                                                    'assets/icons/contact_mail.png',
-                                                    width: Get.width * 0.15,
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: Get.width * 0.05,
-                                                ),
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    launch('${e.whatsAppLink}');
-                                                  },
-                                                  child: Image.asset(
-                                                    'assets/icons/contact_messanger.png',
-                                                    width: Get.width * 0.15,
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: Get.width * 0.05,
-                                                ),
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    launch(
-                                                        'tel:${e.phoneNumber}');
-                                                  },
-                                                  child: Image.asset(
-                                                    'assets/icons/contact_phone.png',
-                                                    width: Get.width * 0.15,
-                                                  ),
-                                                ),
-                                              ],
-                                            )),
+                                        Padding(padding: EdgeInsets.only(bottom:Get.width*0.05),
+                              child:Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () {
+                                                launch('mailto:${e.email}');
+                                              },
+                                              child: Image.asset(
+                                                'assets/icons/contact_mail.png',
+                                                width: Get.width * 0.15,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: Get.width * 0.05,
+                                            ),
+                                            GestureDetector(
+                                              onTap: () {
+                                                launch('${e.whatsAppLink}');
+                                              },
+                                              child: Image.asset(
+                                                'assets/icons/contact_messanger.png',
+                                                width: Get.width * 0.15,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: Get.width * 0.05,
+                                            ),
+                                            GestureDetector(
+                                              onTap: () {
+                                                launch('tel:${e.phoneNumber}');
+                                              },
+                                              child: Image.asset(
+                                                'assets/icons/contact_phone.png',
+                                                width: Get.width * 0.15,
+                                              ),
+                                            ),
+                                          ],
+                                        )),
                                         SizedBox(
                                           width: Get.width * 0.2,
                                         ),
@@ -744,8 +716,8 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     '${'All branches'.tr}:',
-                    style: TextStyle(
-                        fontSize: 16, color: Colors.white.withOpacity(0.77)),
+                    style: TextStyle(fontSize: 16,
+                        color: Colors.white.withOpacity(0.77)),
                   ),
                 ),
               ),
@@ -754,16 +726,16 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
               ),
               Expanded(
                   child: Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: Get.width * 0.02),
+                    padding: EdgeInsets.symmetric(horizontal: Get.width*0.02),
                       color: MyColors.blue_00458C,
                       child: Theme(
                           data: ThemeData(
-                              scrollbarTheme: ScrollbarThemeData(
-                            thumbColor:
-                                MaterialStateProperty.all(MyColors.blue_5584B2),
-                            radius: const Radius.circular(10),
-                          )),
+                            scrollbarTheme: ScrollbarThemeData(
+                              thumbColor:
+                              MaterialStateProperty.all(MyColors.blue_5584B2),
+                              radius: const Radius.circular(10),
+                            )
+                          ),
                           child: Scrollbar(
                             isAlwaysShown: true,
                             controller: _scrollController,
