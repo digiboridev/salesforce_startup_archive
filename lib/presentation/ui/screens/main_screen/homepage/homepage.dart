@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
                     Text(
                       'All Deals'.tr,
                       style: TextStyle(
-                        decoration: TextDecoration.underline,
+                          decoration: TextDecoration.underline,
                           fontSize: Get.width * 0.045,
                           color: Colors.blue),
                     ),
@@ -104,8 +104,7 @@ class _HomePageState extends State<HomePage> {
                       style: TextStyle(
                           decoration: TextDecoration.underline,
                           fontSize: Get.width * 0.045,
-                          color: Colors.blue
-                         ),
+                          color: Colors.blue),
                     ),
                   ],
                 )),
@@ -127,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                     Text(
                       'To all newcomers'.tr,
                       style: TextStyle(
-                        decoration: TextDecoration.underline,
+                          decoration: TextDecoration.underline,
                           fontSize: Get.width * 0.045,
                           color: Colors.blue),
                     ),
@@ -152,7 +151,8 @@ class _HomePageState extends State<HomePage> {
                       'List of deficiencies'.tr,
                       style: TextStyle(
                           decoration: TextDecoration.underline,
-                          fontSize: Get.width * 0.045, color: Colors.blue),
+                          fontSize: Get.width * 0.045,
+                          color: Colors.blue),
                     ),
                   ],
                 )),
@@ -205,7 +205,7 @@ class _HomePageState extends State<HomePage> {
                                     onTap: () {
                                       dealsPosition = index;
                                       buildDealsCard(
-                                         materiale: materials[index]);
+                                          materiale: materials[index]);
                                       setState(() {
                                         dealsPosition;
                                         dealsCard;
@@ -218,7 +218,9 @@ class _HomePageState extends State<HomePage> {
                                           border: dealsPosition == index
                                               ? Border.all(
                                                   color: MyColors.blue_00458C)
-                                              : null,
+                                              : Border.all(
+                                                  color: MyColors.blue_00458C
+                                                      .withAlpha(0)),
                                           color: Colors.white,
                                           borderRadius: BorderRadius.circular(
                                               Get.width * 0.02),
