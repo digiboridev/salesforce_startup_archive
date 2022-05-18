@@ -130,6 +130,7 @@ class _MaterialScreenState extends State<MaterialScreen> {
     if (!widget.material.IsInStock) {
       return OutStockMaterialComponent(
         isUpdate: widget.material.didSubscribedToInventoryAlert,
+        materiale: widget.material,
       );
     } else {
       return Obx(() {
@@ -442,14 +443,12 @@ class _MaterialScreenState extends State<MaterialScreen> {
                   Get.back();
                 },
                 child: Icon(
-                  Directionality.of(context) ==
-                      TextDirection.rtl ?
-                  Icons.keyboard_arrow_right
+                  Directionality.of(context) == TextDirection.rtl
+                      ? Icons.keyboard_arrow_right
                       : Icons.keyboard_arrow_left,
                   color: Colors.white,
                 ),
               ),
-
               Hero(
                 tag: 'logo',
                 child: Image.asset(

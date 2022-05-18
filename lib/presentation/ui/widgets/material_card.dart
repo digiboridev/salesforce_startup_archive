@@ -336,6 +336,7 @@ class MaterialCardState extends State<MaterialCard> {
     if (!widget.materiale.IsInStock) {
       return OutStockMaterialComponent(
         isUpdate: widget.materiale.didSubscribedToInventoryAlert,
+        materiale: widget.materiale,
       );
     } else {
       return Obx(() {

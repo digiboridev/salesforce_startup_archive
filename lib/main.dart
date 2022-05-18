@@ -23,6 +23,7 @@ import 'package:***REMOVED***/domain/usecases/cart/get_cart_items.dart';
 import 'package:***REMOVED***/domain/usecases/cart/set_cart_items.dart';
 import 'package:***REMOVED***/domain/usecases/favorites/get_favorites_and_cache.dart';
 import 'package:***REMOVED***/domain/usecases/favorites/get_favorites_sync_time.dart';
+import 'package:***REMOVED***/domain/usecases/materials/subscribe_to_material.dart';
 import 'package:***REMOVED***/domain/usecases/user/accept_legal_doc.dart';
 import 'package:***REMOVED***/domain/usecases/user/change_language.dart';
 import 'package:***REMOVED***/domain/usecases/user/change_password.dart';
@@ -114,6 +115,7 @@ Future injectDependency() async {
   //-- materials
   Get.put<GetMaterialsAndCache>(GetMaterialsAndCache(materialsRepository));
   Get.put<GetMaterialsSyncTime>(GetMaterialsSyncTime(materialsRepository));
+  Get.put<SubscribeToMaterial>(SubscribeToMaterial(materialsRepository));
 
   // Favorites
   Get.put<GetFavoritesAndCache>(GetFavoritesAndCache(favoritesRepository));

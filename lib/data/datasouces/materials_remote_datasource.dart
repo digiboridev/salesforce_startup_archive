@@ -9,19 +9,28 @@ import 'package:***REMOVED***/data/models/materials/materials_catalog_model.dart
 import 'package:salesforce/salesforce.dart';
 
 abstract class MaterialsRemoteDatasource {
+  Future subscribeToMaterial(
+      {required String customerSAP, required String materialNumber});
+
   Future<MaterialsCatalogModel> getCatalog({required String customerSAP});
 }
 
 class MaterialsRemoteDatasourceImpl implements MaterialsRemoteDatasource {
-  Future subscribeToMaterial({required String customerSAP}) async {
+  Future subscribeToMaterial(
+      {required String customerSAP, required String materialNumber}) async {
     var response = await SalesforcePlugin.sendRequest(
       endPoint: ***REMOVED***Endpoint,
       path: '/materials/subscribeInventory/$customerSAP',
       method: 'POST',
-      payload: {'asd': 'asd'},
+      payload: {
+        "subscribedMaterials": [materialNumber]
+      },
     ) as Map<String, dynamic>;
-
-    print(response);
+    if (response['success']) {
+      return;
+    } else {
+      throw ServerException(response['errorMsg']);
+    }
   }
 
   Future<MaterialsCatalogModel> getCatalog(

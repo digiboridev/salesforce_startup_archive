@@ -7,7 +7,6 @@ import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/brand_
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalog_page_states.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/families_card.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/material_card.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:***REMOVED***/domain/entities/materials/materials_catalog.dart';
@@ -203,7 +202,7 @@ class _CatalogPageState extends State<CatalogPage> {
 
   Widget buildClassificationRow() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: Get.width * 0.025),
+        padding: EdgeInsets.symmetric(horizontal: Get.width * 0.025),
         height: Get.width * 0.15,
         color: Colors.white,
         child: SingleChildScrollView(
@@ -244,9 +243,8 @@ class _CatalogPageState extends State<CatalogPage> {
   Widget buildBrandsPanel({required List<Brand> brands}) {
     return brands.isNotEmpty
         ? Container(
-            key: UniqueKey(),
-            margin: EdgeInsets.symmetric(
-                horizontal: Get.width * 0.02),
+            key: Key('BrandsPanel'),
+            margin: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
             child: GridView.builder(
               cacheExtent: Get.height * 2,
               physics: BouncingScrollPhysics(),
@@ -276,7 +274,7 @@ class _CatalogPageState extends State<CatalogPage> {
   Widget buildFamiliesPanel({required List<Family> families}) {
     return families.isNotEmpty
         ? Container(
-            key: UniqueKey(),
+            key: Key('FamiliesPanel'),
             margin: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
             child: GridView.builder(
               cacheExtent: Get.height * 2,
@@ -306,7 +304,7 @@ class _CatalogPageState extends State<CatalogPage> {
 
   Widget buildBrandsOrFamilySelection() {
     return Container(
-        key: UniqueKey(),
+        key: Key('BrandsOrFamilySelection'),
         height: Get.width * 0.15,
         margin: EdgeInsets.only(left: Get.width * 0.025),
         child: Row(
@@ -384,7 +382,7 @@ class _CatalogPageState extends State<CatalogPage> {
 
   Widget buildAllMaterials({required List<Materiale> materials}) {
     return Container(
-      key: UniqueKey(),
+      key: Key('AllMaterials'),
       child: ListView(
         physics: BouncingScrollPhysics(),
         cacheExtent: Get.height * 2,
@@ -404,8 +402,7 @@ class _CatalogPageState extends State<CatalogPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: Get.width*0.04),
+              padding: EdgeInsets.symmetric(horizontal: Get.width * 0.04),
               child: CachedImage(
                   Url: brand.ImageUrl,
                   width: Get.width * 0.15,
@@ -437,8 +434,7 @@ class _CatalogPageState extends State<CatalogPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: Get.width * 0.025),
+              padding: EdgeInsets.symmetric(horizontal: Get.width * 0.025),
               child: Row(
                 children: [
                   CachedImage(
