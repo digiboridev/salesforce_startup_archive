@@ -166,7 +166,7 @@ class PersonalDetailsPageState extends State<PersonalDetailsPage> {
           Text(
             text2,
             style: TextStyle(fontSize: Get.width * 0.042,
-                color: MyColors.blue_003E7E.withAlpha(50)),
+                color: MyColors.blue_003E7E.withOpacity(0.5)),
           ),
         ],
       ),

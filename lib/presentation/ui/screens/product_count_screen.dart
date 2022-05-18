@@ -34,20 +34,46 @@ class ProductCountScreenState extends State<ProductCountScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: MyColors.blue_003E7E,
-        body: SafeArea(
-            child: Container(
-          color: MyColors.white_F4F4F6,
-          child: SizedBox.expand(
+    return  Dialog(
+      backgroundColor: Colors.transparent,
+
+      insetPadding: EdgeInsets.only(left: 0, right: 0, top: Get.width*0.25),
+        child: Stack(
+          alignment: Alignment.topCenter,
+          children: [
+          GestureDetector(onTap: ()=>Get.back(),child: Container(
+            height: Get.width*0.1,
+            width: Get.width*0.1,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.white
+            ),
+            child: Icon(Icons.clear, color: MyColors.gray_979797,),)),
+          Container(
+            margin: EdgeInsets.only(top: Get.width*0.15),
+
+        //  padding: EdgeInsets.only(top: 20),
+
+      alignment: Alignment.bottomCenter,
+      height: Get.height,
+          width: Get.width,
+
+
             child: Column(
               children: [
-                buildHeader(),
-                Expanded(child: buildBody()),
+               // buildHeader(),
+                Expanded(child: Container(
+                    decoration:BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(55),
+                            topRight: Radius.circular(55))),
+
+                  //height: ,
+                    child: buildBody())),
               ],
             ),
-          ),
-        )));
+
+        )],));
   }
 
   Container buildHeader() {

@@ -28,13 +28,14 @@ class FocusedMaterialComponent extends StatelessWidget {
         children: [
           InkWell(
               onTap: () async {
-                Map<UnitType, int>? d = await Get.to<Map<UnitType, int>>(
-                    () => ProductCountScreen(
+                Map<UnitType, int>? d = await Get.dialog<Map<UnitType, int>>(
+                     ProductCountScreen(
                           initialCount: cartItem.quantity.toInt(),
                           material: materiale,
                           initialUnitType: cartItem.salesUnitType,
                         ),
-                    transition: Transition.circularReveal);
+                  //  transition: Transition.circularReveal
+                );
 
                 if (d != null) {
                   if (d.values.first < 1) {
