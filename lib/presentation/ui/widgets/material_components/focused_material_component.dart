@@ -3,6 +3,7 @@ import 'package:***REMOVED***/domain/entities/cart_item.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
 import 'package:***REMOVED***/domain/entities/materials/unit_types.dart';
 import 'package:***REMOVED***/presentation/controllers/cart_controller.dart';
+import 'package:***REMOVED***/presentation/ui/screens/product_count_bottomsheet.dart';
 import 'package:***REMOVED***/presentation/ui/screens/product_count_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,13 +29,12 @@ class FocusedMaterialComponent extends StatelessWidget {
         children: [
           InkWell(
               onTap: () async {
-                Map<UnitType, int>? d = await Get.to<Map<UnitType, int>>(
-                    () => ProductCountScreen(
-                          initialCount: cartItem.quantity.toInt(),
-                          material: materiale,
-                          initialUnitType: cartItem.salesUnitType,
-                        ),
-                    transition: Transition.circularReveal);
+                Map<UnitType, int>? d =
+                    await Get.bottomSheet(ProductCountBottomSheet(
+                  initialCount: cartItem.quantity.toInt(),
+                  material: materiale,
+                  initialUnitType: cartItem.salesUnitType,
+                ));
 
                 if (d != null) {
                   if (d.values.first < 1) {
