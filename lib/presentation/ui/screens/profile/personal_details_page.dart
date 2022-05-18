@@ -124,12 +124,13 @@ class PersonalDetailsPageState extends State<PersonalDetailsPage> {
                       color: MyColors.blue_00458C,
                       borderRadius: BorderRadius.circular(Get.width * 0.06)),
                   padding: EdgeInsets.symmetric(
-                      horizontal: Get.width * 0.1, vertical: Get.width * 0.03),
+                      horizontal: Get.width * 0.1, vertical: Get.width * 0.02),
                   margin: EdgeInsets.symmetric(
                       horizontal: Get.width * 0.1, vertical: Get.width * 0.03),
                   child: Text(
-                    'Close',
-                    style: TextStyle(color: Colors.white),
+                    'Close'.tr,
+                    style: TextStyle(color: Colors.white,
+                    fontSize: 22),
                   ),
                 ),
               ),

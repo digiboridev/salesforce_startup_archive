@@ -188,6 +188,7 @@ class _HomePageState extends State<HomePage> {
                   height: 108,
                   width: Get.width * 0.2,
                   child: ListView.builder(
+
                       physics: NeverScrollableScrollPhysics(),
                       itemCount: materials.length,
                       scrollDirection: Axis.horizontal,
@@ -205,7 +206,7 @@ class _HomePageState extends State<HomePage> {
                                     onTap: () {
                                       dealsPosition = index;
                                       buildDealsCard(
-                                          materiale: materials[index]);
+                                         materiale: materials[index]);
                                       setState(() {
                                         dealsPosition;
                                         dealsCard;

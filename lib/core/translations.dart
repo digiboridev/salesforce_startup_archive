@@ -135,7 +135,8 @@ class Trs extends Translations {
           'Dinner':'Dinner',
           'Kosher':'Kosher',
           'Select list':'Select list',
-          'SALE!':'SALE!'
+          'SALE!':'SALE!',
+          'All branches':'All branches',
 
 
 
@@ -278,6 +279,7 @@ class Trs extends Translations {
           'Dinner':'אֲרוּחַת עֶרֶב',
           'Kosher':'כשר',
           'Select list':'בחר רשימה',
+          'All branches':'כל הסניפים',
           'SALE!':'מְכִירָה!'
         }
       };

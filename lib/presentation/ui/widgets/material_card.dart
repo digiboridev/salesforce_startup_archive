@@ -106,8 +106,8 @@ class MaterialCardState extends State<MaterialCard> {
                                   BorderRadius.circular(Get.width * 0.03),
                               boxShadow: [
                                 BoxShadow(
-                                    color: Colors.black.withOpacity(0.3),
-                                    spreadRadius: 0,
+                                    color: Colors.grey.shade300,
+                                    spreadRadius: 1,
                                     blurRadius: 10)
                               ]),
                           child: CachedImage(

@@ -306,7 +306,7 @@ class _CatalogPageState extends State<CatalogPage> {
     return Container(
         key: Key('BrandsOrFamilySelection'),
         height: Get.width * 0.15,
-        margin: EdgeInsets.only(left: Get.width * 0.025),
+        margin: EdgeInsets.symmetric(horizontal: Get.width * 0.025),
         child: Row(
           children: [
             GestureDetector(

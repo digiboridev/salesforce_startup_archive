@@ -30,7 +30,7 @@ class _LegalDocScreenState extends State<LegalDocScreen> {
       backgroundColor: MyColors.blue_003E7E,
       body: SafeArea(
           child: Container(
-        color: MyColors.white_F4F4F6,
+        color: Colors.white,
         child: Stack(
           children: [
             Column(
@@ -73,6 +73,9 @@ class _LegalDocScreenState extends State<LegalDocScreen> {
                     },
                   ),
                 )),
+                Container(height: Get.width*0.015,
+                color: MyColors.white_F4F4F6,
+                width: Get.width,),
                 GestureDetector(
                   onTap: () => widget.callback(),
                   child: Container(

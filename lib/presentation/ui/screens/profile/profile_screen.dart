@@ -75,7 +75,9 @@ class ProfileScreenState extends State<ProfileScreen> {
                           style: profileFieldStyle,
                         ),
                         Icon(
-                          Icons.keyboard_arrow_right,
+                          Directionality.of(context) ==
+                              TextDirection.rtl ?
+                          Icons.keyboard_arrow_left:Icons.keyboard_arrow_right,
                           color: MyColors.blue_003E7E,
                         )
                       ],
@@ -100,7 +102,9 @@ class ProfileScreenState extends State<ProfileScreen> {
                       children: [
                         Text('Choose language'.tr, style: profileFieldStyle),
                         Icon(
-                          Icons.keyboard_arrow_right,
+                          Directionality.of(context) ==
+                              TextDirection.rtl ?
+                          Icons.keyboard_arrow_left:Icons.keyboard_arrow_right,
                           color: MyColors.blue_003E7E,
                         )
                       ],
@@ -125,7 +129,9 @@ class ProfileScreenState extends State<ProfileScreen> {
                       children: [
                         Text('Change password'.tr, style: profileFieldStyle),
                         Icon(
-                          Icons.keyboard_arrow_right,
+                          Directionality.of(context) ==
+                          TextDirection.rtl ?
+                          Icons.keyboard_arrow_left:Icons.keyboard_arrow_right,
                           color: MyColors.blue_003E7E,
                         )
                       ],
@@ -158,7 +164,9 @@ class ProfileScreenState extends State<ProfileScreen> {
                         Text('Terms an conditions'.tr,
                             style: profileFieldStyle),
                         Icon(
-                          Icons.keyboard_arrow_right,
+                          Directionality.of(context) ==
+                              TextDirection.rtl ?
+                              Icons.keyboard_arrow_left:Icons.keyboard_arrow_right,
                           color: MyColors.blue_003E7E,
                         )
                       ],
