@@ -88,7 +88,8 @@ class ProductOptionsState extends State<ProductOptions> {
               borderRadius: BorderRadius.all(Radius.circular(15))),
           child: Text(
             "New".tr,
-            style: TextStyle(color: Colors.white, fontSize: 11),
+            style: TextStyle(color: Colors.white, fontSize: 11,
+            fontFamily: 'Almoni'),
           ),
     ));
   }
