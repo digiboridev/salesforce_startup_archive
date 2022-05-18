@@ -78,6 +78,22 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     GestureDetector(
+                        onTap: () {
+                          Get.to(() => ProfileScreen(),
+                              transition: Transition.cupertino);
+                        },
+                        child: Image.asset(
+                          'assets/icons/settings.png',
+                          width: Get.width * 0.05,
+                        )),
+                    Hero(
+                      tag: 'logo',
+                      child: Image.asset(
+                        'assets/images/***REMOVED***_logo.png',
+                        width: Get.width * 0.2,
+                      ),
+                    ),
+                    GestureDetector(
                       onTap: () {
                         setState(() {
                           mainScreeenHeaderController.showContactus();
@@ -92,22 +108,6 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                         ),
                       ),
                     ),
-                    Hero(
-                      tag: 'logo',
-                      child: Image.asset(
-                        'assets/images/***REMOVED***_logo.png',
-                        width: Get.width * 0.2,
-                      ),
-                    ),
-                    GestureDetector(
-                        onTap: () {
-                          Get.to(() => ProfileScreen(),
-                              transition: Transition.cupertino);
-                        },
-                        child: Image.asset(
-                          'assets/icons/settings.png',
-                          width: Get.width * 0.05,
-                        ))
                   ],
                 ),
                 Spacer(
@@ -140,42 +140,54 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                         children: [
                           Expanded(
                             child: Obx(() => RichText(
-                                  textAlign: TextAlign.left,
                                   overflow: TextOverflow.ellipsis,
                                   text: TextSpan(
-                                      text: customerController
-                                          .selectedCustomer!.customerName,
                                       style: TextStyle(
                                           color: Colors.white.withOpacity(0.77),
                                           fontSize: Get.width * 0.035),
                                       children: [
                                         TextSpan(
-                                          text: customerController
-                                              .selectedCustomer!
-                                              .customerAddress,
+                                          text: ' ' +
+                                              customerController
+                                                  .selectedCustomer!
+                                                  .customerName +
+                                              ' ',
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: Get.width * 0.035),
-                                        )
+                                        ),
+                                        TextSpan(
+                                          text: ' ' +
+                                              customerController
+                                                  .selectedCustomer!
+                                                  .customerAddress +
+                                              ' ',
+                                          style: TextStyle(
+                                              color: Colors.white
+                                                  .withOpacity(0.77),
+                                              fontSize: Get.width * 0.035),
+                                        ),
                                       ]),
                                 )),
                           ),
-                          Container(
-                            decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.circular(Get.width * 0.03),
-                                border: Border.all(
-                                    width: Get.width * 0.001,
-                                    color: Colors.white)),
-                            padding: EdgeInsets.symmetric(
-                                horizontal: Get.width * 0.03),
-                            child: Text(
-                              'Recomended List',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: Get.width * 0.035),
-                            ),
-                          )
+                          if (mainScreeenHeaderController
+                              .mainScreeenHeaderState.value is! MSHShowBrunch)
+                            Container(
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.circular(Get.width * 0.03),
+                                  border: Border.all(
+                                      width: Get.width * 0.001,
+                                      color: Colors.white)),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: Get.width * 0.03),
+                              child: Text(
+                                'Recomended List',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: Get.width * 0.035),
+                              ),
+                            )
                         ],
                       ),
                     ),
@@ -191,6 +203,17 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
             child: Align(
           alignment: Alignment.topCenter,
           child: Stack(children: [
+            Obx(() {
+              if (mainScreeenHeaderController.mainScreeenHeaderState.value
+                  is! MSHShowCommon) {
+                return Positioned(
+                    child: Container(
+                  color: Colors.black.withAlpha(100),
+                ));
+              } else {
+                return SizedBox();
+              }
+            }),
             Obx(() => AnimatedContainer(
                   decoration: BoxDecoration(color: Colors.transparent),
                   clipBehavior: Clip.antiAlias,
@@ -615,15 +638,16 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                                         Padding(
                                           padding: EdgeInsets.symmetric(
                                               vertical: Get.width * 0.02),
-                                          child: Align(
-                                            alignment: Alignment.centerLeft,
-                                            child: Text(
-                                              e.description,
-                                              style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Colors.white),
-                                            ),
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                e.description,
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    fontWeight: FontWeight.w500,
+                                                    color: Colors.white),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                         Padding(
@@ -740,13 +764,14 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                 padding: EdgeInsets.symmetric(
                   horizontal: Get.width * 0.06,
                 ),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    '${'All branches'.tr}:',
-                    style: TextStyle(
-                        fontSize: 16, color: Colors.white.withOpacity(0.77)),
-                  ),
+                child: Row(
+                  children: [
+                    Text(
+                      '${'All brunches'.tr}',
+                      style: TextStyle(
+                          fontSize: 16, color: Colors.white.withOpacity(0.77)),
+                    ),
+                  ],
                 ),
               ),
               SizedBox(
