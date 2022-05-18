@@ -150,6 +150,7 @@ class Trs extends Translations {
           'Select list': 'Select list',
           'SALE!': 'SALE!',
           'Recomended List': 'Recomended List',
+          'All branches':'All branches',
         },
         'he': {
           'hello': 'Hallo 123',
@@ -293,6 +294,7 @@ class Trs extends Translations {
           'Kosher': 'כשר',
           'Select list': 'בחר רשימה',
           'SALE!': 'מְכִירָה!',
+          'All branches':'כל הסניפים',
           'Recomended List': 'רשימה מומלצת',
         }
       };
