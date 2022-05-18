@@ -29,9 +29,21 @@ class FocusedMaterialComponent extends StatelessWidget {
         children: [
           InkWell(
               onTap: () async {
-                Map<UnitType, int>? d =
-                    await Get.bottomSheet<Map<UnitType, int>>(
-                  ProductCountBottomSheet(
+                // Map<UnitType, int>? d =
+                //     await Get.bottomSheet<Map<UnitType, int>>(
+                //         ProductCountBottomSheet(
+                //           initialCount: cartItem.quantity.toInt(),
+                //           material: materiale,
+                //           initialUnitType: cartItem.salesUnitType,
+                //         ),
+                //         // enableDrag: false
+                //         persistent: false,
+
+                //         //  transition: Transition.circularReveal
+                //         ignoreSafeArea: false);
+
+                Map<UnitType, int>? d = await Get.dialog<Map<UnitType, int>>(
+                  ProductCountPopup(
                     initialCount: cartItem.quantity.toInt(),
                     material: materiale,
                     initialUnitType: cartItem.salesUnitType,

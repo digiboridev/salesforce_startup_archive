@@ -53,10 +53,11 @@ class BottomBar extends StatelessWidget {
                         width: Get.width * 0.15,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                            color:
-                                bottomBarController.currentPageIndex.value == 3
-                                    ? MyColors.blue_00458C
-                                    : Colors.blueGrey,
+                            color: MyColors.blue_00458C,
+                            // color:
+                            //     bottomBarController.currentPageIndex.value == 3
+                            //         ? MyColors.blue_00458C
+                            //         : Colors.blueGrey,
                             borderRadius:
                                 BorderRadius.circular(Get.width * 0.15)),
                         child: GestureDetector(
