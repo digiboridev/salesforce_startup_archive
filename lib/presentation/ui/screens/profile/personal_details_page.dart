@@ -6,14 +6,12 @@ import 'package:***REMOVED***/presentation/controllers/user_data_controller_stat
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class PersonalDetailsPage extends StatefulWidget{
+class PersonalDetailsPage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() =>PersonalDetailsPageState();
-
+  State<StatefulWidget> createState() => PersonalDetailsPageState();
 }
+
 class PersonalDetailsPageState extends State<PersonalDetailsPage> {
-
-
   final CustomerController customerController = Get.find();
   final UserDataController userDataController = Get.find();
 
@@ -23,14 +21,15 @@ class PersonalDetailsPageState extends State<PersonalDetailsPage> {
     return Scaffold(
       backgroundColor: MyColors.blue_003E7E,
       body: SafeArea(
+          bottom: false,
           child: Container(
-        color: MyColors.white_F4F4F6,
-        child: SizedBox.expand(
-          child: Column(
-            children: [buildHeader(), buildBody()],
-          ),
-        ),
-      )),
+            color: MyColors.white_F4F4F6,
+            child: SizedBox.expand(
+              child: Column(
+                children: [buildHeader(), buildBody()],
+              ),
+            ),
+          )),
     );
   }
 
@@ -52,8 +51,7 @@ class PersonalDetailsPageState extends State<PersonalDetailsPage> {
                 padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
                 child: Text(
                   'Personal details'.tr,
-                  style: TextStyle(
-                      fontSize: Get.width * 0.06, color: MyColors.blue_003E7E),
+                  style: TextStyle(fontSize: Get.width * 0.06, color: MyColors.blue_003E7E),
                 ),
               ),
               Spacer(
@@ -63,27 +61,19 @@ class PersonalDetailsPageState extends State<PersonalDetailsPage> {
                 padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
                 child: Column(
                   children: [
-                    buildRow(
-                        text1: 'First name'.tr,
-                        text2: userDataState.userData.contactFirstName),
+                    buildRow(text1: 'First name'.tr, text2: userDataState.userData.contactFirstName),
                     SizedBox(
                       height: Get.width * 0.12,
                     ),
-                    buildRow(
-                        text1: 'Last name'.tr,
-                        text2: userDataState.userData.contactLastName),
+                    buildRow(text1: 'Last name'.tr, text2: userDataState.userData.contactLastName),
                     SizedBox(
                       height: Get.width * 0.12,
                     ),
-                    buildRow(
-                        text1: 'Phone'.tr,
-                        text2: userDataState.userData.contactMobile),
+                    buildRow(text1: 'Phone'.tr, text2: userDataState.userData.contactMobile),
                     SizedBox(
                       height: Get.width * 0.12,
                     ),
-                    buildRow(
-                        text1: 'Email'.tr,
-                        text2: userDataState.userData.contactEmail),
+                    buildRow(text1: 'Email'.tr, text2: userDataState.userData.contactEmail),
                   ],
                 ),
               ),
@@ -120,13 +110,9 @@ class PersonalDetailsPageState extends State<PersonalDetailsPage> {
                 child: Container(
                   width: Get.width,
                   alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: MyColors.blue_00458C,
-                      borderRadius: BorderRadius.circular(Get.width * 0.06)),
-                  padding: EdgeInsets.symmetric(
-                      horizontal: Get.width * 0.1, vertical: Get.width * 0.03),
-                  margin: EdgeInsets.symmetric(
-                      horizontal: Get.width * 0.1, vertical: Get.width * 0.03),
+                  decoration: BoxDecoration(color: MyColors.blue_00458C, borderRadius: BorderRadius.circular(Get.width * 0.06)),
+                  padding: EdgeInsets.symmetric(horizontal: Get.width * 0.1, vertical: Get.width * 0.03),
+                  margin: EdgeInsets.symmetric(horizontal: Get.width * 0.1, vertical: Get.width * 0.03),
                   child: Text(
                     'Close',
                     style: TextStyle(color: Colors.white),
@@ -151,22 +137,17 @@ class PersonalDetailsPageState extends State<PersonalDetailsPage> {
   }) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: Get.width * 0.01),
-      decoration: BoxDecoration(
-          border: Border(
-              bottom: BorderSide(
-                  color: MyColors.blue_003E7E, width: Get.width * 0.003))),
+      decoration: BoxDecoration(border: Border(bottom: BorderSide(color: MyColors.blue_003E7E, width: Get.width * 0.003))),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             text1,
-            style: TextStyle(
-                fontSize: Get.width * 0.042, color: MyColors.blue_003E7E),
+            style: TextStyle(fontSize: Get.width * 0.042, color: MyColors.blue_003E7E),
           ),
           Text(
             text2,
-            style: TextStyle(fontSize: Get.width * 0.042,
-                color: MyColors.blue_003E7E.withOpacity(0.5)),
+            style: TextStyle(fontSize: Get.width * 0.042, color: MyColors.blue_003E7E.withOpacity(0.5)),
           ),
         ],
       ),
@@ -177,10 +158,7 @@ class PersonalDetailsPageState extends State<PersonalDetailsPage> {
     return Container(
       height: Get.width * 0.3,
       decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
+          gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
       padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
       child: Column(
         children: [
@@ -193,14 +171,10 @@ class PersonalDetailsPageState extends State<PersonalDetailsPage> {
                   Get.back();
                 },
                 child: Icon(
-                  Directionality.of(context) ==
-                      TextDirection.rtl ?
-                  Icons.keyboard_arrow_right
-                      : Icons.keyboard_arrow_left,
+                  Directionality.of(context) == TextDirection.rtl ? Icons.keyboard_arrow_right : Icons.keyboard_arrow_left,
                   color: Colors.white,
                 ),
               ),
-
               Hero(
                 tag: 'logo',
                 child: Image.asset(
@@ -215,7 +189,6 @@ class PersonalDetailsPageState extends State<PersonalDetailsPage> {
                   width: Get.width * 0.05,
                 ),
               ),
-
             ],
           ),
           Spacer(),

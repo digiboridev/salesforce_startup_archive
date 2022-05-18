@@ -17,22 +17,22 @@ class ProfileScreen extends StatefulWidget {
 class ProfileScreenState extends State<ProfileScreen> {
   final CustomerController customerController = Get.find();
   final UserDataController userDataController = Get.find();
-  final TextStyle profileFieldStyle =
-      TextStyle(color: MyColors.blue_003E7E, fontSize: 20);
+  final TextStyle profileFieldStyle = TextStyle(color: MyColors.blue_003E7E, fontSize: 20);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColors.blue_003E7E,
       body: SafeArea(
+          bottom: false,
           child: Container(
-        color: MyColors.white_F4F4F6,
-        child: SizedBox.expand(
-          child: Column(
-            children: [buildHeader(), buildBody()],
-          ),
-        ),
-      )),
+            color: MyColors.white_F4F4F6,
+            child: SizedBox.expand(
+              child: Column(
+                children: [buildHeader(), buildBody()],
+              ),
+            ),
+          )),
     );
   }
 
@@ -41,8 +41,7 @@ class ProfileScreenState extends State<ProfileScreen> {
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(
-                vertical: Get.width * 0.06, horizontal: Get.width * 0.06),
+            padding: EdgeInsets.symmetric(vertical: Get.width * 0.06, horizontal: Get.width * 0.06),
             child: Text(
               customerController.selectedCustomer!.customerName,
               style: TextStyle(
@@ -59,14 +58,11 @@ class ProfileScreenState extends State<ProfileScreen> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Get.to(() => PersonalDetailsPage(),
-                        transition: Transition.cupertino);
+                    Get.to(() => PersonalDetailsPage(), transition: Transition.cupertino);
                   },
                   child: Container(
                     color: Colors.white,
-                    padding: EdgeInsets.symmetric(
-                        horizontal: Get.width * 0.06,
-                        vertical: Get.width * 0.04),
+                    padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06, vertical: Get.width * 0.04),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -87,14 +83,11 @@ class ProfileScreenState extends State<ProfileScreen> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Get.to(() => ChangeLanguagePage(),
-                        transition: Transition.cupertino);
+                    Get.to(() => ChangeLanguagePage(), transition: Transition.cupertino);
                   },
                   child: Container(
                     color: Colors.white,
-                    padding: EdgeInsets.symmetric(
-                        horizontal: Get.width * 0.06,
-                        vertical: Get.width * 0.04),
+                    padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06, vertical: Get.width * 0.04),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -112,14 +105,11 @@ class ProfileScreenState extends State<ProfileScreen> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Get.to(() => ChangePasswordPage(),
-                        transition: Transition.cupertino);
+                    Get.to(() => ChangePasswordPage(), transition: Transition.cupertino);
                   },
                   child: Container(
                     color: Colors.white,
-                    padding: EdgeInsets.symmetric(
-                        horizontal: Get.width * 0.06,
-                        vertical: Get.width * 0.04),
+                    padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06, vertical: Get.width * 0.04),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -149,14 +139,11 @@ class ProfileScreenState extends State<ProfileScreen> {
                   },
                   child: Container(
                     color: Colors.white,
-                    padding: EdgeInsets.symmetric(
-                        horizontal: Get.width * 0.06,
-                        vertical: Get.width * 0.04),
+                    padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06, vertical: Get.width * 0.04),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Terms an conditions'.tr,
-                            style: profileFieldStyle),
+                        Text('Terms an conditions'.tr, style: profileFieldStyle),
                         Icon(
                           Icons.keyboard_arrow_right,
                           color: MyColors.blue_003E7E,
@@ -170,19 +157,14 @@ class ProfileScreenState extends State<ProfileScreen> {
                 ),
                 Container(
                   color: Colors.white,
-                  padding: EdgeInsets.symmetric(
-                      horizontal: Get.width * 0.06, vertical: Get.width * 0.04),
+                  padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06, vertical: Get.width * 0.04),
                   child: GestureDetector(
                     onTap: () {
                       userDataController.logout();
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Log out'.tr, style: profileFieldStyle),
-                        Transform.rotate(
-                            angle: 1.6, child: Icon(Icons.power_settings_new))
-                      ],
+                      children: [Text('Log out'.tr, style: profileFieldStyle), Transform.rotate(angle: 1.6, child: Icon(Icons.power_settings_new))],
                     ),
                   ),
                 )
@@ -198,10 +180,7 @@ class ProfileScreenState extends State<ProfileScreen> {
     return Container(
       height: Get.width * 0.3,
       decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
+          gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
       padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
       child: Column(
         children: [
@@ -215,9 +194,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                   Get.back();
                 },
                 child: Icon(
-                  Directionality.of(context) == TextDirection.rtl
-                      ? Icons.keyboard_arrow_right
-                      : Icons.keyboard_arrow_left,
+                  Directionality.of(context) == TextDirection.rtl ? Icons.keyboard_arrow_right : Icons.keyboard_arrow_left,
                   color: Colors.white,
                 ),
               ),
