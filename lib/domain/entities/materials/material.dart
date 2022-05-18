@@ -4,6 +4,7 @@ import 'package:***REMOVED***/domain/entities/materials/pricing.dart';
 import 'package:***REMOVED***/domain/entities/materials/supplementary_item.dart';
 import 'package:***REMOVED***/domain/entities/materials/unit_types.dart';
 import 'package:equatable/equatable.dart';
+import 'package:get/get.dart';
 
 class Materiale extends Equatable {
   final String WeightUnitDisplay;
@@ -46,7 +47,7 @@ class Materiale extends Equatable {
   final String Barcode;
   final num AverageQty;
   final List<AlternativeItem> alternativeItems;
-  final bool didSubscribedToInventoryAlert;
+  final RxBool didSubscribedToInventoryAlert;
   Materiale({
     required this.WeightUnitDisplay,
     required this.UnitPrice,
@@ -134,7 +135,6 @@ class Materiale extends Equatable {
       Barcode,
       AverageQty,
       alternativeItems,
-      didSubscribedToInventoryAlert
     ];
   }
 

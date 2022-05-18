@@ -7,11 +7,9 @@ import 'package:get/get.dart';
 class OutStockMaterialComponent extends StatefulWidget {
   OutStockMaterialComponent({
     Key? key,
-    required this.isUpdate,
     required this.materiale,
   }) : super(key: key);
 
-  final bool isUpdate;
   final Materiale materiale;
 
   @override
@@ -28,7 +26,7 @@ class _OutStockMaterialComponentState extends State<OutStockMaterialComponent> {
     setState(() => loading = true);
 
     await materialsCatalogController.subscribeToMaterial(
-        materialNumber: widget.materiale.MaterialNumber);
+        material: widget.materiale);
 
     setState(() => loading = false);
   }
@@ -38,18 +36,20 @@ class _OutStockMaterialComponentState extends State<OutStockMaterialComponent> {
     return Container(
       child: Column(
         children: [
-          Container(
-            margin: EdgeInsets.only(
-                left: Get.width * 0.05, right: Get.width * 0.05, bottom: 15),
-            alignment: Alignment.center,
-            height: 44,
-            decoration: BoxDecoration(
-                color: widget.isUpdate
-                    ? MyColors.blue_007AFE
-                    : MyColors.blue_003E83,
-                borderRadius: BorderRadius.all(Radius.circular(20))),
-            child: content,
-          )
+          Obx(() => Container(
+                margin: EdgeInsets.only(
+                    left: Get.width * 0.05,
+                    right: Get.width * 0.05,
+                    bottom: 15),
+                alignment: Alignment.center,
+                height: 44,
+                decoration: BoxDecoration(
+                    color: widget.materiale.didSubscribedToInventoryAlert.value
+                        ? MyColors.blue_007AFE
+                        : MyColors.blue_003E83,
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                child: content,
+              ))
         ],
       ),
     );
@@ -59,7 +59,7 @@ class _OutStockMaterialComponentState extends State<OutStockMaterialComponent> {
     if (loading) {
       return CircularProgressIndicator();
     } else {
-      return widget.isUpdate
+      return widget.materiale.didSubscribedToInventoryAlert.value
           ? Padding(
               padding: EdgeInsets.only(
                   left: Get.width * 0.03, right: Get.width * 0.03),

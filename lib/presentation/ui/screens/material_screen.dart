@@ -129,7 +129,6 @@ class _MaterialScreenState extends State<MaterialScreen> {
   Widget getMaterialComponent() {
     if (!widget.material.IsInStock) {
       return OutStockMaterialComponent(
-        isUpdate: widget.material.didSubscribedToInventoryAlert,
         materiale: widget.material,
       );
     } else {

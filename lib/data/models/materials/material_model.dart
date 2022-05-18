@@ -4,6 +4,7 @@ import 'package:***REMOVED***/data/models/materials/free_goods_model.dart';
 import 'package:***REMOVED***/data/models/materials/pricing_model.dart';
 import 'package:***REMOVED***/data/models/materials/supplementary_item_model.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
+import 'package:get/get.dart';
 
 class MaterialModel extends Materiale {
   @override
@@ -56,7 +57,7 @@ class MaterialModel extends Materiale {
     required String Barcode,
     required num AverageQty,
     required List<AlternativeItemModel> this.alternativeItems,
-    required bool didSubscribedToInventoryAlert,
+    required RxBool didSubscribedToInventoryAlert,
   }) : super(
           WeightUnitDisplay: WeightUnitDisplay,
           UnitPrice: UnitPrice,
@@ -143,7 +144,7 @@ class MaterialModel extends Materiale {
       'Barcode': Barcode,
       'AverageQty': AverageQty,
       'AlternativeItems': alternativeItems.map((x) => x.toMap()).toList(),
-      'didSubscribedToInventoryAlert': didSubscribedToInventoryAlert,
+      'didSubscribedToInventoryAlert': didSubscribedToInventoryAlert.value,
     };
   }
 
@@ -195,7 +196,8 @@ class MaterialModel extends Materiale {
       alternativeItems: List<AlternativeItemModel>.from(map['AlternativeItems']
               ?.map((x) => AlternativeItemModel.fromMap(x)) ??
           []),
-      didSubscribedToInventoryAlert: map['didSubscribedToInventoryAlert'],
+      didSubscribedToInventoryAlert:
+          RxBool(map['didSubscribedToInventoryAlert']),
     );
   }
 

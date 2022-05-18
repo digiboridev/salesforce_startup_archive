@@ -104,12 +104,12 @@ class MaterialsCatalogController extends GetxController {
     }
   }
 
-  Future subscribeToMaterial({required String materialNumber}) async {
+  Future subscribeToMaterial({required Materiale material}) async {
     if (_connectionService.hasConnection) {
       await _subscribeToMaterial.call(SubscribeToMaterialParams(
           customerSAP: _customerController.selectedCustomerSAP!,
-          materialNumber: materialNumber));
-      await updateCatalog();
+          materialNumber: material.MaterialNumber));
+      material.didSubscribedToInventoryAlert.value = true;
     } else {
       Get.snackbar('Error', 'Restricted for offline mode'.tr);
     }
