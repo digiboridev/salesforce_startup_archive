@@ -7,7 +7,6 @@ import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalo
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/favorites/favorites_loader.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/mainscreen_header.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/homepage/homepage_loader.dart';
-import 'package:***REMOVED***/presentation/ui/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -51,22 +50,23 @@ class _MainScreenState extends State<MainScreen> {
                   Padding(
                     padding: EdgeInsets.only(
                         top: Get.width * 0.35, bottom: bottomBarHeight * 0.5),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Expanded(
-                          child: Obx(() {
-                            return Stack(
-                              children: [
-                                buildPageView(),
-                                if (searchController.showSearch.value)
-                                  SearchScreen()
-                              ],
-                            );
-                          }),
-                        ),
-                      ],
-                    ),
+                    child: buildPageView(),
+                    // child: Column(
+                    //   mainAxisSize: MainAxisSize.max,
+                    //   children: [
+                    //     Expanded(
+                    //       child: Obx(() {
+                    //         return Stack(
+                    //           children: [
+                    //             buildPageView(),
+                    //             if (searchController.showSearch.value)
+                    //               SearchScreen()
+                    //           ],
+                    //         );
+                    //       }),
+                    //     ),
+                    //   ],
+                    // ),
                   ),
                   Positioned(
                     bottom: 0,
