@@ -12,6 +12,9 @@ abstract class MaterialsRepository {
   Future<DateTime> getMaterialsSyncTime({required String customerSAP});
   Future setMaterialsSyncTime(
       {required String customerSAP, required DateTime dateTime});
+
+  Future subscribeToMaterial(
+      {required String customerSAP, required String materialNumber});
 }
 
 class MaterialsRepositoryImpl implements MaterialsRepository {
@@ -48,4 +51,9 @@ class MaterialsRepositoryImpl implements MaterialsRepository {
           {required String customerSAP, required DateTime dateTime}) =>
       materialsLocalDataSource.setMaterialsSyncTime(
           customerSAP: customerSAP, dateTime: dateTime);
+
+  Future subscribeToMaterial(
+          {required String customerSAP, required String materialNumber}) =>
+      materialsRemoteDatasource.subscribeToMaterial(
+          customerSAP: customerSAP, materialNumber: materialNumber);
 }

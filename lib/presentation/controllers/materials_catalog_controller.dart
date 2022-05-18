@@ -4,6 +4,7 @@ import 'package:***REMOVED***/domain/services/cache_fetching_service.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
 import 'package:***REMOVED***/domain/usecases/materials/get_materials_sync_time.dart';
+import 'package:***REMOVED***/domain/usecases/materials/subscribe_to_material.dart';
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_states.dart';
 import 'package:get/get.dart';
 import 'package:***REMOVED***/domain/entities/materials/materials_catalog.dart';
@@ -20,6 +21,7 @@ class MaterialsCatalogController extends GetxController {
   // usecases
   GetMaterialsAndCache _getMaterialsAndCache = Get.find();
   GetMaterialsSyncTime _getMaterialsSyncTime = Get.find();
+  SubscribeToMaterial _subscribeToMaterial = Get.find();
 
   // variables
   Rx<MaterialsCatalogState> materialsCatalogState = Rx(MCSInitial());
@@ -99,6 +101,17 @@ class MaterialsCatalogController extends GetxController {
           .toList();
     } else {
       throw Exception('Operation denied');
+    }
+  }
+
+  Future subscribeToMaterial({required Materiale material}) async {
+    if (_connectionService.hasConnection) {
+      await _subscribeToMaterial.call(SubscribeToMaterialParams(
+          customerSAP: _customerController.selectedCustomerSAP!,
+          materialNumber: material.MaterialNumber));
+      material.didSubscribedToInventoryAlert.value = true;
+    } else {
+      Get.snackbar('Error', 'Restricted for offline mode'.tr);
     }
   }
 }

@@ -8,18 +8,17 @@ import 'package:***REMOVED***/presentation/ui/screens/profile/personal_details_p
 import 'package:***REMOVED***/presentation/ui/screens/legal_doc_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-class ProfileScreen extends StatefulWidget{
+
+class ProfileScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => ProfileScreenState();
-
 }
-class ProfileScreenState  extends State<ProfileScreen> {
 
-
+class ProfileScreenState extends State<ProfileScreen> {
   final CustomerController customerController = Get.find();
   final UserDataController userDataController = Get.find();
-  final TextStyle profileFieldStyle = TextStyle(color:
-  MyColors.blue_003E7E, fontSize: 20);
+  final TextStyle profileFieldStyle =
+      TextStyle(color: MyColors.blue_003E7E, fontSize: 20);
 
   @override
   Widget build(BuildContext context) {
@@ -43,12 +42,13 @@ class ProfileScreenState  extends State<ProfileScreen> {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(
-                vertical: Get.width * 0.06,
-            horizontal: Get.width * 0.06),
+                vertical: Get.width * 0.06, horizontal: Get.width * 0.06),
             child: Text(
               customerController.selectedCustomer!.customerName,
               style: TextStyle(
                 color: MyColors.blue_003E7E,
+                // fontFamily: 'Almoni',
+                // fontWeight: FontWeight.w900,
                 fontSize: Get.width * 0.08,
               ),
             ),
@@ -70,10 +70,14 @@ class ProfileScreenState  extends State<ProfileScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Personal details'.tr,
-                        style: profileFieldStyle,),
-                        Icon(Icons.keyboard_arrow_right,
-                        color:  MyColors.blue_003E7E,)
+                        Text(
+                          'Personal details'.tr,
+                          style: profileFieldStyle,
+                        ),
+                        Icon(
+                          Icons.keyboard_arrow_right,
+                          color: MyColors.blue_003E7E,
+                        )
                       ],
                     ),
                   ),
@@ -94,10 +98,11 @@ class ProfileScreenState  extends State<ProfileScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Choose language'.tr,
-                            style: profileFieldStyle),
-                        Icon(Icons.keyboard_arrow_right,
-                          color:  MyColors.blue_003E7E,)
+                        Text('Choose language'.tr, style: profileFieldStyle),
+                        Icon(
+                          Icons.keyboard_arrow_right,
+                          color: MyColors.blue_003E7E,
+                        )
                       ],
                     ),
                   ),
@@ -118,10 +123,11 @@ class ProfileScreenState  extends State<ProfileScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Change password'.tr,
-                            style: profileFieldStyle),
-                        Icon(Icons.keyboard_arrow_right,
-                          color:  MyColors.blue_003E7E,)
+                        Text('Change password'.tr, style: profileFieldStyle),
+                        Icon(
+                          Icons.keyboard_arrow_right,
+                          color: MyColors.blue_003E7E,
+                        )
                       ],
                     ),
                   ),
@@ -151,8 +157,10 @@ class ProfileScreenState  extends State<ProfileScreen> {
                       children: [
                         Text('Terms an conditions'.tr,
                             style: profileFieldStyle),
-                        Icon(Icons.keyboard_arrow_right,
-                          color:  MyColors.blue_003E7E,)
+                        Icon(
+                          Icons.keyboard_arrow_right,
+                          color: MyColors.blue_003E7E,
+                        )
                       ],
                     ),
                   ),
@@ -171,8 +179,7 @@ class ProfileScreenState  extends State<ProfileScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Log out'.tr,
-                            style: profileFieldStyle),
+                        Text('Log out'.tr, style: profileFieldStyle),
                         Transform.rotate(
                             angle: 1.6, child: Icon(Icons.power_settings_new))
                       ],
@@ -208,14 +215,12 @@ class ProfileScreenState  extends State<ProfileScreen> {
                   Get.back();
                 },
                 child: Icon(
-                  Directionality.of(context) ==
-                      TextDirection.rtl ?
-                  Icons.keyboard_arrow_right
+                  Directionality.of(context) == TextDirection.rtl
+                      ? Icons.keyboard_arrow_right
                       : Icons.keyboard_arrow_left,
                   color: Colors.white,
                 ),
               ),
-
               Hero(
                 tag: 'logo',
                 child: Image.asset(
@@ -230,7 +235,6 @@ class ProfileScreenState  extends State<ProfileScreen> {
                   width: Get.width * 0.05,
                 ),
               ),
-
             ],
           ),
           Spacer(),
