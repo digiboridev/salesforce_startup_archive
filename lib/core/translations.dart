@@ -148,7 +148,8 @@ class Trs extends Translations {
           'Dinner': 'Dinner',
           'Kosher': 'Kosher',
           'Select list': 'Select list',
-          'SALE!': 'SALE!'
+          'SALE!': 'SALE!',
+          'Recomended List': 'Recomended List',
         },
         'he': {
           'hello': 'Hallo 123',
@@ -291,7 +292,8 @@ class Trs extends Translations {
           'Dinner': 'אֲרוּחַת עֶרֶב',
           'Kosher': 'כשר',
           'Select list': 'בחר רשימה',
-          'SALE!': 'מְכִירָה!'
+          'SALE!': 'מְכִירָה!',
+          'Recomended List': 'רשימה מומלצת',
         }
       };
 }

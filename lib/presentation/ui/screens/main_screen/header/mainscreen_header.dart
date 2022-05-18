@@ -182,7 +182,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                               padding: EdgeInsets.symmetric(
                                   horizontal: Get.width * 0.03),
                               child: Text(
-                                'Recomended List',
+                                'Recomended List'.tr,
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: Get.width * 0.035),
