@@ -31,38 +31,34 @@ class Loader extends StatelessWidget {
         return Scaffold(
           backgroundColor: MyColors.blue_003E7E,
           body: SafeArea(
+              bottom: false,
               child: Container(
-            color: MyColors.white_F4F4F6,
-            child: SizedBox.expand(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text('User loading error'.tr),
-                  SizedBox(
-                    height: Get.width * 0.06,
+                color: MyColors.white_F4F4F6,
+                child: SizedBox.expand(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text('User loading error'.tr),
+                      SizedBox(
+                        height: Get.width * 0.06,
+                      ),
+                      Text(userDataState.msg),
+                      SizedBox(
+                        height: Get.width * 0.06,
+                      ),
+                      GestureDetector(
+                        onTap: () => userDataController.loadUserData(),
+                        child: Container(
+                          decoration: BoxDecoration(color: Colors.amber, borderRadius: BorderRadius.circular(Get.width * 0.06)),
+                          padding: EdgeInsets.symmetric(horizontal: Get.width * 0.1, vertical: Get.width * 0.03),
+                          child: Text('try again'.tr),
+                        ),
+                      )
+                    ],
                   ),
-                  Text(userDataState.msg),
-                  SizedBox(
-                    height: Get.width * 0.06,
-                  ),
-                  GestureDetector(
-                    onTap: () => userDataController.loadUserData(),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.amber,
-                          borderRadius:
-                              BorderRadius.circular(Get.width * 0.06)),
-                      padding: EdgeInsets.symmetric(
-                          horizontal: Get.width * 0.1,
-                          vertical: Get.width * 0.03),
-                      child: Text('try again'.tr),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          )),
+                ),
+              )),
         );
       }
 
@@ -72,8 +68,7 @@ class Loader extends StatelessWidget {
           buttonText: 'Understood'.tr,
           callback: () {
             if (!connectionService.hasConnection) {
-              Get.snackbar('Error'.tr, 'No internet'.tr,
-                  backgroundColor: Colors.amber);
+              Get.snackbar('Error'.tr, 'No internet'.tr, backgroundColor: Colors.amber);
               return;
             }
 
@@ -91,38 +86,34 @@ class Loader extends StatelessWidget {
           return Scaffold(
             backgroundColor: MyColors.blue_003E7E,
             body: SafeArea(
+                bottom: false,
                 child: Container(
-              color: MyColors.white_F4F4F6,
-              child: SizedBox.expand(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text('Customer loading error'.tr),
-                    SizedBox(
-                      height: Get.width * 0.06,
+                  color: MyColors.white_F4F4F6,
+                  child: SizedBox.expand(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text('Customer loading error'.tr),
+                        SizedBox(
+                          height: Get.width * 0.06,
+                        ),
+                        Text(customerController.customerLoadingError!),
+                        SizedBox(
+                          height: Get.width * 0.06,
+                        ),
+                        GestureDetector(
+                          onTap: () => customerController.loadCustomers(),
+                          child: Container(
+                            decoration: BoxDecoration(color: Colors.amber, borderRadius: BorderRadius.circular(Get.width * 0.06)),
+                            padding: EdgeInsets.symmetric(horizontal: Get.width * 0.1, vertical: Get.width * 0.03),
+                            child: Text('try again'.tr),
+                          ),
+                        )
+                      ],
                     ),
-                    Text(customerController.customerLoadingError!),
-                    SizedBox(
-                      height: Get.width * 0.06,
-                    ),
-                    GestureDetector(
-                      onTap: () => customerController.loadCustomers(),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.amber,
-                            borderRadius:
-                                BorderRadius.circular(Get.width * 0.06)),
-                        padding: EdgeInsets.symmetric(
-                            horizontal: Get.width * 0.1,
-                            vertical: Get.width * 0.03),
-                        child: Text('try again'.tr),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            )),
+                  ),
+                )),
           );
         }
 
@@ -147,9 +138,7 @@ class JustLoadingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColors.blue_003E7E,
-      body: Container(
-          color: MyColors.white_F4F4F6,
-          child: Center(child: CircularProgressIndicator())),
+      body: Container(color: MyColors.white_F4F4F6, child: Center(child: CircularProgressIndicator())),
     );
   }
 }

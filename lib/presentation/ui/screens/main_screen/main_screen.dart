@@ -26,11 +26,9 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     super.initState();
     bottomBarController = Get.put(BottomBarController());
-    pageController = PageController(
-        initialPage: bottomBarController.currentPageIndex.value - 1);
+    pageController = PageController(initialPage: bottomBarController.currentPageIndex.value - 1);
     bottomBarController.futureIndex.listen((event) {
-      pageController.animateToPage(event - 1,
-          duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
+      pageController.animateToPage(event - 1, duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
     });
   }
 
@@ -42,14 +40,14 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
         backgroundColor: MyColors.blue_003E7E,
         body: SafeArea(
+          bottom: false,
           child: Container(
             color: MyColors.white_F4F4F6,
             child: SizedBox.expand(
               child: Stack(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(
-                        top: Get.width * 0.35, bottom: bottomBarHeight * 0.5),
+                    padding: EdgeInsets.only(top: Get.width * 0.35, bottom: bottomBarHeight * 0.5),
                     child: buildPageView(),
                     // child: Column(
                     //   mainAxisSize: MainAxisSize.max,

@@ -34,14 +34,15 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
     return Scaffold(
       backgroundColor: MyColors.blue_003E7E,
       body: SafeArea(
+          bottom: false,
           child: Container(
-        color: MyColors.white_F4F4F6,
-        child: SizedBox.expand(
-          child: Column(
-            children: [buildHeader(), buildBody(context)],
-          ),
-        ),
-      )),
+            color: MyColors.white_F4F4F6,
+            child: SizedBox.expand(
+              child: Column(
+                children: [buildHeader(), buildBody(context)],
+              ),
+            ),
+          )),
     );
   }
 
@@ -80,10 +81,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                     maxLength: 20,
                     obscureText: showAsterisks,
                     validator: (val) {
-                      return passIsCorrect(pass: val, field_type: 'Current'.tr)
-                              .isEmpty
-                          ? null
-                          : '';
+                      return passIsCorrect(pass: val, field_type: 'Current'.tr).isEmpty ? null : '';
                     },
                     controller: _oldPass,
                     decoration: InputDecoration(
@@ -94,9 +92,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                           fontSize: 0,
                         ),
                         hintText: 'Current password'.tr,
-                        hintStyle: TextStyle(
-                            fontSize: Get.width * 0.042,
-                            color: MyColors.blue_003E7E),
+                        hintStyle: TextStyle(fontSize: Get.width * 0.042, color: MyColors.blue_003E7E),
                         enabledBorder: fieldBorder,
                         focusedBorder: fieldBorder,
                         errorBorder: fieldBorder,
@@ -113,10 +109,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                     obscureText: showAsterisks,
                     controller: _pass,
                     validator: (val) {
-                      return passIsCorrect(pass: val, field_type: 'New'.tr)
-                              .isEmpty
-                          ? null
-                          : '';
+                      return passIsCorrect(pass: val, field_type: 'New'.tr).isEmpty ? null : '';
                     },
                     decoration: InputDecoration(
                         counterText: '',
@@ -126,9 +119,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                           fontSize: 0,
                         ),
                         hintText: 'New password'.tr,
-                        hintStyle: TextStyle(
-                            fontSize: Get.width * 0.042,
-                            color: MyColors.blue_003E7E),
+                        hintStyle: TextStyle(fontSize: Get.width * 0.042, color: MyColors.blue_003E7E),
                         enabledBorder: fieldBorder,
                         focusedBorder: fieldBorder,
                         errorBorder: fieldBorder,
@@ -145,10 +136,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                     obscureText: showAsterisks,
                     controller: _confirmPass,
                     validator: (val) {
-                      return passIsCorrect(pass: val, field_type: 'New'.tr)
-                              .isEmpty
-                          ? null
-                          : '';
+                      return passIsCorrect(pass: val, field_type: 'New'.tr).isEmpty ? null : '';
                     },
                     decoration: InputDecoration(
                         counterText: '',
@@ -158,9 +146,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                           fontSize: 0,
                         ),
                         hintText: 'New password again'.tr,
-                        hintStyle: TextStyle(
-                            fontSize: Get.width * 0.042,
-                            color: MyColors.blue_003E7E),
+                        hintStyle: TextStyle(fontSize: Get.width * 0.042, color: MyColors.blue_003E7E),
                         enabledBorder: fieldBorder,
                         errorBorder: fieldBorder,
                         focusedBorder: fieldBorder,
@@ -168,17 +154,13 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(
-                      left: Get.width * 0.06,
-                      right: Get.width * 0.06,
-                      top: Get.width * 0.07),
+                  padding: EdgeInsets.only(left: Get.width * 0.06, right: Get.width * 0.06, top: Get.width * 0.07),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         'Password display in asterisks'.tr,
-                        style: TextStyle(
-                            color: MyColors.blue_003E7E, fontSize: 20),
+                        style: TextStyle(color: MyColors.blue_003E7E, fontSize: 20),
                       ),
                       CustomSwitch(
                           key: UniqueKey(),
@@ -203,39 +185,31 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                     child: Container(
                         width: Get.width,
                         alignment: Alignment.center,
-                        margin: EdgeInsets.only(
-                            left: Get.width * 0.06,
-                            right: Get.width * 0.06),
-
-                            child: Visibility(
-                                visible: passError.isNotEmpty,
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-
-                                        Icon(
-                                          Icons.error,
-                                          color: Colors.red,
-                                        ),
-                                    SizedBox(width:
-                                    Get.width*0.01,),
-
-                                    Flexible(child:Container(
-                                       // width: Get.width * 0.8,
-                                        child:
-                                         Text(
-                                          passError,
-                                          style: TextStyle(
-                                              color: Colors.red, fontSize: 17),
-                                        )))
-                                  ],
-                                )))),
+                        margin: EdgeInsets.only(left: Get.width * 0.06, right: Get.width * 0.06),
+                        child: Visibility(
+                            visible: passError.isNotEmpty,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.error,
+                                  color: Colors.red,
+                                ),
+                                SizedBox(
+                                  width: Get.width * 0.01,
+                                ),
+                                Flexible(
+                                    child: Container(
+                                        // width: Get.width * 0.8,
+                                        child: Text(
+                                  passError,
+                                  style: TextStyle(color: Colors.red, fontSize: 17),
+                                )))
+                              ],
+                            )))),
                 Padding(
-                  padding: EdgeInsets.only(
-                      left: Get.width * 0.06,
-                      right: Get.width * 0.06,
-                      bottom: Get.width * 0.12),
+                  padding: EdgeInsets.only(left: Get.width * 0.06, right: Get.width * 0.06, bottom: Get.width * 0.12),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -270,10 +244,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                           child: Container(
                             width: Get.width / 2.4,
                             alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                                color: MyColors.gray_EAF2FA,
-                                borderRadius:
-                                    BorderRadius.circular(Get.width * 0.06)),
+                            decoration: BoxDecoration(color: MyColors.gray_EAF2FA, borderRadius: BorderRadius.circular(Get.width * 0.06)),
                             padding: EdgeInsets.symmetric(
                               vertical: Get.width * 0.03,
                             ),
@@ -289,32 +260,21 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                             bool valid = _form.currentState!.validate();
 
                             if (!connectionService.hasConnection) {
-                              Get.snackbar(
-                                  'Error'.tr, 'Restricted for offline mode'.tr);
+                              Get.snackbar('Error'.tr, 'Restricted for offline mode'.tr);
                               return;
                             }
                             if (valid) {
-
-                              if (validationPassForSave(
-                                  oldPass: _oldPass.text,
-                                  newPass: _pass.text,
-                                  confirmPass: _confirmPass.text)) {
+                              if (validationPassForSave(oldPass: _oldPass.text, newPass: _pass.text, confirmPass: _confirmPass.text)) {
                                 closePassError();
-                                userDataController.changePassword(
-                                    oldPass: _oldPass.text,
-                                    newPass: _pass.text);
+                                userDataController.changePassword(oldPass: _oldPass.text, newPass: _pass.text);
                               }
                             }
                           },
                           child: Container(
                             width: Get.width / 2.4,
                             alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                                color: MyColors.blue_00458C,
-                                borderRadius:
-                                    BorderRadius.circular(Get.width * 0.06)),
-                            padding: EdgeInsets.symmetric(
-                                vertical: Get.width * 0.03),
+                            decoration: BoxDecoration(color: MyColors.blue_00458C, borderRadius: BorderRadius.circular(Get.width * 0.06)),
+                            padding: EdgeInsets.symmetric(vertical: Get.width * 0.03),
                             child: Text(
                               'Save'.tr,
                               style: TextStyle(color: Colors.white),
@@ -338,10 +298,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
     return Container(
       height: Get.width * 0.3,
       decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
+          gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
       padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
       child: Column(
         children: [
@@ -354,10 +311,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                   Get.back();
                 },
                 child: Icon(
-                  Directionality.of(context) ==
-                      TextDirection.rtl ?
-                  Icons.keyboard_arrow_right
-                      : Icons.keyboard_arrow_left,
+                  Directionality.of(context) == TextDirection.rtl ? Icons.keyboard_arrow_right : Icons.keyboard_arrow_left,
                   color: Colors.white,
                 ),
               ),
@@ -375,7 +329,6 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                   width: Get.width * 0.05,
                 ),
               ),
-
             ],
           ),
           Spacer(),
@@ -385,8 +338,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
   }
 
   bool validationPassword({required String? pass}) {
-    String pattern =
-        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+    String pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
     final RegExp regExp = RegExp(pattern);
     return regExp.hasMatch(pass ?? ' ');
   }
@@ -420,8 +372,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
     }
   }
 
-  bool validationPassForSave(
-      {required oldPass, required newPass, required confirmPass}) {
+  bool validationPassForSave({required oldPass, required newPass, required confirmPass}) {
     if (oldPass == newPass) {
       showPassError(error: 'Passwords must not match'.tr);
       return false;
