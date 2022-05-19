@@ -1,4 +1,4 @@
-import 'package:***REMOVED***/core/assets_images.dart';
+import 'package:***REMOVED***/core/asset_images.dart';
 import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/presentation/controllers/cart_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
