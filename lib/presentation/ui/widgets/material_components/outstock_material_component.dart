@@ -64,20 +64,19 @@ class _OutStockMaterialComponentState extends State<OutStockMaterialComponent> {
               padding: EdgeInsets.only(
                   left: Get.width * 0.03, right: Get.width * 0.03),
               child: Row(
-                textDirection: TextDirection.ltr,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    "We will update as soon as it returns to stock".tr,
-                    style: TextStyle(color: Colors.white, fontSize: 12),
-                  ),
-                  SizedBox(
-                    width: Get.width * 0.01,
-                  ),
                   Icon(
                     Icons.check,
                     color: Colors.white,
                     size: 20,
+                  ),
+                  SizedBox(
+                    width: Get.width * 0.01,
+                  ),
+                  Text(
+                    "We will update as soon as it returns to stock".tr,
+                    style: TextStyle(color: Colors.white, fontSize: 12),
                   ),
                 ],
               ))
