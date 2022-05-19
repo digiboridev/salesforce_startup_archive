@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/core/assets_images.dart';
 import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/presentation/controllers/cart_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar_controller.dart';
@@ -64,7 +65,7 @@ class BottomBar extends StatelessWidget {
                           onTap: () {
                             bottomBarController.changePage(newPageIndex: 3);
                           },
-                          child: Image.asset('assets/icons/cart.png',
+                          child: Image.asset(AssetImages.cart,
                               width: Get.width * 0.06),
                         )),
                     if (cartController.cartItems.isNotEmpty)
@@ -186,10 +187,9 @@ class BottomBar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 bottomBarController.currentPageIndex.value == 1
-                    ? Image.asset('assets/icons/home_active.png',
+                    ? Image.asset(AssetImages.home_active,
                         height: Get.width * 0.06)
-                    : Image.asset('assets/icons/home.png',
-                        height: Get.width * 0.06),
+                    : Image.asset(AssetImages.home, height: Get.width * 0.06),
                 SizedBox(
                   height: Get.width * 0.01,
                 ),
@@ -212,10 +212,9 @@ class BottomBar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 bottomBarController.currentPageIndex.value == 2
-                    ? Image.asset('assets/icons/fav_active.png',
+                    ? Image.asset(AssetImages.fav_active,
                         height: Get.width * 0.06)
-                    : Image.asset('assets/icons/fav.png',
-                        height: Get.width * 0.06),
+                    : Image.asset(AssetImages.fav, height: Get.width * 0.06),
                 SizedBox(
                   height: Get.width * 0.01,
                 ),
@@ -240,9 +239,9 @@ class BottomBar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 bottomBarController.currentPageIndex.value == 4
-                    ? Image.asset('assets/icons/catalog_active.png',
+                    ? Image.asset(AssetImages.catalog_active,
                         height: Get.width * 0.06)
-                    : Image.asset('assets/icons/catalog.png',
+                    : Image.asset(AssetImages.catalog,
                         height: Get.width * 0.06),
                 SizedBox(
                   height: Get.width * 0.01,
@@ -266,10 +265,9 @@ class BottomBar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 bottomBarController.currentPageIndex.value == 5
-                    ? Image.asset('assets/icons/orders_active.png',
+                    ? Image.asset(AssetImages.orders_active,
                         height: Get.width * 0.06)
-                    : Image.asset('assets/icons/orders.png',
-                        height: Get.width * 0.06),
+                    : Image.asset(AssetImages.orders, height: Get.width * 0.06),
                 SizedBox(
                   height: Get.width * 0.01,
                 ),

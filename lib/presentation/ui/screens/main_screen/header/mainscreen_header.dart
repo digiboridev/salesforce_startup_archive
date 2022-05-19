@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/core/assets_images.dart';
 import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/domain/entities/contact_us_data.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
@@ -83,13 +84,13 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                               transition: Transition.cupertino);
                         },
                         child: Image.asset(
-                          'assets/icons/settings.png',
+                          AssetImages.settings,
                           width: Get.width * 0.05,
                         )),
                     Hero(
                       tag: 'logo',
                       child: Image.asset(
-                        'assets/images/***REMOVED***_logo.png',
+                        AssetImages.***REMOVED***Logo,
                         width: Get.width * 0.2,
                       ),
                     ),
@@ -103,7 +104,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                       child: Hero(
                         tag: 'contact_btn',
                         child: Image.asset(
-                          'assets/icons/contact.png',
+                          AssetImages.contactButton,
                           width: Get.width * 0.05,
                         ),
                       ),
@@ -307,7 +308,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Image.asset(
-                                'assets/images/header_tile.png',
+                                AssetImages.header_tile,
                                 width: Get.width * 0.4,
                               ),
                             ],
@@ -384,7 +385,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                     width: Get.width * 0.03,
                   ),
                   Image.asset(
-                    'assets/icons/search.png',
+                    AssetImages.search,
                     width: Get.width * 0.04,
                   ),
                   SizedBox(
@@ -442,7 +443,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                     width: Get.width * 0.03,
                   ),
                   Image.asset(
-                    'assets/icons/search.png',
+                    AssetImages.search,
                     width: Get.width * 0.04,
                   ),
                   SizedBox(
@@ -474,7 +475,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                     ),
                   )),
                   Image.asset(
-                    'assets/icons/barcode.png',
+                    AssetImages.barcode,
                     width: Get.width * 0.06,
                   ),
                   SizedBox(
@@ -689,7 +690,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                                                     launch('mailto:${e.email}');
                                                   },
                                                   child: Image.asset(
-                                                    'assets/icons/contact_mail.png',
+                                                    AssetImages.contact_mail,
                                                     width: Get.width * 0.15,
                                                   ),
                                                 ),
@@ -701,7 +702,8 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                                                     launch('${e.whatsAppLink}');
                                                   },
                                                   child: Image.asset(
-                                                    'assets/icons/contact_messanger.png',
+                                                    AssetImages
+                                                        .contact_messanger,
                                                     width: Get.width * 0.15,
                                                   ),
                                                 ),
@@ -714,7 +716,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                                                         'tel:${e.phoneNumber}');
                                                   },
                                                   child: Image.asset(
-                                                    'assets/icons/contact_phone.png',
+                                                    AssetImages.contact_phone,
                                                     width: Get.width * 0.15,
                                                   ),
                                                 ),
@@ -914,7 +916,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  'assets/images/header_tile.png',
+                  AssetImages.header_tile,
                   width: Get.width * 0.4,
                 ),
               ],

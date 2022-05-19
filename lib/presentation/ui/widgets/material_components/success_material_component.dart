@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/core/assets_images.dart';
 import 'package:***REMOVED***/core/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,7 +34,7 @@ class SuccessMaterialComponentState extends State<SuccessMaterialComponent> {
               alignment: Alignment.center,
               children: [
                 Image.asset(
-                  "assets/images/success_back.png",
+                  AssetImages.success_back,
                   height: 32,
                 ),
                 Text(

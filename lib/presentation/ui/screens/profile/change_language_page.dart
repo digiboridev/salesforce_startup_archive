@@ -1,4 +1,4 @@
-import 'package:***REMOVED***/core/assets.dart';
+import 'package:***REMOVED***/core/assets_images.dart';
 import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/core/languages.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
@@ -82,16 +82,17 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
                       });
                     },
                     child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: Get.width * 0.045),
+                        padding:
+                            EdgeInsets.symmetric(vertical: Get.width * 0.045),
                         child: Row(
                           children: [
                             selectLanguage == e
                                 ? Image.asset(
-                                    'assets/icons/radio_s.png',
+                                    AssetImages.radio_s,
                                     width: Get.width * 0.05,
                                   )
                                 : Image.asset(
-                                    'assets/icons/radio.png',
+                                    AssetImages.radio,
                                     width: Get.width * 0.05,
                                   ),
                             SizedBox(
@@ -126,7 +127,10 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
                       child: Container(
                         width: Get.width / 2.4,
                         alignment: Alignment.center,
-                        decoration: BoxDecoration(color: MyColors.gray_EAF2FA, borderRadius: BorderRadius.circular(Get.width * 0.06)),
+                        decoration: BoxDecoration(
+                            color: MyColors.gray_EAF2FA,
+                            borderRadius:
+                                BorderRadius.circular(Get.width * 0.06)),
                         padding: EdgeInsets.symmetric(
                           vertical: Get.width * 0.03,
                         ),
@@ -143,8 +147,12 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
                       child: Container(
                         width: Get.width / 2.4,
                         alignment: Alignment.center,
-                        decoration: BoxDecoration(color: MyColors.blue_00458C, borderRadius: BorderRadius.circular(Get.width * 0.06)),
-                        padding: EdgeInsets.symmetric(vertical: Get.width * 0.03),
+                        decoration: BoxDecoration(
+                            color: MyColors.blue_00458C,
+                            borderRadius:
+                                BorderRadius.circular(Get.width * 0.06)),
+                        padding:
+                            EdgeInsets.symmetric(vertical: Get.width * 0.03),
                         child: Text(
                           'Save'.tr,
                           style: TextStyle(color: Colors.white),
@@ -166,7 +174,10 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
     return Container(
       height: Get.width * 0.3,
       decoration: BoxDecoration(
-          gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
       padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
       child: Column(
         children: [
@@ -179,7 +190,9 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
                   Get.back();
                 },
                 child: Icon(
-                  Directionality.of(context) == TextDirection.rtl ? Icons.keyboard_arrow_right : Icons.keyboard_arrow_left,
+                  Directionality.of(context) == TextDirection.rtl
+                      ? Icons.keyboard_arrow_right
+                      : Icons.keyboard_arrow_left,
                   color: Colors.white,
                 ),
               ),
@@ -206,6 +219,8 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
   }
 
   void setLanguage() {
-    userDataController.changeLanguage(lang: selectLanguage).then((value) => materialsCatalogController.loadCatalog());
+    userDataController
+        .changeLanguage(lang: selectLanguage)
+        .then((value) => materialsCatalogController.loadCatalog());
   }
 }

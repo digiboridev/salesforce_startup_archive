@@ -1,4 +1,4 @@
-import 'package:***REMOVED***/core/assets.dart';
+import 'package:***REMOVED***/core/assets_images.dart';
 import 'package:***REMOVED***/core/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -45,8 +45,9 @@ class _LegalDocScreenState extends State<LegalDocScreen> {
                     child: Text(
                       'Terms of Use'.tr,
                       style: TextStyle(
-                              color: MyColors.blue_003E7E,
-                              fontSize: 26,),
+                        color: MyColors.blue_003E7E,
+                        fontSize: 26,
+                      ),
                     )),
                 Expanded(
                     child: Padding(
@@ -73,9 +74,11 @@ class _LegalDocScreenState extends State<LegalDocScreen> {
                     },
                   ),
                 )),
-                Container(height: Get.width*0.015,
-                color: MyColors.white_F4F4F6,
-                width: Get.width,),
+                Container(
+                  height: Get.width * 0.015,
+                  color: MyColors.white_F4F4F6,
+                  width: Get.width,
+                ),
                 GestureDetector(
                   onTap: () => widget.callback(),
                   child: Container(
@@ -146,14 +149,12 @@ class _LegalDocScreenState extends State<LegalDocScreen> {
                   Get.back();
                 },
                 child: Icon(
-                  Directionality.of(context) ==
-                      TextDirection.rtl ?
-                  Icons.keyboard_arrow_right
+                  Directionality.of(context) == TextDirection.rtl
+                      ? Icons.keyboard_arrow_right
                       : Icons.keyboard_arrow_left,
                   color: Colors.white,
                 ),
               ),
-
               Hero(
                 tag: 'logo',
                 child: Image.asset(
@@ -161,7 +162,6 @@ class _LegalDocScreenState extends State<LegalDocScreen> {
                   width: Get.width * 0.3,
                 ),
               ),
-
               Hero(
                 tag: 'contact_btn',
                 child: Image.asset(

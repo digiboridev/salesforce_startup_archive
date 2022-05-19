@@ -1,4 +1,4 @@
-import 'package:***REMOVED***/core/assets.dart';
+import 'package:***REMOVED***/core/assets_images.dart';
 import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
@@ -31,7 +31,8 @@ class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
   final String password_condition = 'Password condition'.tr;
 
   bool validationPassword({required String? pass}) {
-    String pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+    String pattern =
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
     final RegExp regExp = RegExp(pattern);
     return regExp.hasMatch(pass ?? ' ');
   }
@@ -51,11 +52,13 @@ class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
   String passIsCorrect({required String? pass, required String field_type}) {
     if (pass != null && pass.isNotEmpty) {
       if (field_type == 'Current'.tr) {
-        validationPassForSave(confirmPass: _confirmPass.text, newPass: _pass.text);
+        validationPassForSave(
+            confirmPass: _confirmPass.text, newPass: _pass.text);
         return '';
       }
       if (validationPassword(pass: pass)) {
-        validationPassForSave(confirmPass: _confirmPass.text, newPass: _pass.text);
+        validationPassForSave(
+            confirmPass: _confirmPass.text, newPass: _pass.text);
         return '';
       } else {
         showPassError(error: password_condition);
@@ -148,7 +151,10 @@ class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
                     passIsCorrect(pass: text, field_type: 'New'.tr).isEmpty;
                   },
                   validator: (val) {
-                    return passIsCorrect(pass: val, field_type: 'New'.tr).isEmpty ? null : '';
+                    return passIsCorrect(pass: val, field_type: 'New'.tr)
+                            .isEmpty
+                        ? null
+                        : '';
                   },
                   decoration: InputDecoration(
                       counterText: '',
@@ -177,7 +183,10 @@ class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
                     passIsCorrect(pass: text, field_type: 'Confirm'.tr).isEmpty;
                   },
                   validator: (val) {
-                    return passIsCorrect(pass: val, field_type: 'New'.tr).isEmpty ? null : '';
+                    return passIsCorrect(pass: val, field_type: 'New'.tr)
+                            .isEmpty
+                        ? null
+                        : '';
                   },
                   decoration: InputDecoration(
                       counterText: '',
@@ -194,13 +203,17 @@ class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(left: Get.width * 0.06, right: Get.width * 0.06, top: Get.width * 0.07),
+                padding: EdgeInsets.only(
+                    left: Get.width * 0.06,
+                    right: Get.width * 0.06,
+                    top: Get.width * 0.07),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'Password display in asterisks'.tr,
-                      style: TextStyle(color: MyColors.blue_003E7E, fontSize: 20),
+                      style:
+                          TextStyle(color: MyColors.blue_003E7E, fontSize: 20),
                     ),
                     CustomSwitch(
                         key: UniqueKey(),
@@ -225,7 +238,8 @@ class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
                   child: Container(
                       width: Get.width,
                       alignment: Alignment.center,
-                      margin: EdgeInsets.only(left: Get.width * 0.06, right: Get.width * 0.06),
+                      margin: EdgeInsets.only(
+                          left: Get.width * 0.06, right: Get.width * 0.06),
                       child: Center(
                           child: Visibility(
                               visible: passError.isNotEmpty,
@@ -244,7 +258,8 @@ class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
                                       width: Get.width * 0.6,
                                       child: Text(
                                         passError,
-                                        style: TextStyle(color: Colors.red, fontSize: 20),
+                                        style: TextStyle(
+                                            color: Colors.red, fontSize: 20),
                                       ))
                                 ],
                               ))))),
@@ -257,21 +272,28 @@ class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
                     bool valid = _form.currentState!.validate();
 
                     if (!connectionService.hasConnection) {
-                      Get.snackbar('Error'.tr, 'Restricted for offline mode'.tr);
+                      Get.snackbar(
+                          'Error'.tr, 'Restricted for offline mode'.tr);
                       return;
                     }
                     if (valid) {
-                      if (validationPassForSave(newPass: _pass.text, confirmPass: _confirmPass.text)) {
+                      if (validationPassForSave(
+                          newPass: _pass.text,
+                          confirmPass: _confirmPass.text)) {
                         closePassError();
-                        userDataController.changePassword(oldPass: '', newPass: _pass.text, onlogin: true);
+                        userDataController.changePassword(
+                            oldPass: '', newPass: _pass.text, onlogin: true);
                       }
                     }
                   },
                   child: Container(
                     width: Get.width / 1.4,
                     alignment: Alignment.center,
-                    decoration:
-                        BoxDecoration(color: isCorrect ? MyColors.blue_00458C : MyColors.blue_D5DDE5, borderRadius: BorderRadius.circular(Get.width * 0.06)),
+                    decoration: BoxDecoration(
+                        color: isCorrect
+                            ? MyColors.blue_00458C
+                            : MyColors.blue_D5DDE5,
+                        borderRadius: BorderRadius.circular(Get.width * 0.06)),
                     padding: EdgeInsets.symmetric(vertical: Get.width * 0.03),
                     child: Text(
                       'Send'.tr,
@@ -320,7 +342,10 @@ class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
     return Container(
       height: Get.width * 0.3,
       decoration: BoxDecoration(
-          gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
       padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
       child: Column(
         children: [

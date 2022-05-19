@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/core/assets_images.dart';
 import 'package:***REMOVED***/core/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -35,7 +36,7 @@ class CartTopIconState extends State<CartTopIcon> {
         padding:
             EdgeInsets.only(left: Get.width * 0.03, right: Get.width * 0.03),
         child: Image.asset(
-          "assets/icons/favorite.png",
+          AssetImages.favorite,
         ));
   }
 
@@ -44,7 +45,7 @@ class CartTopIconState extends State<CartTopIcon> {
         padding:
             EdgeInsets.only(left: Get.width * 0.02, right: Get.width * 0.02),
         child: Image.asset(
-          "assets/icons/favorite_select.png",
+          AssetImages.favorite_select,
         ));
   }
 
@@ -54,8 +55,7 @@ class CartTopIconState extends State<CartTopIcon> {
           border: Border.all(color: MyColors.blue_00458C),
           shape: BoxShape.circle),
       child: Padding(
-          padding: EdgeInsets.all(7),
-          child: Image.asset("assets/icons/close.png")),
+          padding: EdgeInsets.all(7), child: Image.asset(AssetImages.close)),
     );
   }
 

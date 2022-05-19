@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/core/assets_images.dart';
 import 'package:***REMOVED***/core/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -36,7 +37,7 @@ class UpsaleMaterialComponentState extends State<UpsaleMaterialComponent> {
                 Padding(
                     padding: EdgeInsets.only(top: 3),
                     child: Image.asset(
-                      "assets/icons/sale.png",
+                      AssetImages.sale,
                       height: 18,
                       width: Get.width * 0.07,
                     )),

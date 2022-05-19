@@ -1,4 +1,4 @@
-import 'package:***REMOVED***/core/assets.dart';
+import 'package:***REMOVED***/core/assets_images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:***REMOVED***/core/colors.dart';
@@ -122,7 +122,7 @@ class ProductCountBottomSheetState extends State<ProductCountBottomSheet> {
                             },
                             child: Container(
                               child: Image.asset(
-                                "assets/icons/plus.png",
+                                AssetImages.plus,
                                 width: Get.width * 0.06,
                                 height: Get.width * 0.06,
                               ),
@@ -170,7 +170,7 @@ class ProductCountBottomSheetState extends State<ProductCountBottomSheet> {
                             },
                             child: Container(
                               child: Image.asset(
-                                "assets/icons/minus.png",
+                                AssetImages.minus,
                                 width: Get.width * 0.06,
                                 height: Get.width * 0.06,
                               ),

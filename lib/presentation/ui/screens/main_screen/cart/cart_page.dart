@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/core/assets_images.dart';
 import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/presentation/controllers/cart_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
@@ -116,7 +117,7 @@ class CartPageState extends State<CartPage> {
             decoration: BoxDecoration(
                 shape: BoxShape.circle, color: MyColors.blue_003E7E),
             child: Image.asset(
-              "assets/icons/empty_cart.png",
+              AssetImages.empty_cart,
               height: Get.width * 0.06,
               width: Get.width * 0.8,
             ),

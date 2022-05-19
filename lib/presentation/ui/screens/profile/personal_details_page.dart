@@ -1,4 +1,4 @@
-import 'package:***REMOVED***/core/assets.dart';
+import 'package:***REMOVED***/core/assets_images.dart';
 import 'package:***REMOVED***/core/colors.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
@@ -6,14 +6,12 @@ import 'package:***REMOVED***/presentation/controllers/user_data_controller_stat
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class PersonalDetailsPage extends StatefulWidget{
+class PersonalDetailsPage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() =>PersonalDetailsPageState();
-
+  State<StatefulWidget> createState() => PersonalDetailsPageState();
 }
+
 class PersonalDetailsPageState extends State<PersonalDetailsPage> {
-
-
   final CustomerController customerController = Get.find();
   final UserDataController userDataController = Get.find();
 
@@ -99,7 +97,7 @@ class PersonalDetailsPageState extends State<PersonalDetailsPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      'assets/icons/phone.png',
+                      AssetImages.phone,
                       width: Get.width * 0.03,
                       height: Get.width * 0.03,
                     ),
@@ -129,8 +127,7 @@ class PersonalDetailsPageState extends State<PersonalDetailsPage> {
                       horizontal: Get.width * 0.1, vertical: Get.width * 0.03),
                   child: Text(
                     'Close'.tr,
-                    style: TextStyle(color: Colors.white,
-                    fontSize: 22),
+                    style: TextStyle(color: Colors.white, fontSize: 22),
                   ),
                 ),
               ),
@@ -166,7 +163,8 @@ class PersonalDetailsPageState extends State<PersonalDetailsPage> {
           ),
           Text(
             text2,
-            style: TextStyle(fontSize: Get.width * 0.042,
+            style: TextStyle(
+                fontSize: Get.width * 0.042,
                 color: MyColors.blue_003E7E.withOpacity(0.5)),
           ),
         ],
@@ -194,14 +192,12 @@ class PersonalDetailsPageState extends State<PersonalDetailsPage> {
                   Get.back();
                 },
                 child: Icon(
-                  Directionality.of(context) ==
-                      TextDirection.rtl ?
-                  Icons.keyboard_arrow_right
+                  Directionality.of(context) == TextDirection.rtl
+                      ? Icons.keyboard_arrow_right
                       : Icons.keyboard_arrow_left,
                   color: Colors.white,
                 ),
               ),
-
               Hero(
                 tag: 'logo',
                 child: Image.asset(
@@ -216,7 +212,6 @@ class PersonalDetailsPageState extends State<PersonalDetailsPage> {
                   width: Get.width * 0.05,
                 ),
               ),
-
             ],
           ),
           Spacer(),
