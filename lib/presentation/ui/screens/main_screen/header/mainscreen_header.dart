@@ -493,7 +493,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
     return Container(
       width: Get.width,
       // height: Get.height,
-      color: Color(0xff00458C),
+      color: MyColors.blue_00458C,
       child: Column(
         children: [
           if (searchController.findedMaterials.isNotEmpty)
@@ -603,7 +603,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
             children: [
               Container(
                 height: Get.width - Get.width * 0.07,
-                color: Color(0xff00458C),
+                color: MyColors.blue_00458C,
                 child: Column(
                   children: [
                     Expanded(
@@ -653,7 +653,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                                   Container(
                                     // height: Get.width * 0.25,
                                     decoration: BoxDecoration(
-                                        color: Color(0xff0250A0),
+                                        color: MyColors.blue_0250A0,
                                         borderRadius: BorderRadius.circular(
                                             Get.width * 0.02)),
                                     margin: EdgeInsets.symmetric(
@@ -753,7 +753,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
         return Container(
           width: Get.width,
           height: Get.width,
-          color: Color(0xff00458C),
+          color: MyColors.blue_00458C,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -772,7 +772,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
       onLoading: Container(
         width: Get.width,
         height: Get.width,
-        color: Color(0xff00458C),
+        color: MyColors.blue_00458C,
         child: Center(
           child: CircularProgressIndicator(),
         ),
@@ -891,7 +891,6 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                               }).toList(),
                             ),
                           )))),
-              // buildHideBottom(),
               SizedBox(
                 height: Get.width * 0.03,
               )

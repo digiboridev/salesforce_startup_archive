@@ -82,12 +82,6 @@ class _CustomSwitchState extends State<CustomSwitch>
                   child: Container(
                     width: 50,
                     height: 30,
-                    // decoration: BoxDecoration(
-                    //   borderRadius: BorderRadius.circular(30.0),
-                    //   color: _circleAnimation.value == Alignment.centerLeft
-                    //       ? widget.disableColor
-                    //       : widget.enableColor,
-                    // ),
                   ),
                 ),
                 Positioned.fill(

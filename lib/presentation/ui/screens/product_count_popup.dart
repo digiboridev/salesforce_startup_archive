@@ -308,7 +308,7 @@ class ProductCountPopupState extends State<ProductCountPopup> {
                 height: Get.width * 0.15,
                 color: MyColors.blue_00458C,
                 child: Text(
-                  "אישור",
+                  "ok".tr,
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
               ),

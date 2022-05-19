@@ -1,13 +1,10 @@
 import 'package:***REMOVED***/core/asset_images.dart';
 import 'package:***REMOVED***/core/colors.dart';
-import 'package:***REMOVED***/domain/entities/materials/alternative_item.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
-import 'package:***REMOVED***/domain/entities/materials/unit_types.dart';
 import 'package:***REMOVED***/presentation/controllers/favorites_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_states.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/material_card.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -272,7 +272,6 @@ class _HomePageState extends State<HomePage> {
               blurRadius: Get.width * 0.07,
               spreadRadius: 1)
         ]),
-        // key: ObjectKey(materiale.hashCode),
         child: MaterialCard(
           materiale: materiale,
         ));
