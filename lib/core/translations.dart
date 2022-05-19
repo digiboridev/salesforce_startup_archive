@@ -212,7 +212,7 @@ class Trs extends Translations {
           'Families': 'משפחות',
           'All': 'את כל',
           'We will update as soon as it returns to stock': 'נעדכן חוזר למלאי',
-          'Not in stock, update when he gets back?': '?לא במלאי, לעדכן כשיחזור',
+          'Not in stock, update when he gets back?': 'לא במלאי, לעדכן כשיחזור?',
           'Alternative product': 'למוצר  חלופי',
           'Back to original product': 'חזרה למוצר המקורי',
           'free pallets added!': 'התווספו לך  משטחים חינם !',
