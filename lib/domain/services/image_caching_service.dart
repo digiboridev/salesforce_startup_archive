@@ -65,12 +65,14 @@ class CachedImage extends StatefulWidget {
   final String Url;
   final double width;
   final double height;
-  const CachedImage({
-    Key? key,
-    required this.Url,
-    required this.width,
-    required this.height,
-  }) : super(key: key);
+  final BoxFit? boxFit;
+  const CachedImage(
+      {Key? key,
+      required this.Url,
+      required this.width,
+      required this.height,
+      this.boxFit})
+      : super(key: key);
 
   @override
   State<CachedImage> createState() => _CachedImageState();
@@ -148,6 +150,7 @@ class _CachedImageState extends State<CachedImage> {
             imageData!,
             width: widget.width,
             height: widget.height,
+            fit: widget.boxFit,
             errorBuilder: (BuildContext context, Object exception,
                 StackTrace? stackTrace) {
               return GestureDetector(

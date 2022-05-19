@@ -484,7 +484,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
               ),
             ),
           ),
-      ],
+      ].reversed.toList(),
     );
   }
 

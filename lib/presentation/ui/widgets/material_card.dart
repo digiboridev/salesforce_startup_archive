@@ -18,10 +18,12 @@ import 'package:get/get.dart';
 class MaterialCard extends StatefulWidget {
   final Materiale materiale;
   final bool insideFavorites;
+  final bool insideCart;
   MaterialCard({
     Key? key,
     required this.materiale,
     this.insideFavorites = false,
+    this.insideCart = false,
   }) : super(key: key);
 
   @override
@@ -81,7 +83,7 @@ class MaterialCardState extends State<MaterialCard> {
         children: [
           GestureDetector(
               onTap: () {
-                if (!widget.insideFavorites) {
+                if (!(widget.insideFavorites || widget.insideCart)) {
                   Get.to(
                       () => MaterialScreen(
                             material: widget.materiale,
@@ -311,6 +313,14 @@ class MaterialCardState extends State<MaterialCard> {
     if (widget.insideFavorites) {
       return CartTopIcon(
         type: CartTopIcon.menu_type,
+      );
+    } else if (widget.insideCart) {
+      return GestureDetector(
+        onTap: () => cartController.removeItem(
+            materialNumber: widget.materiale.MaterialNumber),
+        child: CartTopIcon(
+          type: CartTopIcon.close_type,
+        ),
       );
     } else {
       return Obx(() {

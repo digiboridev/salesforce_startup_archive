@@ -64,6 +64,7 @@ class _OutStockMaterialComponentState extends State<OutStockMaterialComponent> {
               padding: EdgeInsets.only(
                   left: Get.width * 0.03, right: Get.width * 0.03),
               child: Row(
+                textDirection: TextDirection.ltr,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(

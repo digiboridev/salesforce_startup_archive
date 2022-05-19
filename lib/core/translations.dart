@@ -150,7 +150,7 @@ class Trs extends Translations {
           'Select list': 'Select list',
           'SALE!': 'SALE!',
           'Recomended List': 'Recomended List',
-          'All branches':'All branches',
+          'All branches': 'All branches',
         },
         'he': {
           'hello': 'Hallo 123',
@@ -187,11 +187,11 @@ class Trs extends Translations {
           'Results of': 'תוצאות של',
           'No results were found for this product but we have similar products':
               'לא נמצאו תוצאות לחיפוש המבוקש אבל יש לנו מוצרים דומים שיכולים להתאים',
-          'Deals': 'דילים',
+          'Deals': 'מבצעים',
           'All Deals': 'כל הדילים',
-          'Recomended for you': 'מומלץ עבורך',
-          'All recomended': 'כל המומלצים',
-          'To all newcomers': 'לכל המוצרים החדשים',
+          'Recomended for you': 'מומלצים עבורך',
+          'All recomended': 'לכל המומלצים',
+          'To all newcomers': 'לכל החדשים',
           'New Products': 'מוצרים חדשים',
           'List of deficiencies': 'רשימה של הגדרות',
           'You may be missing': 'אל תפספסו',
@@ -212,7 +212,7 @@ class Trs extends Translations {
           'Families': 'משפחות',
           'All': 'את כל',
           'We will update as soon as it returns to stock': 'נעדכן חוזר למלאי',
-          'Not in stock, update when he gets back?': 'לא במלאי, לעדכן כשיחזור?',
+          'Not in stock, update when he gets back?': '?לא במלאי, לעדכן כשיחזור',
           'Alternative product': 'למוצר  חלופי',
           'Back to original product': 'חזרה למוצר המקורי',
           'free pallets added!': 'התווספו לך  משטחים חינם !',
@@ -294,7 +294,7 @@ class Trs extends Translations {
           'Kosher': 'כשר',
           'Select list': 'בחר רשימה',
           'SALE!': 'מְכִירָה!',
-          'All branches':'כל הסניפים',
+          'All branches': 'כל הסניפים',
           'Recomended List': 'רשימה מומלצת',
         }
       };

@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:***REMOVED***/domain/entities/materials/materials_catalog.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalog_page_controller.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 
 class CatalogPage extends StatefulWidget {
   final MaterialsCatalog materialsCatalog;
@@ -205,6 +206,7 @@ class _CatalogPageState extends State<CatalogPage> {
         padding: EdgeInsets.symmetric(horizontal: Get.width * 0.025),
         height: Get.width * 0.15,
         color: Colors.white,
+        width: Get.width,
         child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             physics: BouncingScrollPhysics(),
@@ -403,10 +405,26 @@ class _CatalogPageState extends State<CatalogPage> {
         children: [
           Padding(
               padding: EdgeInsets.symmetric(horizontal: Get.width * 0.04),
-              child: CachedImage(
-                  Url: brand.ImageUrl,
-                  width: Get.width * 0.15,
-                  height: Get.width * 0.15)),
+              child: Row(
+                children: [
+                  CachedImage(
+                    Url: brand.ImageUrl,
+                    width: Get.width * 0.15,
+                    height: Get.width * 0.10,
+                    boxFit: BoxFit.scaleDown,
+                  ),
+                  SizedBox(
+                    width: Get.width * 0.01,
+                  ),
+                  Text(
+                    brand.Display,
+                    style: TextStyle(color: MyColors.blue_003E7E, fontSize: 24),
+                  )
+                ],
+              )),
+          SizedBox(
+            height: Get.width * 0.01,
+          ),
           Expanded(
             child: materials.isEmpty
                 ? Center(
@@ -438,15 +456,23 @@ class _CatalogPageState extends State<CatalogPage> {
               child: Row(
                 children: [
                   CachedImage(
-                      Url: family.ImageUrl,
-                      width: Get.width * 0.15,
-                      height: Get.width * 0.15),
+                    Url: family.ImageUrl,
+                    width: Get.width * 0.15,
+                    height: Get.width * 0.10,
+                    boxFit: BoxFit.scaleDown,
+                  ),
+                  SizedBox(
+                    width: Get.width * 0.01,
+                  ),
                   Text(
                     family.Display,
                     style: TextStyle(color: MyColors.blue_003E7E, fontSize: 24),
                   )
                 ],
               )),
+          SizedBox(
+            height: Get.width * 0.01,
+          ),
           Expanded(
             child: materials.isEmpty
                 ? Center(
