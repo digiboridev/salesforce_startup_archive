@@ -48,8 +48,6 @@ class ProfileScreenState extends State<ProfileScreen> {
               customerController.selectedCustomer!.customerName,
               style: TextStyle(
                 color: MyColors.blue_003E7E,
-                // fontFamily: 'Almoni',
-                // fontWeight: FontWeight.w900,
                 fontSize: Get.width * 0.08,
               ),
             ),

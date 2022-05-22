@@ -82,26 +82,9 @@ class SearchScreen extends StatelessWidget {
   Row searchBar() {
     return Row(
       children: [
-        // if (searchHasFocus)
-        //   GestureDetector(
-        //     onTap: () {
-        //       searchFocusNode.unfocus();
-        //       mainScreeenHeaderController.hide();
-        //     },
-        //     child: Container(
-        //       decoration: BoxDecoration(
-        //           color: Colors.white.withOpacity(0.8),
-        //           borderRadius: BorderRadius.circular(Get.width * 0.1)),
-        //       width: Get.width * 0.1,
-        //       height: Get.width * 0.1,
-        //       child: Icon(Icons.close),
-        //     ),
-        //   ),
-        // if (searchHasFocus)
         SizedBox(
           width: Get.width * 0.015,
         ),
-
         Expanded(
           child: Container(
             height: Get.width * 0.1,
@@ -224,13 +207,6 @@ class SearchScreen extends StatelessWidget {
                       color: Colors.black, fontSize: Get.width * 0.04),
                 ),
               ),
-            // Obx(() => Expanded(
-            //     child: ListView(
-            //         children: searchController.findedMaterials
-            //             .map((element) => MaterialCard(
-            //                   materiale: element,
-            //                 ))
-            //             .toList()))),
             if (searchController.findedMaterials.isEmpty &&
                 searchController.findedSimilarMaterials.isNotEmpty)
               Container(
@@ -249,7 +225,6 @@ class SearchScreen extends StatelessWidget {
                       color: Colors.black, fontSize: Get.width * 0.04),
                 ),
               ),
-
             if (searchController.findedMaterials.isEmpty &&
                 searchController.findedSimilarMaterials.isNotEmpty)
               Expanded(

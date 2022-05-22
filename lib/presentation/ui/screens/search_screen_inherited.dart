@@ -83,13 +83,6 @@ class SearchScreenInherited extends StatelessWidget {
                           color: Colors.black, fontSize: Get.width * 0.04),
                     ),
                   ),
-                // Obx(() => Expanded(
-                //     child: ListView(
-                //         children: searchController.findedMaterials
-                //             .map((element) => MaterialCard(
-                //                   materiale: element,
-                //                 ))
-                //             .toList()))),
                 if (searchController.findedMaterials.isEmpty &&
                     searchController.findedSimilarMaterials.isNotEmpty)
                   Container(
@@ -108,7 +101,6 @@ class SearchScreenInherited extends StatelessWidget {
                           color: Colors.black, fontSize: Get.width * 0.04),
                     ),
                   ),
-
                 if (searchController.findedMaterials.isEmpty &&
                     searchController.findedSimilarMaterials.isNotEmpty)
                   Expanded(

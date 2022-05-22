@@ -68,7 +68,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                 gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [MyColors.blue_0D63BB, Color(0xff00458C)])),
+                    colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
             padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
             child: Column(
               children: [

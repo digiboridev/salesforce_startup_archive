@@ -54,24 +54,17 @@ class ProductCountPopupState extends State<ProductCountPopup> {
                 )),
             Container(
               margin: EdgeInsets.only(top: Get.width * 0.15),
-
-              //  padding: EdgeInsets.only(top: 20),
-
               alignment: Alignment.bottomCenter,
               height: Get.height,
               width: Get.width,
-
               child: Column(
                 children: [
-                  // buildHeader(),
                   Expanded(
                       child: Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(55),
                                   topRight: Radius.circular(55))),
-
-                          //height: ,
                           child: buildBody())),
                 ],
               ),

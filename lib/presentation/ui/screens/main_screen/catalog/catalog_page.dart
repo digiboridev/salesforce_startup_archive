@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:***REMOVED***/domain/entities/materials/materials_catalog.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalog_page_controller.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 
 class CatalogPage extends StatefulWidget {
   final MaterialsCatalog materialsCatalog;

@@ -86,18 +86,13 @@ class CartPageState extends State<CartPage> {
                     height: Get.width * 0.05,
                   ),
                   buildActions(),
-                  //buildSaveShoppingList(),
-                  // buildCardControll(),
                   SizedBox(
                     height: Get.width * 0.03,
                   ),
                 ],
               )),
           cartController.cartItems.isEmpty
-              ? Expanded(
-                  child: Center(child: Container()
-                      //buildEmptyCard(),
-                      ))
+              ? Expanded(child: SingleChildScrollView(child: buildEmptyCard()))
               : Expanded(
                   child: Container(
                   child: buildItemsList(),

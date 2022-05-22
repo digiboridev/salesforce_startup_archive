@@ -52,22 +52,6 @@ class _MainScreenState extends State<MainScreen> {
                     padding: EdgeInsets.only(
                         top: Get.width * 0.35, bottom: bottomBarHeight * 0.5),
                     child: buildPageView(),
-                    // child: Column(
-                    //   mainAxisSize: MainAxisSize.max,
-                    //   children: [
-                    //     Expanded(
-                    //       child: Obx(() {
-                    //         return Stack(
-                    //           children: [
-                    //             buildPageView(),
-                    //             if (searchController.showSearch.value)
-                    //               SearchScreen()
-                    //           ],
-                    //         );
-                    //       }),
-                    //     ),
-                    //   ],
-                    // ),
                   ),
                   Positioned(
                     bottom: 0,

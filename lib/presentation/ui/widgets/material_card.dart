@@ -31,29 +31,11 @@ class MaterialCard extends StatefulWidget {
 }
 
 class MaterialCardState extends State<MaterialCard> {
-  // late MaterialCountController materialCountController;
   CartController cartController = Get.find();
 
   UserDataController userDataController = Get.find();
   CustomerController customerController = Get.find();
   FavoritesController favoritesController = Get.find();
-
-  // @override
-  // void initState() {
-  //   materialCountController = Get.put(
-  //       MaterialCountController(
-  //         material: widget.materiale,
-  //       ),
-  //       tag: widget.materiale.hashCode.toString());
-  //   super.initState();
-  // }
-
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  //   Get.delete<MaterialCountController>(
-  //       tag: widget.materiale.hashCode.toString());
-  // }
 
   bool get hidePrices {
     return customerController.selectedCustomer!.hidePrices;
@@ -148,7 +130,8 @@ class MaterialCardState extends State<MaterialCard> {
                                         height: Get.width * 0.02,
                                       ),
                                       Text(
-                                        "${widget.materiale.countByUnitType(widget.materiale.avaliableUnitTtypes.first)} ${'units per'.tr} ${widget.materiale.avaliableUnitTtypes.first.text.tr}",
+                                        "${widget.materiale.countByUnitType(widget.materiale.avaliableUnitTtypes.first)}" +
+                                            " ${'units per'.tr} ${widget.materiale.avaliableUnitTtypes.first.text.tr}",
                                         style: TextStyle(
                                             color: MyColors.blue_0571E0,
                                             fontSize: 12),
