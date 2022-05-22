@@ -1,4 +1,4 @@
-import 'package:***REMOVED***/core/colors.dart';
+import 'package:***REMOVED***/core/mycolors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,9 +11,10 @@ class ProductOptions extends StatefulWidget {
   static const MATERIAL_SCREEN_TYPE = "OPTION_MATERIAL_SCREEN_TYPE";
 
   ProductOptions(
-      {required this.isNew, required this.isHotSale,
-        required this.optionType,
-        required this.isFrozen});
+      {required this.isNew,
+      required this.isHotSale,
+      required this.optionType,
+      required this.isFrozen});
   @override
   State<StatefulWidget> createState() => ProductOptionsState();
 }
@@ -33,35 +34,46 @@ class ProductOptionsState extends State<ProductOptions> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.optionType == ProductOptions.CARD_TYPE? Container(
-      height: 15,
-      width: Get.width * 0.1,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-        buildSale(),
-         SizedBox(height: Get.width*0.01,),
-         buildNew(),
-         buildFrozen()
-        ],
-      ),
-    ):Container(
-      height: 30,
-      alignment: Alignment.center,
-      child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-      buildNew(),
-      SizedBox(width: Get.width*0.01,),
-      buildSale(),
-      SizedBox(width: Get.width*0.01,),
-      buildFrozen()
-    ],),);
+    return widget.optionType == ProductOptions.CARD_TYPE
+        ? Container(
+            height: 15,
+            width: Get.width * 0.1,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                buildSale(),
+                SizedBox(
+                  height: Get.width * 0.01,
+                ),
+                buildNew(),
+                buildFrozen()
+              ],
+            ),
+          )
+        : Container(
+            height: 30,
+            alignment: Alignment.center,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                buildNew(),
+                SizedBox(
+                  width: Get.width * 0.01,
+                ),
+                buildSale(),
+                SizedBox(
+                  width: Get.width * 0.01,
+                ),
+                buildFrozen()
+              ],
+            ),
+          );
   }
-  Widget buildSale(){
-    return   Visibility(
+
+  Widget buildSale() {
+    return Visibility(
         visible: isHotSale,
         child: Container(
           alignment: Alignment.center,
@@ -71,13 +83,14 @@ class ProductOptionsState extends State<ProductOptions> {
               color: MyColors.orange_FF8800,
               borderRadius: BorderRadius.all(Radius.circular(15))),
           child: Text(
-           "Hot sale".tr,
+            "Hot sale".tr,
             style: TextStyle(color: Colors.white, fontSize: 8),
           ),
         ));
   }
-  Widget buildNew(){
-    return  Visibility(
+
+  Widget buildNew() {
+    return Visibility(
         visible: isNew,
         child: Container(
           alignment: Alignment.center,
@@ -88,13 +101,14 @@ class ProductOptionsState extends State<ProductOptions> {
               borderRadius: BorderRadius.all(Radius.circular(15))),
           child: Text(
             "New".tr,
-            style: TextStyle(color: Colors.white, fontSize: 11,
-            fontFamily: 'Almoni'),
+            style: TextStyle(
+                color: Colors.white, fontSize: 11, fontFamily: 'Almoni'),
           ),
-    ));
+        ));
   }
-  Widget buildFrozen(){
-    return  Visibility(
+
+  Widget buildFrozen() {
+    return Visibility(
         visible: isFrozen,
         child: Container(
           height: 20,

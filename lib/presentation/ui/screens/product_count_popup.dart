@@ -1,7 +1,7 @@
 import 'package:***REMOVED***/core/asset_images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:***REMOVED***/core/colors.dart';
+import 'package:***REMOVED***/core/mycolors.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
 import 'package:***REMOVED***/domain/entities/materials/unit_types.dart';
 

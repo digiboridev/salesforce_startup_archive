@@ -1,4 +1,4 @@
-import 'package:***REMOVED***/core/colors.dart';
+import 'package:***REMOVED***/core/mycolors.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/loaders/points_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -9,7 +9,7 @@ abstract class MyColors {
   static const blue_5584B2 = Color(0xFF5584B2);
   static const blue_0D63BB = Color(0xFF0D63BB);
   static const blue_D5DDE5 = Color(0xFFD5DDE5);
-  static const gray_979797  = Color(0xFF979797);
+  static const gray_979797 = Color(0xFF979797);
 
   static const gray_8B9298 = Color(0xFF8B9298);
   static const gray_707070 = Color(0xFF707070);

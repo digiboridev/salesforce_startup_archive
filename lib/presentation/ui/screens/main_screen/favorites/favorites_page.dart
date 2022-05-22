@@ -1,5 +1,5 @@
 import 'package:***REMOVED***/core/asset_images.dart';
-import 'package:***REMOVED***/core/colors.dart';
+import 'package:***REMOVED***/core/mycolors.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
 import 'package:***REMOVED***/presentation/controllers/favorites_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';

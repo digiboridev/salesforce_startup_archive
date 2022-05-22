@@ -3,7 +3,7 @@ import 'package:***REMOVED***/domain/services/image_caching_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../../core/colors.dart';
+import '../../../../../core/mycolors.dart';
 
 class BrandCard extends StatefulWidget {
   final Brand brand;

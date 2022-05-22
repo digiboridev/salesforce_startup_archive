@@ -1,4 +1,4 @@
-import 'package:***REMOVED***/core/colors.dart';
+import 'package:***REMOVED***/core/mycolors.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
 import 'package:***REMOVED***/domain/entities/materials/materials_catalog.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
