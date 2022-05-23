@@ -49,8 +49,7 @@ class _MainScreenState extends State<MainScreen> {
               child: Stack(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(
-                        top: headerHeight, bottom: bottomBarHeight * 0.25),
+                    padding: EdgeInsets.only(top: headerHeight),
                     child: buildPageView(),
                   ),
                   Positioned(

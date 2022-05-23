@@ -147,54 +147,16 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                                           color: Colors.white.withOpacity(0.77),
                                           fontSize: Get.width * 0.035),
                                       children: [
-                                        if (Directionality.of(context) ==
-                                            TextDirection.rtl) ...[
-                                          TextSpan(
-                                            text: ' ' +
-                                                customerController
-                                                    .selectedCustomer!
-                                                    .customerName +
-                                                ' ',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: Get.width * 0.035),
-                                          ),
-                                          TextSpan(
-                                            text: ' ' +
-                                                customerController
-                                                    .selectedCustomer!
-                                                    .customerAddress +
-                                                ' ',
-                                            style: TextStyle(
-                                                color: Colors.white
-                                                    .withOpacity(0.77),
-                                                fontSize: Get.width * 0.035),
-                                          )
-                                        ],
-                                        if (Directionality.of(context) !=
-                                            TextDirection.rtl) ...[
-                                          TextSpan(
-                                            text: ' ' +
-                                                customerController
-                                                    .selectedCustomer!
-                                                    .customerAddress +
-                                                ' ',
-                                            style: TextStyle(
-                                                color: Colors.white
-                                                    .withOpacity(0.77),
-                                                fontSize: Get.width * 0.035),
-                                          ),
-                                          TextSpan(
-                                            text: ' ' +
-                                                customerController
-                                                    .selectedCustomer!
-                                                    .customerName +
-                                                ' ',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: Get.width * 0.035),
-                                          ),
-                                        ],
+                                        TextSpan(
+                                          text: ' ' +
+                                              customerController
+                                                  .selectedCustomer!
+                                                  .customerName +
+                                              ' ',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: Get.width * 0.035),
+                                        ),
                                       ]),
                                 )),
                           ),

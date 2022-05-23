@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:***REMOVED***/core/asset_images.dart';
 import 'package:***REMOVED***/core/mycolors.dart';
 import 'package:***REMOVED***/presentation/controllers/cart_controller.dart';
@@ -54,7 +56,13 @@ class BottomBar extends StatelessWidget {
                         width: Get.width * 0.15,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                            color: MyColors.blue_00458C,
+                            gradient: LinearGradient(
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.topCenter,
+                                colors: [
+                                  MyColors.blue_00458C,
+                                  MyColors.blue_0D63BB
+                                ]),
                             borderRadius:
                                 BorderRadius.circular(Get.width * 0.15)),
                         child: GestureDetector(
@@ -163,123 +171,158 @@ class BottomBar extends StatelessWidget {
     );
   }
 
-  Container buildButtonsRow() {
-    return Container(
-      key: Key('btnRow'),
-      height: bottomBarHeight * 0.7,
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              fit: BoxFit.fitWidth,
-              alignment: Alignment.topCenter,
-              image: AssetImage('assets/images/bottombar.png'))),
-      child: Row(
-        children: [
-          Spacer(),
-          GestureDetector(
-            onTap: () {
-              bottomBarController.changePage(newPageIndex: 1);
-            },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                bottomBarController.currentPageIndex.value == 1
-                    ? Image.asset(AssetImages.home_active,
-                        height: Get.width * 0.06)
-                    : Image.asset(AssetImages.home, height: Get.width * 0.06),
-                SizedBox(
-                  height: Get.width * 0.01,
+  Widget buildButtonsRow() {
+    return Stack(
+      children: [
+        BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+            child: Container(
+              child: CustomPaint(
+                size: Size(Get.width, bottomBarHeight * 0.7),
+                painter: Hole(),
+              ),
+            )),
+        Container(
+          key: Key('btnRow'),
+          height: bottomBarHeight * 0.7,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  opacity: 0.7,
+                  fit: BoxFit.fitWidth,
+                  alignment: Alignment.topCenter,
+                  image: AssetImage('assets/images/bottombar.png'))),
+          child: Row(
+            children: [
+              Spacer(),
+              GestureDetector(
+                onTap: () {
+                  bottomBarController.changePage(newPageIndex: 1);
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    bottomBarController.currentPageIndex.value == 1
+                        ? Image.asset(AssetImages.home_active,
+                            height: Get.width * 0.06)
+                        : Image.asset(AssetImages.home,
+                            height: Get.width * 0.06),
+                    SizedBox(
+                      height: Get.width * 0.01,
+                    ),
+                    Text(
+                      'Home'.tr,
+                      style: TextStyle(
+                          color: bottomBarController.currentPageIndex.value == 1
+                              ? MyColors.blue_00458C
+                              : Colors.grey),
+                    ),
+                  ],
                 ),
-                Text(
-                  'Home'.tr,
-                  style: TextStyle(
-                      color: bottomBarController.currentPageIndex.value == 1
-                          ? MyColors.blue_00458C
-                          : Colors.grey),
+              ),
+              Spacer(),
+              GestureDetector(
+                onTap: () {
+                  bottomBarController.changePage(newPageIndex: 2);
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    bottomBarController.currentPageIndex.value == 2
+                        ? Image.asset(AssetImages.fav_active,
+                            height: Get.width * 0.06)
+                        : Image.asset(AssetImages.fav,
+                            height: Get.width * 0.06),
+                    SizedBox(
+                      height: Get.width * 0.01,
+                    ),
+                    Text(
+                      'Favorites'.tr,
+                      style: TextStyle(
+                          color: bottomBarController.currentPageIndex.value == 2
+                              ? MyColors.blue_00458C
+                              : Colors.grey),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+              Spacer(
+                flex: 4,
+              ),
+              GestureDetector(
+                onTap: () {
+                  bottomBarController.changePage(newPageIndex: 4);
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    bottomBarController.currentPageIndex.value == 4
+                        ? Image.asset(AssetImages.catalog_active,
+                            height: Get.width * 0.06)
+                        : Image.asset(AssetImages.catalog,
+                            height: Get.width * 0.06),
+                    SizedBox(
+                      height: Get.width * 0.01,
+                    ),
+                    Text(
+                      'Catalog'.tr,
+                      style: TextStyle(
+                          color: bottomBarController.currentPageIndex.value == 4
+                              ? MyColors.blue_00458C
+                              : Colors.grey),
+                    ),
+                  ],
+                ),
+              ),
+              Spacer(),
+              GestureDetector(
+                onTap: () {
+                  bottomBarController.changePage(newPageIndex: 5);
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    bottomBarController.currentPageIndex.value == 5
+                        ? Image.asset(AssetImages.orders_active,
+                            height: Get.width * 0.06)
+                        : Image.asset(AssetImages.orders,
+                            height: Get.width * 0.06),
+                    SizedBox(
+                      height: Get.width * 0.01,
+                    ),
+                    Text(
+                      'Order'.tr,
+                      style: TextStyle(
+                          color: bottomBarController.currentPageIndex.value == 5
+                              ? MyColors.blue_00458C
+                              : Colors.grey),
+                    ),
+                  ],
+                ),
+              ),
+              Spacer(),
+            ],
           ),
-          Spacer(),
-          GestureDetector(
-            onTap: () {
-              bottomBarController.changePage(newPageIndex: 2);
-            },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                bottomBarController.currentPageIndex.value == 2
-                    ? Image.asset(AssetImages.fav_active,
-                        height: Get.width * 0.06)
-                    : Image.asset(AssetImages.fav, height: Get.width * 0.06),
-                SizedBox(
-                  height: Get.width * 0.01,
-                ),
-                Text(
-                  'Favorites'.tr,
-                  style: TextStyle(
-                      color: bottomBarController.currentPageIndex.value == 2
-                          ? MyColors.blue_00458C
-                          : Colors.grey),
-                ),
-              ],
-            ),
-          ),
-          Spacer(
-            flex: 4,
-          ),
-          GestureDetector(
-            onTap: () {
-              bottomBarController.changePage(newPageIndex: 4);
-            },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                bottomBarController.currentPageIndex.value == 4
-                    ? Image.asset(AssetImages.catalog_active,
-                        height: Get.width * 0.06)
-                    : Image.asset(AssetImages.catalog,
-                        height: Get.width * 0.06),
-                SizedBox(
-                  height: Get.width * 0.01,
-                ),
-                Text(
-                  'Catalog'.tr,
-                  style: TextStyle(
-                      color: bottomBarController.currentPageIndex.value == 4
-                          ? MyColors.blue_00458C
-                          : Colors.grey),
-                ),
-              ],
-            ),
-          ),
-          Spacer(),
-          GestureDetector(
-            onTap: () {
-              bottomBarController.changePage(newPageIndex: 5);
-            },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                bottomBarController.currentPageIndex.value == 5
-                    ? Image.asset(AssetImages.orders_active,
-                        height: Get.width * 0.06)
-                    : Image.asset(AssetImages.orders, height: Get.width * 0.06),
-                SizedBox(
-                  height: Get.width * 0.01,
-                ),
-                Text(
-                  'Order'.tr,
-                  style: TextStyle(
-                      color: bottomBarController.currentPageIndex.value == 5
-                          ? MyColors.blue_00458C
-                          : Colors.grey),
-                ),
-              ],
-            ),
-          ),
-          Spacer(),
-        ],
-      ),
+        ),
+      ],
     );
   }
+}
+
+class Hole extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    double radius = size.width / 6;
+    double blurRadius = size.width / 50;
+    canvas.drawCircle(
+      Offset(size.width / 2, -size.height / 5),
+      radius,
+      Paint()
+        ..blendMode = BlendMode.xor
+        // The mask filter gives some fuziness to the cutout.
+        ..maskFilter = MaskFilter.blur(BlurStyle.normal, blurRadius),
+    );
+  }
+
+  @override
+  bool shouldRepaint(Hole oldDelegate) => false;
 }
