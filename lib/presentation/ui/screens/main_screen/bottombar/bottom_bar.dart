@@ -29,16 +29,15 @@ class BottomBar extends StatelessWidget {
               children: [
                 Container(
                   height: bottomBarHeight * 0.3,
-                  // color: Colors.blue.withOpacity(0.2),
                 ),
                 Obx(() {
                   return AnimatedCrossFade(
                     crossFadeState: bottomBarController.showCount.value
                         ? CrossFadeState.showFirst
                         : CrossFadeState.showSecond,
-                    duration: Duration(milliseconds: 300),
-                    firstCurve: Curves.easeInOut,
-                    secondCurve: Curves.easeInOut,
+                    duration: Duration(milliseconds: 100),
+                    firstCurve: Curves.linear,
+                    secondCurve: Curves.linear,
                     firstChild: buildPricesRow(),
                     secondChild: buildButtonsRow(),
                   );
@@ -317,7 +316,7 @@ class Hole extends CustomPainter {
       Offset(size.width / 2, -size.height / 5),
       radius,
       Paint()
-        ..blendMode = BlendMode.xor
+        ..blendMode = BlendMode.clear
         // The mask filter gives some fuziness to the cutout.
         ..maskFilter = MaskFilter.blur(BlurStyle.normal, blurRadius),
     );
