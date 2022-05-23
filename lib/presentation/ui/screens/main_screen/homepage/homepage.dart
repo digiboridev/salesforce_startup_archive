@@ -3,6 +3,7 @@ import 'package:***REMOVED***/domain/entities/materials/material.dart';
 import 'package:***REMOVED***/domain/entities/materials/materials_catalog.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
+import 'package:***REMOVED***/presentation/ui/screens/material_screen.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/material_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -304,37 +305,46 @@ class _HomePageState extends State<HomePage> {
               alignment: WrapAlignment.spaceEvenly,
               runAlignment: WrapAlignment.spaceEvenly,
               children: materials.map((e) {
-                return Container(
-                  height: Get.width / 2,
-                  width: Get.width * 0.42,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(Get.width * 0.02),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.black.withOpacity(0.15),
-                            blurRadius: Get.width * 0.03)
-                      ]),
-                  child: Column(
-                    children: [
-                      CachedImage(
-                          Url: e.ImageUrl,
-                          width: Get.width * 0.3,
-                          height: Get.width * 0.3),
-                      Expanded(
-                          child: Center(
-                        child: Padding(
-                          padding: EdgeInsets.all(Get.width * 0.02),
-                          child: Text(
-                            e.Name,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: Get.width * 0.035,
-                                color: MyColors.blue_0050A2),
+                return GestureDetector(
+                  onTap: () {
+                    Get.to(
+                        () => MaterialScreen(
+                              material: e,
+                            ),
+                        transition: Transition.cupertino);
+                  },
+                  child: Container(
+                    height: Get.width / 2,
+                    width: Get.width * 0.42,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(Get.width * 0.02),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black.withOpacity(0.15),
+                              blurRadius: Get.width * 0.03)
+                        ]),
+                    child: Column(
+                      children: [
+                        CachedImage(
+                            Url: e.ImageUrl,
+                            width: Get.width * 0.3,
+                            height: Get.width * 0.3),
+                        Expanded(
+                            child: Center(
+                          child: Padding(
+                            padding: EdgeInsets.all(Get.width * 0.02),
+                            child: Text(
+                              e.Name,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: Get.width * 0.035,
+                                  color: MyColors.blue_0050A2),
+                            ),
                           ),
-                        ),
-                      ))
-                    ],
+                        ))
+                      ],
+                    ),
                   ),
                 );
               }).toList(),

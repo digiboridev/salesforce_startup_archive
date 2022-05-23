@@ -50,7 +50,7 @@ class _MainScreenState extends State<MainScreen> {
                 children: [
                   Padding(
                     padding: EdgeInsets.only(
-                        top: Get.width * 0.35, bottom: bottomBarHeight * 0.5),
+                        top: headerHeight, bottom: bottomBarHeight * 0.25),
                     child: buildPageView(),
                   ),
                   Positioned(
