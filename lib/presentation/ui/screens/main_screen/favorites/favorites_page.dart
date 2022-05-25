@@ -1,9 +1,12 @@
+import 'dart:ui';
+
 import 'package:***REMOVED***/core/asset_images.dart';
 import 'package:***REMOVED***/core/mycolors.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
 import 'package:***REMOVED***/presentation/controllers/favorites_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_states.dart';
+import 'package:***REMOVED***/presentation/ui/screens/main_screen/favorites/new_fav_list_bottomsheet.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/material_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,16 +30,9 @@ class _FavoritesPageState extends State<FavoritesPage> {
   final CustomerController customerController = Get.find();
   final MaterialsCatalogController materialsCatalogController = Get.find();
   final FavoritesController favoritesController = Get.find();
-  final List<String> belongsList = [
-    "Vegan".tr,
-    "Frozen".tr,
-    "Just vegetables".tr,
-    "Frozen Products".tr,
-    "Breakfast Products".tr,
-    "Dinner".tr,
-    "Kosher".tr
-  ];
+
   int? selectedListIndex;
+  bool recomendedListSelected = false;
 
   @override
   void initState() {
@@ -67,8 +63,30 @@ class _FavoritesPageState extends State<FavoritesPage> {
     }
   }
 
+  List<Materiale> get recomendedMaterials {
+    MaterialsCatalogState state =
+        materialsCatalogController.materialsCatalogState.value;
+    if (state is MCSCommon) {
+      // return state.catalog.materials
+      //     .where((element) => element.AverageQty > 0)
+      //     .toList();
+
+      return state.catalog.materials.take(10).toList();
+    }
+    return [];
+  }
+
+  showAddNewList() {
+    Get.bottomSheet(NewFavoritesListBottomheet()).then((value) {
+      if (value is String) {
+        favoritesController.addNewBlancList(listName: value);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    print(recomendedMaterials.length);
     return Container(
       color: Colors.white,
       width: Get.width,
@@ -86,10 +104,13 @@ class _FavoritesPageState extends State<FavoritesPage> {
                   'Favorites'.tr,
                   style: TextStyle(fontSize: 24, color: MyColors.blue_003E7E),
                 ),
-                Image.asset(
-                  AssetImages.favorites_list,
-                  width: Get.width * 0.06,
-                  height: Get.width * 0.06,
+                GestureDetector(
+                  onTap: showAddNewList,
+                  child: Image.asset(
+                    AssetImages.favorites_list,
+                    width: Get.width * 0.06,
+                    height: Get.width * 0.06,
+                  ),
                 )
               ],
             ),
@@ -101,30 +122,15 @@ class _FavoritesPageState extends State<FavoritesPage> {
           SizedBox(
             height: Get.width * 0.01,
           ),
-          selectedListIndex is int
-              ? Expanded(
-                  child: Column(
-                    children: [
-                      buildListControll(),
-                      SizedBox(
-                        height: Get.width * 0.01,
-                      ),
-                      Expanded(
-                          child: Container(
-                        child:
-                            //  buildHaveNewList()
-                            //buildBelongsList()
-                            // buildNoProducts()
-                            //buildNewList()
-                            buildItemsList(),
-                      )),
-                    ],
-                  ),
-                )
-              : Expanded(
-                  child: Center(
-                  child: Text('Select list'),
-                ))
+          Expanded(
+            child: Container(
+              child:
+                  //  buildHaveNewList()
+                  // buildBelongsList()
+                  // buildNoProducts()
+                  buildItemsList(),
+            ),
+          )
         ],
       ),
     );
@@ -180,224 +186,162 @@ class _FavoritesPageState extends State<FavoritesPage> {
           materialsCatalogController.materialsCatalogState.value;
 
       if (mcState is MCSCommon) {
-        FavoriteList listToShow =
-            widget.favoriteLists.elementAt(selectedListIndex!);
+        List<Materiale> materialsToShow = [];
 
-        if (listToShow.favoriteItems.isEmpty) {
-          return Center(
-            child: Text('Empty list'),
-          );
-        }
+        if (recomendedListSelected) {
+          materialsToShow = recomendedMaterials;
+        } else {
+          FavoriteList listToShow =
+              widget.favoriteLists.elementAt(selectedListIndex!);
 
-        return ListView(
-          physics: BouncingScrollPhysics(),
-          children: listToShow.favoriteItems.map((e) {
+          listToShow.favoriteItems.forEach((fi) {
             Materiale? m = mcState.catalog.materials.firstWhereOrNull(
-              (element) => element.MaterialNumber == e.materialNumber,
+              (material) => material.MaterialNumber == fi.materialNumber,
             );
 
             if (m is Materiale) {
-              return MaterialCard(
-                materiale: m,
-                insideFavorites: true,
-              );
-            } else {
-              return Text('INVALID MATERIAL');
+              materialsToShow.add(m);
             }
-          }).toList(),
+          });
+        }
+        if (materialsToShow.isEmpty) {
+          return buildNoProducts();
+        }
+
+        return Column(
+          children: [
+            buildListControll(),
+            SizedBox(
+              height: Get.width * 0.01,
+            ),
+            Expanded(
+              child: ListView(
+                physics: BouncingScrollPhysics(),
+                children: [
+                  SizedBox(
+                    height: Get.width * 0.05,
+                  ),
+                  ...materialsToShow.map((material) {
+                    return Column(
+                      children: [
+                        MaterialCard(
+                          materiale: material,
+                          insideFavorites: true,
+                        ),
+                      ],
+                    );
+                  }).toList(),
+                  SizedBox(
+                    height: Get.width * 0.2,
+                  )
+                ],
+              ),
+            ),
+          ],
         );
       } else {
         return Center(
-          child: Text('Waiting catalog'),
+          child: CircularProgressIndicator(),
         );
       }
     });
   }
 
   Widget buildListsRow() {
-    return Padding(
-        padding: EdgeInsets.symmetric(horizontal: Get.width * 0.025),
-        child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-          Container(
-              height: Get.width * 0.15,
-              child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: widget.favoriteLists.map((e) {
-                      return GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              selectedListIndex =
-                                  widget.favoriteLists.indexOf(e);
-                            });
-                          },
-                          child: Stack(
-                            fit: StackFit.loose,
-                            children: [
-                              Row(
-                                children: [
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Container(
-                                      decoration: BoxDecoration(
-                                          color: selectedListIndex ==
-                                                  widget.favoriteLists
-                                                      .indexOf(e)
-                                              ? Color(0xff00458C)
-                                              : Color(0xff00458C)
-                                                  .withOpacity(0.2),
-                                          borderRadius: BorderRadius.circular(
-                                              Get.width * 0.04)),
-                                      margin: EdgeInsets.only(
-                                          left: Get.width * 0.01,
-                                          right: Get.width * 0.01,
-                                          top: 10),
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: Get.width * 0.035,
-                                          vertical: Get.width * 0.025),
-                                      child: Text(e.listName,
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color: selectedListIndex ==
-                                                    widget.favoriteLists
-                                                        .indexOf(e)
-                                                ? Colors.white
-                                                : Color(0xff003E7E),
-                                          )))
-                                ],
-                              ),
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 9, vertical: 6),
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.white,
-                                    border: Border.all(
-                                        color: MyColors.blue_00458C)),
-                                child: Text(
-                                  "${e.favoriteItems.length}",
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      color: MyColors.blue_00458C),
-                                ),
-                              ),
-                            ],
-                          ));
-                    }).toList(),
-                  )))
-        ]));
+    return Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+      Container(
+          height: Get.width * 0.15,
+          width: Get.width,
+          padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
+          child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              physics: BouncingScrollPhysics(),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  listTile(
+                      onTap: () {
+                        setState(() {
+                          selectedListIndex = null;
+                          recomendedListSelected = true;
+                        });
+                      },
+                      isSelected: recomendedListSelected,
+                      name: 'Recomended List'.tr,
+                      count: recomendedMaterials.length),
+                  ...widget.favoriteLists.map((e) {
+                    return listTile(
+                        onTap: () {
+                          setState(() {
+                            recomendedListSelected = false;
+                            selectedListIndex = widget.favoriteLists.indexOf(e);
+                          });
+                        },
+                        isSelected: selectedListIndex ==
+                            widget.favoriteLists.indexOf(e),
+                        name: e.listName,
+                        count: e.favoriteItems.length);
+                  }).toList()
+                ],
+              )))
+    ]);
   }
 
-  Widget buildBelongsList() {
-    return Container(
-      width: Get.width,
-      decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-                color: Colors.grey.shade300, spreadRadius: 1, blurRadius: 10)
-          ],
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(25), topRight: Radius.circular(25))),
-      child: Column(
-        children: [
-          Container(
-              padding: EdgeInsets.symmetric(
-                  horizontal: Get.width * 0.06, vertical: Get.width * 0.05),
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Belongs on the list".tr,
-                      style:
-                          TextStyle(color: MyColors.blue_003E7E, fontSize: 24),
-                    ),
-                    Text(
-                      "Jacobs Kosher Passover Nescafe with Kernels",
-                      style:
-                          TextStyle(color: MyColors.blue_003E7E, fontSize: 17),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                        width: Get.width,
-                        child: Wrap(
-                            direction: Axis.horizontal,
-                            spacing: 5,
-                            runSpacing: 10,
-                            children: belongsList.map((e) {
-                              return Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(20)),
-                                          border: Border.all(
-                                              color: MyColors.blue_00458C)),
-                                      alignment: Alignment.center,
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 10, vertical: 10),
-                                      child: Text("${e}",
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              color: MyColors.blue_00458C)),
-                                    ),
-                                  ]);
-                            }).toList())),
-                  ])),
-          SizedBox(
-            height: 43,
-          ),
-          Expanded(
-              child: Container(
-            padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
-            color: MyColors.blue_E8EEF6,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  Widget listTile({
+    required Function onTap,
+    required bool isSelected,
+    required String name,
+    required int count,
+  }) {
+    return GestureDetector(
+        onTap: () => onTap(),
+        child: Stack(
+          fit: StackFit.loose,
+          children: [
+            Row(
               children: [
-                Container(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: Get.width * 0.1, vertical: Get.width * 0.025),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: MyColors.blue_00458C,
-                  ),
-                  child: Text(
-                    "Save".tr,
-                    style: TextStyle(color: Colors.white, fontSize: 22),
-                  ),
+                SizedBox(
+                  width: 10,
                 ),
-                Row(
-                  children: [
-                    Image.asset(
-                      AssetImages.deleted_list,
-                      color: Colors.red,
-                      width: Get.width * 0.07,
-                      height: Get.width * 0.07,
-                    ),
-                    Text(
-                      "Remove from favorites",
-                      style: TextStyle(color: Colors.red, fontSize: 17),
-                    )
-                  ],
-                )
+                Container(
+                    decoration: BoxDecoration(
+                        color: isSelected
+                            ? Color(0xff00458C)
+                            : Color(0xff00458C).withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(Get.width * 0.04)),
+                    margin: EdgeInsets.only(
+                        left: Get.width * 0.01,
+                        right: Get.width * 0.01,
+                        top: 10),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: Get.width * 0.035,
+                        vertical: Get.width * 0.025),
+                    child: Text(name,
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: isSelected ? Colors.white : Color(0xff003E7E),
+                        )))
               ],
             ),
-          ))
-        ],
-      ),
-    );
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 9, vertical: 6),
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.white,
+                  border: Border.all(color: MyColors.blue_00458C)),
+              child: Text(
+                "${count}",
+                style: TextStyle(fontSize: 12, color: MyColors.blue_00458C),
+              ),
+            ),
+          ],
+        ));
   }
 
   Widget buildNoProducts() {
     return ListView(
+      physics: BouncingScrollPhysics(),
       children: [
         Padding(
             padding: EdgeInsets.symmetric(
@@ -502,79 +446,13 @@ class _FavoritesPageState extends State<FavoritesPage> {
                           decoration: TextDecoration.underline),
                     )
                   ],
-                )
+                ),
+                SizedBox(
+                  height: Get.width * 0.35,
+                ),
               ],
             ))
       ],
-    );
-  }
-
-  Widget buildNewList() {
-    return Container(
-      padding: EdgeInsets.symmetric(
-          horizontal: Get.width * 0.06, vertical: Get.width * 0.05),
-      width: Get.width,
-      decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-                color: Colors.grey.shade300, spreadRadius: 1, blurRadius: 10)
-          ],
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(25), topRight: Radius.circular(25))),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "New shopping list".tr,
-                style: TextStyle(color: MyColors.blue_003E7E, fontSize: 26),
-              ),
-              Image.asset(
-                AssetImages.close,
-                width: Get.width * 0.05,
-                height: Get.width * 0.05,
-              )
-            ],
-          ),
-          SizedBox(
-            height: Get.width * 0.02,
-          ),
-          Container(
-            child: TextFormField(
-              decoration: InputDecoration(
-                  labelText: "List Name".tr,
-                  labelStyle:
-                      TextStyle(color: MyColors.blue_003E7E, fontSize: 17),
-                  hintStyle:
-                      TextStyle(color: MyColors.blue_003E7E, fontSize: 20),
-                  hintText: "Sample: Breakfast products".tr,
-                  border: UnderlineInputBorder(
-                      borderSide: BorderSide(color: MyColors.blue_003E7E)),
-                  enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: MyColors.blue_003E7E)),
-                  focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: MyColors.blue_003E7E))),
-            ),
-          ),
-          SizedBox(
-            height: Get.width * 0.1,
-          ),
-          Container(
-            width: Get.width,
-            alignment: Alignment.center,
-            padding: EdgeInsets.symmetric(vertical: Get.width * 0.03),
-            decoration: BoxDecoration(
-                color: MyColors.blue_00458C,
-                borderRadius: BorderRadius.all(Radius.circular(27))),
-            child: Text(
-              "Save".tr,
-              style: TextStyle(fontSize: 20, color: Colors.white),
-            ),
-          )
-        ],
-      ),
     );
   }
 

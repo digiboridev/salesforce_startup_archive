@@ -294,8 +294,12 @@ class MaterialCardState extends State<MaterialCard> {
 
   Widget buildTopIcon() {
     if (widget.insideFavorites) {
-      return CartTopIcon(
-        type: CartTopIcon.menu_type,
+      return GestureDetector(
+        onTap: () =>
+            favoritesController.showBelongEdit(material: widget.materiale),
+        child: CartTopIcon(
+          type: CartTopIcon.menu_type,
+        ),
       );
     } else if (widget.insideCart) {
       return GestureDetector(

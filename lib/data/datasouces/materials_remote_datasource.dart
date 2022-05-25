@@ -48,7 +48,8 @@ class MaterialsRemoteDatasourceImpl implements MaterialsRemoteDatasource {
 
         // Split materialsList to chunks
         int len = materialsList.length;
-        int size = responseList['result']['chunkSize'];
+        // int size = responseList['result']['chunkSize'];
+        int size = 50;
         List<List> chunks = [];
 
         for (var i = 0; i < len; i += size) {
@@ -57,7 +58,6 @@ class MaterialsRemoteDatasourceImpl implements MaterialsRemoteDatasource {
         }
 
         // load material data sequentialy
-
         Set<ClassificationModel> classification = Set();
         Set<BrandModel> brands = Set();
         Set<HierarchyModel> hierarchys = Set();

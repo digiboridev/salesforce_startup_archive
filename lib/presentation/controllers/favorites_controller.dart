@@ -8,6 +8,7 @@ import 'package:***REMOVED***/domain/usecases/favorites/get_favorites_and_cache.
 import 'package:***REMOVED***/domain/usecases/favorites/get_favorites_sync_time.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/favorites_states.dart';
+import 'package:***REMOVED***/presentation/ui/screens/main_screen/favorites/belogn_list.dart';
 import 'package:get/get.dart';
 
 class FavoritesController extends GetxController {
@@ -62,15 +63,44 @@ class FavoritesController extends GetxController {
     }
   }
 
-  Future updateFavorites() async {}
+  // Future updateFavorites() async {}
 
   Future<DateTime> getLastSync() async {
     return _getFavoritesSyncTime.call(_customerController.selectedCustomerSAP!);
   }
 
-  changeData({required List<FavoriteList> favoriteLists}) {
-    if (state is FSCommon) {
-      _state.value = FSCommon(favoriteLists: favoriteLists);
+  // changeData({required List<FavoriteList> favoriteLists}) {
+  //   if (state is FSCommon) {
+  //     _state.value = FSCommon(favoriteLists: favoriteLists);
+  //   } else {
+  //     Get.snackbar('Error', 'Favorites not ready');
+  //   }
+  // }
+  bool isMaterialInFavorite({required Materiale material}) {
+    FavoritesState s = state;
+
+    if (s is FSCommon) {
+      for (FavoriteList fl in s.favoriteLists) {
+        for (FavoriteItem fi in fl.favoriteItems) {
+          if (fi.materialNumber == material.MaterialNumber) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
+  addNewBlancList({required String listName}) {
+    FavoritesState s = state;
+
+    if (s is FSCommon) {
+      List<FavoriteList> currentLists = List<FavoriteList>.of(s.favoriteLists);
+
+      currentLists.add(FavoriteList(
+          favoriteItems: [], listName: listName, sFId: '', isAllList: false));
+
+      _state.value = FSCommon(favoriteLists: currentLists);
     } else {
       Get.snackbar('Error', 'Favorites not ready');
     }
@@ -143,18 +173,18 @@ class FavoritesController extends GetxController {
     }
   }
 
-  bool isMaterialInFavorite({required Materiale material}) {
+  Future showBelongEdit({required Materiale material}) async {
     FavoritesState s = state;
-
     if (s is FSCommon) {
-      for (FavoriteList fl in s.favoriteLists) {
-        for (FavoriteItem fi in fl.favoriteItems) {
-          if (fi.materialNumber == material.MaterialNumber) {
-            return true;
-          }
-        }
+      List<FavoriteList>? editedFavList = await Get.bottomSheet(BelongList(
+        favoriteLists: s.favoriteLists,
+        material: material,
+      ));
+
+      if (editedFavList is List<FavoriteList>) {
+        // TODO send to api then update
+        _state.value = FSCommon(favoriteLists: editedFavList);
       }
     }
-    return false;
   }
 }
