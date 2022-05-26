@@ -23,6 +23,7 @@ class FavoritesController extends GetxController {
 
   // variables
   Rx<FavoritesState> _state = Rx(FSInitial());
+  Stream<FavoritesState> get stateStream => _state.stream;
   FavoritesState get state => _state.value;
 
   @override

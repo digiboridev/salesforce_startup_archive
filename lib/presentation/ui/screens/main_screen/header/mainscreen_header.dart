@@ -5,6 +5,8 @@ import 'package:***REMOVED***/domain/services/image_caching_service.dart';
 import 'package:***REMOVED***/presentation/controllers/contactus_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/search_controller.dart';
+import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar_controller.dart';
+import 'package:***REMOVED***/presentation/ui/screens/main_screen/favorites/favorites_page_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/mainscreen_header_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/mainscreen_header_states.dart';
 import 'package:***REMOVED***/presentation/ui/screens/profile/profile_screen.dart';
@@ -28,6 +30,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
   final CustomerController customerController = Get.find();
   final ContactusController contactusController = Get.find();
   final SearchController searchController = Get.find();
+  final BottomBarController bottomBarController = Get.find();
 
   FocusNode searchFocusNode = FocusNode();
   bool searchHasFocus = false;
@@ -49,6 +52,11 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
         mainScreeenHeaderController.hide();
       }
     });
+  }
+
+  goToRecomended() async {
+    await bottomBarController.goToFavorites();
+    Get.find<FavoritesPageController>().selectRecomended();
   }
 
   @override
@@ -171,11 +179,14 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                                       color: Colors.white)),
                               padding: EdgeInsets.symmetric(
                                   horizontal: Get.width * 0.03),
-                              child: Text(
-                                'Recomended List'.tr,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: Get.width * 0.035),
+                              child: GestureDetector(
+                                onTap: () => goToRecomended(),
+                                child: Text(
+                                  'Recomended List'.tr,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: Get.width * 0.035),
+                                ),
                               ),
                             )
                         ],

@@ -31,8 +31,8 @@ class _FavoritesLoaderState extends State<FavoritesLoader>
 
       if (state is FSCommon) {
         return FavoritesPage(
-          favoriteLists: state.favoriteLists,
-        );
+            // favoriteLists: state.favoriteLists,
+            );
       } else if (state is FSLoadingError) {
         return Container(
           child: Column(

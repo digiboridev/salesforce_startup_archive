@@ -1,92 +1,19 @@
-import 'dart:ui';
-
 import 'package:***REMOVED***/core/asset_images.dart';
 import 'package:***REMOVED***/core/mycolors.dart';
-import 'package:***REMOVED***/domain/entities/materials/material.dart';
-import 'package:***REMOVED***/presentation/controllers/favorites_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_states.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/favorites/new_fav_list_bottomsheet.dart';
+import 'package:***REMOVED***/presentation/ui/screens/main_screen/favorites/favorites_page_controller.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/material_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:***REMOVED***/domain/entities/favorites/favorite_list.dart';
-import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
-
-class FavoritesPage extends StatefulWidget {
-  final List<FavoriteList> favoriteLists;
-
-  FavoritesPage({
-    Key? key,
-    required this.favoriteLists,
-  }) : super(key: key);
-
-  @override
-  State<FavoritesPage> createState() => _FavoritesPageState();
-}
-
-class _FavoritesPageState extends State<FavoritesPage> {
-  final CustomerController customerController = Get.find();
+class FavoritesPage extends StatelessWidget {
   final MaterialsCatalogController materialsCatalogController = Get.find();
-  final FavoritesController favoritesController = Get.find();
-
-  int? selectedListIndex;
-  bool recomendedListSelected = false;
-
-  @override
-  void initState() {
-    super.initState();
-    if (widget.favoriteLists.isNotEmpty) {
-      selectedListIndex = 0;
-    }
-  }
-
-  FavoriteList? get selectedList {
-    if (selectedListIndex is int) {
-      widget.favoriteLists.elementAt(selectedListIndex!);
-    }
-    return null;
-  }
-
-  @override
-  void didUpdateWidget(covariant FavoritesPage oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (selectedListIndex != null) {
-      if (selectedListIndex! > widget.favoriteLists.length - 1) {
-        if (widget.favoriteLists.isNotEmpty) {
-          selectedListIndex = 0;
-        } else {
-          selectedListIndex = null;
-        }
-      }
-    }
-  }
-
-  List<Materiale> get recomendedMaterials {
-    MaterialsCatalogState state =
-        materialsCatalogController.materialsCatalogState.value;
-    if (state is MCSCommon) {
-      // return state.catalog.materials
-      //     .where((element) => element.AverageQty > 0)
-      //     .toList();
-
-      return state.catalog.materials.take(10).toList();
-    }
-    return [];
-  }
-
-  showAddNewList() {
-    Get.bottomSheet(NewFavoritesListBottomheet()).then((value) {
-      if (value is String) {
-        favoritesController.addNewBlancList(listName: value);
-      }
-    });
-  }
+  final FavoritesPageController favoritesPageController =
+      Get.put(FavoritesPageController());
 
   @override
   Widget build(BuildContext context) {
-    print(recomendedMaterials.length);
     return Container(
       color: Colors.white,
       width: Get.width,
@@ -105,7 +32,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                   style: TextStyle(fontSize: 24, color: MyColors.blue_003E7E),
                 ),
                 GestureDetector(
-                  onTap: showAddNewList,
+                  onTap: () => favoritesPageController.showAddNewList(),
                   child: Image.asset(
                     AssetImages.favorites_list,
                     width: Get.width * 0.06,
@@ -124,11 +51,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
           ),
           Expanded(
             child: Container(
-              child:
-                  //  buildHaveNewList()
-                  // buildBelongsList()
-                  // buildNoProducts()
-                  buildItemsList(),
+              child: buildItemsList(),
             ),
           )
         ],
@@ -186,25 +109,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
           materialsCatalogController.materialsCatalogState.value;
 
       if (mcState is MCSCommon) {
-        List<Materiale> materialsToShow = [];
-
-        if (recomendedListSelected) {
-          materialsToShow = recomendedMaterials;
-        } else {
-          FavoriteList listToShow =
-              widget.favoriteLists.elementAt(selectedListIndex!);
-
-          listToShow.favoriteItems.forEach((fi) {
-            Materiale? m = mcState.catalog.materials.firstWhereOrNull(
-              (material) => material.MaterialNumber == fi.materialNumber,
-            );
-
-            if (m is Materiale) {
-              materialsToShow.add(m);
-            }
-          });
-        }
-        if (materialsToShow.isEmpty) {
+        if (favoritesPageController.materialsToShow.isEmpty) {
           return buildNoProducts();
         }
 
@@ -221,7 +126,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                   SizedBox(
                     height: Get.width * 0.05,
                   ),
-                  ...materialsToShow.map((material) {
+                  ...favoritesPageController.materialsToShow.map((material) {
                     return Column(
                       children: [
                         MaterialCard(
@@ -248,44 +153,41 @@ class _FavoritesPageState extends State<FavoritesPage> {
   }
 
   Widget buildListsRow() {
-    return Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-      Container(
-          height: Get.width * 0.15,
-          width: Get.width,
-          padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
-          child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              physics: BouncingScrollPhysics(),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  listTile(
-                      onTap: () {
-                        setState(() {
-                          selectedListIndex = null;
-                          recomendedListSelected = true;
-                        });
-                      },
-                      isSelected: recomendedListSelected,
-                      name: 'Recomended List'.tr,
-                      count: recomendedMaterials.length),
-                  ...widget.favoriteLists.map((e) {
-                    return listTile(
-                        onTap: () {
-                          setState(() {
-                            recomendedListSelected = false;
-                            selectedListIndex = widget.favoriteLists.indexOf(e);
-                          });
-                        },
-                        isSelected: selectedListIndex ==
-                            widget.favoriteLists.indexOf(e),
-                        name: e.listName,
-                        count: e.favoriteItems.length);
-                  }).toList()
-                ],
-              )))
-    ]);
+    return Obx(() => Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+          Container(
+              height: Get.width * 0.15,
+              width: Get.width,
+              padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
+              child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  physics: BouncingScrollPhysics(),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      listTile(
+                          onTap: () =>
+                              favoritesPageController.selectRecomended(),
+                          isSelected:
+                              favoritesPageController.recomendedListSelected,
+                          name: 'Recomended List'.tr,
+                          count: favoritesPageController
+                              .recomendedMaterials.length),
+                      ...favoritesPageController.favoriteLists.map((e) {
+                        return listTile(
+                            onTap: () => favoritesPageController.selectList(
+                                index: favoritesPageController.favoriteLists
+                                    .indexOf(e)),
+                            isSelected:
+                                favoritesPageController.selectedListIndex ==
+                                    favoritesPageController.favoriteLists
+                                        .indexOf(e),
+                            name: e.listName,
+                            count: e.favoriteItems.length);
+                      }).toList()
+                    ],
+                  )))
+        ]));
   }
 
   Widget listTile({

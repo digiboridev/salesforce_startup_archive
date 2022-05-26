@@ -12,11 +12,44 @@ class BottomBarController extends GetxController {
   RxBool showCount = RxBool(false);
   Timer? t;
 
-  changePage({required int newPageIndex}) {
+  Future changePage({required int newPageIndex}) {
     if (newPageIndex < 1 || newPageIndex > pages) {
       throw Exception('Unsupported index');
     }
-    futureIndex.value = newPageIndex;
+    Completer _completer = new Completer();
+
+    StreamSubscription? sub;
+
+    handle(int p0) {
+      if (p0 == newPageIndex) {
+        _completer.complete();
+        if (sub is StreamSubscription) {
+          sub.cancel();
+        }
+      }
+    }
+
+    // complete future on page changed
+    sub = currentPageIndex.listen((p0) {
+      handle(p0);
+    });
+
+    if (futureIndex.value == newPageIndex) {
+      // force listeners to update if value the same
+      futureIndex.refresh();
+    } else {
+      futureIndex.value = newPageIndex;
+    }
+
+    return _completer.future;
+  }
+
+  Future goToCatalog() async {
+    await changePage(newPageIndex: 4);
+  }
+
+  Future goToFavorites() async {
+    await changePage(newPageIndex: 2);
   }
 
   // Show counter for 3 seconds

@@ -273,8 +273,7 @@ class CartPageState extends State<CartPage> {
             onTap: () => Get.snackbar('Error', 'Not implemented'),
             child: Text('Save to fav')),
         GestureDetector(
-            onTap: () => bottomBarController.changePage(newPageIndex: 4),
-            child: Text('Add')),
+            onTap: () => bottomBarController.goToCatalog(), child: Text('Add')),
       ],
     );
   }

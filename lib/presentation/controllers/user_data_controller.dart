@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:***REMOVED***/core/languages.dart';
 import 'package:***REMOVED***/domain/entities/auth_data.dart';
 import 'package:***REMOVED***/domain/entities/user_data.dart';
+import 'package:***REMOVED***/domain/services/app_version_service.dart';
 import 'package:***REMOVED***/domain/services/cache_fetching_service.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/domain/services/sf_sdk_service.dart';
@@ -80,7 +81,7 @@ class UserDataController extends GetxController {
       return;
     }
 
-    // AppVersionService.checkVersion();
+    AppVersionService.checkVersion();
 
     // emit loading state
     _userDataState.value = UserDataLoadingState();

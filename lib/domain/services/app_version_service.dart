@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:***REMOVED***/presentation/ui/widgets/dialogs/default_dialog.dart';
+import 'package:***REMOVED***/presentation/ui/widgets/dialogs/app_version_dialog.dart';
 import 'package:http/http.dart' as http;
 import 'package:package_info_plus/package_info_plus.dart';
 

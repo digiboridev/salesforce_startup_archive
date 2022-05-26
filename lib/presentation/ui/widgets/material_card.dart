@@ -336,7 +336,6 @@ class MaterialCardState extends State<MaterialCard> {
       );
     } else {
       return Obx(() {
-        print(cartController.cartItems);
         CartItem? cartItem = cartController.getItemByNumber(
             materialNumber: widget.materiale.MaterialNumber);
 
