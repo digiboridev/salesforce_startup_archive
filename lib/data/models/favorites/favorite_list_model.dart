@@ -20,8 +20,8 @@ class FavoriteListModel extends FavoriteList {
   Map<String, dynamic> toMap() {
     return {
       'SFId': sFId,
-      'listName': isAllList,
-      'IsAllList': listName,
+      'listName': listName,
+      'IsAllList': isAllList,
       'FavoriteItems': favoriteItems.map((x) => x.toMap()).toList(),
     };
   }
