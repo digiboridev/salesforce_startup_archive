@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/core/asset_images.dart';
 import 'package:***REMOVED***/domain/entities/materials/alternative_item.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
 import 'package:***REMOVED***/domain/services/cache_fetching_service.dart';
@@ -6,6 +7,7 @@ import 'package:***REMOVED***/domain/services/image_caching_service.dart';
 import 'package:***REMOVED***/domain/usecases/materials/get_materials_sync_time.dart';
 import 'package:***REMOVED***/domain/usecases/materials/subscribe_to_material.dart';
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_states.dart';
+import 'package:***REMOVED***/presentation/ui/widgets/dialogs/info_bottomsheet.dart';
 import 'package:get/get.dart';
 import 'package:***REMOVED***/domain/entities/materials/materials_catalog.dart';
 import 'package:***REMOVED***/domain/usecases/materials/get_materials_and_cache.dart';
@@ -106,12 +108,25 @@ class MaterialsCatalogController extends GetxController {
 
   Future subscribeToMaterial({required Materiale material}) async {
     if (_connectionService.hasConnection) {
-      await _subscribeToMaterial.call(SubscribeToMaterialParams(
-          customerSAP: _customerController.selectedCustomerSAP!,
-          materialNumber: material.MaterialNumber));
-      material.didSubscribedToInventoryAlert.value = true;
+      try {
+        await _subscribeToMaterial.call(SubscribeToMaterialParams(
+            customerSAP: _customerController.selectedCustomerSAP!,
+            materialNumber: material.MaterialNumber));
+        material.didSubscribedToInventoryAlert.value = true;
+      } catch (e) {
+        Get.bottomSheet(InfoBottomSheet(
+            headerText: 'Error',
+            mainText: e.toString(),
+            actions: [InfoAction(text: 'Ok', callback: () => Get.back())],
+            headerIconPath: AssetImages.info));
+      }
     } else {
-      Get.snackbar('Error', 'Restricted for offline mode'.tr);
+      // Get.snackbar('Error', 'Restricted for offline mode'.tr);
+      Get.bottomSheet(InfoBottomSheet(
+          headerText: 'No internet connection',
+          mainText: 'This action is rescticted for offline mode',
+          actions: [InfoAction(text: 'Ok', callback: () => Get.back())],
+          headerIconPath: AssetImages.info));
     }
   }
 }

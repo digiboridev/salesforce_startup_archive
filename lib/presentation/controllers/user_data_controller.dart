@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:***REMOVED***/core/asset_images.dart';
 import 'package:***REMOVED***/core/languages.dart';
 import 'package:***REMOVED***/domain/entities/auth_data.dart';
 import 'package:***REMOVED***/domain/entities/user_data.dart';
@@ -14,6 +15,7 @@ import 'package:***REMOVED***/domain/usecases/user/get_userdata_and_cache.dart';
 import 'package:***REMOVED***/domain/usecases/user/get_userdata_sync_time.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller_states.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/dialogs/default_dialog.dart';
+import 'package:***REMOVED***/presentation/ui/widgets/dialogs/info_bottomsheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -81,7 +83,7 @@ class UserDataController extends GetxController {
       return;
     }
 
-    AppVersionService.checkVersion();
+    // AppVersionService.checkVersion();
 
     // emit loading state
     _userDataState.value = UserDataLoadingState();
@@ -166,7 +168,11 @@ class UserDataController extends GetxController {
       await _acceptLegaloc(NoParams());
       loadUserData();
     } catch (e) {
-      Get.snackbar('Error', e.toString(), backgroundColor: Colors.amber);
+      Get.bottomSheet(InfoBottomSheet(
+          headerText: 'Error',
+          mainText: e.toString(),
+          actions: [InfoAction(text: 'Ok', callback: () => Get.back())],
+          headerIconPath: AssetImages.info));
     }
   }
 
@@ -211,7 +217,11 @@ class UserDataController extends GetxController {
       Get.until((route) => !Get.isDialogOpen!);
     } catch (e) {
       Get.until((route) => !Get.isDialogOpen!);
-      Get.snackbar('Error', e.toString(), backgroundColor: Colors.amber);
+      Get.bottomSheet(InfoBottomSheet(
+          headerText: 'Error',
+          mainText: e.toString(),
+          actions: [InfoAction(text: 'Ok', callback: () => Get.back())],
+          headerIconPath: AssetImages.info));
     }
   }
 
@@ -227,7 +237,11 @@ class UserDataController extends GetxController {
       if (onlogin) loadUserData();
     } catch (e) {
       Get.until((route) => !Get.isDialogOpen!);
-      Get.snackbar('Error', e.toString(), backgroundColor: Colors.amber);
+      Get.bottomSheet(InfoBottomSheet(
+          headerText: 'Error',
+          mainText: e.toString(),
+          actions: [InfoAction(text: 'Ok', callback: () => Get.back())],
+          headerIconPath: AssetImages.info));
     }
   }
 

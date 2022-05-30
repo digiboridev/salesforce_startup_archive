@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:***REMOVED***/core/asset_images.dart';
 import 'package:***REMOVED***/domain/entities/customer.dart';
 import 'package:***REMOVED***/domain/entities/related_consumer.dart';
 import 'package:***REMOVED***/domain/services/cache_fetching_service.dart';
@@ -10,6 +11,7 @@ import 'package:***REMOVED***/domain/usecases/customer/set_selected_customer_sap
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller_states.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/dialogs/default_dialog.dart';
+import 'package:***REMOVED***/presentation/ui/widgets/dialogs/info_bottomsheet.dart';
 import 'package:get/get.dart';
 
 class CustomerController extends GetxController {
@@ -113,14 +115,20 @@ class CustomerController extends GetxController {
           hasConnetrion: _connectionService.hasConnection));
       _selectedCustomer.value = c;
     } catch (e) {
-      Get.snackbar('Error', e.toString());
+      print(e.toString());
     }
   }
 
   Future<void> switchCustomer({required String customerSAP}) async {
+    defaultDialog();
     // Restrict on offline mode
     if (!_connectionService.hasConnection) {
-      Get.snackbar('Error', 'Restricted operation for offline mode');
+      // Get.snackbar('Error', 'Restricted operation for offline mode');
+      Get.bottomSheet(InfoBottomSheet(
+          headerText: 'No internet connection',
+          mainText: 'This action is rescticted for offline mode',
+          actions: [InfoAction(text: 'Ok', callback: () => Get.back())],
+          headerIconPath: AssetImages.info));
       return;
     }
 
@@ -144,7 +152,12 @@ class CustomerController extends GetxController {
       Get.until((route) => !Get.isDialogOpen!);
     } catch (e) {
       Get.until((route) => !Get.isDialogOpen!);
-      Get.snackbar('Error', e.toString());
+      // Get.snackbar('Error', e.toString());
+      Get.bottomSheet(InfoBottomSheet(
+          headerText: 'Error',
+          mainText: e.toString(),
+          actions: [InfoAction(text: 'Ok', callback: () => Get.back())],
+          headerIconPath: AssetImages.info));
     }
   }
 }

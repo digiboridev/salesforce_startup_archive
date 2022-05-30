@@ -39,4 +39,7 @@ abstract class AssetImages {
   static String get favorite_no_product =>
       'assets/icons/favorite_no_product.png';
   static String get have_new_list => 'assets/icons/have_new_list.png';
+
+  static String get info => 'assets/icons/info.png';
+  static String get check => 'assets/icons/check.png';
 }

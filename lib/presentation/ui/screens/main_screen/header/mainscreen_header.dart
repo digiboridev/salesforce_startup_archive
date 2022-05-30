@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:***REMOVED***/core/asset_images.dart';
 import 'package:***REMOVED***/core/mycolors.dart';
 import 'package:***REMOVED***/domain/entities/contact_us_data.dart';
@@ -208,8 +210,13 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
               if (mainScreeenHeaderController.mainScreeenHeaderState.value
                   is! MSHShowCommon) {
                 return Positioned(
+                    child: ClipRect(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
                     child: Container(
-                  color: Colors.black.withAlpha(100),
+                      color: Colors.black.withAlpha(100),
+                    ),
+                  ),
                 ));
               } else {
                 return SizedBox();
