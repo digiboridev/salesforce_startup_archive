@@ -73,6 +73,22 @@ class MaterialsCatalogController extends GetxController {
       print('Load catalog error' + e.toString());
       materialsCatalogState.value =
           MCSLoadingError(errorMsg: 'Load catalog error' + e.toString());
+
+      Get.bottomSheet(
+        InfoBottomSheet(
+            headerText: 'Error while load catalog',
+            mainText: e.toString(),
+            actions: [
+              InfoAction(
+                  text: 'Retry',
+                  callback: () {
+                    Get.back();
+                    loadCatalog();
+                  })
+            ],
+            headerIconPath: AssetImages.info),
+        isDismissible: false,
+      );
     }
   }
 

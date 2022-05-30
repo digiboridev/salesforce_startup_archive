@@ -145,8 +145,15 @@ class FavoritesPage extends StatelessWidget {
           ],
         );
       } else {
-        return Center(
-          child: CircularProgressIndicator(),
+        return Container(
+          child: Center(
+            child: Container(
+              padding: EdgeInsets.all(Get.width * 0.06),
+              alignment: Alignment.center,
+              color: MyColors.white_F4F4F6,
+              child: Image.asset(AssetImages.loading_circle),
+            ),
+          ),
         );
       }
     });

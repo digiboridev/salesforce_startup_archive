@@ -67,98 +67,107 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             SizedBox(
-              height: Get.width * 0.16,
+              height: Get.width * 0.1,
             ),
-            buildDeals(
-                materials: getDeals.take(4).toList(),
-                header: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Deals'.tr,
-                      style: TextStyle(
-                        color: MyColors.blue_003E7E,
-                        fontSize: Get.width * 0.055,
+            if (getDeals.isNotEmpty)
+              buildDeals(
+                  materials: getDeals.take(4).toList(),
+                  header: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Deals'.tr,
+                        style: TextStyle(
+                          color: MyColors.blue_003E7E,
+                          fontSize: Get.width * 0.055,
+                        ),
                       ),
-                    ),
-                    Text(
-                      'All Deals'.tr,
-                      style: TextStyle(
-                          decoration: TextDecoration.underline,
-                          fontSize: Get.width * 0.045,
-                          color: Colors.blue),
-                    ),
-                  ],
-                )),
-            buildIItemsRow(
-                materials: getRecomendedProducts.take(4).toList(),
-                header: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Recomended for you'.tr,
-                      style: TextStyle(
-                        color: MyColors.blue_003E7E,
-                        fontSize: Get.width * 0.055,
+                      Text(
+                        'All Deals'.tr,
+                        style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            fontSize: Get.width * 0.045,
+                            color: Colors.blue),
                       ),
-                    ),
-                    Text(
-                      'All recomended'.tr,
-                      style: TextStyle(
-                          decoration: TextDecoration.underline,
-                          fontSize: Get.width * 0.045,
-                          color: Colors.blue),
-                    ),
-                  ],
-                )),
+                    ],
+                  )),
+            if (getRecomendedProducts.isNotEmpty)
+              buildIItemsRow(
+                  materials: getRecomendedProducts.take(4).toList(),
+                  header: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Recomended for you'.tr,
+                        style: TextStyle(
+                          color: MyColors.blue_003E7E,
+                          fontSize: Get.width * 0.055,
+                        ),
+                      ),
+                      Text(
+                        'All recomended'.tr,
+                        style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            fontSize: Get.width * 0.045,
+                            color: Colors.blue),
+                      ),
+                    ],
+                  )),
+            if (getNewProducts.isNotEmpty)
+              SizedBox(
+                height: Get.width * 0.06,
+              ),
+            if (getNewProducts.isNotEmpty)
+              buildIItemsRow(
+                  materials: getNewProducts.take(4).toList(),
+                  header: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'New Products'.tr,
+                        style: TextStyle(
+                          color: MyColors.blue_003E7E,
+                          fontSize: Get.width * 0.055,
+                        ),
+                      ),
+                      Text(
+                        'To all newcomers'.tr,
+                        style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            fontSize: Get.width * 0.045,
+                            color: Colors.blue),
+                      ),
+                    ],
+                  )),
+            if (getMissingProducts.isNotEmpty)
+              SizedBox(
+                height: Get.width * 0.06,
+              ),
+            if (getMissingProducts.isNotEmpty)
+              buildIItemsRow(
+                  materials: getMissingProducts.take(4).toList(),
+                  header: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'You may be missing'.tr,
+                        style: TextStyle(
+                          color: MyColors.blue_003E7E,
+                          fontSize: Get.width * 0.055,
+                        ),
+                      ),
+                      Text(
+                        'List of deficiencies'.tr,
+                        style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            fontSize: Get.width * 0.045,
+                            color: Colors.blue),
+                      ),
+                    ],
+                  )),
             SizedBox(
-              height: Get.width * 0.06,
+              height: Get.width * 0.2,
             ),
-            buildIItemsRow(
-                materials: getNewProducts.take(4).toList(),
-                header: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'New Products'.tr,
-                      style: TextStyle(
-                        color: MyColors.blue_003E7E,
-                        fontSize: Get.width * 0.055,
-                      ),
-                    ),
-                    Text(
-                      'To all newcomers'.tr,
-                      style: TextStyle(
-                          decoration: TextDecoration.underline,
-                          fontSize: Get.width * 0.045,
-                          color: Colors.blue),
-                    ),
-                  ],
-                )),
-            SizedBox(
-              height: Get.width * 0.06,
-            ),
-            buildIItemsRow(
-                materials: getMissingProducts.take(4).toList(),
-                header: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'You may be missing'.tr,
-                      style: TextStyle(
-                        color: MyColors.blue_003E7E,
-                        fontSize: Get.width * 0.055,
-                      ),
-                    ),
-                    Text(
-                      'List of deficiencies'.tr,
-                      style: TextStyle(
-                          decoration: TextDecoration.underline,
-                          fontSize: Get.width * 0.045,
-                          color: Colors.blue),
-                    ),
-                  ],
-                )),
           ],
         ),
       ),

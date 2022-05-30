@@ -1,3 +1,5 @@
+import 'package:***REMOVED***/core/asset_images.dart';
+import 'package:***REMOVED***/core/mycolors.dart';
 import 'package:***REMOVED***/presentation/controllers/favorites_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/favorites_states.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/favorites/favorites_page.dart';
@@ -33,37 +35,15 @@ class _FavoritesLoaderState extends State<FavoritesLoader>
         return FavoritesPage(
             // favoriteLists: state.favoriteLists,
             );
-      } else if (state is FSLoadingError) {
-        return Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('Favorites loading error'.tr),
-              SizedBox(
-                height: Get.width * 0.06,
-              ),
-              Text(state.errorMsg),
-              SizedBox(
-                height: Get.width * 0.06,
-              ),
-              GestureDetector(
-                onTap: () => favoritesController.loadFavorites(),
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.circular(Get.width * 0.06)),
-                  padding: EdgeInsets.symmetric(
-                      horizontal: Get.width * 0.1, vertical: Get.width * 0.03),
-                  child: Text('try again'.tr),
-                ),
-              )
-            ],
-          ),
-        );
       } else {
         return Container(
           child: Center(
-            child: CircularProgressIndicator(),
+            child: Container(
+              padding: EdgeInsets.all(Get.width * 0.06),
+              alignment: Alignment.center,
+              color: MyColors.white_F4F4F6,
+              child: Image.asset(AssetImages.loading_circle),
+            ),
           ),
         );
       }

@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/core/asset_images.dart';
 import 'package:***REMOVED***/domain/entities/favorites/favorite_item.dart';
 import 'package:***REMOVED***/domain/entities/favorites/favorite_list.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
@@ -9,6 +10,7 @@ import 'package:***REMOVED***/domain/usecases/favorites/get_favorites_sync_time.
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/favorites_states.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/favorites/belogn_list.dart';
+import 'package:***REMOVED***/presentation/ui/widgets/dialogs/info_bottomsheet.dart';
 import 'package:get/get.dart';
 
 class FavoritesController extends GetxController {
@@ -61,6 +63,21 @@ class FavoritesController extends GetxController {
       print('Load favorites error' + e.toString());
       _state.value =
           FSLoadingError(errorMsg: 'Load catalog error' + e.toString());
+      Get.bottomSheet(
+        InfoBottomSheet(
+            headerText: 'Error while load favorites',
+            mainText: e.toString(),
+            actions: [
+              InfoAction(
+                  text: 'Retry',
+                  callback: () {
+                    Get.back();
+                    loadFavorites();
+                  })
+            ],
+            headerIconPath: AssetImages.info),
+        isDismissible: false,
+      );
     }
   }
 

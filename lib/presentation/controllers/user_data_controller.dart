@@ -83,6 +83,9 @@ class UserDataController extends GetxController {
       return;
     }
 
+    // _userDataState.value = UserDataLoadingErrorState(msg: 'error');
+    // return;
+
     // AppVersionService.checkVersion();
 
     // emit loading state
@@ -122,6 +125,21 @@ class UserDataController extends GetxController {
       // emit error state
       print(e);
       _userDataState.value = UserDataLoadingErrorState(msg: e.toString());
+      Get.bottomSheet(
+        InfoBottomSheet(
+            headerText: 'Error while load user data',
+            mainText: e.toString(),
+            actions: [
+              InfoAction(
+                  text: 'Retry',
+                  callback: () {
+                    Get.back();
+                    loadUserData();
+                  })
+            ],
+            headerIconPath: AssetImages.info),
+        isDismissible: false,
+      );
     }
   }
 

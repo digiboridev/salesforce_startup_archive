@@ -1,3 +1,5 @@
+import 'package:***REMOVED***/core/asset_images.dart';
+import 'package:***REMOVED***/core/mycolors.dart';
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_states.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalog_page.dart';
@@ -35,37 +37,15 @@ class _CatalogLoaderState extends State<CatalogLoader>
           key: ObjectKey(state.catalog),
           materialsCatalog: state.catalog,
         );
-      } else if (state is MCSLoadingError) {
-        return Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('Materials loading error'.tr),
-              SizedBox(
-                height: Get.width * 0.06,
-              ),
-              Text(state.errorMsg),
-              SizedBox(
-                height: Get.width * 0.06,
-              ),
-              GestureDetector(
-                onTap: () => materialsCatalogController.loadCatalog(),
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.circular(Get.width * 0.06)),
-                  padding: EdgeInsets.symmetric(
-                      horizontal: Get.width * 0.1, vertical: Get.width * 0.03),
-                  child: Text('try again'.tr),
-                ),
-              )
-            ],
-          ),
-        );
       } else {
         return Container(
           child: Center(
-            child: CircularProgressIndicator(),
+            child: Container(
+              padding: EdgeInsets.all(Get.width * 0.06),
+              alignment: Alignment.center,
+              color: MyColors.white_F4F4F6,
+              child: Image.asset(AssetImages.loading_circle),
+            ),
           ),
         );
       }

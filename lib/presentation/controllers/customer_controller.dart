@@ -101,6 +101,21 @@ class CustomerController extends GetxController {
     } catch (e) {
       _customerLoadingError.value = e.toString();
       print(e.toString());
+      Get.bottomSheet(
+        InfoBottomSheet(
+            headerText: 'Error while load customer data',
+            mainText: e.toString(),
+            actions: [
+              InfoAction(
+                  text: 'Retry',
+                  callback: () {
+                    Get.back();
+                    loadCustomers();
+                  })
+            ],
+            headerIconPath: AssetImages.info),
+        isDismissible: false,
+      );
     }
   }
 
@@ -120,7 +135,6 @@ class CustomerController extends GetxController {
   }
 
   Future<void> switchCustomer({required String customerSAP}) async {
-    defaultDialog();
     // Restrict on offline mode
     if (!_connectionService.hasConnection) {
       // Get.snackbar('Error', 'Restricted operation for offline mode');
