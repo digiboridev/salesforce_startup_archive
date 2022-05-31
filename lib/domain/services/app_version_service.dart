@@ -9,7 +9,12 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AppVersionService {
+  static bool skipped = false;
+
   static Future checkVersion() async {
+    if (skipped) {
+      return;
+    }
     try {
       PackageInfo packageInfo = await PackageInfo.fromPlatform();
       String appVersion = packageInfo.version;
@@ -33,14 +38,11 @@ class AppVersionService {
       int bn = int.parse(appVersion.split('.').join().toString());
 
       if (an > bn) {
-        // appVersionDialog(
-        //     current: appVersion,
-        //     desired: desiredVersion.version,
-        //     ulr: desiredVersion.downloadUrl);
         await Get.bottomSheet(
           InfoBottomSheet(
               headerText: 'Update app please',
-              mainText: 'Actual app version: ${desiredVersion.version}',
+              mainText:
+                  'A new version of this application is available, please update',
               actions: [
                 InfoAction(
                     text: 'Update',
@@ -51,6 +53,7 @@ class AppVersionService {
               headerIconPath: AssetImages.info),
           // isDismissible: false,
         );
+        skipped = true;
       }
     } catch (e) {
       print(e);

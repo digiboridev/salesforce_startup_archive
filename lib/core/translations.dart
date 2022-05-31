@@ -4,6 +4,10 @@ class Trs extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'en': {
+          'Good morning': 'Good morning🌞',
+          'The password you entered is expired':
+              'The password you entered is expired',
+          'Back to the login screen': 'Back to the login screen',
           'hello': 'Hello World',
           'Hebrew': 'Hebrew',
           'English': 'English',
@@ -153,6 +157,9 @@ class Trs extends Translations {
           'All branches': 'All branches',
         },
         'he': {
+          'Good morning': 'בוקר טוב🌞',
+          'The password you entered is expired': 'תוקף הסיסמה שהזנת פג',
+          'Back to the login screen': 'חזרה למסך הכניסה',
           'hello': 'Hallo 123',
           'Hebrew': "עברית",
           'English': 'English',

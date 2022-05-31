@@ -21,7 +21,7 @@ import 'package:get/get.dart';
 
 class UserDataController extends GetxController {
   // dependencies
-  SFSDKService _sfsdkService = SFSDKService();
+  SFSDKService _sfsdkService = Get.find();
   CacheFetchingService _cacheFetchingService = Get.find();
   ConnectionService _connectionService = Get.find();
 
@@ -247,13 +247,10 @@ class UserDataController extends GetxController {
       required String newPass,
       bool onlogin = false}) async {
     try {
-      defaultDialog();
       await _changePassword
           .call(ChangePasswordParams(oldPass: oldPass, newPass: newPass));
-      Get.until((route) => !Get.isDialogOpen!);
       if (onlogin) loadUserData();
     } catch (e) {
-      Get.until((route) => !Get.isDialogOpen!);
       Get.bottomSheet(InfoBottomSheet(
           headerText: 'Error',
           mainText: e.toString(),

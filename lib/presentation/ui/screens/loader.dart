@@ -37,15 +37,7 @@ class Loader extends StatelessWidget {
         return LegalDocScreen(
           legalDocLink: userDataState.legalDoc,
           buttonText: 'Understood'.tr,
-          callback: () {
-            if (!connectionService.hasConnection) {
-              Get.snackbar('Error'.tr, 'No internet'.tr,
-                  backgroundColor: Colors.amber);
-              return;
-            }
-
-            userDataController.acceptLegalDoc();
-          },
+          callback: () => userDataController.acceptLegalDoc(),
         );
       }
 

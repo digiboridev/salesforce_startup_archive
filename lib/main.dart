@@ -19,6 +19,7 @@ import 'package:***REMOVED***/data/repositories/user_data_repository.dart';
 import 'package:***REMOVED***/domain/services/cache_fetching_service.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
+import 'package:***REMOVED***/domain/services/sf_sdk_service.dart';
 import 'package:***REMOVED***/domain/usecases/cart/get_cart_items.dart';
 import 'package:***REMOVED***/domain/usecases/cart/set_cart_items.dart';
 import 'package:***REMOVED***/domain/usecases/favorites/get_favorites_and_cache.dart';
@@ -134,9 +135,10 @@ Future injectDependency() async {
 Future initServices() async {
   print('starting services ...');
   await GetStorage.init();
+  await Get.put(SFSDKService(), permanent: true);
   await Get.putAsync(() => ConnectionService().init());
   await Get.put(ImageCachingService());
-  await Get.putAsync(() => CacheFetchingService(Duration(minutes: 30)).init());
+  await Get.put(CacheFetchingService(Duration(minutes: 30)));
   print('All services started...');
 }
 

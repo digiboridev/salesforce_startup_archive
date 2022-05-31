@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'package:***REMOVED***/domain/entities/auth_data.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
+import 'package:***REMOVED***/domain/services/sf_sdk_service.dart';
 import 'package:***REMOVED***/domain/services/sync.dart';
 import 'package:get/get.dart';
 
@@ -17,6 +19,7 @@ class CacheUpdateEvent {
 class CacheFetchingService extends GetxService {
   CacheFetchingService(this.updateInterval);
   ConnectionService connectionService = Get.find();
+  SFSDKService _sfsdkService = Get.find();
   final Duration updateInterval;
   Timer? t;
 
@@ -28,14 +31,46 @@ class CacheFetchingService extends GetxService {
     _cacheUpdateEvents.add(cacheUpdateEvent);
   }
 
-  Future<CacheFetchingService> init() async {
+  @override
+  void onReady() {
+    super.onReady();
+
+    // Bind to auth events
+    _sfsdkService.authData.then((d) {
+      if (d != null) start();
+    });
+
+    _sfsdkService.authEventStream.listen((event) async {
+      AuthData? d = await _sfsdkService.authData;
+      if (d != null) {
+        start();
+      } else {
+        stop();
+      }
+    });
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    stop();
+  }
+
+  // Start automatic iterations
+  start() async {
     parseConfig();
     if (t is! Timer) {
       t = Timer.periodic(Duration(minutes: 5), (t) => fetch());
-    } else {
-      throw Exception('Already init');
     }
-    return this;
+  }
+
+  // Stop automatic iterations and remove events
+  stop() {
+    if (t is Timer) {
+      t!.cancel();
+      t = null;
+    }
+    _cacheUpdateEvents.clear();
   }
 
   fetch() {
@@ -59,14 +94,5 @@ class CacheFetchingService extends GetxService {
     });
 
     print('Cache update complete');
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-    if (t is Timer) {
-      t!.cancel();
-      t = null;
-    }
   }
 }

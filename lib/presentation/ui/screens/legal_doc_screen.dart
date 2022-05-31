@@ -13,7 +13,7 @@ class LegalDocScreen extends StatefulWidget {
       : super(key: key);
 
   final Uri legalDocLink;
-  final Function callback;
+  final Future Function() callback;
   final String buttonText;
 
   @override
@@ -23,6 +23,7 @@ class LegalDocScreen extends StatefulWidget {
 class _LegalDocScreenState extends State<LegalDocScreen> {
   WebViewController? webViewController;
   bool error = false;
+  bool processing = false;
 
   @override
   Widget build(BuildContext context) {
@@ -45,13 +46,13 @@ class _LegalDocScreenState extends State<LegalDocScreen> {
                     child: Text(
                       'Terms of Use'.tr,
                       style: TextStyle(
-                        color: MyColors.blue_003E7E,
-                        fontSize: 26,
-                      ),
+                          color: MyColors.blue_003E7E,
+                          fontSize: Get.width * 0.07,
+                          fontWeight: FontWeight.w500),
                     )),
                 Expanded(
                     child: Padding(
-                  padding: EdgeInsets.all(Get.width * 0.06),
+                  padding: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
                   child: WebView(
                     zoomEnabled: false,
                     javascriptMode: JavascriptMode.unrestricted,
@@ -80,23 +81,31 @@ class _LegalDocScreenState extends State<LegalDocScreen> {
                   width: Get.width,
                 ),
                 GestureDetector(
-                  onTap: () => widget.callback(),
+                  onTap: () async {
+                    if (processing) return;
+                    setState(() => processing = true);
+                    await widget.callback();
+                    setState(() => processing = false);
+                  },
                   child: Container(
                     width: Get.width,
+                    height: Get.width * 0.12,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                         color: MyColors.blue_00458C,
                         borderRadius: BorderRadius.circular(Get.width * 0.06)),
-                    padding: EdgeInsets.symmetric(
-                        horizontal: Get.width * 0.3,
-                        vertical: Get.width * 0.03),
                     margin: EdgeInsets.symmetric(
-                        horizontal: Get.width * 0.1,
-                        vertical: Get.width * 0.03),
-                    child: Text(
-                      widget.buttonText.tr,
-                      style: TextStyle(color: Colors.white),
-                    ),
+                        horizontal: Get.width * 0.05,
+                        vertical: Get.width * 0.05),
+                    child: processing
+                        ? CircularProgressIndicator()
+                        : Text(
+                            widget.buttonText.tr,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                                fontSize: Get.width * 0.04),
+                          ),
                   ),
                 ),
               ],
@@ -131,7 +140,7 @@ class _LegalDocScreenState extends State<LegalDocScreen> {
 
   Container buildHeader() {
     return Container(
-      height: Get.width * 0.3,
+      height: Get.width * 0.25,
       decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topCenter,
@@ -142,31 +151,13 @@ class _LegalDocScreenState extends State<LegalDocScreen> {
         children: [
           Spacer(),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              GestureDetector(
-                onTap: () {
-                  Get.back();
-                },
-                child: Icon(
-                  Directionality.of(context) == TextDirection.rtl
-                      ? Icons.keyboard_arrow_right
-                      : Icons.keyboard_arrow_left,
-                  color: Colors.white,
-                ),
-              ),
               Hero(
                 tag: 'logo',
                 child: Image.asset(
                   AssetImages.***REMOVED***Logo,
-                  width: Get.width * 0.3,
-                ),
-              ),
-              Hero(
-                tag: 'contact_btn',
-                child: Image.asset(
-                  AssetImages.contactButton,
-                  width: Get.width * 0.05,
+                  width: Get.width * 0.25,
                 ),
               ),
             ],

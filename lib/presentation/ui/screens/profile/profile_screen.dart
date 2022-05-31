@@ -146,7 +146,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                         () => LegalDocScreen(
                               legalDocLink: userDataController.legalocLink,
                               buttonText: 'Close',
-                              callback: () {
+                              callback: () async {
                                 Get.back();
                               },
                             ),

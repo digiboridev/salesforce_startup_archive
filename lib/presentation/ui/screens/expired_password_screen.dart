@@ -6,6 +6,7 @@ import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart
 import 'package:***REMOVED***/presentation/ui/widgets/custom_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 class ExpiredPasswordScreen extends StatefulWidget {
   ExpiredPasswordScreen({Key? key}) : super(key: key);
@@ -29,6 +30,7 @@ class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
   bool showAsterisks = true;
   bool isCorrect = false;
   final String password_condition = 'Password condition'.tr;
+  bool processing = false;
 
   bool validationPassword({required String? pass}) {
     String pattern =
@@ -90,14 +92,18 @@ class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColors.blue_003E7E,
-      resizeToAvoidBottomInset: false,
+      // resizeToAvoidBottomInset: false,
+
       body: SafeArea(
           bottom: false,
           child: Container(
             color: MyColors.white_F4F4F6,
-            child: SizedBox.expand(
-              child: Column(
-                children: [buildHeader(), buildBody(context)],
+            child: SingleChildScrollView(
+              child: SizedBox(
+                height: Get.height - Get.mediaQuery.padding.top,
+                child: Column(
+                  children: [buildHeader(), buildBody(context)],
+                ),
               ),
             ),
           )),
@@ -115,14 +121,15 @@ class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: Get.width * 0.06,
+                height: Get.width * 0.2,
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
                 child: Text(
-                  '🌞Good morning,'.tr,
+                  'Good morning'.tr,
                   style: TextStyle(
-                    fontSize: Get.width * 0.06,
+                    color: MyColors.blue_003E7E,
+                    fontSize: Get.width * 0.08,
                   ),
                 ),
               ),
@@ -134,7 +141,8 @@ class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
                 child: Text(
                   'The password you entered is expired'.tr,
                   style: TextStyle(
-                    fontSize: Get.width * 0.04,
+                    color: MyColors.blue_003E7E,
+                    fontSize: Get.width * 0.05,
                   ),
                 ),
               ),
@@ -144,6 +152,8 @@ class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
                 child: TextFormField(
+                  style: TextStyle(
+                      color: MyColors.blue_003E7E, fontSize: Get.width * 0.045),
                   maxLength: 20,
                   obscureText: showAsterisks,
                   controller: _pass,
@@ -157,6 +167,9 @@ class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
                         : '';
                   },
                   decoration: InputDecoration(
+                      hintStyle: TextStyle(
+                          color: MyColors.blue_003E7E,
+                          fontSize: Get.width * 0.045),
                       counterText: '',
                       errorText: '',
                       errorStyle: TextStyle(
@@ -176,6 +189,8 @@ class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
                 child: TextFormField(
+                  style: TextStyle(
+                      color: MyColors.blue_003E7E, fontSize: Get.width * 0.045),
                   maxLength: 20,
                   obscureText: showAsterisks,
                   controller: _confirmPass,
@@ -189,6 +204,9 @@ class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
                         : '';
                   },
                   decoration: InputDecoration(
+                      hintStyle: TextStyle(
+                          color: MyColors.blue_003E7E,
+                          fontSize: Get.width * 0.045),
                       counterText: '',
                       errorText: '',
                       errorStyle: TextStyle(
@@ -267,7 +285,7 @@ class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
                 width: Get.width,
                 alignment: Alignment.center,
                 child: GestureDetector(
-                  onTap: () {
+                  onTap: () async {
                     FocusScope.of(context).unfocus();
                     bool valid = _form.currentState!.validate();
 
@@ -281,24 +299,30 @@ class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
                           newPass: _pass.text,
                           confirmPass: _confirmPass.text)) {
                         closePassError();
-                        userDataController.changePassword(
+                        setState(() => processing = true);
+                        await userDataController.changePassword(
                             oldPass: '', newPass: _pass.text, onlogin: true);
+                        setState(() => processing = false);
                       }
                     }
                   },
                   child: Container(
-                    width: Get.width / 1.4,
+                    width: Get.width / 1.2,
+                    height: Get.width * 0.12,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                         color: isCorrect
                             ? MyColors.blue_00458C
                             : MyColors.blue_D5DDE5,
                         borderRadius: BorderRadius.circular(Get.width * 0.06)),
-                    padding: EdgeInsets.symmetric(vertical: Get.width * 0.03),
-                    child: Text(
-                      'Send'.tr,
-                      style: TextStyle(color: Colors.white),
-                    ),
+                    child: processing
+                        ? CircularProgressIndicator()
+                        : Text(
+                            'Send'.tr,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: Get.width * 0.05),
+                          ),
                   ),
                 ),
               ),
@@ -309,21 +333,17 @@ class _ExpiredPasswordScreenState extends State<ExpiredPasswordScreen> {
                 width: Get.width,
                 alignment: Alignment.center,
                 child: GestureDetector(
-                  onTap: () {
+                  onTap: () async {
                     userDataController.logout();
                   },
                   child: Container(
-                    width: Get.width / 2.4,
                     alignment: Alignment.center,
-                    // decoration: BoxDecoration(
-                    //     color: MyColors.gray_EAF2FA,
-                    //     borderRadius: BorderRadius.circular(Get.width * 0.06)),
-                    padding: EdgeInsets.symmetric(
-                      vertical: Get.width * 0.03,
-                    ),
                     child: Text(
                       'Back to the login screen'.tr,
-                      style: TextStyle(color: MyColors.blue_003E7E),
+                      style: TextStyle(
+                          color: MyColors.blue_003E7E,
+                          fontSize: Get.width * 0.05,
+                          decoration: TextDecoration.underline),
                     ),
                   ),
                 ),
