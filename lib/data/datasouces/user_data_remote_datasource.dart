@@ -27,7 +27,7 @@ class UserDataRemoteDatasourceImpl implements UserDataRemoteDatasource {
       }
     } catch (e) {
       print(e);
-      throw ServerException('Internal error');
+      throw ServerException('Connection error');
     }
   }
 
@@ -45,7 +45,7 @@ class UserDataRemoteDatasourceImpl implements UserDataRemoteDatasource {
         throw ServerException(response['errorMsg']);
       }
     } catch (e) {
-      throw ServerException('Internal error');
+      throw ServerException('Connection error');
     }
   }
 
@@ -63,7 +63,7 @@ class UserDataRemoteDatasourceImpl implements UserDataRemoteDatasource {
         throw ServerException(response['errorMsg']);
       }
     } catch (e) {
-      throw ServerException('Internal error');
+      throw ServerException('Connection error');
     }
   }
 

@@ -86,7 +86,7 @@ class UserDataController extends GetxController {
     // _userDataState.value = UserDataLoadingErrorState(msg: 'error');
     // return;
 
-    // AppVersionService.checkVersion();
+    await AppVersionService.checkVersion();
 
     // emit loading state
     _userDataState.value = UserDataLoadingState();
@@ -95,7 +95,8 @@ class UserDataController extends GetxController {
     try {
       UserData userData = await _getUserDataAndCache(GetUserDataAndCacheParams(
           userId: _authData.value!.userId,
-          hasConnection: _connectionService.hasConnection));
+          hasConnection: _connectionService.hasConnection,
+          forceRemote: false));
 
       // emmit accept legaldoc state if not
 
@@ -110,9 +111,10 @@ class UserDataController extends GetxController {
       }
       // load complete
       else {
-        _userDataState.value = UserDataCommonState(userData: userData);
         // Set locale based on user data
-        setLocale();
+        setLocale(locale: userData.selectedLanguage);
+
+        _userDataState.value = UserDataCommonState(userData: userData);
 
         // Register in cache fetching service
         CacheUpdateEvent cacheUpdateEvent = CacheUpdateEvent(
@@ -144,21 +146,18 @@ class UserDataController extends GetxController {
   }
 
   // Perform only update of data, without side states
-  Future updateUserData() async {
+  Future updateUserData({bool forceRemote = false}) async {
     UserDataState oldState = _userDataState.value;
     if (oldState is UserDataCommonState) {
-      try {
-        UserData userData = await _getUserDataAndCache(
-            GetUserDataAndCacheParams(
-                userId: _authData.value!.userId,
-                hasConnection: _connectionService.hasConnection));
-        _userDataState.value = UserDataCommonState(userData: userData);
-
-        setLocale();
-      } catch (e) {
-        print('Update user data error');
-        print(e);
-      }
+      UserData userData = await _getUserDataAndCache(
+        GetUserDataAndCacheParams(
+          userId: _authData.value!.userId,
+          hasConnection: _connectionService.hasConnection,
+          forceRemote: forceRemote,
+        ),
+      );
+      setLocale(locale: userData.selectedLanguage);
+      _userDataState.value = UserDataCommonState(userData: userData);
     }
   }
 
@@ -166,9 +165,9 @@ class UserDataController extends GetxController {
     return _getUserDataSyncTime.call(_authData.value!.userId);
   }
 
-  setLocale() {
-    if (Get.locale!.languageCode != currentLanguage.identifier) {
-      Get.updateLocale(Locale(currentLanguage.identifier));
+  setLocale({required String locale}) {
+    if (Get.locale!.languageCode != locale) {
+      Get.updateLocale(Locale(locale));
     }
   }
 
@@ -231,7 +230,7 @@ class UserDataController extends GetxController {
     try {
       defaultDialog();
       await _changeLanguage(ChangeLanguageParams(lang: lang));
-      await updateUserData();
+      await updateUserData(forceRemote: true);
       Get.until((route) => !Get.isDialogOpen!);
     } catch (e) {
       Get.until((route) => !Get.isDialogOpen!);

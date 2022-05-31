@@ -22,7 +22,7 @@ class ContactUsRemoteDatasourceImpl implements ContactUsRemoteDatasource {
       }
     } catch (e) {
       print(e);
-      throw ServerException('Internal error');
+      throw ServerException('Connection error');
     }
   }
 }

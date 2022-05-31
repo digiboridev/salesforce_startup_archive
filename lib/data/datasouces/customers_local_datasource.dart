@@ -1,6 +1,10 @@
+import 'dart:convert';
+
+import 'package:***REMOVED***/data/models/sync_data.dart';
+import 'package:get_storage/get_storage.dart';
+
 import 'package:***REMOVED***/core/errors.dart';
 import 'package:***REMOVED***/data/models/customer_model.dart';
-import 'package:get_storage/get_storage.dart';
 
 abstract class CustomersLocalDatasource {
   Future<String> getSelectedCustomerSAP({required String userId});
@@ -13,10 +17,12 @@ abstract class CustomersLocalDatasource {
 
   Future<CustomerModel> getCustomerBySAP({required String customerSAP});
 
-  Future setCustomerSyncTime(
-      {required String customerSAP, required DateTime dateTime});
+  Future setCustomerSyncData({
+    required String customerSAP,
+    required SyncData syncData,
+  });
 
-  Future<DateTime> getCustomerSyncTime({required String customerSAP});
+  Future<SyncData> getCustomerSyncData({required String customerSAP});
 }
 
 class CustomersLocalDatasourceImpl implements CustomersLocalDatasource {
@@ -60,19 +66,21 @@ class CustomersLocalDatasourceImpl implements CustomersLocalDatasource {
   }
 
   @override
-  Future setCustomerSyncTime(
-      {required String customerSAP, required DateTime dateTime}) async {
-    await customerSyncBox.write(customerSAP, dateTime.millisecondsSinceEpoch);
+  Future setCustomerSyncData({
+    required String customerSAP,
+    required SyncData syncData,
+  }) async {
+    await customerSyncBox.write(customerSAP, syncData.toJson());
   }
 
   @override
-  Future<DateTime> getCustomerSyncTime({required String customerSAP}) async {
-    int? data = customerSyncBox.read(customerSAP);
+  Future<SyncData> getCustomerSyncData({required String customerSAP}) async {
+    String? data = customerSyncBox.read(customerSAP);
 
     if (data == null) {
-      throw CacheException('No sync time for $customerSAP');
+      throw CacheException('No sync data for $customerSAP');
     }
 
-    return DateTime.fromMillisecondsSinceEpoch(data);
+    return SyncData.fromJson(data);
   }
 }

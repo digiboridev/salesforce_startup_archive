@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'package:***REMOVED***/core/asset_images.dart';
+import 'package:***REMOVED***/data/models/sync_data.dart';
 import 'package:***REMOVED***/domain/entities/customer.dart';
 import 'package:***REMOVED***/domain/entities/related_consumer.dart';
 import 'package:***REMOVED***/domain/services/cache_fetching_service.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/domain/usecases/customer/get_customer_and_cache.dart';
-import 'package:***REMOVED***/domain/usecases/customer/get_customer_sync_time.dart';
+import 'package:***REMOVED***/domain/usecases/customer/get_customer_sync_data.dart';
 import 'package:***REMOVED***/domain/usecases/customer/get_selected_customer_sap.dart';
 import 'package:***REMOVED***/domain/usecases/customer/set_selected_customer_sap.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
@@ -24,7 +25,7 @@ class CustomerController extends GetxController {
   GetSelectedCustomerSAP _getSelectedCustomerSAP = Get.find();
   SetSelectedCustomerSAP _setSelectedCustomerSAP = Get.find();
   GetCustomerAndCache _getCustomerAndCache = Get.find();
-  GetCustomerSyncTime _getCustomerSyncTime = Get.find();
+  GetCustomerSyncData _getCustomerSyncData = Get.find();
 
   // variables
   RxList<RelatedConsumer> _relatedConsumers = RxList();
@@ -90,7 +91,8 @@ class CustomerController extends GetxController {
       _selectedCustomer.value = await _getCustomerAndCache.call(
           GetCustomerAndCacheParams(
               customerSAP: _selectedCustomerSAP.value!,
-              hasConnetrion: _connectionService.hasConnection));
+              hasConnetrion: _connectionService.hasConnection,
+              locale: Get.locale!.languageCode));
 
       // Register in cache fetching service
       CacheUpdateEvent cacheUpdateEvent = CacheUpdateEvent(
@@ -120,12 +122,15 @@ class CustomerController extends GetxController {
   }
 
   Future<DateTime> getLastSync() async {
-    return _getCustomerSyncTime.call(_selectedCustomerSAP.value!);
+    SyncData syncData =
+        await _getCustomerSyncData.call(_selectedCustomerSAP.value!);
+    return syncData.syncDateTime;
   }
 
   Future updateCustomerData() async {
     try {
       Customer c = await _getCustomerAndCache.call(GetCustomerAndCacheParams(
+          locale: Get.locale!.languageCode,
           customerSAP: _selectedCustomerSAP.value!,
           hasConnetrion: _connectionService.hasConnection));
       _selectedCustomer.value = c;
@@ -153,6 +158,7 @@ class CustomerController extends GetxController {
       // load data
       _selectedCustomer.value = await _getCustomerAndCache.call(
           GetCustomerAndCacheParams(
+              locale: Get.locale!.languageCode,
               customerSAP: customerSAP,
               hasConnetrion: _connectionService.hasConnection));
 

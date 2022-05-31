@@ -1,6 +1,7 @@
 import 'package:***REMOVED***/data/datasouces/customers_local_datasource.dart';
 import 'package:***REMOVED***/data/datasouces/customers_remote_datasource.dart';
 import 'package:***REMOVED***/data/models/customer_model.dart';
+import 'package:***REMOVED***/data/models/sync_data.dart';
 import 'package:***REMOVED***/domain/entities/customer.dart';
 
 abstract class CustomersRepository {
@@ -16,10 +17,10 @@ abstract class CustomersRepository {
   Future setLocalCustomerBySAP(
       {required String customerSAP, required Customer customer});
 
-  Future setCustomerSyncTime(
-      {required String customerSAP, required DateTime dateTime});
+  Future setCustomerSyncData(
+      {required String customerSAP, required SyncData syncData});
 
-  Future<DateTime> getCustomerSyncTime({required String customerSAP});
+  Future<SyncData> getCustomerSyncData({required String customerSAP});
 }
 
 class CustomersRepositoryImpl implements CustomersRepository {
@@ -57,12 +58,12 @@ class CustomersRepositoryImpl implements CustomersRepository {
           customerModel: CustomerModel.fromEntity(customer));
 
   @override
-  Future setCustomerSyncTime(
-          {required String customerSAP, required DateTime dateTime}) =>
-      customersLocalDatasource.setCustomerSyncTime(
-          customerSAP: customerSAP, dateTime: dateTime);
+  Future setCustomerSyncData(
+          {required String customerSAP, required SyncData syncData}) =>
+      customersLocalDatasource.setCustomerSyncData(
+          customerSAP: customerSAP, syncData: syncData);
 
   @override
-  Future<DateTime> getCustomerSyncTime({required String customerSAP}) =>
-      customersLocalDatasource.getCustomerSyncTime(customerSAP: customerSAP);
+  Future<SyncData> getCustomerSyncData({required String customerSAP}) =>
+      customersLocalDatasource.getCustomerSyncData(customerSAP: customerSAP);
 }

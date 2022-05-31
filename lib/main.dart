@@ -29,9 +29,9 @@ import 'package:***REMOVED***/domain/usecases/user/change_language.dart';
 import 'package:***REMOVED***/domain/usecases/user/change_password.dart';
 import 'package:***REMOVED***/domain/usecases/get_contactus_and_cache.dart';
 import 'package:***REMOVED***/domain/usecases/customer/get_customer_and_cache.dart';
-import 'package:***REMOVED***/domain/usecases/customer/get_customer_sync_time.dart';
+import 'package:***REMOVED***/domain/usecases/customer/get_customer_sync_data.dart';
 import 'package:***REMOVED***/domain/usecases/materials/get_materials_and_cache.dart';
-import 'package:***REMOVED***/domain/usecases/materials/get_materials_sync_time.dart';
+import 'package:***REMOVED***/domain/usecases/materials/get_materials_sync_data.dart';
 import 'package:***REMOVED***/domain/usecases/customer/get_selected_customer_sap.dart';
 import 'package:***REMOVED***/domain/usecases/user/get_userdata_and_cache.dart';
 import 'package:***REMOVED***/domain/usecases/user/get_userdata_sync_time.dart';
@@ -110,14 +110,14 @@ Future injectDependency() async {
   Get.put<GetSelectedCustomerSAP>(GetSelectedCustomerSAP(customersRepository));
   Get.put<SetSelectedCustomerSAP>(SetSelectedCustomerSAP(customersRepository));
   Get.put<GetCustomerAndCache>(GetCustomerAndCache(customersRepository));
-  Get.put<GetCustomerSyncTime>(GetCustomerSyncTime(customersRepository));
+  Get.put<GetCustomerSyncData>(GetCustomerSyncData(customersRepository));
 
   //-- contactus
   Get.put<GetContactusAndCache>(GetContactusAndCache(contactUsRepository));
 
   //-- materials
   Get.put<GetMaterialsAndCache>(GetMaterialsAndCache(materialsRepository));
-  Get.put<GetMaterialsSyncTime>(GetMaterialsSyncTime(materialsRepository));
+  Get.put<GetMaterialsSyncData>(GetMaterialsSyncData(materialsRepository));
   Get.put<SubscribeToMaterial>(SubscribeToMaterial(materialsRepository));
 
   // Favorites

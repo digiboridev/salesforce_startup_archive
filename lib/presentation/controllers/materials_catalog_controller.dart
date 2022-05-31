@@ -1,10 +1,11 @@
 import 'package:***REMOVED***/core/asset_images.dart';
+import 'package:***REMOVED***/data/models/sync_data.dart';
 import 'package:***REMOVED***/domain/entities/materials/alternative_item.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
 import 'package:***REMOVED***/domain/services/cache_fetching_service.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
-import 'package:***REMOVED***/domain/usecases/materials/get_materials_sync_time.dart';
+import 'package:***REMOVED***/domain/usecases/materials/get_materials_sync_data.dart';
 import 'package:***REMOVED***/domain/usecases/materials/subscribe_to_material.dart';
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_states.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/dialogs/info_bottomsheet.dart';
@@ -22,7 +23,7 @@ class MaterialsCatalogController extends GetxController {
 
   // usecases
   GetMaterialsAndCache _getMaterialsAndCache = Get.find();
-  GetMaterialsSyncTime _getMaterialsSyncTime = Get.find();
+  GetMaterialsSyncData _getMaterialsSyncData = Get.find();
   SubscribeToMaterial _subscribeToMaterial = Get.find();
 
   // variables
@@ -49,10 +50,12 @@ class MaterialsCatalogController extends GetxController {
     materialsCatalogState.value = MCSLoading();
     try {
       // Load catalog data
-      MaterialsCatalog catalog = await _getMaterialsAndCache.call(
-          GetMaterialsAndCacheParams(
-              customerSAP: _customerController.selectedCustomerSAP!,
-              hasConnection: _connectionService.hasConnection));
+      MaterialsCatalog catalog =
+          await _getMaterialsAndCache.call(GetMaterialsAndCacheParams(
+        customerSAP: _customerController.selectedCustomerSAP!,
+        hasConnection: _connectionService.hasConnection,
+        locale: Get.locale!.languageCode,
+      ));
       // emmit state
       materialsCatalogState.value = MCSCommon(catalog: catalog);
 
@@ -95,10 +98,12 @@ class MaterialsCatalogController extends GetxController {
   // Perform only update of data, without side states
   Future updateCatalog() async {
     try {
-      MaterialsCatalog catalog = await _getMaterialsAndCache.call(
-          GetMaterialsAndCacheParams(
-              customerSAP: _customerController.selectedCustomerSAP!,
-              hasConnection: _connectionService.hasConnection));
+      MaterialsCatalog catalog =
+          await _getMaterialsAndCache.call(GetMaterialsAndCacheParams(
+        customerSAP: _customerController.selectedCustomerSAP!,
+        hasConnection: _connectionService.hasConnection,
+        locale: Get.locale!.languageCode,
+      ));
       materialsCatalogState.value = MCSCommon(catalog: catalog);
     } catch (e) {
       print('Update catalog error' + e.toString());
@@ -106,7 +111,9 @@ class MaterialsCatalogController extends GetxController {
   }
 
   Future<DateTime> getLastSync() async {
-    return _getMaterialsSyncTime.call(_customerController.selectedCustomerSAP!);
+    SyncData syncData = await _getMaterialsSyncData
+        .call(_customerController.selectedCustomerSAP!);
+    return syncData.syncDateTime;
   }
 
   List<Materiale> getAlternativeMaterials(

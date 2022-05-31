@@ -69,22 +69,17 @@ class InfoBottomSheet extends StatelessWidget {
                 SizedBox(
                   height: Get.width * 0.115,
                 ),
-                Container(
-                  height: Get.width * 0.2,
-                  width: Get.width,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          opacity: 1,
-                          fit: BoxFit.fitWidth,
-                          alignment: Alignment.topCenter,
-                          image: AssetImage('assets/images/bottombar.png'))),
-                ),
                 Expanded(
                   child: Container(
-                    color: Colors.white,
                     width: Get.width,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            opacity: 1,
+                            fit: BoxFit.fitWidth,
+                            alignment: Alignment.topCenter,
+                            image: AssetImage('assets/images/bottombar.png'))),
                   ),
-                )
+                ),
               ],
             ),
           ),

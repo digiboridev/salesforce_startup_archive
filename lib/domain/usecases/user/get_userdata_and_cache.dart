@@ -11,21 +11,28 @@ class GetUserDataAndCache
 
   @override
   Future<UserData> call(GetUserDataAndCacheParams params) async {
-    if (params.hasConnection) {
-      try {
-        UserData remoteUserData = await userDataRepository.getRemoteUserData;
-        userDataRepository.setLocalUserData(
-            userId: params.userId, userData: remoteUserData);
-        userDataRepository.setUserDataSyncTime(
-            userId: params.userId, dateTime: DateTime.now());
-
-        return remoteUserData;
-      } catch (e) {
-        return _loadFromCache(userId: params.userId);
-      }
-    } else {
-      return _loadFromCache(userId: params.userId);
+    if (params.forceRemote) {
+      return _loadFromRemote(userId: params.userId);
     }
+
+    try {
+      UserData cachedUserData = await _loadFromCache(userId: params.userId);
+      return cachedUserData;
+    } catch (e) {
+      if (!params.hasConnection) {
+        throw InternalException('No connection');
+      }
+      return _loadFromRemote(userId: params.userId);
+    }
+  }
+
+  Future<UserData> _loadFromRemote({required String userId}) async {
+    UserData remoteUserData = await userDataRepository.getRemoteUserData;
+    userDataRepository.setLocalUserData(
+        userId: userId, userData: remoteUserData);
+    userDataRepository.setUserDataSyncTime(
+        userId: userId, dateTime: DateTime.now());
+    return remoteUserData;
   }
 
   Future<UserData> _loadFromCache({required String userId}) async {
@@ -55,8 +62,10 @@ class GetUserDataAndCache
 class GetUserDataAndCacheParams {
   final String userId;
   final bool hasConnection;
+  final bool forceRemote;
   GetUserDataAndCacheParams({
     required this.userId,
     required this.hasConnection,
+    required this.forceRemote,
   });
 }

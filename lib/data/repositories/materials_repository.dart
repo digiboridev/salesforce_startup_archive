@@ -1,6 +1,7 @@
 import 'package:***REMOVED***/data/datasouces/materials_local_datasource.dart';
 import 'package:***REMOVED***/data/datasouces/materials_remote_datasource.dart';
 import 'package:***REMOVED***/data/models/materials/materials_catalog_model.dart';
+import 'package:***REMOVED***/data/models/sync_data.dart';
 import 'package:***REMOVED***/domain/entities/materials/materials_catalog.dart';
 
 abstract class MaterialsRepository {
@@ -9,9 +10,9 @@ abstract class MaterialsRepository {
   Future setLocalMaterials(
       {required String customerSAP,
       required MaterialsCatalog materialsCatalog});
-  Future<DateTime> getMaterialsSyncTime({required String customerSAP});
-  Future setMaterialsSyncTime(
-      {required String customerSAP, required DateTime dateTime});
+  Future<SyncData> getMaterialsSyncData({required String customerSAP});
+  Future setMaterialsSyncData(
+      {required String customerSAP, required SyncData syncData});
 
   Future subscribeToMaterial(
       {required String customerSAP, required String materialNumber});
@@ -43,14 +44,14 @@ class MaterialsRepositoryImpl implements MaterialsRepository {
               MaterialsCatalogModel.fromEntity(materialsCatalog));
 
   @override
-  Future<DateTime> getMaterialsSyncTime({required String customerSAP}) =>
-      materialsLocalDataSource.getMaterialsSyncTime(customerSAP: customerSAP);
+  Future<SyncData> getMaterialsSyncData({required String customerSAP}) =>
+      materialsLocalDataSource.getMaterialsSyncData(customerSAP: customerSAP);
 
   @override
-  Future setMaterialsSyncTime(
-          {required String customerSAP, required DateTime dateTime}) =>
-      materialsLocalDataSource.setMaterialsSyncTime(
-          customerSAP: customerSAP, dateTime: dateTime);
+  Future setMaterialsSyncData(
+          {required String customerSAP, required SyncData syncData}) =>
+      materialsLocalDataSource.setMaterialsSyncData(
+          customerSAP: customerSAP, syncData: syncData);
 
   Future subscribeToMaterial(
           {required String customerSAP, required String materialNumber}) =>
