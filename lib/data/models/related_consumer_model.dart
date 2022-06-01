@@ -8,12 +8,17 @@ class RelatedConsumerModel extends RelatedConsumer {
     required String customerName,
     required String customerId,
     required String customerAddress,
+    required double latitude,
+    required double longitude,
   }) : super(
-            lastOrderDate: lastOrderDate,
-            customerSAPNumber: customerSAPNumber,
-            customerName: customerName,
-            customerId: customerId,
-            customerAddress: customerAddress);
+          lastOrderDate: lastOrderDate,
+          customerSAPNumber: customerSAPNumber,
+          customerName: customerName,
+          customerId: customerId,
+          customerAddress: customerAddress,
+          latitude: latitude,
+          longitude: longitude,
+        );
 
   Map<String, dynamic> toMap() {
     return {
@@ -22,16 +27,20 @@ class RelatedConsumerModel extends RelatedConsumer {
       'CustomerName': customerName,
       'CustomerId': customerId,
       'CustomerAddress': customerAddress,
+      'latitude': latitude,
+      'longitude': longitude,
     };
   }
 
   factory RelatedConsumerModel.fromMap(Map<String, dynamic> map) {
     return RelatedConsumerModel(
-      lastOrderDate: map['LastOrderDate'] ?? '',
-      customerSAPNumber: map['CustomerSAPNumber'] ?? '',
-      customerName: map['CustomerName'] ?? '',
-      customerId: map['CustomerId'] ?? '',
-      customerAddress: map['CustomerAddress'] ?? '',
+      lastOrderDate: map['LastOrderDate'],
+      customerSAPNumber: map['CustomerSAPNumber'],
+      customerName: map['CustomerName'],
+      customerId: map['CustomerId'],
+      customerAddress: map['CustomerAddress'],
+      latitude: map['latitude'],
+      longitude: map['longitude'],
     );
   }
 
@@ -42,6 +51,8 @@ class RelatedConsumerModel extends RelatedConsumer {
       customerName: relatedConsumer.customerName,
       customerId: relatedConsumer.customerId,
       customerAddress: relatedConsumer.customerAddress,
+      latitude: relatedConsumer.latitude,
+      longitude: relatedConsumer.longitude,
     );
   }
 
@@ -52,6 +63,6 @@ class RelatedConsumerModel extends RelatedConsumer {
 
   @override
   String toString() {
-    return 'RelatedConsumer(lastOrderDate: $lastOrderDate, customerSAPNumber: $customerSAPNumber, customerName: $customerName, customerId: $customerId, customerAddress: $customerAddress)';
+    return 'RelatedConsumer(lastOrderDate: $lastOrderDate, customerSAPNumber: $customerSAPNumber, customerName: $customerName, customerId: $customerId, customerAddress: $customerAddress, latitude: $latitude, longitude: $longitude)';
   }
 }

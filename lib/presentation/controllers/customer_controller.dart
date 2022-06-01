@@ -3,6 +3,7 @@ import 'package:***REMOVED***/core/asset_images.dart';
 import 'package:***REMOVED***/data/models/sync_data.dart';
 import 'package:***REMOVED***/domain/entities/customer.dart';
 import 'package:***REMOVED***/domain/entities/related_consumer.dart';
+import 'package:***REMOVED***/domain/entities/user_data.dart';
 import 'package:***REMOVED***/domain/services/cache_fetching_service.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/domain/usecases/customer/get_customer_and_cache.dart';
@@ -14,6 +15,7 @@ import 'package:***REMOVED***/presentation/controllers/user_data_controller_stat
 import 'package:***REMOVED***/presentation/ui/widgets/dialogs/default_dialog.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/dialogs/info_bottomsheet.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
 class CustomerController extends GetxController {
@@ -57,32 +59,47 @@ class CustomerController extends GetxController {
     UserDataState uds = userDataState;
     if (uds is UserDataCommonState) {
       _relatedConsumers.value = uds.userData.relatedCustomers;
-      loadCustomers();
+      loadCustomers(userData: uds.userData);
     } else {
       // clear all data
-      _relatedConsumers.clear();
+      // _relatedConsumers.clear();
       _selectedCustomer.value = null;
       _selectedCustomerSAP.value = null;
     }
   }
 
   // Load full customer data
-  Future<void> loadCustomers() async {
+  Future<void> loadCustomers({required UserData userData}) async {
     _customerLoadingError.value = null;
+
     try {
       // Get saved selection
       _selectedCustomerSAP.value = await _getSelectedCustomerSAP.call(
           GetSelectedCustomerSAPParams(
               userId: _userDataController.authData!.userId));
 
-      // Select customer on first time or related list changes
+      // Select customer durning first time or related list changes
       if (_selectedCustomerSAP.value is! String ||
-          !_relatedConsumers
+          !userData.relatedCustomers
               .map((element) => element.customerSAPNumber)
               .contains(_selectedCustomerSAP.value)) {
-        // select
-        _selectedCustomerSAP.value = _relatedConsumers.first.customerSAPNumber;
-        // save
+        // select by location if avalieble
+        // if not select first one
+        try {
+          Position userPosition = await _getUserPosition();
+
+          RelatedConsumer? closestCustomer = userData.closestRelatedCustomer(
+              lattitude: userPosition.latitude,
+              longtitude: userPosition.longitude);
+
+          _selectedCustomerSAP.value = closestCustomer?.customerSAPNumber ??
+              userData.relatedCustomers.first.customerSAPNumber;
+        } catch (e) {
+          _selectedCustomerSAP.value =
+              userData.relatedCustomers.first.customerSAPNumber;
+        }
+
+        // save selected customer
         _setSelectedCustomerSAP.call(SetSelectedCustomerSAPParams(
             userId: _userDataController.authData!.userId,
             customerSAP: _selectedCustomerSAP.value!));
@@ -115,7 +132,7 @@ class CustomerController extends GetxController {
                     text: 'Retry',
                     callback: () {
                       Get.back();
-                      loadCustomers();
+                      loadCustomers(userData: userData);
                     })
               ],
               headerIconPath: AssetImages.info),
@@ -123,6 +140,31 @@ class CustomerController extends GetxController {
         isDismissible: false,
       );
     }
+  }
+
+  Future<Position> _getUserPosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+
+    return await Geolocator.getCurrentPosition();
   }
 
   Future<DateTime> getLastSync() async {

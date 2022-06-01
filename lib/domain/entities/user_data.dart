@@ -1,5 +1,6 @@
 import 'package:***REMOVED***/domain/entities/related_consumer.dart';
 import 'package:equatable/equatable.dart';
+import 'package:geolocator/geolocator.dart';
 
 class UserData extends Equatable {
   final String sFUserId;
@@ -80,5 +81,22 @@ class UserData extends Equatable {
       contactEmail,
       availableLanguages,
     ];
+  }
+
+  RelatedConsumer? closestRelatedCustomer(
+      {required double lattitude, required double longtitude}) {
+    RelatedConsumer? closestCustomer;
+    double minDistance = double.infinity;
+
+    relatedCustomers.forEach((element) {
+      double distance = Geolocator.distanceBetween(
+          lattitude, longtitude, element.latitude, element.longitude);
+
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestCustomer = element;
+      }
+    });
+    return closestCustomer;
   }
 }

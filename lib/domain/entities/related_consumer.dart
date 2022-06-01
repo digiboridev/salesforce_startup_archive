@@ -6,12 +6,16 @@ class RelatedConsumer extends Equatable {
   final String customerName;
   final String customerId;
   final String customerAddress;
+  final double latitude;
+  final double longitude;
   RelatedConsumer({
     required this.lastOrderDate,
     required this.customerSAPNumber,
     required this.customerName,
     required this.customerId,
     required this.customerAddress,
+    required this.latitude,
+    required this.longitude,
   });
 
   @override
@@ -22,11 +26,13 @@ class RelatedConsumer extends Equatable {
       customerName,
       customerId,
       customerAddress,
+      latitude,
+      longitude,
     ];
   }
 
   @override
   String toString() {
-    return 'RelatedConsumer(lastOrderDate: $lastOrderDate, customerSAPNumber: $customerSAPNumber, customerName: $customerName, customerId: $customerId, customerAddress: $customerAddress)';
+    return 'RelatedConsumer(lastOrderDate: $lastOrderDate, customerSAPNumber: $customerSAPNumber, customerName: $customerName, customerId: $customerId, customerAddress: $customerAddress, latitude: $latitude, longitude: $longitude)';
   }
 }
