@@ -1,6 +1,6 @@
+import 'dart:math';
 import 'package:***REMOVED***/domain/entities/related_consumer.dart';
 import 'package:equatable/equatable.dart';
-import 'package:geolocator/geolocator.dart';
 
 class UserData extends Equatable {
   final String sFUserId;
@@ -89,8 +89,15 @@ class UserData extends Equatable {
     double minDistance = double.infinity;
 
     relatedCustomers.forEach((element) {
-      double distance = Geolocator.distanceBetween(
-          lattitude, longtitude, element.latitude, element.longitude);
+      var p = 0.017453292519943295;
+      var c = cos;
+      var a = 0.5 -
+          c((element.latitude - lattitude) * p) / 2 +
+          c(lattitude * p) *
+              c(element.latitude * p) *
+              (1 - c((element.longitude - longtitude) * p)) /
+              2;
+      double distance = 12742 * asin(sqrt(a));
 
       if (distance < minDistance) {
         minDistance = distance;
