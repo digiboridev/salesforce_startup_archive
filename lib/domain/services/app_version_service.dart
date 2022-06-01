@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:***REMOVED***/core/asset_images.dart';
-import 'package:***REMOVED***/presentation/ui/widgets/dialogs/app_version_dialog.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/dialogs/info_bottomsheet.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;

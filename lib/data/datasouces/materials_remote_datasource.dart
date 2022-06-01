@@ -90,7 +90,7 @@ class MaterialsRemoteDatasourceImpl implements MaterialsRemoteDatasource {
               brands.add(BrandModel.fromMap(element));
             });
 
-            List hi = responseMaterials['result']['Hierarchys'];
+            List hi = responseMaterials['result']['hierarchies'];
             hi.forEach((element) {
               hierarchys.add(HierarchyModel.fromMap(element));
             });

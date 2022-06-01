@@ -11,6 +11,7 @@ import 'package:***REMOVED***/presentation/controllers/customer_controller.dart'
 import 'package:***REMOVED***/presentation/controllers/favorites_states.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/favorites/belogn_list.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/dialogs/info_bottomsheet.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class FavoritesController extends GetxController {
@@ -64,18 +65,21 @@ class FavoritesController extends GetxController {
       _state.value =
           FSLoadingError(errorMsg: 'Load catalog error' + e.toString());
       Get.bottomSheet(
-        InfoBottomSheet(
-            headerText: 'Error while load favorites',
-            mainText: e.toString(),
-            actions: [
-              InfoAction(
-                  text: 'Retry',
-                  callback: () {
-                    Get.back();
-                    loadFavorites();
-                  })
-            ],
-            headerIconPath: AssetImages.info),
+        WillPopScope(
+          onWillPop: () async => false,
+          child: InfoBottomSheet(
+              headerText: 'Error while load favorites',
+              mainText: e.toString(),
+              actions: [
+                InfoAction(
+                    text: 'Retry',
+                    callback: () {
+                      Get.back();
+                      loadFavorites();
+                    })
+              ],
+              headerIconPath: AssetImages.info),
+        ),
         isDismissible: false,
       );
     }

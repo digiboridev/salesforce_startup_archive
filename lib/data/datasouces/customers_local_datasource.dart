@@ -1,8 +1,5 @@
-import 'dart:convert';
-
 import 'package:***REMOVED***/data/models/sync_data.dart';
 import 'package:get_storage/get_storage.dart';
-
 import 'package:***REMOVED***/core/errors.dart';
 import 'package:***REMOVED***/data/models/customer_model.dart';
 

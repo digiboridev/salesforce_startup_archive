@@ -6,7 +6,6 @@ import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart
 import 'package:***REMOVED***/presentation/ui/widgets/custom_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 
 class ExpiredPasswordScreen extends StatefulWidget {
   ExpiredPasswordScreen({Key? key}) : super(key: key);

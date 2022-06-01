@@ -13,6 +13,7 @@ import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart
 import 'package:***REMOVED***/presentation/controllers/user_data_controller_states.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/dialogs/default_dialog.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/dialogs/info_bottomsheet.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class CustomerController extends GetxController {
@@ -104,18 +105,21 @@ class CustomerController extends GetxController {
       _customerLoadingError.value = e.toString();
       print(e.toString());
       Get.bottomSheet(
-        InfoBottomSheet(
-            headerText: 'Error while load customer data',
-            mainText: e.toString(),
-            actions: [
-              InfoAction(
-                  text: 'Retry',
-                  callback: () {
-                    Get.back();
-                    loadCustomers();
-                  })
-            ],
-            headerIconPath: AssetImages.info),
+        WillPopScope(
+          onWillPop: () async => false,
+          child: InfoBottomSheet(
+              headerText: 'Error while load customer data',
+              mainText: e.toString(),
+              actions: [
+                InfoAction(
+                    text: 'Retry',
+                    callback: () {
+                      Get.back();
+                      loadCustomers();
+                    })
+              ],
+              headerIconPath: AssetImages.info),
+        ),
         isDismissible: false,
       );
     }

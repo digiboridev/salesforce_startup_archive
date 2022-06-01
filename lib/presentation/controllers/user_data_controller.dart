@@ -128,18 +128,21 @@ class UserDataController extends GetxController {
       print(e);
       _userDataState.value = UserDataLoadingErrorState(msg: e.toString());
       Get.bottomSheet(
-        InfoBottomSheet(
-            headerText: 'Error while load user data',
-            mainText: e.toString(),
-            actions: [
-              InfoAction(
-                  text: 'Retry',
-                  callback: () {
-                    Get.back();
-                    loadUserData();
-                  })
-            ],
-            headerIconPath: AssetImages.info),
+        WillPopScope(
+          onWillPop: () async => false,
+          child: InfoBottomSheet(
+              headerText: 'Error while load user data',
+              mainText: e.toString(),
+              actions: [
+                InfoAction(
+                    text: 'Retry',
+                    callback: () {
+                      Get.back();
+                      loadUserData();
+                    })
+              ],
+              headerIconPath: AssetImages.info),
+        ),
         isDismissible: false,
       );
     }

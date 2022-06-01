@@ -9,6 +9,7 @@ import 'package:***REMOVED***/domain/usecases/materials/get_materials_sync_data.
 import 'package:***REMOVED***/domain/usecases/materials/subscribe_to_material.dart';
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_states.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/dialogs/info_bottomsheet.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:***REMOVED***/domain/entities/materials/materials_catalog.dart';
 import 'package:***REMOVED***/domain/usecases/materials/get_materials_and_cache.dart';
@@ -78,18 +79,21 @@ class MaterialsCatalogController extends GetxController {
           MCSLoadingError(errorMsg: 'Load catalog error' + e.toString());
 
       Get.bottomSheet(
-        InfoBottomSheet(
-            headerText: 'Error while load catalog',
-            mainText: e.toString(),
-            actions: [
-              InfoAction(
-                  text: 'Retry',
-                  callback: () {
-                    Get.back();
-                    loadCatalog();
-                  })
-            ],
-            headerIconPath: AssetImages.info),
+        WillPopScope(
+          onWillPop: () async => false,
+          child: InfoBottomSheet(
+              headerText: 'Error while load catalog',
+              mainText: e.toString(),
+              actions: [
+                InfoAction(
+                    text: 'Retry',
+                    callback: () {
+                      Get.back();
+                      loadCatalog();
+                    })
+              ],
+              headerIconPath: AssetImages.info),
+        ),
         isDismissible: false,
       );
     }

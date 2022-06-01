@@ -98,6 +98,12 @@ class CatalogPageController extends GetxController {
 
     Set<Hierarchy> avaliableHierarhys = Set();
 
+    // Set<Materiale> test = _materialsCatalog.value.materials
+    //     .where((element) => element.Hierarchy4 != null)
+    //     .toSet();
+
+    // print(test);
+
     materials.where((m) => m.Hierarchy4 != null).forEach((mm) {
       Hierarchy? h = hierarhys.firstWhereOrNull((h) => h.SFId == mm);
       if (h != null) {
