@@ -155,6 +155,9 @@ class Trs extends Translations {
           'SALE!': 'SALE!',
           'Recomended List': 'Recomended List',
           'All branches': 'All branches',
+          'Client ID': 'Client ID:',
+          'Last order date': 'Last order date:',
+          'Distance': 'Distance:',
         },
         'he': {
           'Good morning': 'בוקר טוב🌞',
@@ -303,6 +306,9 @@ class Trs extends Translations {
           'SALE!': 'מְכִירָה!',
           'All branches': 'כל הסניפים',
           'Recomended List': 'רשימה מומלצת',
+          'Client ID': 'מזהה לקוח:',
+          'Last order date': 'תאריך הזמנה אחרון:',
+          'Distance': 'מֶרְחָק:',
         }
       };
 }

@@ -89,15 +89,8 @@ class UserData extends Equatable {
     double minDistance = double.infinity;
 
     relatedCustomers.forEach((element) {
-      var p = 0.017453292519943295;
-      var c = cos;
-      var a = 0.5 -
-          c((element.latitude - lattitude) * p) / 2 +
-          c(lattitude * p) *
-              c(element.latitude * p) *
-              (1 - c((element.longitude - longtitude) * p)) /
-              2;
-      double distance = 12742 * asin(sqrt(a));
+      double distance =
+          element.distanceTo(lattitude: lattitude, longtitude: longtitude);
 
       if (distance < minDistance) {
         minDistance = distance;

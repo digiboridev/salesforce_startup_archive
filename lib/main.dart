@@ -19,6 +19,7 @@ import 'package:***REMOVED***/data/repositories/user_data_repository.dart';
 import 'package:***REMOVED***/domain/services/cache_fetching_service.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
+import 'package:***REMOVED***/domain/services/location_service.dart';
 import 'package:***REMOVED***/domain/services/sf_sdk_service.dart';
 import 'package:***REMOVED***/domain/usecases/cart/get_cart_items.dart';
 import 'package:***REMOVED***/domain/usecases/cart/set_cart_items.dart';
@@ -139,6 +140,7 @@ Future initServices() async {
   await Get.putAsync(() => ConnectionService().init());
   await Get.put(ImageCachingService());
   await Get.put(CacheFetchingService(Duration(minutes: 30)));
+  await Get.put(LocationService());
   print('All services started...');
 }
 

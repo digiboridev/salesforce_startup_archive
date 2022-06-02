@@ -6,6 +6,7 @@ import 'package:***REMOVED***/domain/entities/related_consumer.dart';
 import 'package:***REMOVED***/domain/entities/user_data.dart';
 import 'package:***REMOVED***/domain/services/cache_fetching_service.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
+import 'package:***REMOVED***/domain/services/location_service.dart';
 import 'package:***REMOVED***/domain/usecases/customer/get_customer_and_cache.dart';
 import 'package:***REMOVED***/domain/usecases/customer/get_customer_sync_data.dart';
 import 'package:***REMOVED***/domain/usecases/customer/get_selected_customer_sap.dart';
@@ -23,6 +24,7 @@ class CustomerController extends GetxController {
   UserDataController _userDataController = Get.find();
   ConnectionService _connectionService = Get.find();
   CacheFetchingService _cacheFetchingService = Get.find();
+  LocationService _locationService = Get.find();
 
   // Usecases
   GetSelectedCustomerSAP _getSelectedCustomerSAP = Get.find();
@@ -59,6 +61,7 @@ class CustomerController extends GetxController {
     UserDataState uds = userDataState;
     if (uds is UserDataCommonState) {
       _relatedConsumers.value = uds.userData.relatedCustomers;
+      _locationService.getUserPosition();
       loadCustomers(userData: uds.userData);
     } else {
       // clear all data
@@ -86,7 +89,7 @@ class CustomerController extends GetxController {
         // select by location if avalieble
         // if not select first one
         try {
-          Position userPosition = await _getUserPosition();
+          Position userPosition = await _locationService.getUserPosition();
 
           RelatedConsumer? closestCustomer = userData.closestRelatedCustomer(
               lattitude: userPosition.latitude,
@@ -140,31 +143,6 @@ class CustomerController extends GetxController {
         isDismissible: false,
       );
     }
-  }
-
-  Future<Position> _getUserPosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      return Future.error('Location services are disabled.');
-    }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
-    }
-
-    return await Geolocator.getCurrentPosition();
   }
 
   Future<DateTime> getLastSync() async {
