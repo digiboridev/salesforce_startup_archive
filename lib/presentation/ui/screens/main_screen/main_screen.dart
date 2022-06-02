@@ -96,11 +96,7 @@ class _MainScreenState extends State<MainScreen> {
         Container(
           alignment: Alignment.center,
           color: Colors.amber,
-          child: GestureDetector(
-              onTap: () {
-                Get.updateLocale(Locale('he'));
-              },
-              child: Text('hello'.tr)),
+          child: Text('hello'.tr),
         ),
       ],
     );
