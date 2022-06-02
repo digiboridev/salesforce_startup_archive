@@ -1,5 +1,6 @@
 import 'package:***REMOVED***/core/mycolors.dart';
 import 'package:***REMOVED***/domain/entities/materials/brand.dart';
+import 'package:***REMOVED***/domain/entities/materials/classification.dart';
 import 'package:***REMOVED***/domain/entities/materials/family.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
@@ -11,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:***REMOVED***/domain/entities/materials/materials_catalog.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalog_page_controller.dart';
+import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 
 class CatalogPage extends StatefulWidget {
   final MaterialsCatalog materialsCatalog;
@@ -53,7 +55,8 @@ class _CatalogPageState extends State<CatalogPage> {
                     firstChild: SizedBox(),
                     secondChild: buildBrandsOrFamilySelection(),
                     crossFadeState:
-                        catalogPageController.state is ShowAllMaterials
+                        catalogPageController.state is ShowAllMaterials ||
+                                catalogPageController.state is ShowDeals
                             ? CrossFadeState.showFirst
                             : CrossFadeState.showSecond,
                     duration: Duration(milliseconds: 300)),
@@ -179,6 +182,10 @@ class _CatalogPageState extends State<CatalogPage> {
     if (state is ShowAllMaterials) {
       return buildAllMaterials(materials: state.materials);
     }
+    if (state is ShowDeals) {
+      return buildDealsMaterials(materials: state.materials);
+    }
+
     if (state is ShowBrands) {
       return buildBrandsPanel(brands: state.brands);
     }
@@ -210,35 +217,44 @@ class _CatalogPageState extends State<CatalogPage> {
             scrollDirection: Axis.horizontal,
             physics: BouncingScrollPhysics(),
             child: Row(
-              children: catalogPageController.getClassifications.map((e) {
-                return GestureDetector(
-                  onTap: () => catalogPageController.onClassificationClick(
-                      classification: e),
-                  child: Container(
-                      decoration: BoxDecoration(
-                          color:
-                              catalogPageController.selectedClassification == e
-                                  ? MyColors.blue_00458C
-                                  : MyColors.blue_00458C.withOpacity(0.2),
-                          borderRadius:
-                              BorderRadius.circular(Get.width * 0.04)),
-                      margin:
-                          EdgeInsets.symmetric(horizontal: Get.width * 0.01),
-                      padding: EdgeInsets.symmetric(
-                          horizontal: Get.width * 0.03,
-                          vertical: Get.width * 0.015),
-                      child: Text(
-                        e.Display,
-                        style: TextStyle(
-                            color:
-                                catalogPageController.selectedClassification ==
-                                        e
-                                    ? Colors.white
-                                    : MyColors.blue_003E7E),
-                      )),
-                );
-              }).toList(),
+              children: [
+                classificationBtn(
+                    text: 'Deals'.tr,
+                    selected: catalogPageController.state is ShowDeals,
+                    onTap: () {
+                      catalogPageController.onDealsClick();
+                    }),
+                ...catalogPageController.getClassifications.map((e) {
+                  return classificationBtn(
+                      text: e.Display,
+                      selected:
+                          catalogPageController.selectedClassification == e,
+                      onTap: () => catalogPageController.onClassificationClick(
+                          classification: e));
+                }).toList()
+              ],
             )));
+  }
+
+  GestureDetector classificationBtn(
+      {required bool selected, required String text, required Callback onTap}) {
+    return GestureDetector(
+      onTap: () => onTap(),
+      child: Container(
+          decoration: BoxDecoration(
+              color: selected
+                  ? MyColors.blue_00458C
+                  : MyColors.blue_00458C.withOpacity(0.2),
+              borderRadius: BorderRadius.circular(Get.width * 0.04)),
+          margin: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
+          padding: EdgeInsets.symmetric(
+              horizontal: Get.width * 0.03, vertical: Get.width * 0.015),
+          child: Text(
+            text,
+            style: TextStyle(
+                color: selected ? Colors.white : MyColors.blue_003E7E),
+          )),
+    );
   }
 
   Widget buildBrandsPanel({required List<Brand> brands}) {
@@ -384,6 +400,21 @@ class _CatalogPageState extends State<CatalogPage> {
   Widget buildAllMaterials({required List<Materiale> materials}) {
     return Container(
       key: Key('AllMaterials'),
+      child: ListView(
+        physics: BouncingScrollPhysics(),
+        cacheExtent: Get.height * 2,
+        children: materials.map((e) {
+          return MaterialCard(
+            materiale: e,
+          );
+        }).toList(),
+      ),
+    );
+  }
+
+  Widget buildDealsMaterials({required List<Materiale> materials}) {
+    return Container(
+      key: Key('ShowDeals'),
       child: ListView(
         physics: BouncingScrollPhysics(),
         cacheExtent: Get.height * 2,

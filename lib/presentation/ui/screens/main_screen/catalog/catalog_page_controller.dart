@@ -29,7 +29,11 @@ class CatalogPageController extends GetxController {
   List<Hierarchy> get hierarhys => _materialsCatalog.value.hierarchys;
 
   List<Classification> get getClassifications =>
-      _materialsCatalog.value.classifications;
+      _materialsCatalog.value.classifications
+          .where((element) => _materialsCatalog.value.materials
+              .map((e) => e.ClassificationId)
+              .contains(element.SFId))
+          .toList();
 
   Rxn<Classification> _selectedClassification = Rxn();
   Classification? get selectedClassification => _selectedClassification.value;
@@ -158,6 +162,19 @@ class CatalogPageController extends GetxController {
 
     if (oldState is HierarhableMaterials) {
       _state.value = oldState.copyWith(hierarhyFilter: hierarchy);
+    }
+  }
+
+  onDealsClick({bool forsed = false}) {
+    if (_state.value is ShowDeals && !forsed) {
+      _state.value =
+          ShowAllMaterials(materials: _materialsCatalog.value.materials);
+    } else {
+      _selectedClassification.value = null;
+      List<Materiale> materialsToShow = _materialsCatalog.value.materials
+          .where((element) => element.IsHotSale)
+          .toList();
+      _state.value = ShowDeals(materials: materialsToShow);
     }
   }
 }

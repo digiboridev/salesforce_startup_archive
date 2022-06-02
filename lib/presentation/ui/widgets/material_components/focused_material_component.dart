@@ -30,10 +30,10 @@ class FocusedMaterialComponent extends StatelessWidget {
               onTap: () async {
                 Map<UnitType, int>? d = await Get.dialog<Map<UnitType, int>>(
                   ProductCountPopup(
-                    initialCount: cartItem.quantity.toInt(),
-                    material: materiale,
-                    initialUnitType: cartItem.salesUnitType,
-                  ),
+                      initialCount: cartItem.quantity.toInt(),
+                      material: materiale,
+                      initialUnitType: cartItem.salesUnitType),
+                  transitionDuration: Duration(milliseconds: 100),
                 );
 
                 if (d != null) {

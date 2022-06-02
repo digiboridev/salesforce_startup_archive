@@ -20,6 +20,19 @@ class ShowAllMaterials extends CatalogPageState with EquatableMixin {
   String toString() => 'ShowAllMaterials(materials: $materials)';
 }
 
+class ShowDeals extends CatalogPageState with EquatableMixin {
+  final List<Materiale> materials;
+  ShowDeals({
+    required this.materials,
+  });
+
+  @override
+  List<Object> get props => [materials];
+
+  @override
+  String toString() => 'ShowAllMaterials(materials: $materials)';
+}
+
 class ShowBrands extends CatalogPageState with EquatableMixin {
   final List<Brand> brands;
   ShowBrands({

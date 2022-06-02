@@ -3,6 +3,8 @@ import 'package:***REMOVED***/domain/entities/materials/material.dart';
 import 'package:***REMOVED***/domain/entities/materials/materials_catalog.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
+import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar_controller.dart';
+import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalog_page_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/material_screen.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/material_card.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +24,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final ConnectionService connectionService = Get.find();
+  final BottomBarController bottomBarController = Get.find();
 
   int dealsPosition = 0;
   Widget dealsCard = Container();
@@ -55,6 +58,11 @@ class _HomePageState extends State<HomePage> {
         .toList();
   }
 
+  goToRecomended() async {
+    await bottomBarController.goToCatalog();
+    Get.find<CatalogPageController>().onDealsClick(forsed: true);
+  }
+
   Widget buildBody() {
     return Container(
       width: Get.width,
@@ -80,12 +88,15 @@ class _HomePageState extends State<HomePage> {
                           fontSize: Get.width * 0.055,
                         ),
                       ),
-                      Text(
-                        'All Deals'.tr,
-                        style: TextStyle(
-                            decoration: TextDecoration.underline,
-                            fontSize: Get.width * 0.045,
-                            color: Colors.blue),
+                      GestureDetector(
+                        onTap: () => goToRecomended(),
+                        child: Text(
+                          'All Deals'.tr,
+                          style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              fontSize: Get.width * 0.045,
+                              color: Colors.blue),
+                        ),
                       ),
                     ],
                   )),

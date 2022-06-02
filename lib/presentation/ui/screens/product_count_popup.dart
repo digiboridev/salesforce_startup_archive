@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:***REMOVED***/core/asset_images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -34,86 +36,46 @@ class ProductCountPopupState extends State<ProductCountPopup> {
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-        backgroundColor: Colors.transparent,
-        insetPadding: EdgeInsets.only(left: 0, right: 0, top: Get.width * 0.25),
-        child: Stack(
-          alignment: Alignment.topCenter,
-          children: [
-            GestureDetector(
-                onTap: () => Get.back(),
-                child: Container(
-                  height: Get.width * 0.1,
-                  width: Get.width * 0.1,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: Colors.white),
-                  child: Icon(
-                    Icons.clear,
-                    color: MyColors.gray_979797,
-                  ),
-                )),
-            Container(
-              margin: EdgeInsets.only(top: Get.width * 0.15),
-              alignment: Alignment.bottomCenter,
-              height: Get.height,
-              width: Get.width,
-              child: Column(
-                children: [
-                  Expanded(
-                      child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(55),
-                                  topRight: Radius.circular(55))),
-                          child: buildBody())),
-                ],
-              ),
-            )
-          ],
-        ));
-  }
-
-  Container buildHeader() {
-    return Container(
-      height: Get.width * 0.3,
-      color: MyColors.blue_00458C,
-      padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
-      child: Column(
-        children: [
-          Spacer(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return BackdropFilter(
+      filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+      child: Dialog(
+          backgroundColor: Colors.transparent,
+          insetPadding:
+              EdgeInsets.only(left: 0, right: 0, top: Get.width * 0.25),
+          child: Stack(
+            alignment: Alignment.topCenter,
             children: [
               GestureDetector(
-                onTap: () {
-                  Get.back();
-                },
-                child: Icon(
-                  Directionality.of(context) == TextDirection.rtl
-                      ? Icons.keyboard_arrow_right
-                      : Icons.keyboard_arrow_left,
-                  color: Colors.white,
+                  onTap: () => Get.back(),
+                  child: Container(
+                    height: Get.width * 0.1,
+                    width: Get.width * 0.1,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle, color: Colors.white),
+                    child: Icon(
+                      Icons.clear,
+                      color: MyColors.gray_979797,
+                    ),
+                  )),
+              Container(
+                margin: EdgeInsets.only(top: Get.width * 0.15),
+                alignment: Alignment.bottomCenter,
+                height: Get.height,
+                width: Get.width,
+                child: Column(
+                  children: [
+                    Expanded(
+                        child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(55),
+                                    topRight: Radius.circular(55))),
+                            child: buildBody())),
+                  ],
                 ),
-              ),
-              Hero(
-                tag: 'logo',
-                child: Image.asset(
-                  AssetImages.***REMOVED***Logo,
-                  width: Get.width * 0.3,
-                ),
-              ),
-              Hero(
-                tag: 'contact_btn',
-                child: Image.asset(
-                  AssetImages.contactButton,
-                  width: Get.width * 0.05,
-                ),
-              ),
+              )
             ],
-          ),
-          Spacer(),
-        ],
-      ),
+          )),
     );
   }
 
@@ -133,15 +95,18 @@ class ProductCountPopupState extends State<ProductCountPopup> {
                 physics: BouncingScrollPhysics(),
                 child: Column(
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: Get.width * 0.1,
-                          right: Get.width * 0.1,
-                          top: Get.width * 0.05),
+                    Container(
+                      height: Get.width * 0.4,
+                      alignment: Alignment.center,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: Get.width * 0.1),
                       child: Text(
                         "${widget.material.Name}",
                         style: TextStyle(
-                            fontSize: 20, color: MyColors.blue_00458C),
+                          fontSize: Get.width * 0.05,
+                          color: MyColors.blue_00458C,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
                     ),
                     Container(
@@ -151,11 +116,9 @@ class ProductCountPopupState extends State<ProductCountPopup> {
                           borderRadius: BorderRadius.all(
                               Radius.circular(Get.width * 0.06))),
                       height: 52,
-                      margin: EdgeInsets.only(
-                          left: Get.width * 0.05,
-                          right: Get.width * 0.05,
-                          top: Get.width * 0.05,
-                          bottom: Get.width * 0.05),
+                      margin: EdgeInsets.symmetric(
+                        horizontal: Get.width * 0.05,
+                      ),
                       child: Row(
                         children: widget.material.avaliableUnitTtypes.map((e) {
                           return InkWell(
@@ -171,6 +134,9 @@ class ProductCountPopupState extends State<ProductCountPopup> {
                                       e.runtimeType == unitType.runtimeType));
                         }).toList(),
                       ),
+                    ),
+                    SizedBox(
+                      height: Get.width * 0.05,
                     ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
