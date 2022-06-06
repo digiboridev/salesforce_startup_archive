@@ -39,8 +39,8 @@ class RelatedConsumerModel extends RelatedConsumer {
       customerName: map['CustomerName'],
       customerId: map['CustomerId'],
       customerAddress: map['CustomerAddress'],
-      latitude: map['latitude'],
-      longitude: map['longitude'],
+      latitude: double.parse(map['latitude'].toString()),
+      longitude: double.parse(map['longitude'].toString()),
     );
   }
 
@@ -58,8 +58,7 @@ class RelatedConsumerModel extends RelatedConsumer {
 
   String toJson() => json.encode(toMap());
 
-  factory RelatedConsumerModel.fromJson(String source) =>
-      RelatedConsumerModel.fromMap(json.decode(source));
+  factory RelatedConsumerModel.fromJson(String source) => RelatedConsumerModel.fromMap(json.decode(source));
 
   @override
   String toString() {

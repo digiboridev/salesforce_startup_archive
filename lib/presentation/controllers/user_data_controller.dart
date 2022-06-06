@@ -86,23 +86,20 @@ class UserDataController extends GetxController {
     // _userDataState.value = UserDataLoadingErrorState(msg: 'error');
     // return;
 
-    await AppVersionService.checkVersion();
+    // await AppVersionService.checkVersion();
 
     // emit loading state
     _userDataState.value = UserDataLoadingState();
 
     // Load user data
     try {
-      UserData userData = await _getUserDataAndCache(GetUserDataAndCacheParams(
-          userId: _authData.value!.userId,
-          hasConnection: _connectionService.hasConnection,
-          forceRemote: false));
+      UserData userData = await _getUserDataAndCache(
+          GetUserDataAndCacheParams(userId: _authData.value!.userId, hasConnection: _connectionService.hasConnection, forceRemote: false));
 
       // emmit accept legaldoc state if not
 
       if (!userData.hasAcceptedLegalDoc) {
-        _userDataState.value =
-            UserDataAskLegalDocState(legalDoc: userData.legalDoc);
+        _userDataState.value = UserDataAskLegalDocState(legalDoc: userData.legalDoc);
       }
       // emmit change password state if needed
 
@@ -117,10 +114,7 @@ class UserDataController extends GetxController {
         _userDataState.value = UserDataCommonState(userData: userData);
 
         // Register in cache fetching service
-        CacheUpdateEvent cacheUpdateEvent = CacheUpdateEvent(
-            tag: 'user',
-            updateActionCallback: updateUserData,
-            lastUpdateTimeCallback: getLastSync);
+        CacheUpdateEvent cacheUpdateEvent = CacheUpdateEvent(tag: 'user', updateActionCallback: updateUserData, lastUpdateTimeCallback: getLastSync);
         _cacheFetchingService.registerEvent(cacheUpdateEvent: cacheUpdateEvent);
       }
     } catch (e) {
@@ -189,10 +183,7 @@ class UserDataController extends GetxController {
       loadUserData();
     } catch (e) {
       Get.bottomSheet(InfoBottomSheet(
-          headerText: 'Error',
-          mainText: e.toString(),
-          actions: [InfoAction(text: 'Ok', callback: () => Get.back())],
-          headerIconPath: AssetImages.info));
+          headerText: 'Error', mainText: e.toString(), actions: [InfoAction(text: 'Ok', callback: () => Get.back())], headerIconPath: AssetImages.info));
     }
   }
 
@@ -213,8 +204,7 @@ class UserDataController extends GetxController {
   Languages get currentLanguage {
     var state = _userDataState.value;
     if (state is UserDataCommonState) {
-      return Languages.fromIdentifier(
-          identifier: state.userData.selectedLanguage);
+      return Languages.fromIdentifier(identifier: state.userData.selectedLanguage);
     } else {
       throw Exception('Operation denied');
     }
@@ -238,27 +228,17 @@ class UserDataController extends GetxController {
     } catch (e) {
       Get.until((route) => !Get.isDialogOpen!);
       Get.bottomSheet(InfoBottomSheet(
-          headerText: 'Error',
-          mainText: e.toString(),
-          actions: [InfoAction(text: 'Ok', callback: () => Get.back())],
-          headerIconPath: AssetImages.info));
+          headerText: 'Error', mainText: e.toString(), actions: [InfoAction(text: 'Ok', callback: () => Get.back())], headerIconPath: AssetImages.info));
     }
   }
 
-  Future changePassword(
-      {required String oldPass,
-      required String newPass,
-      bool onlogin = false}) async {
+  Future changePassword({required String oldPass, required String newPass, bool onlogin = false}) async {
     try {
-      await _changePassword
-          .call(ChangePasswordParams(oldPass: oldPass, newPass: newPass));
+      await _changePassword.call(ChangePasswordParams(oldPass: oldPass, newPass: newPass));
       if (onlogin) loadUserData();
     } catch (e) {
       Get.bottomSheet(InfoBottomSheet(
-          headerText: 'Error',
-          mainText: e.toString(),
-          actions: [InfoAction(text: 'Ok', callback: () => Get.back())],
-          headerIconPath: AssetImages.info));
+          headerText: 'Error', mainText: e.toString(), actions: [InfoAction(text: 'Ok', callback: () => Get.back())], headerIconPath: AssetImages.info));
     }
   }
 
