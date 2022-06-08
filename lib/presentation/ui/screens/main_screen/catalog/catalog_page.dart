@@ -136,25 +136,25 @@ class _CatalogPageState extends State<CatalogPage> {
                 Expanded(
                   child: ListView(
                     physics: BouncingScrollPhysics(),
-                    children: state.avaliableHierarhys.map((e) {
-                      return Builder(builder: (context) {
+                    children: [
+                      Builder(builder: (context) {
                         bool selected = false;
                         CatalogPageState state = catalogPageController.state;
                         if (state is HierarhableMaterials) {
-                          if (state.hierarhyFilter == e) {
+                          if (state.hierarhyFilter == null) {
                             selected = true;
                           }
                         }
 
                         return GestureDetector(
                           onTap: () => catalogPageController
-                              .changeHierarhyFilter(hierarchy: e),
+                              .changeHierarhyFilter(hierarchy: null),
                           child: Padding(
                             padding: EdgeInsets.symmetric(
                                 horizontal: Get.width * 0.03,
                                 vertical: Get.width * 0.02),
                             child: Text(
-                              e.Display,
+                              'All materials',
                               style: TextStyle(
                                   color: selected
                                       ? Colors.blue
@@ -163,8 +163,37 @@ class _CatalogPageState extends State<CatalogPage> {
                             ),
                           ),
                         );
-                      });
-                    }).toList(),
+                      }),
+                      ...state.avaliableHierarhys.map((e) {
+                        return Builder(builder: (context) {
+                          bool selected = false;
+                          CatalogPageState state = catalogPageController.state;
+                          if (state is HierarhableMaterials) {
+                            if (state.hierarhyFilter == e) {
+                              selected = true;
+                            }
+                          }
+
+                          return GestureDetector(
+                            onTap: () => catalogPageController
+                                .changeHierarhyFilter(hierarchy: e),
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: Get.width * 0.03,
+                                  vertical: Get.width * 0.02),
+                              child: Text(
+                                e.Display,
+                                style: TextStyle(
+                                    color: selected
+                                        ? Colors.blue
+                                        : MyColors.blue_003E7E,
+                                    fontSize: Get.width * 0.036),
+                              ),
+                            ),
+                          );
+                        });
+                      })
+                    ],
                   ),
                 ),
               ],

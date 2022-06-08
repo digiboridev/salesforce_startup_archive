@@ -102,14 +102,8 @@ class CatalogPageController extends GetxController {
 
     Set<Hierarchy> avaliableHierarhys = Set();
 
-    // Set<Materiale> test = _materialsCatalog.value.materials
-    //     .where((element) => element.Hierarchy4 != null)
-    //     .toSet();
-
-    // print(test);
-
     materials.where((m) => m.Hierarchy4 != null).forEach((mm) {
-      Hierarchy? h = hierarhys.firstWhereOrNull((h) => h.SFId == mm);
+      Hierarchy? h = hierarhys.firstWhereOrNull((h) => h.SFId == mm.Hierarchy4);
       if (h != null) {
         avaliableHierarhys.add(h);
       }
@@ -136,7 +130,7 @@ class CatalogPageController extends GetxController {
     Set<Hierarchy> avaliableHierarhys = Set();
 
     materials.where((m) => m.Hierarchy4 != null).forEach((mm) {
-      Hierarchy? h = hierarhys.firstWhereOrNull((h) => h.SFId == mm);
+      Hierarchy? h = hierarhys.firstWhereOrNull((h) => h.SFId == mm.Hierarchy4);
       if (h != null) {
         avaliableHierarhys.add(h);
       }
@@ -161,7 +155,11 @@ class CatalogPageController extends GetxController {
     var oldState = state;
 
     if (oldState is HierarhableMaterials) {
-      _state.value = oldState.copyWith(hierarhyFilter: hierarchy);
+      if (hierarchy == null) {
+        _state.value = oldState.copyWithClearedFilter();
+      } else {
+        _state.value = oldState.copyWith(hierarhyFilter: hierarchy);
+      }
     }
   }
 

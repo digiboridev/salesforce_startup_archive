@@ -72,6 +72,8 @@ abstract class HierarhableMaterials extends CatalogPageState {
     List<Hierarchy>? avaliableHierarhys,
   });
 
+  HierarhableMaterials copyWithClearedFilter();
+
   List<Materiale> get materialsByFilter {
     if (hierarhyFilter != null) {
       return materials
@@ -128,6 +130,17 @@ class ShowMaterialsByFamily extends HierarhableMaterials with EquatableMixin {
       avaliableHierarhys: avaliableHierarhys ?? this.avaliableHierarhys,
     );
   }
+
+  @override
+  HierarhableMaterials copyWithClearedFilter() {
+    return ShowMaterialsByFamily(
+      family: this.family,
+      materials: this.materials,
+      hierarhyFilter: null,
+      showFilter: this.showFilter,
+      avaliableHierarhys: this.avaliableHierarhys,
+    );
+  }
 }
 
 class ShowMaterialsByBrand extends HierarhableMaterials with EquatableMixin {
@@ -174,6 +187,17 @@ class ShowMaterialsByBrand extends HierarhableMaterials with EquatableMixin {
       hierarhyFilter: hierarhyFilter ?? this.hierarhyFilter,
       showFilter: showFilter ?? this.showFilter,
       avaliableHierarhys: avaliableHierarhys ?? this.avaliableHierarhys,
+    );
+  }
+
+  @override
+  HierarhableMaterials copyWithClearedFilter() {
+    return ShowMaterialsByBrand(
+      brand: this.brand,
+      materials: this.materials,
+      hierarhyFilter: null,
+      showFilter: this.showFilter,
+      avaliableHierarhys: this.avaliableHierarhys,
     );
   }
 }
