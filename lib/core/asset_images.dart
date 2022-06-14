@@ -43,4 +43,6 @@ abstract class AssetImages {
   static String get info => 'assets/icons/info.png';
   static String get check => 'assets/icons/check.png';
   static String get loading_circle => 'assets/images/loading_circle.png';
+
+  static String get recomended_list => 'assets/icons/recomended_list.png';
 }

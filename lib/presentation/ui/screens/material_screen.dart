@@ -4,7 +4,10 @@ import 'package:***REMOVED***/domain/entities/cart_item.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
 import 'package:***REMOVED***/presentation/controllers/cart_controller.dart';
+import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
+import 'package:***REMOVED***/presentation/controllers/favorites_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
+import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/cart_top_icon.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/product_options.dart';
 import 'package:***REMOVED***/presentation/ui/screens/material_screen_dialog.dart';
@@ -29,6 +32,22 @@ class MaterialScreen extends StatefulWidget {
 class _MaterialScreenState extends State<MaterialScreen> {
   MaterialsCatalogController materialsCatalogController = Get.find();
   CartController cartController = Get.find();
+
+  CustomerController customerController = Get.find();
+  UserDataController userDataController = Get.find();
+  FavoritesController favoritesController = Get.find();
+
+  bool get hidePrices {
+    return customerController.selectedCustomer!.hidePrices;
+  }
+
+  num priceWithVAT({required num price}) {
+    if (customerController.selectedCustomer!.showPriceWithVAT) {
+      return price + customerController.selectedCustomer!.vat;
+    } else {
+      return price;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -145,6 +164,7 @@ class _MaterialScreenState extends State<MaterialScreen> {
         } else {
           return NormalMaterialComponent(
             materiale: widget.material,
+            onlyButton: true,
           );
         }
       });
@@ -193,35 +213,30 @@ class _MaterialScreenState extends State<MaterialScreen> {
                               isHotSale: true,
                               optionType: ProductOptions.MATERIAL_SCREEN_TYPE,
                               isFrozen: true),
-                          SizedBox(
-                            height: Get.width * 0.01,
-                          ),
                           Container(
                               width: Get.width * 0.5,
                               child: Text(
                                 widget.material.Name,
                                 style: TextStyle(
-                                    color: MyColors.blue_003E7E, fontSize: 18),
+                                  color: MyColors.blue_003E7E,
+                                  fontSize: Get.width * 0.05,
+                                  fontWeight: FontWeight.w400,
+                                ),
                               )),
-                          SizedBox(
-                            height: Get.width * 0.025,
-                          ),
                           Text(
                             "${'Code'.tr}: " + widget.material.SFId,
                             style: TextStyle(
                               color: MyColors.blue_003E7E,
+                              fontSize: Get.width * 0.035,
+                              fontWeight: FontWeight.w400,
                             ),
-                          ),
-                          SizedBox(
-                            height: Get.width * 0.01,
                           ),
                           Text("${'Barcode'.tr}: " + widget.material.Barcode,
                               style: TextStyle(
                                 color: MyColors.blue_003E7E,
+                                fontSize: Get.width * 0.035,
+                                fontWeight: FontWeight.w400,
                               )),
-                          SizedBox(
-                            height: Get.width * 0.01,
-                          ),
                           Text(
                               '${'Minimum order'.tr}: ' +
                                   widget.material.MinimumOrderQuantity
@@ -230,6 +245,8 @@ class _MaterialScreenState extends State<MaterialScreen> {
                                   widget.material.salesUnitType.text,
                               style: TextStyle(
                                 color: MyColors.blue_003E7E,
+                                fontSize: Get.width * 0.035,
+                                fontWeight: FontWeight.w400,
                               )),
                         ],
                       )
@@ -241,11 +258,14 @@ class _MaterialScreenState extends State<MaterialScreen> {
                         right: Get.width * 0.03,
                         top: Get.width * 0.06),
                     width: Get.width,
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'About the product'.tr,
-                      style:
-                          TextStyle(fontSize: 18, color: MyColors.blue_003E7E),
+                    child: Row(
+                      children: [
+                        Text(
+                          'About the product'.tr,
+                          style: TextStyle(
+                              fontSize: 18, color: MyColors.blue_003E7E),
+                        ),
+                      ],
                     ),
                   ),
                   Container(
@@ -378,20 +398,7 @@ class _MaterialScreenState extends State<MaterialScreen> {
                         right: Get.width * 0.03,
                         top: Get.width * 0.05,
                         bottom: Get.width * 0.05),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Quantity".tr,
-                          style: TextStyle(
-                              color: MyColors.blue_0050A2, fontSize: 17),
-                        ),
-                        Text(
-                            "${widget.material.countByUnitType(widget.material.avaliableUnitTtypes.first)} ${'units per'.tr} ${widget.material.avaliableUnitTtypes.first.text.tr}",
-                            style: TextStyle(
-                                color: MyColors.blue_0571E0, fontSize: 20)),
-                      ],
-                    ),
+                    child: pricesRow(),
                   ),
                   getMaterialComponent(),
                 ],
@@ -425,6 +432,127 @@ class _MaterialScreenState extends State<MaterialScreen> {
         ],
       ),
     );
+  }
+
+  Widget pricesRow() {
+    if (hidePrices) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            "Quantity".tr,
+            style: TextStyle(color: MyColors.blue_0050A2, fontSize: 17),
+          ),
+          Text(
+              "${widget.material.countByUnitType(widget.material.avaliableUnitTtypes.first)} ${'units per'.tr} ${widget.material.avaliableUnitTtypes.first.text.tr}",
+              style: TextStyle(color: MyColors.blue_0571E0, fontSize: 20)),
+        ],
+      );
+    } else {
+      return Row(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Quantity".tr,
+                style: TextStyle(
+                  color: MyColors.blue_0050A2,
+                  fontSize: Get.width * 0.04,
+                ),
+              ),
+              Text(
+                "${widget.material.countByUnitType(widget.material.avaliableUnitTtypes.first)}" +
+                    " ${'units per'.tr} ${widget.material.avaliableUnitTtypes.first.text.tr}",
+                style: TextStyle(
+                  color: MyColors.blue_0571E0,
+                  fontSize: Get.width * 0.045,
+                ),
+              )
+            ],
+          ),
+          Spacer(),
+          Container(
+            height: Get.width * 0.09,
+            width: 1,
+            color: Colors.grey,
+          ),
+          Spacer(),
+          Visibility(
+              visible: (widget.material.UnitPrice != 0 && !hidePrices),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text("Price per Unit".tr,
+                      style: TextStyle(
+                        color: MyColors.blue_0050A2,
+                        fontSize: Get.width * 0.04,
+                      )),
+                  Row(children: [
+                    Row(
+                      children: [
+                        Text(
+                          userDataController.currencyKey,
+                          style: TextStyle(
+                            color: MyColors.blue_0571E0,
+                            fontSize: Get.width * 0.04,
+                          ),
+                        ),
+                        Text(
+                          priceWithVAT(price: widget.material.UnitNetPrice)
+                              .toString(),
+                          style: TextStyle(
+                            color: MyColors.blue_0571E0,
+                            fontSize: Get.width * 0.045,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      width: Get.width * 0.01,
+                    ),
+                    Stack(
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              userDataController.currencyKey,
+                              style: TextStyle(
+                                color: MyColors.gray_8B9298,
+                                fontSize: Get.width * 0.04,
+                              ),
+                            ),
+                            Text(
+                              priceWithVAT(price: widget.material.UnitPrice)
+                                  .toString(),
+                              style: TextStyle(
+                                color: MyColors.gray_8B9298,
+                                fontSize: Get.width * 0.045,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Positioned.fill(
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 2.4,
+                            child: Container(
+                              height: 0.8,
+                              // width: Get.width*0.13,
+                              color: MyColors.gray_8B9298,
+                              margin: EdgeInsets.all(0.5),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  ]),
+                ],
+              )),
+          Spacer(),
+        ],
+      );
+    }
   }
 
   Widget buildHeader() {

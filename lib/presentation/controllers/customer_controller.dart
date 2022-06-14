@@ -36,6 +36,9 @@ class CustomerController extends GetxController {
   RxList<RelatedConsumer> _relatedConsumers = RxList();
   List<RelatedConsumer> get relatedConsumers => _relatedConsumers;
 
+  Rxn<RelatedConsumer> _closestRelatedConsumer = Rxn();
+  RelatedConsumer? get closestRelatedConsumer => _closestRelatedConsumer.value;
+
   RxnString _selectedCustomerSAP = RxnString();
   String? get selectedCustomerSAP => _selectedCustomerSAP.value;
   Stream<String?> get selectedCustomerSAPStream => _selectedCustomerSAP.stream;
@@ -61,19 +64,31 @@ class CustomerController extends GetxController {
     UserDataState uds = userDataState;
     if (uds is UserDataCommonState) {
       _relatedConsumers.value = uds.userData.relatedCustomers;
-      _locationService.getUserPosition();
+      try {
+        await _locationService.getUserPosition();
+      } catch (e) {
+        print('Location determine error: ' + e.toString());
+      }
       loadCustomers(userData: uds.userData);
     } else {
       // clear all data
-      // _relatedConsumers.clear();
+      _relatedConsumers.clear();
       _selectedCustomer.value = null;
       _selectedCustomerSAP.value = null;
+      _closestRelatedConsumer.value = null;
     }
   }
 
   // Load full customer data
   Future<void> loadCustomers({required UserData userData}) async {
     _customerLoadingError.value = null;
+
+    // Determine closest consumer
+    if (_locationService.lastPosition is Position) {
+      _closestRelatedConsumer.value = userData.closestRelatedCustomer(
+          lattitude: _locationService.lastPosition!.latitude,
+          longtitude: _locationService.lastPosition!.longitude);
+    }
 
     try {
       // Get saved selection
@@ -86,21 +101,10 @@ class CustomerController extends GetxController {
           !userData.relatedCustomers
               .map((element) => element.customerSAPNumber)
               .contains(_selectedCustomerSAP.value)) {
-        // select by location if avalieble
-        // if not select first one
-        try {
-          Position userPosition = await _locationService.getUserPosition();
-
-          RelatedConsumer? closestCustomer = userData.closestRelatedCustomer(
-              lattitude: userPosition.latitude,
-              longtitude: userPosition.longitude);
-
-          _selectedCustomerSAP.value = closestCustomer?.customerSAPNumber ??
-              userData.relatedCustomers.first.customerSAPNumber;
-        } catch (e) {
-          _selectedCustomerSAP.value =
-              userData.relatedCustomers.first.customerSAPNumber;
-        }
+        // select closest if possible, if not select first one
+        _selectedCustomerSAP.value =
+            closestRelatedConsumer?.customerSAPNumber ??
+                userData.relatedCustomers.first.customerSAPNumber;
 
         // save selected customer
         _setSelectedCustomerSAP.call(SetSelectedCustomerSAPParams(
@@ -124,6 +128,8 @@ class CustomerController extends GetxController {
     } catch (e) {
       _customerLoadingError.value = e.toString();
       print(e.toString());
+
+      // Show error popup with retry
       Get.bottomSheet(
         WillPopScope(
           onWillPop: () async => false,

@@ -55,6 +55,7 @@ class ProductOptionsState extends State<ProductOptions> {
             height: 30,
             alignment: Alignment.center,
             child: Row(
+              textDirection: TextDirection.ltr,
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -83,7 +84,7 @@ class ProductOptionsState extends State<ProductOptions> {
               color: MyColors.orange_FF8800,
               borderRadius: BorderRadius.all(Radius.circular(15))),
           child: Text(
-            "Hot sale".tr,
+            "hot_material".tr,
             style: TextStyle(color: Colors.white, fontSize: 8),
           ),
         ));
@@ -100,7 +101,7 @@ class ProductOptionsState extends State<ProductOptions> {
               color: MyColors.blue_00458C,
               borderRadius: BorderRadius.all(Radius.circular(15))),
           child: Text(
-            "New".tr,
+            "new_material".tr,
             style: TextStyle(
                 color: Colors.white, fontSize: 11, fontFamily: 'Almoni'),
           ),

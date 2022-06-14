@@ -30,23 +30,25 @@ class MaterialScreenDialog extends StatelessWidget {
                     width: Get.width,
                     height: Get.width * 1.1,
                   )),
-              Positioned(
+              Positioned.directional(
+                  textDirection: Directionality.of(context),
+                  end: 0,
                   child: GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Container(
-                  height: Get.width * 0.07,
-                  width: Get.width * 0.07,
-                  decoration: BoxDecoration(
-                      color: MyColors.blue_00458C, shape: BoxShape.circle),
-                  child: Icon(
-                    Icons.close,
-                    color: Colors.white,
-                    size: 18,
-                  ),
-                ),
-              ))
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: Container(
+                      height: Get.width * 0.07,
+                      width: Get.width * 0.07,
+                      decoration: BoxDecoration(
+                          color: MyColors.blue_00458C, shape: BoxShape.circle),
+                      child: Icon(
+                        Icons.close,
+                        color: Colors.white,
+                        size: 18,
+                      ),
+                    ),
+                  ))
             ],
           ),
         ));

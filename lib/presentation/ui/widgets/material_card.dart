@@ -34,8 +34,8 @@ class MaterialCardState extends State<MaterialCard> {
   CartController cartController = Get.find();
 
   UserDataController userDataController = Get.find();
-  CustomerController customerController = Get.find();
   FavoritesController favoritesController = Get.find();
+  CustomerController customerController = Get.find();
 
   bool get hidePrices {
     return customerController.selectedCustomer!.hidePrices;
@@ -114,124 +114,7 @@ class MaterialCardState extends State<MaterialCard> {
                               SizedBox(
                                 height: 16,
                               ),
-                              Row(
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Quantity".tr,
-                                        style: TextStyle(
-                                            color: MyColors.blue_0050A2,
-                                            fontSize: 12),
-                                      ),
-                                      SizedBox(
-                                        height: Get.width * 0.02,
-                                      ),
-                                      Text(
-                                        "${widget.materiale.countByUnitType(widget.materiale.avaliableUnitTtypes.first)}" +
-                                            " ${'units per'.tr} ${widget.materiale.avaliableUnitTtypes.first.text.tr}",
-                                        style: TextStyle(
-                                            color: MyColors.blue_0571E0,
-                                            fontSize: 12),
-                                      )
-                                    ],
-                                  ),
-                                  Spacer(),
-                                  Container(
-                                    height: Get.width * 0.09,
-                                    width: 1,
-                                    color: Colors.grey,
-                                  ),
-                                  Spacer(),
-                                  Visibility(
-                                      visible:
-                                          (widget.materiale.UnitPrice != 0 &&
-                                              !hidePrices),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text("Price per Unit".tr,
-                                              style: TextStyle(
-                                                  color: MyColors.blue_0050A2,
-                                                  fontSize: 12)),
-                                          SizedBox(
-                                            height: Get.width * 0.02,
-                                          ),
-                                          Row(children: [
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  userDataController
-                                                      .currencyKey,
-                                                  style: TextStyle(
-                                                      color:
-                                                          MyColors.blue_0571E0,
-                                                      fontSize: 12),
-                                                ),
-                                                Text(
-                                                  priceWithVAT(
-                                                          price: widget
-                                                              .materiale
-                                                              .UnitNetPrice)
-                                                      .toString(),
-                                                  style: TextStyle(
-                                                      color:
-                                                          MyColors.blue_0571E0,
-                                                      fontSize: 12),
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              width: Get.width * 0.01,
-                                            ),
-                                            Stack(
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    Text(
-                                                      userDataController
-                                                          .currencyKey,
-                                                      style: TextStyle(
-                                                          color: MyColors
-                                                              .gray_8B9298),
-                                                    ),
-                                                    Text(
-                                                      priceWithVAT(
-                                                              price: widget
-                                                                  .materiale
-                                                                  .UnitPrice)
-                                                          .toString(),
-                                                      style: TextStyle(
-                                                          color: MyColors
-                                                              .gray_8B9298),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Positioned.fill(
-                                                  child: Container(
-                                                    alignment: Alignment.center,
-                                                    height: 2.4,
-                                                    child: Container(
-                                                      height: 0.8,
-                                                      // width: Get.width*0.13,
-                                                      color:
-                                                          MyColors.gray_8B9298,
-                                                      margin:
-                                                          EdgeInsets.all(0.5),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            )
-                                          ]),
-                                        ],
-                                      )),
-                                  Spacer(),
-                                ],
-                              )
+                              pricesRow()
                             ])),
                       ],
                     ),
@@ -289,6 +172,100 @@ class MaterialCardState extends State<MaterialCard> {
           )
         ],
       ),
+    );
+  }
+
+  Row pricesRow() {
+    return Row(
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Quantity".tr,
+              style: TextStyle(color: MyColors.blue_0050A2, fontSize: 12),
+            ),
+            SizedBox(
+              height: Get.width * 0.02,
+            ),
+            Text(
+              "${widget.materiale.countByUnitType(widget.materiale.avaliableUnitTtypes.first)}" +
+                  " ${'units per'.tr} ${widget.materiale.avaliableUnitTtypes.first.text.tr}",
+              style: TextStyle(color: MyColors.blue_0571E0, fontSize: 12),
+            )
+          ],
+        ),
+        Spacer(),
+        Container(
+          height: Get.width * 0.09,
+          width: 1,
+          color: Colors.grey,
+        ),
+        Spacer(),
+        Visibility(
+            visible: (widget.materiale.UnitPrice != 0 && !hidePrices),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Price per Unit".tr,
+                    style:
+                        TextStyle(color: MyColors.blue_0050A2, fontSize: 12)),
+                SizedBox(
+                  height: Get.width * 0.02,
+                ),
+                Row(children: [
+                  Row(
+                    children: [
+                      Text(
+                        userDataController.currencyKey,
+                        style: TextStyle(
+                            color: MyColors.blue_0571E0, fontSize: 12),
+                      ),
+                      Text(
+                        priceWithVAT(price: widget.materiale.UnitNetPrice)
+                            .toString(),
+                        style: TextStyle(
+                            color: MyColors.blue_0571E0, fontSize: 12),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    width: Get.width * 0.01,
+                  ),
+                  Stack(
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            userDataController.currencyKey,
+                            style: TextStyle(color: MyColors.gray_8B9298),
+                          ),
+                          Text(
+                            priceWithVAT(price: widget.materiale.UnitPrice)
+                                .toString(),
+                            style: TextStyle(color: MyColors.gray_8B9298),
+                          ),
+                        ],
+                      ),
+                      Positioned.fill(
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: 2.4,
+                          child: Container(
+                            height: 0.8,
+                            // width: Get.width*0.13,
+                            color: MyColors.gray_8B9298,
+                            margin: EdgeInsets.all(0.5),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ]),
+              ],
+            )),
+        Spacer(),
+      ],
     );
   }
 

@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:***REMOVED***/domain/entities/related_consumer.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/contact_option_tile.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/header_search_result.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/our_focus_head.dart';
@@ -143,7 +144,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                 curve: Curves.easeInOut,
                 duration: Duration(milliseconds: 300),
                 height: mainScreeenHeaderController.enableBrunchSelection.value
-                    ? Get.width * 0.06
+                    ? Get.width * 0.08
                     : 0,
                 child: GestureDetector(
                   onTap: () {
@@ -156,23 +157,13 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                   child: Row(
                     children: [
                       Expanded(
-                        child: Obx(() => RichText(
+                        child: Obx(() => Text(
+                              customerController.selectedCustomer!.customerName,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: Get.width * 0.035,
+                              ),
                               overflow: TextOverflow.ellipsis,
-                              text: TextSpan(
-                                  style: TextStyle(
-                                      color: Colors.white.withOpacity(0.77),
-                                      fontSize: Get.width * 0.035),
-                                  children: [
-                                    TextSpan(
-                                      text: ' ' +
-                                          customerController
-                                              .selectedCustomer!.customerName +
-                                          ' ',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: Get.width * 0.035),
-                                    ),
-                                  ]),
                             )),
                       ),
                       if (mainScreeenHeaderController
@@ -185,14 +176,27 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                                   width: Get.width * 0.001,
                                   color: Colors.white)),
                           padding: EdgeInsets.symmetric(
+                              vertical: Get.width * 0.005,
                               horizontal: Get.width * 0.03),
                           child: GestureDetector(
                             onTap: () => goToRecomended(),
-                            child: Text(
-                              'Recomended List'.tr,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: Get.width * 0.035),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  'Recomended List'.tr,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: Get.width * 0.035),
+                                ),
+                                SizedBox(
+                                  width: Get.width * 0.015,
+                                ),
+                                Image.asset(
+                                  AssetImages.recomended_list,
+                                  width: Get.width * 0.03,
+                                )
+                              ],
                             ),
                           ),
                         )
@@ -448,66 +452,89 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
         Container(
           height: Get.width * 1 - Get.width * 0.07,
           color: MyColors.blue_00458C,
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: Get.width * 0.06,
-                ),
-                child: Row(
-                  children: [
-                    Text(
-                      '${'All brunches'.tr}',
-                      style: TextStyle(
-                          fontSize: 16, color: Colors.white.withOpacity(0.77)),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: Get.width * 0.02,
-              ),
-              Expanded(
-                  child: Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: Get.width * 0.02),
-                      color: MyColors.blue_00458C,
-                      child: Theme(
-                          data: ThemeData(
-                              scrollbarTheme: ScrollbarThemeData(
-                            thumbColor:
-                                MaterialStateProperty.all(MyColors.blue_5584B2),
-                            radius: const Radius.circular(10),
-                          )),
-                          child: Scrollbar(
-                            isAlwaysShown: true,
-                            controller: _scrollController,
-                            child: ListView(
-                              controller: _scrollController,
-                              physics: BouncingScrollPhysics(),
-                              children: customerController.relatedConsumers
-                                  .where((element) => element.customerName
-                                      .toLowerCase()
-                                      .contains(
-                                          searchBranchCondition.toLowerCase()))
-                                  .map((e) {
-                                return RelatedCustomerTile(
-                                  ontap: () {
-                                    customerController
-                                        .switchCustomer(
-                                            customerSAP: e.customerSAPNumber)
-                                        .then((value) =>
-                                            mainScreeenHeaderController.hide());
-                                  },
-                                  relatedConsumer: e,
-                                );
-                              }).toList(),
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
+            margin: EdgeInsets.only(bottom: Get.width * 0.02),
+            color: MyColors.blue_00458C,
+            child: Theme(
+              data: ThemeData(
+                  scrollbarTheme: ScrollbarThemeData(
+                thumbColor: MaterialStateProperty.all(MyColors.blue_5584B2),
+                radius: const Radius.circular(10),
+              )),
+              child: Scrollbar(
+                isAlwaysShown: true,
+                controller: _scrollController,
+                child: SingleChildScrollView(
+                  controller: _scrollController,
+                  physics: BouncingScrollPhysics(),
+                  child: Column(children: [
+                    if (customerController.closestRelatedConsumer
+                        is RelatedConsumer)
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: Get.width * 0.03,
+                        ),
+                        child: Row(
+                          children: [
+                            Text(
+                              '${'Nearest Brunch'.tr}',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white.withOpacity(0.77)),
                             ),
-                          )))),
-              SizedBox(
-                height: Get.width * 0.03,
-              )
-            ],
+                          ],
+                        ),
+                      ),
+                    if (customerController.closestRelatedConsumer
+                        is RelatedConsumer)
+                      RelatedCustomerTile(
+                        ontap: () {
+                          customerController
+                              .switchCustomer(
+                                  customerSAP: customerController
+                                      .closestRelatedConsumer!
+                                      .customerSAPNumber)
+                              .then((value) =>
+                                  mainScreeenHeaderController.hide());
+                        },
+                        relatedConsumer:
+                            customerController.closestRelatedConsumer!,
+                      ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: Get.width * 0.03,
+                      ),
+                      child: Row(
+                        children: [
+                          Text(
+                            '${'All brunches'.tr}',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white.withOpacity(0.77)),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ...customerController.relatedConsumers
+                        .where((element) => element.customerName
+                            .toLowerCase()
+                            .contains(searchBranchCondition.toLowerCase()))
+                        .map((e) {
+                      return RelatedCustomerTile(
+                        ontap: () {
+                          customerController
+                              .switchCustomer(customerSAP: e.customerSAPNumber)
+                              .then((value) =>
+                                  mainScreeenHeaderController.hide());
+                        },
+                        relatedConsumer: e,
+                      );
+                    }).toList()
+                  ]),
+                ),
+              ),
+            ),
           ),
         ),
         buildHideBottom()

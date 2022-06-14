@@ -100,6 +100,16 @@ class CatalogPageController extends GetxController {
       return false;
     }).toList();
 
+    // Set<Materiale> s = Set();
+
+    // s = _materialsCatalog.value.materials
+    //     .where((element) => element.pricing.isNotEmpty)
+    //     .toSet();
+
+    // s = _materialsCatalog.value.materials
+    //     .where((element) => element.freeGoods.isNotEmpty)
+    //     .toSet();
+
     Set<Hierarchy> avaliableHierarhys = Set();
 
     materials.where((m) => m.Hierarchy4 != null).forEach((mm) {

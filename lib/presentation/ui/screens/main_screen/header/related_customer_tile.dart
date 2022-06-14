@@ -109,7 +109,11 @@ class RelatedCustomerTile extends StatelessWidget {
                       ),
                       Text(
                         relatedConsumer
-                            .distanceTo(lattitude: 0, longtitude: 0)
+                            .distanceTo(
+                                lattitude:
+                                    locationService.lastPosition!.latitude,
+                                longtitude:
+                                    locationService.lastPosition!.longitude)
                             .toStringAsFixed(2),
                         style: TextStyle(color: Colors.white),
                       ),

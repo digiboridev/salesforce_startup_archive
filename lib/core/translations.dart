@@ -143,9 +143,13 @@ class Trs extends Translations {
               'Favorites loading error', // Popups with error
           'Recomended List': 'Recomended List', // header
           'All branches': 'All branches', // header
+          'Nearest Brunch': 'Nearest Brunch', // header
           'Client ID': 'Client ID:', // header
           'Last order date': 'Last order date:', // header
           'Distance': 'Distance:', // header
+          'new_material': 'New', // PS1
+          'hot_material': 'Work', // PS1
+          'Add to cart': 'Add to cart', // PP2
         },
         'he': {
           'Good morning': 'בוקר טוב🌞',
@@ -181,7 +185,7 @@ class Trs extends Translations {
           'No results were found for this product but we have similar products':
               'לא נמצאו תוצאות לחיפוש המבוקש אבל יש לנו מוצרים דומים שיכולים להתאים',
           'Deals': 'מבצעים',
-          'All Deals': 'כל הדילים',
+          'All Deals': 'כל המבצעים',
           'Recomended for you': 'מומלצים עבורך',
           'All recomended': 'לכל המומלצים',
           'To all newcomers': 'לכל החדשים',
@@ -272,10 +276,14 @@ class Trs extends Translations {
           'Materials loading error': 'שגיאת טעינת חומרים',
           'Favorites loading error': 'שגיאת טעינת מועדפים',
           'All branches': 'כל הסניפים',
+          'Nearest Brunch': 'הסניף הקרוב',
           'Recomended List': 'רשימה מומלצת',
           'Client ID': 'מזהה לקוח:',
           'Last order date': 'תאריך הזמנה אחרון:',
           'Distance': 'מֶרְחָק:',
+          'new_material': 'חדש',
+          'hot_material': 'מבצע',
+          'Add to cart': 'הוסף לעגלה',
         }
       };
 }
