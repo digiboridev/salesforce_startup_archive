@@ -35,7 +35,10 @@ class RelatedCustomerTile extends StatelessWidget {
               children: [
                 Text(
                   relatedConsumer.customerName,
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: Get.width * 0.05,
+                  ),
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(vertical: Get.width * 0.025),

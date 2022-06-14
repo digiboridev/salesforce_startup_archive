@@ -10,7 +10,7 @@ class PricingModel extends Pricing {
     required String? UnitDisplay,
     required String Unit,
     required String SFId,
-    required num Rate,
+    required num? Rate,
     required String MaterialId,
     required bool IsPercentage,
     required bool HasScale,

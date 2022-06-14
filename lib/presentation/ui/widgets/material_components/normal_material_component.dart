@@ -27,7 +27,7 @@ class NormalMaterialComponent extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  height: 24,
+                  height: Get.width * 0.08,
                   width: Get.width * 0.005,
                   color: MyColors.blue_003E7E,
                 ),
@@ -42,23 +42,31 @@ class NormalMaterialComponent extends StatelessWidget {
                             Text(
                               "${'Recommended quantity'.tr}: ",
                               style: TextStyle(
-                                  color: MyColors.blue_003E83, fontSize: 12),
+                                color: MyColors.blue_003E83,
+                                fontSize: Get.width * 0.035,
+                              ),
                             ),
                             Text(
                                 "${materiale.AverageQty} ${materiale.salesUnitType.text.tr}",
                                 style: TextStyle(
-                                    color: MyColors.blue_003E83, fontSize: 12))
+                                  color: MyColors.blue_003E83,
+                                  fontSize: Get.width * 0.035,
+                                ))
                           ],
                         ),
                         Row(
                           children: [
                             Text("${'Minimum order'.tr}: ",
                                 style: TextStyle(
-                                    color: MyColors.blue_003E83, fontSize: 12)),
+                                  color: MyColors.blue_003E83,
+                                  fontSize: Get.width * 0.035,
+                                )),
                             Text(
                                 "${materiale.MinimumOrderQuantity} ${materiale.salesUnitType.text.tr}",
                                 style: TextStyle(
-                                    color: MyColors.blue_003E83, fontSize: 12))
+                                  color: MyColors.blue_003E83,
+                                  fontSize: Get.width * 0.035,
+                                ))
                           ],
                         )
                       ],

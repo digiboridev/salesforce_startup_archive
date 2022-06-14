@@ -109,10 +109,16 @@ class MaterialCardState extends State<MaterialCard> {
                                 children: [
                               Text(
                                 widget.materiale.Name,
-                                style: TextStyle(color: MyColors.blue_003E7E),
+                                // 'Jacobs Kosher Passover Nescafe with Kernels',
+
+                                style: TextStyle(
+                                    height: 1,
+                                    color: MyColors.blue_003E7E,
+                                    fontSize: Get.width * 0.045,
+                                    fontWeight: FontWeight.w500),
                               ),
                               SizedBox(
-                                height: 16,
+                                height: Get.width * 0.03,
                               ),
                               pricesRow()
                             ])),
@@ -183,15 +189,28 @@ class MaterialCardState extends State<MaterialCard> {
           children: [
             Text(
               "Quantity".tr,
-              style: TextStyle(color: MyColors.blue_0050A2, fontSize: 12),
+              style: TextStyle(
+                color: MyColors.blue_0050A2,
+                fontSize: Get.width * 0.04,
+                fontWeight: FontWeight.w500,
+              ),
             ),
-            SizedBox(
-              height: Get.width * 0.02,
-            ),
+            // SizedBox(
+            //   height: Get.width * 0.02,
+            // ),
             Text(
-              "${widget.materiale.countByUnitType(widget.materiale.avaliableUnitTtypes.first)}" +
-                  " ${'units per'.tr} ${widget.materiale.avaliableUnitTtypes.first.text.tr}",
-              style: TextStyle(color: MyColors.blue_0571E0, fontSize: 12),
+              widget.materiale
+                      .countByUnitType(
+                          widget.materiale.avaliableUnitTtypes.first)
+                      .toString() +
+                  " " +
+                  'units per'.tr +
+                  " " +
+                  widget.materiale.avaliableUnitTtypes.first.text.tr,
+              style: TextStyle(
+                color: MyColors.blue_0571E0,
+                fontSize: Get.width * 0.035,
+              ),
             )
           ],
         ),
@@ -208,24 +227,31 @@ class MaterialCardState extends State<MaterialCard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text("Price per Unit".tr,
-                    style:
-                        TextStyle(color: MyColors.blue_0050A2, fontSize: 12)),
-                SizedBox(
-                  height: Get.width * 0.02,
-                ),
+                    style: TextStyle(
+                      color: MyColors.blue_0050A2,
+                      fontSize: Get.width * 0.04,
+                      fontWeight: FontWeight.w500,
+                    )),
+                // SizedBox(
+                //   height: Get.width * 0.02,
+                // ),
                 Row(children: [
                   Row(
                     children: [
                       Text(
                         userDataController.currencyKey,
                         style: TextStyle(
-                            color: MyColors.blue_0571E0, fontSize: 12),
+                          color: MyColors.blue_0571E0,
+                          fontSize: Get.width * 0.035,
+                        ),
                       ),
                       Text(
                         priceWithVAT(price: widget.materiale.UnitNetPrice)
                             .toString(),
                         style: TextStyle(
-                            color: MyColors.blue_0571E0, fontSize: 12),
+                          color: MyColors.blue_0571E0,
+                          fontSize: Get.width * 0.035,
+                        ),
                       ),
                     ],
                   ),
@@ -238,12 +264,18 @@ class MaterialCardState extends State<MaterialCard> {
                         children: [
                           Text(
                             userDataController.currencyKey,
-                            style: TextStyle(color: MyColors.gray_8B9298),
+                            style: TextStyle(
+                              color: MyColors.gray_8B9298,
+                              fontSize: Get.width * 0.035,
+                            ),
                           ),
                           Text(
                             priceWithVAT(price: widget.materiale.UnitPrice)
                                 .toString(),
-                            style: TextStyle(color: MyColors.gray_8B9298),
+                            style: TextStyle(
+                              color: MyColors.gray_8B9298,
+                              fontSize: Get.width * 0.035,
+                            ),
                           ),
                         ],
                       ),

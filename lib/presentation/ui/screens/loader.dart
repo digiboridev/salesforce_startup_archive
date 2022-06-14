@@ -1,6 +1,8 @@
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/presentation/controllers/contactus_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
+import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
+import 'package:***REMOVED***/presentation/controllers/materials_catalog_states.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller_states.dart';
 import 'package:***REMOVED***/presentation/ui/screens/expired_password_screen.dart';
@@ -17,20 +19,15 @@ class Loader extends StatelessWidget {
   final CustomerController customerController = Get.find();
   final ContactusController contactusController = Get.find();
   final ConnectionService connectionService = Get.find();
+  final MaterialsCatalogController materialsCatalogController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Obx(() {
       UserDataState userDataState = userDataController.userDataState;
 
-      if (userDataState is UserDataLoadingState) {
-        return JustLoadingScreen();
-      }
-
-      if (userDataState is UserDataLoadingErrorState) {
-        return JustLoadingScreen();
-      }
-
+      // User data loading part
+      //
       if (userDataState is UserDataAskLegalDocState) {
         return LegalDocScreen(
           legalDocLink: userDataState.legalDoc,
@@ -44,15 +41,16 @@ class Loader extends StatelessWidget {
       }
 
       if (userDataState is UserDataCommonState) {
-        if (customerController.customerLoadingError is String) {
-          return JustLoadingScreen();
+        // Customer loading part
+        //
+        if (customerController.selectedCustomer != null) {
+          // Catalog loading part
+          //
+          if (materialsCatalogController.materialsCatalogState.value
+              is MCSCommon) {
+            return MainScreen();
+          }
         }
-
-        if (customerController.selectedCustomer == null) {
-          return JustLoadingScreen();
-        }
-
-        return MainScreen();
       }
 
       return JustLoadingScreen();

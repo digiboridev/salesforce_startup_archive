@@ -43,8 +43,8 @@ class CustomerController extends GetxController {
   String? get selectedCustomerSAP => _selectedCustomerSAP.value;
   Stream<String?> get selectedCustomerSAPStream => _selectedCustomerSAP.stream;
 
-  RxnString _customerLoadingError = RxnString();
-  String? get customerLoadingError => _customerLoadingError.value;
+  // RxnString _customerLoadingError = RxnString();
+  // String? get customerLoadingError => _customerLoadingError.value;
 
   Rxn<Customer> _selectedCustomer = Rxn<Customer>();
   Customer? get selectedCustomer => _selectedCustomer.value;
@@ -81,7 +81,7 @@ class CustomerController extends GetxController {
 
   // Load full customer data
   Future<void> loadCustomers({required UserData userData}) async {
-    _customerLoadingError.value = null;
+    // _customerLoadingError.value = null;
 
     // Determine closest consumer
     if (_locationService.lastPosition is Position) {
@@ -126,7 +126,7 @@ class CustomerController extends GetxController {
           lastUpdateTimeCallback: getLastSync);
       _cacheFetchingService.registerEvent(cacheUpdateEvent: cacheUpdateEvent);
     } catch (e) {
-      _customerLoadingError.value = e.toString();
+      // _customerLoadingError.value = e.toString();
       print(e.toString());
 
       // Show error popup with retry

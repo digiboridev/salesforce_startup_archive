@@ -31,7 +31,7 @@ class Trs extends Translations {
           'Email': 'Email', // P2
           'User loading error': 'User loading error', // Popups with error
           'try again': 'try again', // Popups with error
-          'Understood': 'Understood', // AL 14
+          'Understood': 'Accept', // AL 14
           'Customer loading error':
               'Customer loading error', // Popups with error
           'Search results': 'Search results', // SE2
@@ -52,6 +52,7 @@ class Trs extends Translations {
           'Recommended quantity': 'Recommended quantity', // PS1
           'Minimum order': 'Minimum order', // PS1
           'units per': 'units per', // PS1
+          'Price per Unit': 'Price per Unit',
           'Home': 'Home', // bottombar
           'Favorites': 'Favorites', // bottombar
           'Catalog': 'Catalog', // bottombar
@@ -150,6 +151,7 @@ class Trs extends Translations {
           'new_material': 'New', // PS1
           'hot_material': 'Work', // PS1
           'Add to cart': 'Add to cart', // PP2
+          'All_filter': 'ALL', // C7
         },
         'he': {
           'Good morning': 'בוקר טוב🌞',
@@ -198,6 +200,7 @@ class Trs extends Translations {
           'Recommended quantity': 'כמות מומלצת',
           'Minimum order': 'מינימום הזמנה',
           'units per': 'כמות',
+          'Price per Unit': 'מחיר ליח׳',
           'Home': 'בית',
           'Favorites': 'מועדפים',
           'Order': 'הזמנות',
@@ -284,6 +287,7 @@ class Trs extends Translations {
           'new_material': 'חדש',
           'hot_material': 'מבצע',
           'Add to cart': 'הוסף לעגלה',
+          'All_filter': 'ALL',
         }
       };
 }

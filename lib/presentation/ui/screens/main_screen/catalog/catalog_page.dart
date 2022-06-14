@@ -1,3 +1,4 @@
+import 'package:***REMOVED***/core/asset_images.dart';
 import 'package:***REMOVED***/core/mycolors.dart';
 import 'package:***REMOVED***/domain/entities/materials/brand.dart';
 import 'package:***REMOVED***/domain/entities/materials/classification.dart';
@@ -95,7 +96,7 @@ class _CatalogPageState extends State<CatalogPage> {
         return Container(
           child: Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(Get.width * 0.03),
+              borderRadius: BorderRadius.circular(Get.width * 0.02),
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
@@ -109,6 +110,9 @@ class _CatalogPageState extends State<CatalogPage> {
                 left: Get.width * 0.06,
                 right: Get.width * 0.06,
                 bottom: Get.width * 0.3),
+            padding: EdgeInsets.only(
+              top: Get.width * 0.025,
+            ),
             child: Column(
               children: [
                 Padding(
@@ -119,14 +123,16 @@ class _CatalogPageState extends State<CatalogPage> {
                       Text(
                         'Filter by'.tr,
                         style: TextStyle(
-                            color: MyColors.blue_003E7E,
-                            fontSize: Get.width * 0.04),
+                          color: MyColors.blue_003E7E,
+                          fontSize: Get.width * 0.045,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                       Spacer(),
                       GestureDetector(
                         onTap: () => catalogPageController.onFilterClick(),
                         child: Icon(
-                          Icons.close_rounded,
+                          Icons.cancel_outlined,
                           color: MyColors.blue_003E7E,
                         ),
                       )
@@ -154,12 +160,14 @@ class _CatalogPageState extends State<CatalogPage> {
                                 horizontal: Get.width * 0.03,
                                 vertical: Get.width * 0.02),
                             child: Text(
-                              'All materials',
+                              'All_filter'.tr,
                               style: TextStyle(
-                                  color: selected
-                                      ? Colors.blue
-                                      : MyColors.blue_003E7E,
-                                  fontSize: Get.width * 0.036),
+                                color: selected
+                                    ? Colors.blue
+                                    : MyColors.blue_003E7E,
+                                fontSize: Get.width * 0.04,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
                         );
@@ -184,10 +192,12 @@ class _CatalogPageState extends State<CatalogPage> {
                               child: Text(
                                 e.Display,
                                 style: TextStyle(
-                                    color: selected
-                                        ? Colors.blue
-                                        : MyColors.blue_003E7E,
-                                    fontSize: Get.width * 0.036),
+                                  color: selected
+                                      ? Colors.blue
+                                      : MyColors.blue_003E7E,
+                                  fontSize: Get.width * 0.04,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
                             ),
                           );
@@ -281,7 +291,10 @@ class _CatalogPageState extends State<CatalogPage> {
           child: Text(
             text,
             style: TextStyle(
-                color: selected ? Colors.white : MyColors.blue_003E7E),
+              color: selected ? Colors.white : MyColors.blue_003E7E,
+              fontSize: Get.width * 0.035,
+              fontWeight: FontWeight.w500,
+            ),
           )),
     );
   }
@@ -292,6 +305,7 @@ class _CatalogPageState extends State<CatalogPage> {
             key: Key('BrandsPanel'),
             margin: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
             child: GridView.builder(
+              padding: EdgeInsets.only(bottom: Get.width * 0.25),
               cacheExtent: Get.height * 2,
               physics: BouncingScrollPhysics(),
               itemCount: brands.length,
@@ -323,6 +337,7 @@ class _CatalogPageState extends State<CatalogPage> {
             key: Key('FamiliesPanel'),
             margin: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
             child: GridView.builder(
+              padding: EdgeInsets.only(bottom: Get.width * 0.25),
               cacheExtent: Get.height * 2,
               physics: BouncingScrollPhysics(),
               itemCount: families.length,
@@ -352,7 +367,7 @@ class _CatalogPageState extends State<CatalogPage> {
     return Container(
         key: Key('BrandsOrFamilySelection'),
         height: Get.width * 0.15,
-        margin: EdgeInsets.symmetric(horizontal: Get.width * 0.025),
+        margin: EdgeInsets.symmetric(horizontal: Get.width * 0.03),
         child: Row(
           children: [
             GestureDetector(
@@ -372,11 +387,14 @@ class _CatalogPageState extends State<CatalogPage> {
                   child: Text(
                     'Brands'.tr,
                     style: TextStyle(
-                        color: catalogPageController.state is ShowBrands ||
-                                catalogPageController.state
-                                    is ShowMaterialsByBrand
-                            ? Colors.white
-                            : MyColors.blue_003E7E),
+                      color: catalogPageController.state is ShowBrands ||
+                              catalogPageController.state
+                                  is ShowMaterialsByBrand
+                          ? Colors.white
+                          : MyColors.blue_003E7E,
+                      fontSize: Get.width * 0.035,
+                      fontWeight: FontWeight.w500,
+                    ),
                   )),
             ),
             GestureDetector(
@@ -396,11 +414,14 @@ class _CatalogPageState extends State<CatalogPage> {
                   child: Text(
                     'Families'.tr,
                     style: TextStyle(
-                        color: catalogPageController.state is ShowFamilies ||
-                                catalogPageController.state
-                                    is ShowMaterialsByFamily
-                            ? Colors.white
-                            : MyColors.blue_003E7E),
+                      color: catalogPageController.state is ShowFamilies ||
+                              catalogPageController.state
+                                  is ShowMaterialsByFamily
+                          ? Colors.white
+                          : MyColors.blue_003E7E,
+                      fontSize: Get.width * 0.035,
+                      fontWeight: FontWeight.w500,
+                    ),
                   )),
             ),
             Spacer(),
@@ -409,19 +430,35 @@ class _CatalogPageState extends State<CatalogPage> {
               if (state is HierarhableMaterials &&
                   state.avaliableHierarhys.isNotEmpty) {
                 return GestureDetector(
-                    onTap: () {
-                      catalogPageController.onFilterClick();
-                    },
-                    child: Text(state.hierarhyFilter != null
-                        ? state.hierarhyFilter!.Display
-                        : 'Filtering'.tr));
+                  onTap: () {
+                    catalogPageController.onFilterClick();
+                  },
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        AssetImages.filter,
+                        width: Get.width * 0.035,
+                      ),
+                      SizedBox(
+                        width: Get.width * 0.01,
+                      ),
+                      Text(
+                        state.hierarhyFilter != null
+                            ? state.hierarhyFilter!.Display
+                            : 'Filtering'.tr,
+                        style: TextStyle(
+                          fontSize: Get.width * 0.035,
+                          fontWeight: FontWeight.w500,
+                          color: MyColors.blue_003E7E,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
               } else {
                 return SizedBox();
               }
             }),
-            SizedBox(
-              width: Get.width * 0.06,
-            )
           ],
         ));
   }
@@ -477,7 +514,11 @@ class _CatalogPageState extends State<CatalogPage> {
                   ),
                   Text(
                     brand.Display,
-                    style: TextStyle(color: MyColors.blue_003E7E, fontSize: 24),
+                    style: TextStyle(
+                      color: MyColors.blue_003E7E,
+                      fontSize: Get.width * 0.05,
+                      fontWeight: FontWeight.w600,
+                    ),
                   )
                 ],
               )),
@@ -525,7 +566,11 @@ class _CatalogPageState extends State<CatalogPage> {
                   ),
                   Text(
                     family.Display,
-                    style: TextStyle(color: MyColors.blue_003E7E, fontSize: 24),
+                    style: TextStyle(
+                      color: MyColors.blue_003E7E,
+                      fontSize: Get.width * 0.05,
+                      fontWeight: FontWeight.w600,
+                    ),
                   )
                 ],
               )),

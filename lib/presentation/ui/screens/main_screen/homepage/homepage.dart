@@ -86,6 +86,7 @@ class _HomePageState extends State<HomePage> {
                         style: TextStyle(
                           color: MyColors.blue_003E7E,
                           fontSize: Get.width * 0.055,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                       GestureDetector(
@@ -93,9 +94,11 @@ class _HomePageState extends State<HomePage> {
                         child: Text(
                           'All Deals'.tr,
                           style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              fontSize: Get.width * 0.045,
-                              color: Colors.blue),
+                            decoration: TextDecoration.underline,
+                            fontSize: Get.width * 0.045,
+                            color: Colors.blue,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ],
@@ -111,6 +114,7 @@ class _HomePageState extends State<HomePage> {
                         style: TextStyle(
                           color: MyColors.blue_003E7E,
                           fontSize: Get.width * 0.055,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                       Text(
@@ -118,6 +122,7 @@ class _HomePageState extends State<HomePage> {
                         style: TextStyle(
                             decoration: TextDecoration.underline,
                             fontSize: Get.width * 0.045,
+                            fontWeight: FontWeight.w500,
                             color: Colors.blue),
                       ),
                     ],
@@ -137,14 +142,17 @@ class _HomePageState extends State<HomePage> {
                         style: TextStyle(
                           color: MyColors.blue_003E7E,
                           fontSize: Get.width * 0.055,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                       Text(
                         'To all newcomers'.tr,
                         style: TextStyle(
-                            decoration: TextDecoration.underline,
-                            fontSize: Get.width * 0.045,
-                            color: Colors.blue),
+                          decoration: TextDecoration.underline,
+                          fontSize: Get.width * 0.045,
+                          color: Colors.blue,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ],
                   )),
@@ -163,14 +171,17 @@ class _HomePageState extends State<HomePage> {
                         style: TextStyle(
                           color: MyColors.blue_003E7E,
                           fontSize: Get.width * 0.055,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                       Text(
                         'List of deficiencies'.tr,
                         style: TextStyle(
-                            decoration: TextDecoration.underline,
-                            fontSize: Get.width * 0.045,
-                            color: Colors.blue),
+                          decoration: TextDecoration.underline,
+                          fontSize: Get.width * 0.045,
+                          color: Colors.blue,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ],
                   )),

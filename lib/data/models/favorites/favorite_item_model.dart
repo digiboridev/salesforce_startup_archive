@@ -28,7 +28,7 @@ class FavoriteItemModel extends FavoriteItem {
       materialNumber: map['MaterialNumber'],
       sFId: map['SFId'],
       unit: map['Unit'],
-      quantity: int.tryParse(map['Quantity']) ?? 0,
+      quantity: int.tryParse(map['Quantity'].toString()) ?? 0,
     );
   }
 
