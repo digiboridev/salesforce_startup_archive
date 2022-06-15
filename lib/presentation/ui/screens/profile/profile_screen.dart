@@ -17,8 +17,11 @@ class ProfileScreen extends StatefulWidget {
 class ProfileScreenState extends State<ProfileScreen> {
   final CustomerController customerController = Get.find();
   final UserDataController userDataController = Get.find();
-  final TextStyle profileFieldStyle =
-      TextStyle(color: MyColors.blue_003E7E, fontSize: 20);
+  final TextStyle profileFieldStyle = TextStyle(
+    color: MyColors.blue_003E7E,
+    fontSize: Get.width * 0.04,
+    fontWeight: FontWeight.w500,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -41,14 +44,17 @@ class ProfileScreenState extends State<ProfileScreen> {
     return Expanded(
       child: Column(
         children: [
-          Padding(
+          Container(
+            alignment: Alignment.centerLeft,
             padding: EdgeInsets.symmetric(
                 vertical: Get.width * 0.06, horizontal: Get.width * 0.06),
             child: Text(
               customerController.selectedCustomer!.customerName,
+              textAlign: TextAlign.left,
               style: TextStyle(
                 color: MyColors.blue_003E7E,
-                fontSize: Get.width * 0.08,
+                fontSize: Get.width * 0.07,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ),

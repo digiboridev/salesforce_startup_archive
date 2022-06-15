@@ -69,6 +69,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                     style: TextStyle(
                       color: MyColors.blue_003E7E,
                       fontSize: Get.width * 0.08,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
@@ -96,8 +97,10 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                         ),
                         hintText: 'Current password'.tr,
                         hintStyle: TextStyle(
-                            fontSize: Get.width * 0.042,
-                            color: MyColors.blue_003E7E),
+                          fontSize: Get.width * 0.042,
+                          color: MyColors.blue_003E7E,
+                          fontWeight: FontWeight.w500,
+                        ),
                         enabledBorder: fieldBorder,
                         focusedBorder: fieldBorder,
                         errorBorder: fieldBorder,
@@ -128,8 +131,10 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                         ),
                         hintText: 'New password'.tr,
                         hintStyle: TextStyle(
-                            fontSize: Get.width * 0.042,
-                            color: MyColors.blue_003E7E),
+                          fontSize: Get.width * 0.042,
+                          color: MyColors.blue_003E7E,
+                          fontWeight: FontWeight.w500,
+                        ),
                         enabledBorder: fieldBorder,
                         focusedBorder: fieldBorder,
                         errorBorder: fieldBorder,
@@ -160,8 +165,10 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                         ),
                         hintText: 'New password again'.tr,
                         hintStyle: TextStyle(
-                            fontSize: Get.width * 0.042,
-                            color: MyColors.blue_003E7E),
+                          fontSize: Get.width * 0.042,
+                          color: MyColors.blue_003E7E,
+                          fontWeight: FontWeight.w500,
+                        ),
                         enabledBorder: fieldBorder,
                         errorBorder: fieldBorder,
                         focusedBorder: fieldBorder,
@@ -179,7 +186,10 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                       Text(
                         'Password display in asterisks'.tr,
                         style: TextStyle(
-                            color: MyColors.blue_003E7E, fontSize: 20),
+                          color: MyColors.blue_003E7E,
+                          fontSize: Get.width * 0.045,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                       CustomSwitch(
                           key: UniqueKey(),
@@ -225,7 +235,10 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                                         child: Text(
                                   passError,
                                   style: TextStyle(
-                                      color: Colors.red, fontSize: 17),
+                                    color: Colors.red,
+                                    fontSize: Get.width * 0.045,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 )))
                               ],
                             )))),
@@ -248,7 +261,11 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                       Container(
                           child: Text(
                         'For details please contact the hotline'.tr,
-                        style: TextStyle(color: MyColors.blue_003E7E),
+                        style: TextStyle(
+                          color: MyColors.blue_003E7E,
+                          fontSize: Get.width * 0.04,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ))
                     ],
                   ),
@@ -277,7 +294,11 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                             ),
                             child: Text(
                               'Cancellation'.tr,
-                              style: TextStyle(color: MyColors.blue_003E7E),
+                              style: TextStyle(
+                                color: MyColors.blue_003E7E,
+                                fontSize: Get.width * 0.04,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
                         ),
@@ -314,7 +335,11 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                                 vertical: Get.width * 0.03),
                             child: Text(
                               'Save'.tr,
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: Get.width * 0.04,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
                         ),

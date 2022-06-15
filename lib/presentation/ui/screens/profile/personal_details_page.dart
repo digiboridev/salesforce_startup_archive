@@ -107,7 +107,11 @@ class PersonalDetailsPageState extends State<PersonalDetailsPage> {
                     Container(
                         child: Text(
                       'For details please contact the hotline'.tr,
-                      style: TextStyle(color: MyColors.blue_003E7E),
+                      style: TextStyle(
+                        color: MyColors.blue_003E7E,
+                        fontSize: Get.width * 0.04,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ))
                   ],
                 ),
@@ -159,7 +163,10 @@ class PersonalDetailsPageState extends State<PersonalDetailsPage> {
           Text(
             text1,
             style: TextStyle(
-                fontSize: Get.width * 0.042, color: MyColors.blue_003E7E),
+              fontSize: Get.width * 0.042,
+              color: MyColors.blue_003E7E,
+              fontWeight: FontWeight.w500,
+            ),
           ),
           Text(
             text2,

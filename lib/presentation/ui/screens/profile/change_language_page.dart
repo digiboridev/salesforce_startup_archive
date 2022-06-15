@@ -61,6 +61,7 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
                 style: TextStyle(
                   color: MyColors.blue_003E7E,
                   fontSize: Get.width * 0.08,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),
@@ -101,6 +102,7 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
                               language.languageString.tr,
                               style: TextStyle(
                                 fontSize: Get.width * 0.04,
+                                fontWeight: FontWeight.w500,
                                 color: MyColors.blue_003E7E,
                               ),
                             ),
@@ -135,7 +137,11 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
                         ),
                         child: Text(
                           'Cancellation'.tr,
-                          style: TextStyle(color: MyColors.blue_003E7E),
+                          style: TextStyle(
+                            color: MyColors.blue_003E7E,
+                            fontSize: Get.width * 0.04,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ),
@@ -154,7 +160,11 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
                             EdgeInsets.symmetric(vertical: Get.width * 0.03),
                         child: Text(
                           'Save'.tr,
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: Get.width * 0.04,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ),

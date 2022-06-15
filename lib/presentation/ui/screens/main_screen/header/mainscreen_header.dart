@@ -271,7 +271,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
             curve: Curves.easeInOut,
             height: mainScreeenHeaderController.mainScreeenHeaderState.value
                     is MSHShowBrunch
-                ? Get.width
+                ? Get.width * 1.2
                 : 0,
             child: OverflowBox(
               minHeight: 0,
@@ -450,7 +450,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
     return Column(
       children: [
         Container(
-          height: Get.width * 1 - Get.width * 0.07,
+          height: Get.width * 1.2 - Get.width * 0.07,
           color: MyColors.blue_00458C,
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
