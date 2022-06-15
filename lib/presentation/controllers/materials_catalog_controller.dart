@@ -49,6 +49,10 @@ class MaterialsCatalogController extends GetxController {
     }
 
     materialsCatalogState.value = MCSLoading();
+
+    // delay to force context refresh on momentary load
+    await Future.delayed(Duration(milliseconds: 10));
+
     try {
       // Load catalog data
       MaterialsCatalog catalog =

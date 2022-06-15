@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:***REMOVED***/core/mycolors.dart';
 import 'package:***REMOVED***/presentation/controllers/search_controller.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar.dart';
@@ -21,6 +23,7 @@ class _MainScreenState extends State<MainScreen> {
   late final BottomBarController bottomBarController;
   late final PageController pageController;
   SearchController searchController = Get.put(SearchController());
+  StreamSubscription? pageListener;
 
   @override
   void initState() {
@@ -28,10 +31,16 @@ class _MainScreenState extends State<MainScreen> {
     bottomBarController = Get.put(BottomBarController());
     pageController = PageController(
         initialPage: bottomBarController.currentPageIndex.value - 1);
-    bottomBarController.futureIndex.listen((event) {
+    pageListener = bottomBarController.futureIndex.listen((event) {
       pageController.animateToPage(event - 1,
           duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    pageListener?.cancel();
   }
 
   double headerHeight = Get.width * 0.4;
