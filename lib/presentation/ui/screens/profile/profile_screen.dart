@@ -1,13 +1,19 @@
+import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/contactus_panel.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 import 'package:***REMOVED***/core/asset_images.dart';
 import 'package:***REMOVED***/core/mycolors.dart';
+import 'package:***REMOVED***/domain/entities/contact_us_data.dart';
+import 'package:***REMOVED***/presentation/controllers/contactus_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
+import 'package:***REMOVED***/presentation/ui/screens/legal_doc_screen.dart';
+import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/contact_option_tile.dart';
+import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/our_focus_head.dart';
 import 'package:***REMOVED***/presentation/ui/screens/profile/change_language_page.dart';
 import 'package:***REMOVED***/presentation/ui/screens/profile/change_password_page.dart';
 import 'package:***REMOVED***/presentation/ui/screens/profile/personal_details_page.dart';
-import 'package:***REMOVED***/presentation/ui/screens/legal_doc_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -17,6 +23,9 @@ class ProfileScreen extends StatefulWidget {
 class ProfileScreenState extends State<ProfileScreen> {
   final CustomerController customerController = Get.find();
   final UserDataController userDataController = Get.find();
+
+  bool expanded = false;
+
   final TextStyle profileFieldStyle = TextStyle(
     color: MyColors.blue_003E7E,
     fontSize: Get.width * 0.04,
@@ -32,8 +41,39 @@ class ProfileScreenState extends State<ProfileScreen> {
           child: Container(
             color: MyColors.white_F4F4F6,
             child: SizedBox.expand(
-              child: Column(
-                children: [buildHeader(), buildBody()],
+              child: Stack(
+                children: [
+                  Column(
+                    children: [
+                      SizedBox(
+                        height: Get.width * 0.3,
+                      ),
+                      buildBody()
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      buildHeader(),
+                      AnimatedContainer(
+                        decoration: BoxDecoration(color: Colors.transparent),
+                        clipBehavior: Clip.antiAlias,
+                        duration: Duration(milliseconds: 200),
+                        curve: Curves.easeInOut,
+                        height: expanded ? Get.width : 0,
+                        child: OverflowBox(
+                          minHeight: 0,
+                          child: ContactUsPanel(
+                            onCloseTap: () {
+                              setState(() {
+                                expanded = false;
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
               ),
             ),
           )),
@@ -220,7 +260,7 @@ class ProfileScreenState extends State<ProfileScreen> {
         children: [
           Spacer(),
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               GestureDetector(
@@ -241,11 +281,18 @@ class ProfileScreenState extends State<ProfileScreen> {
                   width: Get.width * 0.3,
                 ),
               ),
-              Hero(
-                tag: 'contact_btn',
-                child: Image.asset(
-                  AssetImages.contactButton,
-                  width: Get.width * 0.05,
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    expanded = !expanded;
+                  });
+                },
+                child: Hero(
+                  tag: 'contact_btn',
+                  child: Image.asset(
+                    AssetImages.contactButton,
+                    width: Get.width * 0.05,
+                  ),
                 ),
               ),
             ],

@@ -4,6 +4,7 @@ import 'package:***REMOVED***/core/languages.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
+import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/contactus_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,6 +18,7 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
   final UserDataController userDataController = Get.find();
   final MaterialsCatalogController materialsCatalogController = Get.find();
   late Languages selectLanguage;
+  bool expanded = false;
 
   @override
   void initState() {
@@ -34,8 +36,39 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
           child: Container(
             color: MyColors.white_F4F4F6,
             child: SizedBox.expand(
-              child: Column(
-                children: [buildHeader(), buildBody()],
+              child: Stack(
+                children: [
+                  Column(
+                    children: [
+                      SizedBox(
+                        height: Get.width * 0.3,
+                      ),
+                      buildBody()
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      buildHeader(),
+                      AnimatedContainer(
+                        decoration: BoxDecoration(color: Colors.transparent),
+                        clipBehavior: Clip.antiAlias,
+                        duration: Duration(milliseconds: 200),
+                        curve: Curves.easeInOut,
+                        height: expanded ? Get.width : 0,
+                        child: OverflowBox(
+                          minHeight: 0,
+                          child: ContactUsPanel(
+                            onCloseTap: () {
+                              setState(() {
+                                expanded = false;
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
               ),
             ),
           )),
@@ -212,11 +245,18 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
                   width: Get.width * 0.3,
                 ),
               ),
-              Hero(
-                tag: 'contact_btn',
-                child: Image.asset(
-                  AssetImages.contactButton,
-                  width: Get.width * 0.05,
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    expanded = !expanded;
+                  });
+                },
+                child: Hero(
+                  tag: 'contact_btn',
+                  child: Image.asset(
+                    AssetImages.contactButton,
+                    width: Get.width * 0.05,
+                  ),
                 ),
               ),
             ],

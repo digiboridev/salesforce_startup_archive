@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:***REMOVED***/domain/entities/related_consumer.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/contact_option_tile.dart';
+import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/contactus_panel.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/header_search_result.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/our_focus_head.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/related_customer_tile.dart';
@@ -31,7 +32,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
   final MainScreeenHeaderController mainScreeenHeaderController =
       Get.put(MainScreeenHeaderController());
   final CustomerController customerController = Get.find();
-  final ContactusController contactusController = Get.find();
+  // final ContactusController contactusController = Get.find();
   final SearchController searchController = Get.find();
   final BottomBarController bottomBarController = Get.find();
 
@@ -260,7 +261,9 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                   : 0,
               child: OverflowBox(
                 minHeight: 0,
-                child: buildContact(),
+                child: ContactUsPanel(
+                  onCloseTap: () => mainScreeenHeaderController.hide(),
+                ),
               ),
             )),
         Obx(
@@ -369,79 +372,6 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
             is! MSHShowBrunch)
           buildMaterialsSearchField(),
       ].reversed.toList(),
-    );
-  }
-
-  Widget buildContact() {
-    return contactusController.obx(
-      (state) {
-        if (state is ContactUsData) {
-          return Column(
-            children: [
-              Container(
-                height: Get.width - Get.width * 0.07,
-                color: MyColors.blue_00458C,
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: SingleChildScrollView(
-                        physics: BouncingScrollPhysics(),
-                        child: Column(
-                          children: [
-                            OurFocusHead(
-                              contactUsData: state,
-                            ),
-                            SizedBox(
-                              height: Get.width * 0.02,
-                            ),
-                            ...state.contactOptionsList.map((e) {
-                              return ContactOptionTile(
-                                contactOption: e,
-                              );
-                            }),
-                          ],
-                        ),
-                      ),
-                    ),
-                    // buildHideBottom()
-                  ],
-                ),
-              ),
-              buildHideBottom()
-            ],
-          );
-        } else {
-          return SizedBox();
-        }
-      },
-      onError: (error) {
-        return Container(
-          width: Get.width,
-          height: Get.width,
-          color: MyColors.blue_00458C,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('Contact Us loaing error',
-                  style: TextStyle(color: Colors.white)),
-              SizedBox(height: Get.width * 0.06),
-              GestureDetector(
-                  onTap: () {
-                    contactusController.load();
-                  },
-                  child: Text('Reload', style: TextStyle(color: Colors.white))),
-            ],
-          ),
-        );
-      },
-      onLoading: Container(
-        width: Get.width,
-        height: Get.width,
-        color: MyColors.blue_00458C,
-        child: Center(
-          child: CircularProgressIndicator(),
-        ),
-      ),
     );
   }
 

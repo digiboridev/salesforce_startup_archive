@@ -3,6 +3,7 @@ import 'package:***REMOVED***/core/mycolors.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller_states.dart';
+import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/contactus_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,6 +15,7 @@ class PersonalDetailsPage extends StatefulWidget {
 class PersonalDetailsPageState extends State<PersonalDetailsPage> {
   final CustomerController customerController = Get.find();
   final UserDataController userDataController = Get.find();
+  bool expanded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +26,39 @@ class PersonalDetailsPageState extends State<PersonalDetailsPage> {
           child: Container(
         color: MyColors.white_F4F4F6,
         child: SizedBox.expand(
-          child: Column(
-            children: [buildHeader(), buildBody()],
+          child: Stack(
+            children: [
+              Column(
+                children: [
+                  SizedBox(
+                    height: Get.width * 0.3,
+                  ),
+                  buildBody()
+                ],
+              ),
+              Column(
+                children: [
+                  buildHeader(),
+                  AnimatedContainer(
+                    decoration: BoxDecoration(color: Colors.transparent),
+                    clipBehavior: Clip.antiAlias,
+                    duration: Duration(milliseconds: 200),
+                    curve: Curves.easeInOut,
+                    height: expanded ? Get.width : 0,
+                    child: OverflowBox(
+                      minHeight: 0,
+                      child: ContactUsPanel(
+                        onCloseTap: () {
+                          setState(() {
+                            expanded = false;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            ],
           ),
         ),
       )),
@@ -212,11 +245,18 @@ class PersonalDetailsPageState extends State<PersonalDetailsPage> {
                   width: Get.width * 0.3,
                 ),
               ),
-              Hero(
-                tag: 'contact_btn',
-                child: Image.asset(
-                  AssetImages.contactButton,
-                  width: Get.width * 0.05,
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    expanded = !expanded;
+                  });
+                },
+                child: Hero(
+                  tag: 'contact_btn',
+                  child: Image.asset(
+                    AssetImages.contactButton,
+                    width: Get.width * 0.05,
+                  ),
                 ),
               ),
             ],

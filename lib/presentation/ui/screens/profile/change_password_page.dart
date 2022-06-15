@@ -3,6 +3,7 @@ import 'package:***REMOVED***/core/mycolors.dart';
 import 'package:***REMOVED***/domain/services/connections_service.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
+import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/contactus_panel.dart';
 import 'package:***REMOVED***/presentation/ui/widgets/custom_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,6 +28,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
   String passError = '';
   bool showAsterisks = true;
   final String password_condition = 'Password condition'.tr;
+  bool expanded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +40,39 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
           child: Container(
             color: MyColors.white_F4F4F6,
             child: SizedBox.expand(
-              child: Column(
-                children: [buildHeader(), buildBody(context)],
+              child: Stack(
+                children: [
+                  Column(
+                    children: [
+                      SizedBox(
+                        height: Get.width * 0.3,
+                      ),
+                      buildBody(context)
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      buildHeader(),
+                      AnimatedContainer(
+                        decoration: BoxDecoration(color: Colors.transparent),
+                        clipBehavior: Clip.antiAlias,
+                        duration: Duration(milliseconds: 200),
+                        curve: Curves.easeInOut,
+                        height: expanded ? Get.width : 0,
+                        child: OverflowBox(
+                          minHeight: 0,
+                          child: ContactUsPanel(
+                            onCloseTap: () {
+                              setState(() {
+                                expanded = false;
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
               ),
             ),
           )),
@@ -389,11 +422,18 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                   width: Get.width * 0.3,
                 ),
               ),
-              Hero(
-                tag: 'contact_btn',
-                child: Image.asset(
-                  AssetImages.contactButton,
-                  width: Get.width * 0.05,
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    expanded = !expanded;
+                  });
+                },
+                child: Hero(
+                  tag: 'contact_btn',
+                  child: Image.asset(
+                    AssetImages.contactButton,
+                    width: Get.width * 0.05,
+                  ),
                 ),
               ),
             ],
