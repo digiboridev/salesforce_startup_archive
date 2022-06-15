@@ -2,6 +2,7 @@ import 'package:***REMOVED***/core/asset_images.dart';
 import 'package:***REMOVED***/core/mycolors.dart';
 import 'package:***REMOVED***/domain/entities/cart_item.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
+import 'package:***REMOVED***/domain/entities/materials/unit_types.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
 import 'package:***REMOVED***/presentation/controllers/cart_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
@@ -51,6 +52,9 @@ class _MaterialScreenState extends State<MaterialScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.material.pricing.isNotEmpty) {
+      print('asd');
+    }
     return Scaffold(
       backgroundColor: MyColors.blue_003E7E,
       body: SafeArea(
@@ -273,125 +277,60 @@ class _MaterialScreenState extends State<MaterialScreen> {
                     child: Text(
                         widget.material.ProductDescription ?? 'No Description'),
                   ),
-                  Padding(
-                    padding: EdgeInsets.all(Get.width * 0.03),
-                    child: Row(
-                      children: [
-                        Container(
-                          alignment: Alignment.center,
-                          height: Get.width * 0.05,
-                          width: Get.width * 0.05,
-                          decoration: BoxDecoration(
-                              color: MyColors.blue_6DA5EC,
-                              shape: BoxShape.circle),
-                          child: Icon(
-                            Icons.check,
-                            color: Colors.white,
-                            size: 17,
+                  if (widget.material.freeGoods.isNotEmpty ||
+                      widget.material.pricing.isNotEmpty)
+                    Padding(
+                      padding: EdgeInsets.all(Get.width * 0.03),
+                      child: Row(
+                        children: [
+                          Container(
+                            alignment: Alignment.center,
+                            height: Get.width * 0.05,
+                            width: Get.width * 0.05,
+                            decoration: BoxDecoration(
+                                color: MyColors.blue_6DA5EC,
+                                shape: BoxShape.circle),
+                            child: Icon(
+                              Icons.check,
+                              color: Colors.white,
+                              size: 17,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          width: Get.width * 0.02,
-                        ),
-                        Text(
-                          "The Rabbinical Society".tr,
-                          style: TextStyle(
-                              color: MyColors.blue_003E7E, fontSize: 18),
-                        ),
-                        SizedBox(
-                          width: Get.width * 0.02,
-                        ),
-                      ],
+                          SizedBox(
+                            width: Get.width * 0.02,
+                          ),
+                          Text(
+                            "The Rabbinical Society".tr,
+                            style: TextStyle(
+                                color: MyColors.blue_003E7E, fontSize: 18),
+                          ),
+                          SizedBox(
+                            width: Get.width * 0.02,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  Container(
-                    color: MyColors.blue_003E7E,
-                    height: 1,
-                    width: Get.width,
-                    margin: EdgeInsets.only(
-                        left: Get.width * 0.03, right: Get.width * 0.03),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(
-                        left: Get.width * 0.07,
-                        right: Get.width * 0.07,
-                        top: Get.width * 0.03,
-                        bottom: Get.width * 0.03),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Shop".tr,
-                              style: TextStyle(
-                                  fontSize: 16, color: MyColors.blue_0050A2),
-                            ),
-                            SizedBox(
-                              height: Get.width * 0.01,
-                            ),
-                            Text('3 surfaces',
-                                style: TextStyle(
-                                    fontSize: 16, color: MyColors.blue_0571E0)),
-                            SizedBox(
-                              height: Get.width * 0.01,
-                            ),
-                            Text('3 surfaces',
-                                style: TextStyle(
-                                    fontSize: 16, color: MyColors.blue_0571E0)),
-                            SizedBox(
-                              height: Get.width * 0.01,
-                            ),
-                            Text('3 surfaces',
-                                style: TextStyle(
-                                    fontSize: 16, color: MyColors.blue_0571E0)),
-                          ],
-                        ),
-                        SizedBox(
-                          width: Get.width * 0.2,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Get".tr,
-                              style: TextStyle(
-                                  fontSize: 16, color: MyColors.blue_0050A2),
-                            ),
-                            SizedBox(
-                              height: Get.width * 0.01,
-                            ),
-                            Text("Gift Pallets",
-                                style: TextStyle(
-                                    fontSize: 16, color: MyColors.blue_0571E0)),
-                            SizedBox(
-                              height: Get.width * 0.01,
-                            ),
-                            Text("25% off",
-                                style: TextStyle(
-                                    fontSize: 16, color: MyColors.blue_0571E0)),
-                            SizedBox(
-                              height: Get.width * 0.01,
-                            ),
-                            Text("Cardboard Gift",
-                                style: TextStyle(
-                                    fontSize: 16, color: MyColors.blue_0571E0)),
-                          ],
-                        ),
-                      ],
+                  if (widget.material.freeGoods.isNotEmpty ||
+                      widget.material.pricing.isNotEmpty)
+                    Container(
+                      color: MyColors.blue_003E7E,
+                      height: 1,
+                      width: Get.width,
+                      margin: EdgeInsets.only(
+                          left: Get.width * 0.03, right: Get.width * 0.03),
                     ),
-                  ),
-                  Container(
-                    color: MyColors.blue_003E7E,
-                    height: 1,
-                    width: Get.width,
-                    margin: EdgeInsets.only(
-                        left: Get.width * 0.03, right: Get.width * 0.03),
-                  ),
+                  if (widget.material.freeGoods.isNotEmpty ||
+                      widget.material.pricing.isNotEmpty)
+                    buildFreeGodsAndPricing(),
+                  if (widget.material.freeGoods.isNotEmpty ||
+                      widget.material.pricing.isNotEmpty)
+                    Container(
+                      color: MyColors.blue_003E7E,
+                      height: 1,
+                      width: Get.width,
+                      margin: EdgeInsets.only(
+                          left: Get.width * 0.03, right: Get.width * 0.03),
+                    ),
                   Padding(
                     padding: EdgeInsets.only(
                         left: Get.width * 0.03,
@@ -429,6 +368,190 @@ class _MaterialScreenState extends State<MaterialScreen> {
               ],
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildFreeGodsAndPricing() {
+    List<Widget> rows = [];
+
+    widget.material.freeGoods.forEach((freedog) {
+      rows.add(Row(
+        children: [
+          Expanded(
+              child: Row(
+            children: [
+              Text(
+                freedog.BuyQty.toString(),
+                style: TextStyle(
+                  color: MyColors.blue_0571E0,
+                  fontSize: Get.width * 0.035,
+                ),
+              ),
+              SizedBox(
+                width: Get.width * 0.01,
+              ),
+              Text(
+                UnitType.fromSalesUnit(freedog.QuantityUnit).text.tr,
+                style: TextStyle(
+                  color: MyColors.blue_0571E0,
+                  fontSize: Get.width * 0.035,
+                ),
+              ),
+            ],
+          )),
+          Expanded(
+              child: Row(
+            children: [
+              Text(
+                freedog.GetQty.toString(),
+                style: TextStyle(
+                  color: MyColors.blue_0571E0,
+                  fontSize: Get.width * 0.035,
+                ),
+              ),
+              SizedBox(
+                width: Get.width * 0.01,
+              ),
+              Text(
+                UnitType.fromSalesUnit(freedog.GetQuantityUnit).text.tr,
+                style: TextStyle(
+                  color: MyColors.blue_0571E0,
+                  fontSize: Get.width * 0.035,
+                ),
+              ),
+            ],
+          ))
+        ],
+      ));
+    });
+
+    widget.material.pricing.forEach(
+      (pricing) {
+        pricing.scales.forEach((scale) {
+          rows.add(Row(
+            children: [
+              Expanded(
+                  child: Row(
+                // textDirection: TextDirection.rtl,
+                children: [
+                  Text(
+                    scale.ScaleQuantityFrom.toString(),
+                    style: TextStyle(
+                      color: MyColors.blue_0571E0,
+                      fontSize: Get.width * 0.035,
+                    ),
+                  ),
+                  SizedBox(
+                    width: Get.width * 0.01,
+                  ),
+                  Text(
+                    UnitType.fromSalesUnit(scale.Unit).text.tr,
+                    style: TextStyle(
+                      color: MyColors.blue_0571E0,
+                      fontSize: Get.width * 0.035,
+                    ),
+                  ),
+                ],
+              )),
+              if (pricing.IsPercentage)
+                Expanded(
+                    child: Row(
+                  children: [
+                    Text(
+                      scale.Rate.toStringAsFixed(0),
+                      style: TextStyle(
+                        color: MyColors.blue_0571E0,
+                        fontSize: Get.width * 0.035,
+                      ),
+                    ),
+                    Text(
+                      '%',
+                      style: TextStyle(
+                        color: MyColors.blue_0571E0,
+                        fontSize: Get.width * 0.035,
+                      ),
+                    ),
+                    SizedBox(
+                      width: Get.width * 0.01,
+                    ),
+                    Text(
+                      'off',
+                      style: TextStyle(
+                        color: MyColors.blue_0571E0,
+                        fontSize: Get.width * 0.035,
+                      ),
+                    ),
+                  ],
+                )),
+              if (!pricing.IsPercentage)
+                Expanded(
+                    child: Row(
+                  children: [
+                    Text(
+                      scale.Rate.toStringAsFixed(0),
+                      style: TextStyle(
+                        color: MyColors.blue_0571E0,
+                        fontSize: Get.width * 0.035,
+                      ),
+                    ),
+                    Text(
+                      '₪',
+                      style: TextStyle(
+                        color: MyColors.blue_0571E0,
+                        fontSize: Get.width * 0.035,
+                      ),
+                    ),
+                    SizedBox(
+                      width: Get.width * 0.01,
+                    ),
+                    Text(
+                      'off'.tr,
+                      style: TextStyle(
+                        color: MyColors.blue_0571E0,
+                        fontSize: Get.width * 0.035,
+                      ),
+                    ),
+                  ],
+                )),
+            ],
+          ));
+        });
+      },
+    );
+
+    return Container(
+      margin: EdgeInsets.only(
+          left: Get.width * 0.07,
+          right: Get.width * 0.07,
+          top: Get.width * 0.03,
+          bottom: Get.width * 0.03),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  'Shop'.tr,
+                  style: TextStyle(
+                    color: MyColors.blue_0050A2,
+                    fontSize: Get.width * 0.04,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  'Get'.tr,
+                  style: TextStyle(
+                    color: MyColors.blue_0050A2,
+                    fontSize: Get.width * 0.04,
+                  ),
+                ),
+              )
+            ],
+          ),
+          ...rows
         ],
       ),
     );

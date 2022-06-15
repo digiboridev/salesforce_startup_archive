@@ -128,6 +128,11 @@ class MaterialsCatalogController extends GetxController {
       {required List<AlternativeItem> altItems}) {
     MaterialsCatalogState state = materialsCatalogState.value;
     if (state is MCSCommon) {
+      // List<String> asd = state.catalog.materials.map((e) => e.SFId).toList();
+      // List<String> asd2 = altItems.map((e) => e.SFId).toList();
+
+      // print('asd');
+
       return state.catalog.materials
           .where(
               (element) => altItems.map((e) => e.SFId).contains(element.SFId))

@@ -152,6 +152,7 @@ class Trs extends Translations {
           'hot_material': 'Work', // PS1
           'Add to cart': 'Add to cart', // PP2
           'All_filter': 'ALL', // C7
+          'off': 'off', // PP4
         },
         'he': {
           'Good morning': 'בוקר טוב🌞',
@@ -288,6 +289,7 @@ class Trs extends Translations {
           'hot_material': 'מבצע',
           'Add to cart': 'הוסף לעגלה',
           'All_filter': 'ALL',
+          'off': 'כבוי',
         }
       };
 }
