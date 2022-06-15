@@ -66,14 +66,22 @@ class FocusedMaterialComponent extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "${cartItem.quantity} ${cartItem.salesUnitType.text.tr} ₪${materiale.UnitNetPrice.toInt() * cartItem.quantity * materiale.countByUnitType(cartItem.salesUnitType)}",
+                                "${cartItem.quantity} ${cartItem.salesUnitType.text.tr}",
                                 style: TextStyle(
-                                  fontSize: 12,
+                                  fontSize: Get.width * 0.035,
+                                  fontWeight: FontWeight.w600,
+                                  color: MyColors.blue_00458C,
+                                ),
+                              ),
+                              Text(
+                                "₪${materiale.UnitNetPrice.toInt() * cartItem.quantity * materiale.countByUnitType(cartItem.salesUnitType)}",
+                                style: TextStyle(
+                                  fontSize: Get.width * 0.035,
                                   color: MyColors.blue_00458C,
                                 ),
                               ),
                               Icon(
-                                Icons.arrow_drop_down_outlined,
+                                Icons.keyboard_arrow_down_sharp,
                                 color: MyColors.blue_00458C,
                               )
                             ],

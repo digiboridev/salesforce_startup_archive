@@ -215,6 +215,7 @@ class CartPageState extends State<CartPage> {
 
       if (mcState is MCSCommon) {
         return ListView(
+          padding: EdgeInsets.only(bottom: Get.width * 0.2),
           physics: BouncingScrollPhysics(),
           children: [
             if (cartController.dryMaterials.isNotEmpty)

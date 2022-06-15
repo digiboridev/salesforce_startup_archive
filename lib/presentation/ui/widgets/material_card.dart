@@ -1,6 +1,8 @@
+import 'package:***REMOVED***/core/asset_images.dart';
 import 'package:***REMOVED***/core/mycolors.dart';
 import 'package:***REMOVED***/domain/entities/cart_item.dart';
 import 'package:***REMOVED***/domain/entities/materials/material.dart';
+import 'package:***REMOVED***/domain/entities/materials/unit_types.dart';
 import 'package:***REMOVED***/domain/services/image_caching_service.dart';
 import 'package:***REMOVED***/presentation/controllers/cart_controller.dart';
 import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
@@ -36,6 +38,7 @@ class MaterialCardState extends State<MaterialCard> {
   UserDataController userDataController = Get.find();
   FavoritesController favoritesController = Get.find();
   CustomerController customerController = Get.find();
+  bool ignoreBonus = false;
 
   bool get hidePrices {
     return customerController.selectedCustomer!.hidePrices;
@@ -60,6 +63,7 @@ class MaterialCardState extends State<MaterialCard> {
           left: Get.width * 0.025,
           top: Get.width * 0.05,
           right: Get.width * 0.025),
+      // clipBehavior: Clip.antiAlias,
       child: Stack(
         clipBehavior: Clip.none,
         children: [
@@ -132,6 +136,7 @@ class MaterialCardState extends State<MaterialCard> {
                   SizedBox(
                       // height: Get.width * 0.05,
                       ),
+                  buildBonusesRow()
                 ],
               )),
           Positioned(
@@ -179,6 +184,172 @@ class MaterialCardState extends State<MaterialCard> {
         ],
       ),
     );
+  }
+
+  Widget buildBonusesRow() {
+    return Obx(() {
+      CartItem? cartItem = cartController.getItemByNumber(
+          materialNumber: widget.materiale.MaterialNumber);
+
+      List<String> reachedScales = [];
+
+      if (cartItem is CartItem) {
+        widget.materiale.pricing.forEach(
+          (pricing) {
+            pricing.scales.forEach((scales) {
+              if (scales.Unit == cartItem.unit &&
+                  cartItem.quantity >= scales.ScaleQuantityFrom) {
+                if (pricing.IsPercentage) {
+                  reachedScales.add(
+                      'You got ' + scales.Rate.toString() + ' % ' + 'off'.tr);
+                } else {
+                  reachedScales.add(
+                      'You got ' + scales.Rate.toString() + ' ₪ ' + 'off'.tr);
+                }
+              }
+            });
+          },
+        );
+      }
+
+      List<String> avaliableScales = [];
+
+      if (cartItem is CartItem) {
+        widget.materiale.pricing.forEach(
+          (pricing) {
+            pricing.scales.forEach((scales) {
+              if (scales.Unit == cartItem.unit &&
+                  cartItem.quantity < scales.ScaleQuantityFrom) {
+                if (pricing.IsPercentage) {
+                  avaliableScales.add('Buy ' +
+                      scales.ScaleQuantityFrom.toString() +
+                      ' ' +
+                      UnitType.fromSalesUnit(scales.Unit).text.tr +
+                      ' get ' +
+                      scales.Rate.toString() +
+                      ' % ' +
+                      'off'.tr);
+                } else {
+                  avaliableScales.add('Buy ' +
+                      scales.ScaleQuantityFrom.toString() +
+                      ' ' +
+                      UnitType.fromSalesUnit(scales.Unit).text.tr +
+                      ' get ' +
+                      scales.Rate.toString() +
+                      ' ₪ ' +
+                      'off'.tr);
+                }
+              }
+            });
+          },
+        );
+      }
+
+      if (reachedScales.isNotEmpty) {
+        return Container(
+            height: Get.width * 0.1,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(Get.width * 0.03),
+                bottomRight: Radius.circular(Get.width * 0.03),
+              ),
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Color(0xffFFBD00), Color(0xffFF8800)],
+              ),
+            ),
+            alignment: Alignment.center,
+            child: Row(
+              children: [
+                Spacer(),
+                Image.asset(
+                  AssetImages.have_new_list,
+                  width: Get.height * 0.03,
+                ),
+                Spacer(
+                  flex: 5,
+                ),
+                Text(
+                  reachedScales.last,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: Get.width * 0.04,
+                  ),
+                ),
+                Spacer(
+                  flex: 5,
+                ),
+                Image.asset(
+                  AssetImages.have_new_list,
+                  width: Get.height * 0.03,
+                ),
+                Spacer(),
+              ],
+            ));
+      } else {
+        if (avaliableScales.isNotEmpty && !ignoreBonus) {
+          return Container(
+              height: Get.width * 0.1,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(Get.width * 0.03),
+                  bottomRight: Radius.circular(Get.width * 0.03),
+                ),
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Color(0xffFFBD00), Color(0xffFF8800)],
+                ),
+              ),
+              alignment: Alignment.center,
+              child: Row(
+                children: [
+                  Spacer(
+                    flex: 2,
+                  ),
+                  Text(
+                    'SALE!',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: Get.width * 0.04,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  Spacer(),
+                  Image.asset(
+                    AssetImages.sale,
+                    width: Get.height * 0.03,
+                  ),
+                  Spacer(),
+                  Text(
+                    avaliableScales.first,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: Get.width * 0.04,
+                    ),
+                  ),
+                  Spacer(
+                    flex: 10,
+                  ),
+                  GestureDetector(
+                    onTap: () => setState(() => ignoreBonus = true),
+                    child: Icon(
+                      Icons.close,
+                      color: Colors.white,
+                      size: Get.width * 0.04,
+                    ),
+                  ),
+                  Spacer(
+                    flex: 2,
+                  ),
+                ],
+              ));
+        }
+      }
+
+      return SizedBox();
+    });
   }
 
   Row pricesRow() {
