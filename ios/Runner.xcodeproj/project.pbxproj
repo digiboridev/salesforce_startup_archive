@@ -466,7 +466,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				MARKETING_VERSION = 0.0.30;
+				MARKETING_VERSION = 0.0.34;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"z\"",
@@ -524,7 +524,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				MARKETING_VERSION = 0.0.30;
+				MARKETING_VERSION = 0.0.34;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"z\"",
