@@ -151,7 +151,7 @@ class MaterialsCatalogController extends GetxController {
         material.didSubscribedToInventoryAlert.value = true;
       } catch (e) {
         Get.bottomSheet(InfoBottomSheet(
-            headerText: 'Error',
+            headerText: 'Error'.tr,
             mainText: e.toString(),
             actions: [InfoAction(text: 'Ok', callback: () => Get.back())],
             headerIconPath: AssetImages.info));

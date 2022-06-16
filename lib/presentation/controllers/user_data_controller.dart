@@ -189,7 +189,7 @@ class UserDataController extends GetxController {
       loadUserData();
     } catch (e) {
       Get.bottomSheet(InfoBottomSheet(
-          headerText: 'Error',
+          headerText: 'Error'.tr,
           mainText: e.toString(),
           actions: [InfoAction(text: 'Ok', callback: () => Get.back())],
           headerIconPath: AssetImages.info));
@@ -238,7 +238,7 @@ class UserDataController extends GetxController {
     } catch (e) {
       Get.until((route) => !Get.isDialogOpen!);
       Get.bottomSheet(InfoBottomSheet(
-          headerText: 'Error',
+          headerText: 'Error'.tr,
           mainText: e.toString(),
           actions: [InfoAction(text: 'Ok', callback: () => Get.back())],
           headerIconPath: AssetImages.info));
@@ -255,7 +255,7 @@ class UserDataController extends GetxController {
       if (onlogin) loadUserData(forceRemote: true);
     } catch (e) {
       Get.bottomSheet(InfoBottomSheet(
-          headerText: 'Error',
+          headerText: 'Error'.tr,
           mainText: e.toString(),
           actions: [InfoAction(text: 'Ok', callback: () => Get.back())],
           headerIconPath: AssetImages.info));

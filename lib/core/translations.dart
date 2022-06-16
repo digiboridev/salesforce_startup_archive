@@ -148,11 +148,16 @@ class Trs extends Translations {
           'Client ID': 'Client ID:', // header
           'Last order date': 'Last order date:', // header
           'Distance': 'Distance:', // header
+          'Contact Form': 'Contact Form',
           'new_material': 'New', // PS1
           'hot_material': 'Work', // PS1
           'Add to cart': 'Add to cart', // PP2
           'All_filter': 'ALL', // C7
           'off': 'off', // PP4
+          'Hello_contact': 'Hello @name, what can be done to help', // H7
+          'Selecting_reason': 'Selecting the reason for the referral', // H7
+          'Want to elaborate?': 'Want to elaborate?', // H7
+          'Send': 'Send' // H7
         },
         'he': {
           'Good morning': 'בוקר טוב🌞',
@@ -285,11 +290,16 @@ class Trs extends Translations {
           'Client ID': 'מזהה לקוח:',
           'Last order date': 'תאריך הזמנה אחרון:',
           'Distance': 'מֶרְחָק:',
+          'Contact Form': 'טופס יצירת קשר',
           'new_material': 'חדש',
           'hot_material': 'מבצע',
           'Add to cart': 'הוסף לעגלה',
           'All_filter': 'ALL',
           'off': 'כבוי',
+          'Hello_contact': 'שלום @name, מה ניתן לעשות כדי לעזור',
+          'Selecting_reason': 'בחירת הסיבה להפניה',
+          'Want to elaborate?': 'רוצה לפרט?',
+          'Send': 'לִשְׁלוֹחַ'
         }
       };
 }

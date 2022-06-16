@@ -2,6 +2,7 @@ import 'package:***REMOVED***/core/asset_images.dart';
 import 'package:***REMOVED***/core/mycolors.dart';
 import 'package:***REMOVED***/domain/entities/contact_us_data.dart';
 import 'package:***REMOVED***/presentation/controllers/contactus_controller.dart';
+import 'package:***REMOVED***/presentation/ui/screens/contactus_form.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/contact_option_tile.dart';
 import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/our_focus_head.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +45,38 @@ class ContactUsPanel extends StatelessWidget {
                                 contactOption: e,
                               );
                             }),
+                            GestureDetector(
+                              onTap: () => Get.to(() => ContactusFormScreen()),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: MyColors.blue_0250A0,
+                                    borderRadius: BorderRadius.circular(
+                                        Get.width * 0.02)),
+                                margin: EdgeInsets.symmetric(
+                                    horizontal: Get.width * 0.06),
+                                padding: EdgeInsets.symmetric(
+                                    vertical: Get.width * 0.01,
+                                    horizontal: Get.width * 0.025),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Contact Form'.tr,
+                                      style: TextStyle(
+                                        fontSize: Get.width * 0.035,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.keyboard_arrow_right,
+                                      size: Get.width * 0.035,
+                                      color: Colors.white,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -86,7 +119,7 @@ class ContactUsPanel extends StatelessWidget {
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           );
         } else {

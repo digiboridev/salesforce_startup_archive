@@ -100,11 +100,11 @@ class CatalogPageController extends GetxController {
       return false;
     }).toList();
 
-    Set<Materiale> s = Set();
+    // Set<Materiale> s = Set();
 
-    s = materials
-        .where((element) => element.alternativeItems.isNotEmpty)
-        .toSet();
+    // s = materials
+    //     .where((element) => element.alternativeItems.isNotEmpty)
+    //     .toSet();
 
     // s = _materialsCatalog.value.materials
     //     .where((element) => element.pricing.isNotEmpty)

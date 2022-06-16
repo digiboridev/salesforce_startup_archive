@@ -204,7 +204,7 @@ class CustomerController extends GetxController {
       Get.until((route) => !Get.isDialogOpen!);
       // Get.snackbar('Error', e.toString());
       Get.bottomSheet(InfoBottomSheet(
-          headerText: 'Error',
+          headerText: 'Error'.tr,
           mainText: e.toString(),
           actions: [InfoAction(text: 'Ok', callback: () => Get.back())],
           headerIconPath: AssetImages.info));
