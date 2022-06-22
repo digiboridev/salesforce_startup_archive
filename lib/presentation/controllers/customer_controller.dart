@@ -53,8 +53,7 @@ class CustomerController extends GetxController {
   void onReady() {
     super.onReady();
     // Listen to user data
-    handleUserDataState(
-        userDataState: _userDataController.userDataStateStream.value);
+    handleUserDataState(userDataState: _userDataController.userDataState);
     _userDataController.userDataStateStream
         .listen((event) => handleUserDataState(userDataState: event));
   }

@@ -38,7 +38,7 @@ class UserDataController extends GetxController {
 
   Rx<UserDataState> _userDataState = Rx(UserDataInitialState());
   UserDataState get userDataState => _userDataState.value;
-  Rx<UserDataState> get userDataStateStream => _userDataState;
+  Stream<UserDataState> get userDataStateStream => _userDataState.stream;
 
   StreamSubscription? _sub;
 
