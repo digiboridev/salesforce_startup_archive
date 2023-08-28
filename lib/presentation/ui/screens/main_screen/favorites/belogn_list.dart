@@ -1,10 +1,10 @@
 import 'dart:ui';
 
-import 'package:***REMOVED***/core/asset_images.dart';
-import 'package:***REMOVED***/core/mycolors.dart';
-import 'package:***REMOVED***/domain/entities/favorites/favorite_item.dart';
-import 'package:***REMOVED***/domain/entities/favorites/favorite_list.dart';
-import 'package:***REMOVED***/domain/entities/materials/material.dart';
+import 'package:salesforce.startup/core/asset_images.dart';
+import 'package:salesforce.startup/core/mycolors.dart';
+import 'package:salesforce.startup/domain/entities/favorites/favorite_item.dart';
+import 'package:salesforce.startup/domain/entities/favorites/favorite_list.dart';
+import 'package:salesforce.startup/domain/entities/materials/material.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -51,8 +51,7 @@ class _BelongListState extends State<BelongList> {
 
   remove() {
     editableFavList.forEach((l) {
-      l.favoriteItems.removeWhere(
-          (fi) => fi.materialNumber == widget.material.MaterialNumber);
+      l.favoriteItems.removeWhere((fi) => fi.materialNumber == widget.material.MaterialNumber);
     });
     Get.back(result: editableFavList);
   }
@@ -65,97 +64,65 @@ class _BelongListState extends State<BelongList> {
         width: Get.width,
         // height: Get.width * 3,
         decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.grey.shade300, spreadRadius: 1, blurRadius: 10)
-            ],
+            boxShadow: [BoxShadow(color: Colors.grey.shade300, spreadRadius: 1, blurRadius: 10)],
             color: Colors.white,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(Get.width * 0.06),
-                topRight: Radius.circular(Get.width * 0.06))),
+            borderRadius: BorderRadius.only(topLeft: Radius.circular(Get.width * 0.06), topRight: Radius.circular(Get.width * 0.06))),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-                padding: EdgeInsets.symmetric(
-                    horizontal: Get.width * 0.06, vertical: Get.width * 0.05),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Belongs on the list".tr,
-                        style: TextStyle(
-                            color: MyColors.blue_003E7E, fontSize: 24),
-                      ),
-                      Text(
-                        widget.material.Name,
-                        style: TextStyle(
-                            color: MyColors.blue_003E7E, fontSize: 17),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                          width: Get.width,
-                          child: Wrap(
-                              direction: Axis.horizontal,
-                              spacing: 5,
-                              runSpacing: 10,
-                              children: editableFavList.map((e) {
-                                bool materialInside = e.favoriteItems
-                                    .map((e) => e.materialNumber)
-                                    .contains(widget.material.MaterialNumber);
+                padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06, vertical: Get.width * 0.05),
+                child: Column(mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.center, children: [
+                  Text(
+                    "Belongs on the list".tr,
+                    style: TextStyle(color: MyColors.blue_003E7E, fontSize: 24),
+                  ),
+                  Text(
+                    widget.material.Name,
+                    style: TextStyle(color: MyColors.blue_003E7E, fontSize: 17),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                      width: Get.width,
+                      child: Wrap(
+                          direction: Axis.horizontal,
+                          spacing: 5,
+                          runSpacing: 10,
+                          children: editableFavList.map((e) {
+                            bool materialInside = e.favoriteItems.map((e) => e.materialNumber).contains(widget.material.MaterialNumber);
 
-                                return Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          if (materialInside) {
-                                            setState(() {
-                                              e.favoriteItems.removeWhere(
-                                                  (element) =>
-                                                      element.materialNumber ==
-                                                      widget.material
-                                                          .MaterialNumber);
-                                            });
-                                          } else {
-                                            setState(() {
-                                              e.favoriteItems.add(FavoriteItem(
-                                                  materialNumber: widget
-                                                      .material.MaterialNumber,
-                                                  sFId: widget.material.SFId,
-                                                  unit:
-                                                      widget.material.SalesUnit,
-                                                  quantity: widget.material
-                                                      .MinimumOrderQuantity));
-                                            });
-                                          }
-                                        },
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(
-                                                      Get.width * 0.04)),
-                                              border: Border.all(
-                                                  width: Get.width / Get.width,
-                                                  color: materialInside
-                                                      ? MyColors.blue_00458C
-                                                      : MyColors.blue_00458C
-                                                          .withOpacity(0.25))),
-                                          alignment: Alignment.center,
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 10, vertical: 10),
-                                          child: Text("${e.listName}",
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  color: MyColors.blue_00458C)),
-                                        ),
-                                      ),
-                                    ]);
-                              }).toList())),
-                    ])),
+                            return Row(mainAxisSize: MainAxisSize.min, children: [
+                              GestureDetector(
+                                onTap: () {
+                                  if (materialInside) {
+                                    setState(() {
+                                      e.favoriteItems.removeWhere((element) => element.materialNumber == widget.material.MaterialNumber);
+                                    });
+                                  } else {
+                                    setState(() {
+                                      e.favoriteItems.add(FavoriteItem(
+                                          materialNumber: widget.material.MaterialNumber,
+                                          sFId: widget.material.SFId,
+                                          unit: widget.material.SalesUnit,
+                                          quantity: widget.material.MinimumOrderQuantity));
+                                    });
+                                  }
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.all(Radius.circular(Get.width * 0.04)),
+                                      border: Border.all(
+                                          width: Get.width / Get.width, color: materialInside ? MyColors.blue_00458C : MyColors.blue_00458C.withOpacity(0.25))),
+                                  alignment: Alignment.center,
+                                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                                  child: Text("${e.listName}", style: TextStyle(fontSize: 16, color: MyColors.blue_00458C)),
+                                ),
+                              ),
+                            ]);
+                          }).toList())),
+                ])),
             SizedBox(
               height: 43,
             ),
@@ -169,9 +136,7 @@ class _BelongListState extends State<BelongList> {
                   GestureDetector(
                     onTap: save,
                     child: Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: Get.width * 0.1,
-                          vertical: Get.width * 0.025),
+                      padding: EdgeInsets.symmetric(horizontal: Get.width * 0.1, vertical: Get.width * 0.025),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(Get.width * 0.06),
                         color: MyColors.blue_00458C,

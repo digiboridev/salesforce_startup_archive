@@ -1,10 +1,9 @@
-import 'package:***REMOVED***/core/errors.dart';
-import 'package:***REMOVED***/data/repositories/user_data_repository.dart';
-import 'package:***REMOVED***/domain/entities/user_data.dart';
-import 'package:***REMOVED***/domain/usecases/usecase.dart';
+import 'package:salesforce.startup/core/errors.dart';
+import 'package:salesforce.startup/data/repositories/user_data_repository.dart';
+import 'package:salesforce.startup/domain/entities/user_data.dart';
+import 'package:salesforce.startup/domain/usecases/usecase.dart';
 
-class GetUserDataAndCache
-    implements UseCase<UserData, GetUserDataAndCacheParams> {
+class GetUserDataAndCache implements UseCase<UserData, GetUserDataAndCacheParams> {
   final UserDataRepository userDataRepository;
 
   GetUserDataAndCache(this.userDataRepository);
@@ -28,10 +27,8 @@ class GetUserDataAndCache
 
   Future<UserData> _loadFromRemote({required String userId}) async {
     UserData remoteUserData = await userDataRepository.getRemoteUserData;
-    userDataRepository.setLocalUserData(
-        userId: userId, userData: remoteUserData);
-    userDataRepository.setUserDataSyncTime(
-        userId: userId, dateTime: DateTime.now());
+    userDataRepository.setLocalUserData(userId: userId, userData: remoteUserData);
+    userDataRepository.setUserDataSyncTime(userId: userId, dateTime: DateTime.now());
     return remoteUserData;
   }
 
@@ -45,8 +42,7 @@ class GetUserDataAndCache
 
   Future<bool> _cacheUpToDate({required String userId}) async {
     try {
-      DateTime lastSync =
-          await userDataRepository.getUserDataSyncTime(userId: userId);
+      DateTime lastSync = await userDataRepository.getUserDataSyncTime(userId: userId);
       Duration diff = DateTime.now().difference(lastSync);
 
       if (diff.inMinutes < 30) {

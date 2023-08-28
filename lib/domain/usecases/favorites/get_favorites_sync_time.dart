@@ -1,5 +1,5 @@
-import 'package:***REMOVED***/data/repositories/favorites_repository.dart';
-import 'package:***REMOVED***/domain/usecases/usecase.dart';
+import 'package:salesforce.startup/data/repositories/favorites_repository.dart';
+import 'package:salesforce.startup/domain/usecases/usecase.dart';
 
 class GetFavoritesSyncTime implements UseCase<DateTime, String> {
   final FavoritesRepository favoritesRepository;
@@ -9,8 +9,7 @@ class GetFavoritesSyncTime implements UseCase<DateTime, String> {
   @override
   Future<DateTime> call(customerSAP) async {
     try {
-      DateTime d = await favoritesRepository.getFavoritesSyncTime(
-          customerSAP: customerSAP);
+      DateTime d = await favoritesRepository.getFavoritesSyncTime(customerSAP: customerSAP);
       return d;
     } catch (e) {
       return DateTime(1994);

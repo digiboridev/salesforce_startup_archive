@@ -1,6 +1,6 @@
-import 'package:***REMOVED***/core/constants.dart';
-import 'package:***REMOVED***/core/errors.dart';
-import 'package:***REMOVED***/data/models/contact_us_data_model.dart';
+import 'package:salesforce.startup/core/constants.dart';
+import 'package:salesforce.startup/core/errors.dart';
+import 'package:salesforce.startup/data/models/contact_us_data_model.dart';
 import 'package:salesforce/salesforce.dart';
 
 abstract class ContactUsRemoteDatasource {
@@ -12,7 +12,7 @@ class ContactUsRemoteDatasourceImpl implements ContactUsRemoteDatasource {
   Future<ContactUsataModel> get getContactUs async {
     try {
       Map<String, dynamic> response = await SalesforcePlugin.sendRequest(
-        endPoint: ***REMOVED***Endpoint,
+        endPoint: startupEndpoint,
         path: '/login/getContactUs',
       ) as Map<String, dynamic>;
       if (response['success']) {

@@ -1,16 +1,14 @@
-import 'package:***REMOVED***/data/repositories/customers_repository.dart';
-import 'package:***REMOVED***/domain/usecases/usecase.dart';
+import 'package:salesforce.startup/data/repositories/customers_repository.dart';
+import 'package:salesforce.startup/domain/usecases/usecase.dart';
 
-class SetSelectedCustomerSAP
-    implements UseCase<void, SetSelectedCustomerSAPParams> {
+class SetSelectedCustomerSAP implements UseCase<void, SetSelectedCustomerSAPParams> {
   final CustomersRepository customersRepository;
 
   SetSelectedCustomerSAP(this.customersRepository);
 
   @override
   Future<void> call(params) async {
-    return customersRepository.setSelectedCustomerSAP(
-        userId: params.userId, customerSAP: params.customerSAP);
+    return customersRepository.setSelectedCustomerSAP(userId: params.userId, customerSAP: params.customerSAP);
   }
 }
 

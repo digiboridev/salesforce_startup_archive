@@ -1,18 +1,16 @@
-import 'package:***REMOVED***/core/errors.dart';
-import 'package:***REMOVED***/data/models/cart_item_model.dart';
+import 'package:salesforce.startup/core/errors.dart';
+import 'package:salesforce.startup/data/models/cart_item_model.dart';
 import 'package:get_storage/get_storage.dart';
 
 abstract class CartLocalDatasource {
   Future<List<CartItemModel>> getItemsByCustomer({required String customerSAP});
-  Future setItemsByCustomer(
-      {required String customerSAP, required List<CartItemModel> items});
+  Future setItemsByCustomer({required String customerSAP, required List<CartItemModel> items});
 }
 
 class CartLocalDatasourceImpl extends CartLocalDatasource {
   final cartBox = GetStorage('cartBox');
 
-  Future<List<CartItemModel>> getItemsByCustomer(
-      {required String customerSAP}) async {
+  Future<List<CartItemModel>> getItemsByCustomer({required String customerSAP}) async {
     List? data = cartBox.read(customerSAP);
 
     if (data == null) {
@@ -22,8 +20,7 @@ class CartLocalDatasourceImpl extends CartLocalDatasource {
     return data.map((e) => CartItemModel.fromJson(e)).toList();
   }
 
-  Future setItemsByCustomer(
-      {required String customerSAP, required List<CartItemModel> items}) async {
+  Future setItemsByCustomer({required String customerSAP, required List<CartItemModel> items}) async {
     await cartBox.write(customerSAP, items.map((e) => e.toJson()).toList());
   }
 }

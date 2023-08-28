@@ -1,4 +1,4 @@
-import 'package:***REMOVED***/core/mycolors.dart';
+import 'package:salesforce.startup/core/mycolors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,11 +10,7 @@ class ProductOptions extends StatefulWidget {
   static const CARD_TYPE = "OPTION_CARD_TYPE";
   static const MATERIAL_SCREEN_TYPE = "OPTION_MATERIAL_SCREEN_TYPE";
 
-  ProductOptions(
-      {required this.isNew,
-      required this.isHotSale,
-      required this.optionType,
-      required this.isFrozen});
+  ProductOptions({required this.isNew, required this.isHotSale, required this.optionType, required this.isFrozen});
   @override
   State<StatefulWidget> createState() => ProductOptionsState();
 }
@@ -80,9 +76,7 @@ class ProductOptionsState extends State<ProductOptions> {
           alignment: Alignment.center,
           height: 15,
           width: Get.width * 0.1,
-          decoration: BoxDecoration(
-              color: MyColors.orange_FF8800,
-              borderRadius: BorderRadius.all(Radius.circular(15))),
+          decoration: BoxDecoration(color: MyColors.orange_FF8800, borderRadius: BorderRadius.all(Radius.circular(15))),
           child: Text(
             "hot_material".tr,
             style: TextStyle(color: Colors.white, fontSize: 8),
@@ -97,13 +91,10 @@ class ProductOptionsState extends State<ProductOptions> {
           alignment: Alignment.center,
           height: 15,
           width: Get.width * 0.1,
-          decoration: BoxDecoration(
-              color: MyColors.blue_00458C,
-              borderRadius: BorderRadius.all(Radius.circular(15))),
+          decoration: BoxDecoration(color: MyColors.blue_00458C, borderRadius: BorderRadius.all(Radius.circular(15))),
           child: Text(
             "new_material".tr,
-            style: TextStyle(
-                color: Colors.white, fontSize: 11, fontFamily: 'Almoni'),
+            style: TextStyle(color: Colors.white, fontSize: 11, fontFamily: 'Almoni'),
           ),
         ));
   }
@@ -117,8 +108,7 @@ class ProductOptionsState extends State<ProductOptions> {
           margin: EdgeInsets.only(
             top: Get.width * 0.01,
           ),
-          decoration: BoxDecoration(
-              color: MyColors.blue_6DA5EC, shape: BoxShape.circle),
+          decoration: BoxDecoration(color: MyColors.blue_6DA5EC, shape: BoxShape.circle),
           child: Icon(
             Icons.ac_unit_outlined,
             color: MyColors.blue_003E83,

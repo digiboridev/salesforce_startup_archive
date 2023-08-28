@@ -1,8 +1,8 @@
-import 'package:***REMOVED***/core/asset_images.dart';
-import 'package:***REMOVED***/core/mycolors.dart';
-import 'package:***REMOVED***/presentation/controllers/favorites_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/favorites_states.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/favorites/favorites_page.dart';
+import 'package:salesforce.startup/core/asset_images.dart';
+import 'package:salesforce.startup/core/mycolors.dart';
+import 'package:salesforce.startup/presentation/controllers/favorites_controller.dart';
+import 'package:salesforce.startup/presentation/controllers/favorites_states.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/favorites/favorites_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,8 +13,7 @@ class FavoritesLoader extends StatefulWidget {
   State<FavoritesLoader> createState() => _FavoritesLoaderState();
 }
 
-class _FavoritesLoaderState extends State<FavoritesLoader>
-    with AutomaticKeepAliveClientMixin {
+class _FavoritesLoaderState extends State<FavoritesLoader> with AutomaticKeepAliveClientMixin {
   final FavoritesController favoritesController = Get.find();
 
   @override

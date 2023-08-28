@@ -1,14 +1,14 @@
-import 'package:***REMOVED***/domain/services/connections_service.dart';
-import 'package:***REMOVED***/presentation/controllers/contactus_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/materials_catalog_states.dart';
-import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/user_data_controller_states.dart';
-import 'package:***REMOVED***/presentation/ui/screens/expired_password_screen.dart';
-import 'package:***REMOVED***/presentation/ui/screens/just_loading_screen.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/main_screen.dart';
-import 'package:***REMOVED***/presentation/ui/screens/legal_doc_screen.dart';
+import 'package:salesforce.startup/domain/services/connections_service.dart';
+import 'package:salesforce.startup/presentation/controllers/contactus_controller.dart';
+import 'package:salesforce.startup/presentation/controllers/customer_controller.dart';
+import 'package:salesforce.startup/presentation/controllers/materials_catalog_controller.dart';
+import 'package:salesforce.startup/presentation/controllers/materials_catalog_states.dart';
+import 'package:salesforce.startup/presentation/controllers/user_data_controller.dart';
+import 'package:salesforce.startup/presentation/controllers/user_data_controller_states.dart';
+import 'package:salesforce.startup/presentation/ui/screens/expired_password_screen.dart';
+import 'package:salesforce.startup/presentation/ui/screens/just_loading_screen.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/main_screen.dart';
+import 'package:salesforce.startup/presentation/ui/screens/legal_doc_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -46,8 +46,7 @@ class Loader extends StatelessWidget {
         if (customerController.selectedCustomer != null) {
           // Catalog loading part
           //
-          if (materialsCatalogController.materialsCatalogState.value
-              is MCSCommon) {
+          if (materialsCatalogController.materialsCatalogState.value is MCSCommon) {
             return MainScreen();
           }
         }

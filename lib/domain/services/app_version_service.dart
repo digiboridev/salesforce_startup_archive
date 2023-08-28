@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:***REMOVED***/core/asset_images.dart';
-import 'package:***REMOVED***/presentation/ui/widgets/dialogs/info_bottomsheet.dart';
+import 'package:salesforce.startup/core/asset_images.dart';
+import 'package:salesforce.startup/presentation/ui/widgets/dialogs/info_bottomsheet.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:package_info_plus/package_info_plus.dart';
@@ -27,8 +27,7 @@ class AppVersionService {
         throw Exception('Unsupported platform');
       }
 
-      var response = await http.get(Uri.parse(
-          'http://***REMOVED******REMOVED***AppVersion/V2/$platform'));
+      var response = await http.get(Uri.parse('http://qa.sf.api/services/apexrest/startupAppVersion/V2/$platform'));
 
       AppVersion desiredVersion = AppVersion.fromJson(response.body);
 
@@ -40,8 +39,7 @@ class AppVersionService {
         await Get.bottomSheet(
           InfoBottomSheet(
               headerText: 'Update app please',
-              mainText:
-                  'A new version of this application is available, please update',
+              mainText: 'A new version of this application is available, please update',
               actions: [
                 InfoAction(
                     text: 'Update',
@@ -84,10 +82,8 @@ class AppVersion {
 
   String toJson() => json.encode(toMap());
 
-  factory AppVersion.fromJson(String source) =>
-      AppVersion.fromMap(json.decode(source));
+  factory AppVersion.fromJson(String source) => AppVersion.fromMap(json.decode(source));
 
   @override
-  String toString() =>
-      'AppVersion(version: $version, downloadUrl: $downloadUrl)';
+  String toString() => 'AppVersion(version: $version, downloadUrl: $downloadUrl)';
 }

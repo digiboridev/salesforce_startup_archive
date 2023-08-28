@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:***REMOVED***/domain/services/connections_service.dart';
+import 'package:salesforce.startup/domain/services/connections_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -66,13 +66,7 @@ class CachedImage extends StatefulWidget {
   final double width;
   final double height;
   final BoxFit? boxFit;
-  const CachedImage(
-      {Key? key,
-      required this.Url,
-      required this.width,
-      required this.height,
-      this.boxFit})
-      : super(key: key);
+  const CachedImage({Key? key, required this.Url, required this.width, required this.height, this.boxFit}) : super(key: key);
 
   @override
   State<CachedImage> createState() => _CachedImageState();
@@ -105,8 +99,7 @@ class _CachedImageState extends State<CachedImage> {
       error = false;
     });
     try {
-      Uint8List d =
-          await imageCachingService.getImage(url: Uri.parse(widget.Url));
+      Uint8List d = await imageCachingService.getImage(url: Uri.parse(widget.Url));
       if (mounted) {
         setState(() {
           imageData = d;
@@ -151,8 +144,7 @@ class _CachedImageState extends State<CachedImage> {
             width: widget.width,
             height: widget.height,
             fit: widget.boxFit,
-            errorBuilder: (BuildContext context, Object exception,
-                StackTrace? stackTrace) {
+            errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
               return GestureDetector(
                 onTap: () => load(),
                 child: Center(

@@ -1,21 +1,21 @@
 import 'dart:async';
-import 'package:***REMOVED***/core/asset_images.dart';
-import 'package:***REMOVED***/core/languages.dart';
-import 'package:***REMOVED***/domain/entities/auth_data.dart';
-import 'package:***REMOVED***/domain/entities/user_data.dart';
-import 'package:***REMOVED***/domain/services/app_version_service.dart';
-import 'package:***REMOVED***/domain/services/cache_fetching_service.dart';
-import 'package:***REMOVED***/domain/services/connections_service.dart';
-import 'package:***REMOVED***/domain/services/sf_sdk_service.dart';
-import 'package:***REMOVED***/domain/usecases/usecase.dart';
-import 'package:***REMOVED***/domain/usecases/user/accept_legal_doc.dart';
-import 'package:***REMOVED***/domain/usecases/user/change_language.dart';
-import 'package:***REMOVED***/domain/usecases/user/change_password.dart';
-import 'package:***REMOVED***/domain/usecases/user/get_userdata_and_cache.dart';
-import 'package:***REMOVED***/domain/usecases/user/get_userdata_sync_time.dart';
-import 'package:***REMOVED***/presentation/controllers/user_data_controller_states.dart';
-import 'package:***REMOVED***/presentation/ui/widgets/dialogs/default_dialog.dart';
-import 'package:***REMOVED***/presentation/ui/widgets/dialogs/info_bottomsheet.dart';
+import 'package:salesforce.startup/core/asset_images.dart';
+import 'package:salesforce.startup/core/languages.dart';
+import 'package:salesforce.startup/domain/entities/auth_data.dart';
+import 'package:salesforce.startup/domain/entities/user_data.dart';
+import 'package:salesforce.startup/domain/services/app_version_service.dart';
+import 'package:salesforce.startup/domain/services/cache_fetching_service.dart';
+import 'package:salesforce.startup/domain/services/connections_service.dart';
+import 'package:salesforce.startup/domain/services/sf_sdk_service.dart';
+import 'package:salesforce.startup/domain/usecases/usecase.dart';
+import 'package:salesforce.startup/domain/usecases/user/accept_legal_doc.dart';
+import 'package:salesforce.startup/domain/usecases/user/change_language.dart';
+import 'package:salesforce.startup/domain/usecases/user/change_password.dart';
+import 'package:salesforce.startup/domain/usecases/user/get_userdata_and_cache.dart';
+import 'package:salesforce.startup/domain/usecases/user/get_userdata_sync_time.dart';
+import 'package:salesforce.startup/presentation/controllers/user_data_controller_states.dart';
+import 'package:salesforce.startup/presentation/ui/widgets/dialogs/default_dialog.dart';
+import 'package:salesforce.startup/presentation/ui/widgets/dialogs/info_bottomsheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -93,16 +93,13 @@ class UserDataController extends GetxController {
 
     // Load user data
     try {
-      UserData userData = await _getUserDataAndCache(GetUserDataAndCacheParams(
-          userId: _authData.value!.userId,
-          hasConnection: _connectionService.hasConnection,
-          forceRemote: forceRemote));
+      UserData userData = await _getUserDataAndCache(
+          GetUserDataAndCacheParams(userId: _authData.value!.userId, hasConnection: _connectionService.hasConnection, forceRemote: forceRemote));
 
       // emmit accept legaldoc state if not
 
       if (!userData.hasAcceptedLegalDoc) {
-        _userDataState.value =
-            UserDataAskLegalDocState(legalDoc: userData.legalDoc);
+        _userDataState.value = UserDataAskLegalDocState(legalDoc: userData.legalDoc);
       }
       // emmit change password state if needed
 
@@ -117,10 +114,7 @@ class UserDataController extends GetxController {
         _userDataState.value = UserDataCommonState(userData: userData);
 
         // Register in cache fetching service
-        CacheUpdateEvent cacheUpdateEvent = CacheUpdateEvent(
-            tag: 'user',
-            updateActionCallback: updateUserData,
-            lastUpdateTimeCallback: getLastSync);
+        CacheUpdateEvent cacheUpdateEvent = CacheUpdateEvent(tag: 'user', updateActionCallback: updateUserData, lastUpdateTimeCallback: getLastSync);
         _cacheFetchingService.registerEvent(cacheUpdateEvent: cacheUpdateEvent);
       }
     } catch (e) {
@@ -189,10 +183,7 @@ class UserDataController extends GetxController {
       loadUserData();
     } catch (e) {
       Get.bottomSheet(InfoBottomSheet(
-          headerText: 'Error'.tr,
-          mainText: e.toString(),
-          actions: [InfoAction(text: 'Ok', callback: () => Get.back())],
-          headerIconPath: AssetImages.info));
+          headerText: 'Error'.tr, mainText: e.toString(), actions: [InfoAction(text: 'Ok', callback: () => Get.back())], headerIconPath: AssetImages.info));
     }
   }
 
@@ -213,8 +204,7 @@ class UserDataController extends GetxController {
   Languages get currentLanguage {
     var state = _userDataState.value;
     if (state is UserDataCommonState) {
-      return Languages.fromIdentifier(
-          identifier: state.userData.selectedLanguage);
+      return Languages.fromIdentifier(identifier: state.userData.selectedLanguage);
     } else {
       throw Exception('Operation denied');
     }
@@ -238,27 +228,17 @@ class UserDataController extends GetxController {
     } catch (e) {
       Get.until((route) => !Get.isDialogOpen!);
       Get.bottomSheet(InfoBottomSheet(
-          headerText: 'Error'.tr,
-          mainText: e.toString(),
-          actions: [InfoAction(text: 'Ok', callback: () => Get.back())],
-          headerIconPath: AssetImages.info));
+          headerText: 'Error'.tr, mainText: e.toString(), actions: [InfoAction(text: 'Ok', callback: () => Get.back())], headerIconPath: AssetImages.info));
     }
   }
 
-  Future changePassword(
-      {required String oldPass,
-      required String newPass,
-      bool onlogin = false}) async {
+  Future changePassword({required String oldPass, required String newPass, bool onlogin = false}) async {
     try {
-      await _changePassword
-          .call(ChangePasswordParams(oldPass: oldPass, newPass: newPass));
+      await _changePassword.call(ChangePasswordParams(oldPass: oldPass, newPass: newPass));
       if (onlogin) loadUserData(forceRemote: true);
     } catch (e) {
       Get.bottomSheet(InfoBottomSheet(
-          headerText: 'Error'.tr,
-          mainText: e.toString(),
-          actions: [InfoAction(text: 'Ok', callback: () => Get.back())],
-          headerIconPath: AssetImages.info));
+          headerText: 'Error'.tr, mainText: e.toString(), actions: [InfoAction(text: 'Ok', callback: () => Get.back())], headerIconPath: AssetImages.info));
     }
   }
 

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:***REMOVED***/domain/entities/contact_us_data.dart';
+import 'package:salesforce.startup/domain/entities/contact_us_data.dart';
 
 class ContactUsataModel extends ContactUsData {
   @override
@@ -12,10 +12,7 @@ class ContactUsataModel extends ContactUsData {
     required this.openingHours,
     required String openingHoursString,
     required this.contactOptionsList,
-  }) : super(
-            openingHours: openingHours,
-            openingHoursString: openingHoursString,
-            contactOptionsList: contactOptionsList);
+  }) : super(openingHours: openingHours, openingHoursString: openingHoursString, contactOptionsList: contactOptionsList);
 
   Map<String, dynamic> toMap() {
     return {
@@ -29,10 +26,7 @@ class ContactUsataModel extends ContactUsData {
     return ContactUsataModel(
       openingHours: OpeningHoursModel.fromMap(map['openingHours']),
       openingHoursString: map['openingHoursString'] ?? '',
-      contactOptionsList: List<ContactOptionModel>.from(
-          map['contactOptionsList']
-                  ?.map((x) => ContactOptionModel.fromMap(x)) ??
-              const []),
+      contactOptionsList: List<ContactOptionModel>.from(map['contactOptionsList']?.map((x) => ContactOptionModel.fromMap(x)) ?? const []),
     );
   }
 
@@ -40,16 +34,13 @@ class ContactUsataModel extends ContactUsData {
     return ContactUsataModel(
       openingHours: OpeningHoursModel.fromEntity(contactUsata.openingHours),
       openingHoursString: contactUsata.openingHoursString,
-      contactOptionsList: contactUsata.contactOptionsList
-          .map((e) => ContactOptionModel.fromEntity(e))
-          .toList(),
+      contactOptionsList: contactUsata.contactOptionsList.map((e) => ContactOptionModel.fromEntity(e)).toList(),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory ContactUsataModel.fromJson(String source) =>
-      ContactUsataModel.fromMap(json.decode(source));
+  factory ContactUsataModel.fromJson(String source) => ContactUsataModel.fromMap(json.decode(source));
 }
 
 class OpeningHoursModel extends OpeningHours {
@@ -81,8 +72,7 @@ class OpeningHoursModel extends OpeningHours {
 
   String toJson() => json.encode(toMap());
 
-  factory OpeningHoursModel.fromJson(String source) =>
-      OpeningHoursModel.fromMap(json.decode(source));
+  factory OpeningHoursModel.fromJson(String source) => OpeningHoursModel.fromMap(json.decode(source));
 }
 
 class ContactOptionModel extends ContactOption {
@@ -92,12 +82,7 @@ class ContactOptionModel extends ContactOption {
     required String agentCode,
     required String email,
     required String whatsAppLink,
-  }) : super(
-            description: description,
-            phoneNumber: phoneNumber,
-            agentCode: agentCode,
-            email: email,
-            whatsAppLink: whatsAppLink);
+  }) : super(description: description, phoneNumber: phoneNumber, agentCode: agentCode, email: email, whatsAppLink: whatsAppLink);
 
   Map<String, dynamic> toMap() {
     return {
@@ -131,6 +116,5 @@ class ContactOptionModel extends ContactOption {
 
   String toJson() => json.encode(toMap());
 
-  factory ContactOptionModel.fromJson(String source) =>
-      ContactOptionModel.fromMap(json.decode(source));
+  factory ContactOptionModel.fromJson(String source) => ContactOptionModel.fromMap(json.decode(source));
 }

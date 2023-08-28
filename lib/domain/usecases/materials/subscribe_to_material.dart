@@ -1,5 +1,5 @@
-import 'package:***REMOVED***/data/repositories/materials_repository.dart';
-import 'package:***REMOVED***/domain/usecases/usecase.dart';
+import 'package:salesforce.startup/data/repositories/materials_repository.dart';
+import 'package:salesforce.startup/domain/usecases/usecase.dart';
 
 class SubscribeToMaterial implements UseCase<void, SubscribeToMaterialParams> {
   final MaterialsRepository materialsRepository;
@@ -8,8 +8,7 @@ class SubscribeToMaterial implements UseCase<void, SubscribeToMaterialParams> {
 
   @override
   Future<void> call(SubscribeToMaterialParams params) async {
-    return materialsRepository.subscribeToMaterial(
-        customerSAP: params.customerSAP, materialNumber: params.materialNumber);
+    return materialsRepository.subscribeToMaterial(customerSAP: params.customerSAP, materialNumber: params.materialNumber);
   }
 }
 

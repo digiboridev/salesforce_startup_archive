@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:***REMOVED***/data/models/related_consumer_model.dart';
-import 'package:***REMOVED***/domain/entities/user_data.dart';
+import 'package:salesforce.startup/data/models/related_consumer_model.dart';
+import 'package:salesforce.startup/domain/entities/user_data.dart';
 
 class UserDataModel extends UserData {
   @override
@@ -86,8 +86,7 @@ class UserDataModel extends UserData {
       sFUserId: map['SFUserId'] ?? '',
       selectedLanguage: map['SelectedLanguage'] ?? '',
       requireLegalDocSign: map['RequireLegalDocSign'] ?? false,
-      relatedCustomers: List<RelatedConsumerModel>.from(
-          map['RelatedCustomers'].map((x) => RelatedConsumerModel.fromMap(x))),
+      relatedCustomers: List<RelatedConsumerModel>.from(map['RelatedCustomers'].map((x) => RelatedConsumerModel.fromMap(x))),
       legalDoc: Uri.parse(map['LegalDoc']),
       isSystemAdmin: map['isSystemAdmin'] ?? false,
       isStandardUser: map['isStandardUser'] ?? false,
@@ -114,9 +113,7 @@ class UserDataModel extends UserData {
       sFUserId: userData.sFUserId,
       selectedLanguage: userData.selectedLanguage,
       requireLegalDocSign: userData.requireLegalDocSign,
-      relatedCustomers: userData.relatedCustomers
-          .map((e) => RelatedConsumerModel.fromEnitty(e))
-          .toList(),
+      relatedCustomers: userData.relatedCustomers.map((e) => RelatedConsumerModel.fromEnitty(e)).toList(),
       legalDoc: userData.legalDoc,
       isSystemAdmin: userData.isSystemAdmin,
       isStandardUser: userData.isStandardUser,
@@ -140,6 +137,5 @@ class UserDataModel extends UserData {
 
   String toJson() => json.encode(toMap());
 
-  factory UserDataModel.fromJson(String source) =>
-      UserDataModel.fromMap(json.decode(source));
+  factory UserDataModel.fromJson(String source) => UserDataModel.fromMap(json.decode(source));
 }

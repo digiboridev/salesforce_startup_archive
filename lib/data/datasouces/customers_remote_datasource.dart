@@ -1,6 +1,6 @@
-import 'package:***REMOVED***/core/constants.dart';
-import 'package:***REMOVED***/core/errors.dart';
-import 'package:***REMOVED***/data/models/customer_model.dart';
+import 'package:salesforce.startup/core/constants.dart';
+import 'package:salesforce.startup/core/errors.dart';
+import 'package:salesforce.startup/data/models/customer_model.dart';
 import 'package:flutter/services.dart';
 import 'package:salesforce/salesforce.dart';
 
@@ -12,7 +12,7 @@ class CustomersRemoteDatasourceImpl implements CustomersRemoteDatasource {
   Future<CustomerModel> getCustomerBySAP({required String customerSAP}) async {
     try {
       Map<String, dynamic> response = await SalesforcePlugin.sendRequest(
-        endPoint: ***REMOVED***Endpoint,
+        endPoint: startupEndpoint,
         path: '/customer/$customerSAP',
       ) as Map<String, dynamic>;
 

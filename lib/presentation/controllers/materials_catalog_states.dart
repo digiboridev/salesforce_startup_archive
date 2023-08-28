@@ -1,4 +1,4 @@
-import 'package:***REMOVED***/domain/entities/materials/materials_catalog.dart';
+import 'package:salesforce.startup/domain/entities/materials/materials_catalog.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class MaterialsCatalogState {}

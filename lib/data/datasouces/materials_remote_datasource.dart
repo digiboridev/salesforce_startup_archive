@@ -1,25 +1,23 @@
-import 'package:***REMOVED***/core/constants.dart';
-import 'package:***REMOVED***/core/errors.dart';
-import 'package:***REMOVED***/data/models/materials/brand_model.dart';
-import 'package:***REMOVED***/data/models/materials/classification_model.dart';
-import 'package:***REMOVED***/data/models/materials/family_model.dart';
-import 'package:***REMOVED***/data/models/materials/hierarchy_model.dart';
-import 'package:***REMOVED***/data/models/materials/material_model.dart';
-import 'package:***REMOVED***/data/models/materials/materials_catalog_model.dart';
+import 'package:salesforce.startup/core/constants.dart';
+import 'package:salesforce.startup/core/errors.dart';
+import 'package:salesforce.startup/data/models/materials/brand_model.dart';
+import 'package:salesforce.startup/data/models/materials/classification_model.dart';
+import 'package:salesforce.startup/data/models/materials/family_model.dart';
+import 'package:salesforce.startup/data/models/materials/hierarchy_model.dart';
+import 'package:salesforce.startup/data/models/materials/material_model.dart';
+import 'package:salesforce.startup/data/models/materials/materials_catalog_model.dart';
 import 'package:salesforce/salesforce.dart';
 
 abstract class MaterialsRemoteDatasource {
-  Future subscribeToMaterial(
-      {required String customerSAP, required String materialNumber});
+  Future subscribeToMaterial({required String customerSAP, required String materialNumber});
 
   Future<MaterialsCatalogModel> getCatalog({required String customerSAP});
 }
 
 class MaterialsRemoteDatasourceImpl implements MaterialsRemoteDatasource {
-  Future subscribeToMaterial(
-      {required String customerSAP, required String materialNumber}) async {
+  Future subscribeToMaterial({required String customerSAP, required String materialNumber}) async {
     var response = await SalesforcePlugin.sendRequest(
-      endPoint: ***REMOVED***Endpoint,
+      endPoint: startupEndpoint,
       path: '/materials/subscribeInventory/$customerSAP',
       method: 'POST',
       payload: {
@@ -33,13 +31,12 @@ class MaterialsRemoteDatasourceImpl implements MaterialsRemoteDatasource {
     }
   }
 
-  Future<MaterialsCatalogModel> getCatalog(
-      {required String customerSAP}) async {
+  Future<MaterialsCatalogModel> getCatalog({required String customerSAP}) async {
     try {
       // Get materials list
 
       Map<String, dynamic> responseList = await SalesforcePlugin.sendRequest(
-        endPoint: ***REMOVED***Endpoint,
+        endPoint: startupEndpoint,
         path: '/materials/GetMaterialsList/android/$customerSAP',
       ) as Map<String, dynamic>;
 
@@ -66,14 +63,10 @@ class MaterialsRemoteDatasourceImpl implements MaterialsRemoteDatasource {
 
         for (var chunk in chunks) {
           // Chunk loading
-          print('Load chunk: ' +
-              (chunks.indexOf(chunk) + 1).toString() +
-              ' of ' +
-              chunks.length.toString());
+          print('Load chunk: ' + (chunks.indexOf(chunk) + 1).toString() + ' of ' + chunks.length.toString());
 
-          Map<String, dynamic> responseMaterials =
-              await SalesforcePlugin.sendRequest(
-            endPoint: ***REMOVED***Endpoint,
+          Map<String, dynamic> responseMaterials = await SalesforcePlugin.sendRequest(
+            endPoint: startupEndpoint,
             path: '/materials/catalog/$customerSAP',
             method: 'POST',
             payload: {"materialList": chunk},

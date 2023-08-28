@@ -1,11 +1,11 @@
-import 'package:***REMOVED***/core/asset_images.dart';
-import 'package:***REMOVED***/core/mycolors.dart';
-import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/user_data_controller_states.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/contactus_panel.dart';
-import 'package:***REMOVED***/presentation/ui/widgets/dialogs/default_dialog.dart';
-import 'package:***REMOVED***/presentation/ui/widgets/dialogs/info_bottomsheet.dart';
+import 'package:salesforce.startup/core/asset_images.dart';
+import 'package:salesforce.startup/core/mycolors.dart';
+import 'package:salesforce.startup/presentation/controllers/customer_controller.dart';
+import 'package:salesforce.startup/presentation/controllers/user_data_controller.dart';
+import 'package:salesforce.startup/presentation/controllers/user_data_controller_states.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/header/contactus_panel.dart';
+import 'package:salesforce.startup/presentation/ui/widgets/dialogs/default_dialog.dart';
+import 'package:salesforce.startup/presentation/ui/widgets/dialogs/info_bottomsheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -108,31 +108,24 @@ class ContactusFormScreenState extends State<ContactusFormScreen> {
                         height: Get.width * 0.06,
                       ),
                       Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: Get.width * 0.06),
+                        padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
                         child: Text(
                           'Contact Form'.tr,
-                          style: TextStyle(
-                              fontSize: Get.width * 0.06,
-                              color: MyColors.blue_003E7E),
+                          style: TextStyle(fontSize: Get.width * 0.06, color: MyColors.blue_003E7E),
                         ),
                       ),
                       Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: Get.width * 0.06),
+                        padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
                         child: Text(
                           'Hello_contact'.trParams({'name': 'qwe'}),
-                          style: TextStyle(
-                              fontSize: Get.width * 0.05,
-                              color: MyColors.blue_003E7E),
+                          style: TextStyle(fontSize: Get.width * 0.05, color: MyColors.blue_003E7E),
                         ),
                       ),
                       SizedBox(
                         height: Get.width * 0.08,
                       ),
                       Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: Get.width * 0.06),
+                        padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
                         child: DropdownButton(
                             icon: Icon(Icons.keyboard_arrow_down_sharp),
                             isExpanded: true,
@@ -166,8 +159,7 @@ class ContactusFormScreenState extends State<ContactusFormScreen> {
                         height: Get.width * 0.08,
                       ),
                       Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: Get.width * 0.06),
+                        padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
                         child: Column(
                           children: [
                             Row(
@@ -182,16 +174,12 @@ class ContactusFormScreenState extends State<ContactusFormScreen> {
                               ],
                             ),
                             Container(
-                              decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: MyColors.blue_003E7E)),
+                              decoration: BoxDecoration(border: Border.all(color: MyColors.blue_003E7E)),
                               child: TextField(
-                                onChanged: (value) =>
-                                    setState(() => reasonText = value),
+                                onChanged: (value) => setState(() => reasonText = value),
                                 minLines: 8,
                                 maxLines: 12,
-                                decoration:
-                                    InputDecoration.collapsed(hintText: ''),
+                                decoration: InputDecoration.collapsed(hintText: ''),
                               ),
                             ),
                           ],
@@ -209,13 +197,9 @@ class ContactusFormScreenState extends State<ContactusFormScreen> {
                 child: Container(
                   width: Get.width,
                   alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: MyColors.blue_00458C,
-                      borderRadius: BorderRadius.circular(Get.width * 0.06)),
-                  padding: EdgeInsets.symmetric(
-                      horizontal: Get.width * 0.1, vertical: Get.width * 0.02),
-                  margin: EdgeInsets.symmetric(
-                      horizontal: Get.width * 0.1, vertical: Get.width * 0.03),
+                  decoration: BoxDecoration(color: MyColors.blue_00458C, borderRadius: BorderRadius.circular(Get.width * 0.06)),
+                  padding: EdgeInsets.symmetric(horizontal: Get.width * 0.1, vertical: Get.width * 0.02),
+                  margin: EdgeInsets.symmetric(horizontal: Get.width * 0.1, vertical: Get.width * 0.03),
                   child: Text(
                     'Send'.tr,
                     style: TextStyle(color: Colors.white, fontSize: 22),
@@ -240,10 +224,7 @@ class ContactusFormScreenState extends State<ContactusFormScreen> {
   }) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: Get.width * 0.01),
-      decoration: BoxDecoration(
-          border: Border(
-              bottom: BorderSide(
-                  color: MyColors.blue_003E7E, width: Get.width * 0.003))),
+      decoration: BoxDecoration(border: Border(bottom: BorderSide(color: MyColors.blue_003E7E, width: Get.width * 0.003))),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -257,9 +238,7 @@ class ContactusFormScreenState extends State<ContactusFormScreen> {
           ),
           Text(
             text2,
-            style: TextStyle(
-                fontSize: Get.width * 0.042,
-                color: MyColors.blue_003E7E.withOpacity(0.5)),
+            style: TextStyle(fontSize: Get.width * 0.042, color: MyColors.blue_003E7E.withOpacity(0.5)),
           ),
         ],
       ),
@@ -270,10 +249,7 @@ class ContactusFormScreenState extends State<ContactusFormScreen> {
     return Container(
       height: Get.width * 0.3,
       decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
+          gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
       padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
       child: Column(
         children: [
@@ -286,16 +262,14 @@ class ContactusFormScreenState extends State<ContactusFormScreen> {
                   Get.back();
                 },
                 child: Icon(
-                  Directionality.of(context) == TextDirection.rtl
-                      ? Icons.keyboard_arrow_right
-                      : Icons.keyboard_arrow_left,
+                  Directionality.of(context) == TextDirection.rtl ? Icons.keyboard_arrow_right : Icons.keyboard_arrow_left,
                   color: Colors.white,
                 ),
               ),
               Hero(
                 tag: 'logo',
                 child: Image.asset(
-                  AssetImages.***REMOVED***Logo,
+                  AssetImages.startupLogo,
                   width: Get.width * 0.3,
                 ),
               ),

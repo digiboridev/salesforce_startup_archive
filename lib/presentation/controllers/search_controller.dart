@@ -1,8 +1,8 @@
-import 'package:***REMOVED***/domain/entities/materials/family.dart';
-import 'package:***REMOVED***/domain/entities/materials/material.dart';
-import 'package:***REMOVED***/domain/entities/materials/materials_catalog.dart';
-import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/materials_catalog_states.dart';
+import 'package:salesforce.startup/domain/entities/materials/family.dart';
+import 'package:salesforce.startup/domain/entities/materials/material.dart';
+import 'package:salesforce.startup/domain/entities/materials/materials_catalog.dart';
+import 'package:salesforce.startup/presentation/controllers/materials_catalog_controller.dart';
+import 'package:salesforce.startup/presentation/controllers/materials_catalog_states.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,20 +22,14 @@ class SearchController extends GetxController {
         findedSimilarMaterials.clear();
         return;
       }
-      List<Materiale> finded = getMaterials()
-          .where((element) => element.Name.toLowerCase()
-              .contains(textEditingController.text.toLowerCase()))
-          .toList();
+      List<Materiale> finded = getMaterials().where((element) => element.Name.toLowerCase().contains(textEditingController.text.toLowerCase())).toList();
 
       findedMaterials.value = finded;
 
       if (finded.isEmpty) {
         List<Family> families = getCatalog()?.families ?? [];
 
-        List<Family> findedFams = families
-            .where((element) => element.Display.toLowerCase()
-                .contains(textEditingController.text.toLowerCase()))
-            .toList();
+        List<Family> findedFams = families.where((element) => element.Display.toLowerCase().contains(textEditingController.text.toLowerCase())).toList();
 
         Set<Materiale> findedMaterialsByFam = Set();
 
@@ -53,8 +47,7 @@ class SearchController extends GetxController {
   }
 
   List<Materiale> getMaterials() {
-    MaterialsCatalogState materialsState =
-        materialsCatalogController.materialsCatalogState.value;
+    MaterialsCatalogState materialsState = materialsCatalogController.materialsCatalogState.value;
     if (materialsState is MCSCommon) {
       return materialsState.catalog.materials;
     } else {
@@ -63,8 +56,7 @@ class SearchController extends GetxController {
   }
 
   MaterialsCatalog? getCatalog() {
-    MaterialsCatalogState materialsState =
-        materialsCatalogController.materialsCatalogState.value;
+    MaterialsCatalogState materialsState = materialsCatalogController.materialsCatalogState.value;
     if (materialsState is MCSCommon) {
       return materialsState.catalog;
     } else {

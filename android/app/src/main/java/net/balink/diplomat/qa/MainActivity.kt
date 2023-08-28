@@ -1,4 +1,4 @@
-package ***REMOVED***.qa
+package net.archive.qa
 
 import com.salesforce.flutter.ui.SalesforceFlutterActivity
 import io.flutter.embedding.engine.FlutterEngine

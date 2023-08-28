@@ -1,10 +1,10 @@
-import 'package:***REMOVED***/core/asset_images.dart';
-import 'package:***REMOVED***/core/mycolors.dart';
-import 'package:***REMOVED***/core/languages.dart';
-import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/contactus_panel.dart';
+import 'package:salesforce.startup/core/asset_images.dart';
+import 'package:salesforce.startup/core/mycolors.dart';
+import 'package:salesforce.startup/core/languages.dart';
+import 'package:salesforce.startup/presentation/controllers/customer_controller.dart';
+import 'package:salesforce.startup/presentation/controllers/materials_catalog_controller.dart';
+import 'package:salesforce.startup/presentation/controllers/user_data_controller.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/header/contactus_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -115,8 +115,7 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
                       });
                     },
                     child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(vertical: Get.width * 0.045),
+                        padding: EdgeInsets.symmetric(vertical: Get.width * 0.045),
                         child: Row(
                           children: [
                             selectLanguage == language
@@ -161,10 +160,7 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
                       child: Container(
                         width: Get.width / 2.4,
                         alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: MyColors.gray_EAF2FA,
-                            borderRadius:
-                                BorderRadius.circular(Get.width * 0.06)),
+                        decoration: BoxDecoration(color: MyColors.gray_EAF2FA, borderRadius: BorderRadius.circular(Get.width * 0.06)),
                         padding: EdgeInsets.symmetric(
                           vertical: Get.width * 0.03,
                         ),
@@ -185,12 +181,8 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
                       child: Container(
                         width: Get.width / 2.4,
                         alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: MyColors.blue_00458C,
-                            borderRadius:
-                                BorderRadius.circular(Get.width * 0.06)),
-                        padding:
-                            EdgeInsets.symmetric(vertical: Get.width * 0.03),
+                        decoration: BoxDecoration(color: MyColors.blue_00458C, borderRadius: BorderRadius.circular(Get.width * 0.06)),
+                        padding: EdgeInsets.symmetric(vertical: Get.width * 0.03),
                         child: Text(
                           'Save'.tr,
                           style: TextStyle(
@@ -216,10 +208,7 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
     return Container(
       height: Get.width * 0.3,
       decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
+          gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
       padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
       child: Column(
         children: [
@@ -232,16 +221,14 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
                   Get.back();
                 },
                 child: Icon(
-                  Directionality.of(context) == TextDirection.rtl
-                      ? Icons.keyboard_arrow_right
-                      : Icons.keyboard_arrow_left,
+                  Directionality.of(context) == TextDirection.rtl ? Icons.keyboard_arrow_right : Icons.keyboard_arrow_left,
                   color: Colors.white,
                 ),
               ),
               Hero(
                 tag: 'logo',
                 child: Image.asset(
-                  AssetImages.***REMOVED***Logo,
+                  AssetImages.startupLogo,
                   width: Get.width * 0.3,
                 ),
               ),
@@ -268,8 +255,6 @@ class ChangeLanguagePageState extends State<ChangeLanguagePage> {
   }
 
   void setLanguage() {
-    userDataController
-        .changeLanguage(lang: selectLanguage)
-        .then((value) => materialsCatalogController.loadCatalog());
+    userDataController.changeLanguage(lang: selectLanguage).then((value) => materialsCatalogController.loadCatalog());
   }
 }

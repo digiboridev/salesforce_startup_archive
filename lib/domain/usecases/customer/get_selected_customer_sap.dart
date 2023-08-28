@@ -1,8 +1,7 @@
-import 'package:***REMOVED***/data/repositories/customers_repository.dart';
-import 'package:***REMOVED***/domain/usecases/usecase.dart';
+import 'package:salesforce.startup/data/repositories/customers_repository.dart';
+import 'package:salesforce.startup/domain/usecases/usecase.dart';
 
-class GetSelectedCustomerSAP
-    implements UseCase<String?, GetSelectedCustomerSAPParams> {
+class GetSelectedCustomerSAP implements UseCase<String?, GetSelectedCustomerSAPParams> {
   final CustomersRepository customersRepository;
 
   GetSelectedCustomerSAP(this.customersRepository);
@@ -10,8 +9,7 @@ class GetSelectedCustomerSAP
   @override
   Future<String?> call(params) async {
     try {
-      return await customersRepository.getSelectedCustomerSAP(
-          userId: params.userId);
+      return await customersRepository.getSelectedCustomerSAP(userId: params.userId);
     } catch (e) {
       print(e);
       return null;

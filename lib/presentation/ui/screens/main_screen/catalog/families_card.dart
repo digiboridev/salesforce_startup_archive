@@ -1,6 +1,6 @@
-import 'package:***REMOVED***/core/mycolors.dart';
-import 'package:***REMOVED***/domain/entities/materials/family.dart';
-import 'package:***REMOVED***/domain/services/image_caching_service.dart';
+import 'package:salesforce.startup/core/mycolors.dart';
+import 'package:salesforce.startup/domain/entities/materials/family.dart';
+import 'package:salesforce.startup/domain/services/image_caching_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,9 +22,7 @@ class FamiliesCardState extends State<FamiliesCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(Get.width * 0.04))),
+      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(Get.width * 0.04))),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

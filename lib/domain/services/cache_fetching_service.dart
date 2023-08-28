@@ -1,8 +1,8 @@
 import 'dart:async';
-import 'package:***REMOVED***/domain/entities/auth_data.dart';
-import 'package:***REMOVED***/domain/services/connections_service.dart';
-import 'package:***REMOVED***/domain/services/sf_sdk_service.dart';
-import 'package:***REMOVED***/domain/services/sync.dart';
+import 'package:salesforce.startup/domain/entities/auth_data.dart';
+import 'package:salesforce.startup/domain/services/connections_service.dart';
+import 'package:salesforce.startup/domain/services/sf_sdk_service.dart';
+import 'package:salesforce.startup/domain/services/sync.dart';
 import 'package:get/get.dart';
 
 class CacheUpdateEvent {
@@ -26,8 +26,7 @@ class CacheFetchingService extends GetxService {
   List<CacheUpdateEvent> _cacheUpdateEvents = [];
 
   registerEvent({required CacheUpdateEvent cacheUpdateEvent}) {
-    _cacheUpdateEvents
-        .removeWhere((element) => element.tag == cacheUpdateEvent.tag);
+    _cacheUpdateEvents.removeWhere((element) => element.tag == cacheUpdateEvent.tag);
     _cacheUpdateEvents.add(cacheUpdateEvent);
   }
 

@@ -1,8 +1,8 @@
-import 'package:***REMOVED***/core/asset_images.dart';
-import 'package:***REMOVED***/core/mycolors.dart';
-import 'package:***REMOVED***/presentation/controllers/search_controller.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/mainscreen_header_controller.dart';
-import 'package:***REMOVED***/presentation/ui/widgets/material_card.dart';
+import 'package:salesforce.startup/core/asset_images.dart';
+import 'package:salesforce.startup/core/mycolors.dart';
+import 'package:salesforce.startup/presentation/controllers/search_controller.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/header/mainscreen_header_controller.dart';
+import 'package:salesforce.startup/presentation/ui/widgets/material_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -33,10 +33,7 @@ class SearchScreen extends StatelessWidget {
     return Container(
       height: Get.width * 0.3,
       decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
+          gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
       padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
       child: Column(
         children: [
@@ -49,16 +46,14 @@ class SearchScreen extends StatelessWidget {
                   Get.back();
                 },
                 child: Icon(
-                  Directionality.of(context) == TextDirection.rtl
-                      ? Icons.keyboard_arrow_right
-                      : Icons.keyboard_arrow_left,
+                  Directionality.of(context) == TextDirection.rtl ? Icons.keyboard_arrow_right : Icons.keyboard_arrow_left,
                   color: Colors.white,
                 ),
               ),
               Hero(
                 tag: 'logo',
                 child: Image.asset(
-                  AssetImages.***REMOVED***Logo,
+                  AssetImages.startupLogo,
                   width: Get.width * 0.2,
                 ),
               ),
@@ -88,9 +83,7 @@ class SearchScreen extends StatelessWidget {
         Expanded(
           child: Container(
             height: Get.width * 0.1,
-            decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.8),
-                borderRadius: BorderRadius.circular(Get.width * 0.1)),
+            decoration: BoxDecoration(color: Colors.white.withOpacity(0.8), borderRadius: BorderRadius.circular(Get.width * 0.1)),
             child: Row(
               children: [
                 SizedBox(
@@ -117,8 +110,7 @@ class SearchScreen extends StatelessWidget {
                     alignLabelWithHint: true,
 
                     labelText: 'Search product'.tr,
-                    labelStyle:
-                        TextStyle(color: MyColors.blue_00458C, fontSize: 16),
+                    labelStyle: TextStyle(color: MyColors.blue_00458C, fontSize: 16),
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: InputBorder.none,
                     focusedBorder: InputBorder.none,
@@ -168,14 +160,12 @@ class SearchScreen extends StatelessWidget {
                     height: Get.width * 0.02,
                   ),
                   Obx(() => Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: Get.width * 0.06),
+                        padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             '${'Found'.tr}: ' +
-                                searchController.findedMaterials.length
-                                    .toString() +
+                                searchController.findedMaterials.length.toString() +
                                 ' ${'Results of'.tr} ' +
                                 searchController.textEditingController.text,
                             style: TextStyle(
@@ -196,19 +186,15 @@ class SearchScreen extends StatelessWidget {
                       .toList(),
                 ),
               ),
-            if (searchController.findedMaterials.isEmpty &&
-                searchController.findedSimilarMaterials.isNotEmpty)
+            if (searchController.findedMaterials.isEmpty && searchController.findedSimilarMaterials.isNotEmpty)
               Padding(
                 padding: EdgeInsets.all(Get.width * 0.05),
                 child: Text(
-                  'No results were found for this product but we have similar products'
-                      .tr,
-                  style: TextStyle(
-                      color: Colors.black, fontSize: Get.width * 0.04),
+                  'No results were found for this product but we have similar products'.tr,
+                  style: TextStyle(color: Colors.black, fontSize: Get.width * 0.04),
                 ),
               ),
-            if (searchController.findedMaterials.isEmpty &&
-                searchController.findedSimilarMaterials.isNotEmpty)
+            if (searchController.findedMaterials.isEmpty && searchController.findedSimilarMaterials.isNotEmpty)
               Container(
                 padding: EdgeInsets.symmetric(horizontal: Get.width * 0.05),
                 alignment: Alignment.centerLeft,
@@ -216,17 +202,12 @@ class SearchScreen extends StatelessWidget {
                   searchController
                       .getCatalog()!
                       .families
-                      .firstWhere((element) =>
-                          element.SFId ==
-                          searchController
-                              .findedSimilarMaterials.first.FamilyId)
+                      .firstWhere((element) => element.SFId == searchController.findedSimilarMaterials.first.FamilyId)
                       .Display,
-                  style: TextStyle(
-                      color: Colors.black, fontSize: Get.width * 0.04),
+                  style: TextStyle(color: Colors.black, fontSize: Get.width * 0.04),
                 ),
               ),
-            if (searchController.findedMaterials.isEmpty &&
-                searchController.findedSimilarMaterials.isNotEmpty)
+            if (searchController.findedMaterials.isEmpty && searchController.findedSimilarMaterials.isNotEmpty)
               Expanded(
                 child: ListView(
                   children: searchController.findedSimilarMaterials

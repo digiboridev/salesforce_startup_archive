@@ -1,6 +1,6 @@
-import 'package:***REMOVED***/core/languages.dart';
-import 'package:***REMOVED***/data/repositories/user_data_repository.dart';
-import 'package:***REMOVED***/domain/usecases/usecase.dart';
+import 'package:salesforce.startup/core/languages.dart';
+import 'package:salesforce.startup/data/repositories/user_data_repository.dart';
+import 'package:salesforce.startup/domain/usecases/usecase.dart';
 
 class ChangeLanguage implements UseCase<void, ChangeLanguageParams> {
   final UserDataRepository userDataRepository;

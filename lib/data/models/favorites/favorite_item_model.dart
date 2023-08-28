@@ -1,18 +1,10 @@
 import 'dart:convert';
 
-import 'package:***REMOVED***/domain/entities/favorites/favorite_item.dart';
+import 'package:salesforce.startup/domain/entities/favorites/favorite_item.dart';
 
 class FavoriteItemModel extends FavoriteItem {
-  FavoriteItemModel(
-      {required String materialNumber,
-      required String sFId,
-      required String unit,
-      required num quantity})
-      : super(
-            materialNumber: materialNumber,
-            sFId: sFId,
-            unit: unit,
-            quantity: quantity);
+  FavoriteItemModel({required String materialNumber, required String sFId, required String unit, required num quantity})
+      : super(materialNumber: materialNumber, sFId: sFId, unit: unit, quantity: quantity);
 
   Map<String, dynamic> toMap() {
     return {
@@ -43,6 +35,5 @@ class FavoriteItemModel extends FavoriteItem {
 
   String toJson() => json.encode(toMap());
 
-  factory FavoriteItemModel.fromJson(String source) =>
-      FavoriteItemModel.fromMap(json.decode(source));
+  factory FavoriteItemModel.fromJson(String source) => FavoriteItemModel.fromMap(json.decode(source));
 }

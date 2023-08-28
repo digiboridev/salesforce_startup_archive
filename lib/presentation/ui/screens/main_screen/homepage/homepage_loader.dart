@@ -1,8 +1,8 @@
-import 'package:***REMOVED***/core/asset_images.dart';
-import 'package:***REMOVED***/core/mycolors.dart';
-import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/materials_catalog_states.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/homepage/homepage.dart';
+import 'package:salesforce.startup/core/asset_images.dart';
+import 'package:salesforce.startup/core/mycolors.dart';
+import 'package:salesforce.startup/presentation/controllers/materials_catalog_controller.dart';
+import 'package:salesforce.startup/presentation/controllers/materials_catalog_states.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/homepage/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,8 +13,7 @@ class HomepageLoader extends StatefulWidget {
   State<HomepageLoader> createState() => _HomepageLoaderState();
 }
 
-class _HomepageLoaderState extends State<HomepageLoader>
-    with AutomaticKeepAliveClientMixin {
+class _HomepageLoaderState extends State<HomepageLoader> with AutomaticKeepAliveClientMixin {
   final MaterialsCatalogController materialsCatalogController = Get.find();
 
   @override
@@ -29,8 +28,7 @@ class _HomepageLoaderState extends State<HomepageLoader>
   Widget build(BuildContext context) {
     super.build(context);
     return Obx(() {
-      MaterialsCatalogState state =
-          materialsCatalogController.materialsCatalogState.value;
+      MaterialsCatalogState state = materialsCatalogController.materialsCatalogState.value;
 
       if (state is MCSCommon) {
         return HomePage(

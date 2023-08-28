@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:***REMOVED***/domain/entities/materials/classification.dart';
+import 'package:salesforce.startup/domain/entities/materials/classification.dart';
 
 class ClassificationModel extends Classification {
   ClassificationModel({
@@ -34,6 +34,5 @@ class ClassificationModel extends Classification {
 
   String toJson() => json.encode(toMap());
 
-  factory ClassificationModel.fromJson(String source) =>
-      ClassificationModel.fromMap(json.decode(source));
+  factory ClassificationModel.fromJson(String source) => ClassificationModel.fromMap(json.decode(source));
 }

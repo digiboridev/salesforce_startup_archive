@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:***REMOVED***/data/models/materials/scales_model.dart';
-import 'package:***REMOVED***/domain/entities/materials/pricing.dart';
+import 'package:salesforce.startup/data/models/materials/scales_model.dart';
+import 'package:salesforce.startup/domain/entities/materials/pricing.dart';
 
 class PricingModel extends Pricing {
   @override
@@ -47,8 +47,7 @@ class PricingModel extends Pricing {
       MaterialId: map['MaterialId'],
       IsPercentage: map['IsPercentage'],
       HasScale: map['HasScale'],
-      scales: List<ScalesModel>.from(
-          map['Scales'].map((x) => ScalesModel.fromMap(x))),
+      scales: List<ScalesModel>.from(map['Scales'].map((x) => ScalesModel.fromMap(x))),
     );
   }
 
@@ -67,6 +66,5 @@ class PricingModel extends Pricing {
 
   String toJson() => json.encode(toMap());
 
-  factory PricingModel.fromJson(String source) =>
-      PricingModel.fromMap(json.decode(source));
+  factory PricingModel.fromJson(String source) => PricingModel.fromMap(json.decode(source));
 }

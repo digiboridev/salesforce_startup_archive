@@ -1,6 +1,6 @@
-import 'package:***REMOVED***/core/mycolors.dart';
-import 'package:***REMOVED***/domain/entities/related_consumer.dart';
-import 'package:***REMOVED***/domain/services/location_service.dart';
+import 'package:salesforce.startup/core/mycolors.dart';
+import 'package:salesforce.startup/domain/entities/related_consumer.dart';
+import 'package:salesforce.startup/domain/services/location_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -27,9 +27,7 @@ class RelatedCustomerTile extends StatelessWidget {
         onTap: () => ontap(),
         child: Container(
             padding: EdgeInsets.all(Get.width * 0.04),
-            decoration: BoxDecoration(
-                color: MyColors.blue_0250A0,
-                borderRadius: BorderRadius.circular(Get.width * 0.02)),
+            decoration: BoxDecoration(color: MyColors.blue_0250A0, borderRadius: BorderRadius.circular(Get.width * 0.02)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -87,8 +85,7 @@ class RelatedCustomerTile extends StatelessWidget {
                       width: Get.width * 0.01,
                     ),
                     Text(
-                      DateFormat('dd/MM/yyyy').format(
-                          DateTime.parse(relatedConsumer.lastOrderDate)),
+                      DateFormat('dd/MM/yyyy').format(DateTime.parse(relatedConsumer.lastOrderDate)),
                       style: TextStyle(color: Colors.white),
                     ),
                   ],
@@ -112,11 +109,7 @@ class RelatedCustomerTile extends StatelessWidget {
                       ),
                       Text(
                         relatedConsumer
-                            .distanceTo(
-                                lattitude:
-                                    locationService.lastPosition!.latitude,
-                                longtitude:
-                                    locationService.lastPosition!.longitude)
+                            .distanceTo(lattitude: locationService.lastPosition!.latitude, longtitude: locationService.lastPosition!.longitude)
                             .toStringAsFixed(2),
                         style: TextStyle(color: Colors.white),
                       ),

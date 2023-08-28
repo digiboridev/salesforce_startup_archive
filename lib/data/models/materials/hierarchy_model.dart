@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:***REMOVED***/domain/entities/materials/hierarchy.dart';
+import 'package:salesforce.startup/domain/entities/materials/hierarchy.dart';
 
 class HierarchyModel extends Hierarchy {
   HierarchyModel({
@@ -30,6 +30,5 @@ class HierarchyModel extends Hierarchy {
 
   String toJson() => json.encode(toMap());
 
-  factory HierarchyModel.fromJson(String source) =>
-      HierarchyModel.fromMap(json.decode(source));
+  factory HierarchyModel.fromJson(String source) => HierarchyModel.fromMap(json.decode(source));
 }

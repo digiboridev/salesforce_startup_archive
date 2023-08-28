@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:***REMOVED***/domain/entities/materials/family.dart';
+import 'package:salesforce.startup/domain/entities/materials/family.dart';
 
 class FamilyModel extends Family {
   FamilyModel({
@@ -8,11 +8,7 @@ class FamilyModel extends Family {
     required int IndexNumber,
     required String ImageUrl,
     required String Display,
-  }) : super(
-            SFId: SFId,
-            IndexNumber: IndexNumber,
-            ImageUrl: ImageUrl,
-            Display: Display);
+  }) : super(SFId: SFId, IndexNumber: IndexNumber, ImageUrl: ImageUrl, Display: Display);
 
   Map<String, dynamic> toMap() {
     return {
@@ -43,6 +39,5 @@ class FamilyModel extends Family {
 
   String toJson() => json.encode(toMap());
 
-  factory FamilyModel.fromJson(String source) =>
-      FamilyModel.fromMap(json.decode(source));
+  factory FamilyModel.fromJson(String source) => FamilyModel.fromMap(json.decode(source));
 }

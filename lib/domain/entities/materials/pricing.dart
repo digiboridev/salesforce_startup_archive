@@ -1,4 +1,4 @@
-import 'package:***REMOVED***/domain/entities/materials/scales.dart';
+import 'package:salesforce.startup/domain/entities/materials/scales.dart';
 import 'package:equatable/equatable.dart';
 
 class Pricing extends Equatable {

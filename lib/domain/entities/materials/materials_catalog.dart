@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
-import 'package:***REMOVED***/domain/entities/materials/brand.dart';
-import 'package:***REMOVED***/domain/entities/materials/classification.dart';
-import 'package:***REMOVED***/domain/entities/materials/family.dart';
-import 'package:***REMOVED***/domain/entities/materials/hierarchy.dart';
-import 'package:***REMOVED***/domain/entities/materials/material.dart';
+import 'package:salesforce.startup/domain/entities/materials/brand.dart';
+import 'package:salesforce.startup/domain/entities/materials/classification.dart';
+import 'package:salesforce.startup/domain/entities/materials/family.dart';
+import 'package:salesforce.startup/domain/entities/materials/hierarchy.dart';
+import 'package:salesforce.startup/domain/entities/materials/material.dart';
 
 class MaterialsCatalog extends Equatable {
   final List<Materiale> materials;

@@ -1,6 +1,6 @@
 abstract class AssetImages {
   static String get contactButton => 'assets/icons/contact.png';
-  static String get ***REMOVED***Logo => 'assets/images/***REMOVED***_logo.png';
+  static String get startupLogo => 'assets/images/startup_logo.png';
   static String get bottombar => 'assets/images/bottombar.png';
   static String get plus => 'assets/icons/plus.png';
   static String get minus => 'assets/icons/minus.png';
@@ -36,8 +36,7 @@ abstract class AssetImages {
   static String get favorites_sort => 'assets/icons/favorites_sort.png';
   static String get deleted_list => 'assets/icons/deleted_list.png';
   static String get no_products => 'assets/icons/no_products.png';
-  static String get favorite_no_product =>
-      'assets/icons/favorite_no_product.png';
+  static String get favorite_no_product => 'assets/icons/favorite_no_product.png';
   static String get have_new_list => 'assets/icons/have_new_list.png';
 
   static String get info => 'assets/icons/info.png';

@@ -2,6 +2,6 @@
 <servers>
 
     <!--UAT-->
-    <server name="Costumer Community (QA)" url="https://***REMOVED***" />
+    <server name="Costumer Community (QA)" url="https://qa.sf.api" />
 
 </servers>

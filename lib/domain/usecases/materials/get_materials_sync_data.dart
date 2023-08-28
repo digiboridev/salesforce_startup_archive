@@ -1,6 +1,6 @@
-import 'package:***REMOVED***/data/models/sync_data.dart';
-import 'package:***REMOVED***/data/repositories/materials_repository.dart';
-import 'package:***REMOVED***/domain/usecases/usecase.dart';
+import 'package:salesforce.startup/data/models/sync_data.dart';
+import 'package:salesforce.startup/data/repositories/materials_repository.dart';
+import 'package:salesforce.startup/domain/usecases/usecase.dart';
 
 class GetMaterialsSyncData implements UseCase<SyncData, String> {
   final MaterialsRepository materialsRepository;
@@ -9,8 +9,7 @@ class GetMaterialsSyncData implements UseCase<SyncData, String> {
 
   @override
   Future<SyncData> call(customerSAP) async {
-    SyncData d = await materialsRepository.getMaterialsSyncData(
-        customerSAP: customerSAP);
+    SyncData d = await materialsRepository.getMaterialsSyncData(customerSAP: customerSAP);
     return d;
   }
 }

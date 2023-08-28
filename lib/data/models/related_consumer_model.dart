@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:***REMOVED***/domain/entities/related_consumer.dart';
+import 'package:salesforce.startup/domain/entities/related_consumer.dart';
 
 class RelatedConsumerModel extends RelatedConsumer {
   RelatedConsumerModel({

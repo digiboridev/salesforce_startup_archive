@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="account_type">***REMOVED***.qa.login</string>
+    <string name="account_type">net.archive.qa.login</string>
     <string name="app_name"><b>Diplomat</b></string>
-    <string name="app_package">***REMOVED***.qa</string>
+    <string name="app_package">net.archive.qa</string>
 </resources>

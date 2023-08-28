@@ -1,7 +1,7 @@
-import 'package:***REMOVED***/data/datasouces/contact_us_local_datasource.dart';
-import 'package:***REMOVED***/data/datasouces/contact_us_remote_datasource.dart';
-import 'package:***REMOVED***/data/models/contact_us_data_model.dart';
-import 'package:***REMOVED***/domain/entities/contact_us_data.dart';
+import 'package:salesforce.startup/data/datasouces/contact_us_local_datasource.dart';
+import 'package:salesforce.startup/data/datasouces/contact_us_remote_datasource.dart';
+import 'package:salesforce.startup/data/models/contact_us_data_model.dart';
+import 'package:salesforce.startup/domain/entities/contact_us_data.dart';
 
 abstract class ContactUsRepository {
   Future<ContactUsData> get getRemoteContactUs;
@@ -19,15 +19,12 @@ class ContactUsRepositoryImpl implements ContactUsRepository {
   });
 
   @override
-  Future<ContactUsData> get getRemoteContactUs =>
-      contactUsRemoteDatasource.getContactUs;
+  Future<ContactUsData> get getRemoteContactUs => contactUsRemoteDatasource.getContactUs;
 
   @override
-  Future<ContactUsData> get getLocalContactUs =>
-      contactUsLocalDatasource.getContactUs;
+  Future<ContactUsData> get getLocalContactUs => contactUsLocalDatasource.getContactUs;
 
   @override
   Future setLocalContactUs({required ContactUsData contactUsData}) =>
-      contactUsLocalDatasource.setContactUs(
-          contactUsataModel: ContactUsataModel.fromEntity(contactUsData));
+      contactUsLocalDatasource.setContactUs(contactUsataModel: ContactUsataModel.fromEntity(contactUsData));
 }

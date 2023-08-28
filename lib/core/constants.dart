@@ -1,3 +1,3 @@
-String ***REMOVED***Endpoint = '***REMOVED***';
-String ***REMOVED*** = '***REMOVED***';
-String ***REMOVED*** = '/services/apexrest';
+String startupEndpoint = '/services/apexrest/startup';
+String startupServer = 'qa.sf.api';
+String startupPubServer = '/services/apexrest';

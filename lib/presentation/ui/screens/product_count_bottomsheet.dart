@@ -1,9 +1,9 @@
-import 'package:***REMOVED***/core/asset_images.dart';
+import 'package:salesforce.startup/core/asset_images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:***REMOVED***/core/mycolors.dart';
-import 'package:***REMOVED***/domain/entities/materials/material.dart';
-import 'package:***REMOVED***/domain/entities/materials/unit_types.dart';
+import 'package:salesforce.startup/core/mycolors.dart';
+import 'package:salesforce.startup/domain/entities/materials/material.dart';
+import 'package:salesforce.startup/domain/entities/materials/unit_types.dart';
 
 class ProductCountBottomSheet extends StatefulWidget {
   final Materiale material;
@@ -25,8 +25,7 @@ class ProductCountBottomSheetState extends State<ProductCountBottomSheet> {
 
   @override
   void initState() {
-    textEditingController =
-        TextEditingController(text: widget.initialCount.toString());
+    textEditingController = TextEditingController(text: widget.initialCount.toString());
 
     unitType = widget.initialUnitType;
     super.initState();
@@ -48,8 +47,7 @@ class ProductCountBottomSheetState extends State<ProductCountBottomSheet> {
             child: Container(
               height: Get.width * 0.1,
               width: Get.width * 0.1,
-              decoration:
-                  BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+              decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white),
               child: Icon(
                 Icons.clear,
                 color: MyColors.gray_979797,
@@ -60,50 +58,32 @@ class ProductCountBottomSheetState extends State<ProductCountBottomSheet> {
               width: Get.width,
               decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(Get.width * 0.05),
-                      topLeft: Radius.circular(Get.width * 0.05))),
+                  borderRadius: BorderRadius.only(topRight: Radius.circular(Get.width * 0.05), topLeft: Radius.circular(Get.width * 0.05))),
               child: Column(
                 children: [
                   Column(
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(
-                            left: Get.width * 0.1,
-                            right: Get.width * 0.1,
-                            top: Get.width * 0.05),
+                        padding: EdgeInsets.only(left: Get.width * 0.1, right: Get.width * 0.1, top: Get.width * 0.05),
                         child: Text(
                           "${widget.material.Name}",
-                          style: TextStyle(
-                              fontSize: 20, color: MyColors.blue_00458C),
+                          style: TextStyle(fontSize: 20, color: MyColors.blue_00458C),
                         ),
                       ),
                       Container(
                         alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: MyColors.blue_E8EEF6,
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(Get.width * 0.06))),
+                        decoration: BoxDecoration(color: MyColors.blue_E8EEF6, borderRadius: BorderRadius.all(Radius.circular(Get.width * 0.06))),
                         height: 52,
-                        margin: EdgeInsets.only(
-                            left: Get.width * 0.05,
-                            right: Get.width * 0.05,
-                            top: Get.width * 0.05,
-                            bottom: Get.width * 0.05),
+                        margin: EdgeInsets.only(left: Get.width * 0.05, right: Get.width * 0.05, top: Get.width * 0.05, bottom: Get.width * 0.05),
                         child: Row(
-                          children:
-                              widget.material.avaliableUnitTtypes.map((e) {
+                          children: widget.material.avaliableUnitTtypes.map((e) {
                             return InkWell(
                                 onTap: () {
                                   setState(() {
-                                    unitType = UnitType.fromSalesUnit(
-                                        e.salesUnitString);
+                                    unitType = UnitType.fromSalesUnit(e.salesUnitString);
                                   });
                                 },
-                                child: boxTypes(
-                                    text: "${e.text.tr}",
-                                    isSelect:
-                                        e.runtimeType == unitType.runtimeType));
+                                child: boxTypes(text: "${e.text.tr}", isSelect: e.runtimeType == unitType.runtimeType));
                           }).toList(),
                         ),
                       ),
@@ -113,12 +93,10 @@ class ProductCountBottomSheetState extends State<ProductCountBottomSheet> {
                         children: [
                           InkWell(
                             onTap: () {
-                              int currentCount =
-                                  int.tryParse(textEditingController.text) ?? 0;
+                              int currentCount = int.tryParse(textEditingController.text) ?? 0;
                               ++currentCount;
 
-                              textEditingController.text =
-                                  currentCount.toString();
+                              textEditingController.text = currentCount.toString();
                             },
                             child: Container(
                               child: Image.asset(
@@ -131,9 +109,7 @@ class ProductCountBottomSheetState extends State<ProductCountBottomSheet> {
                           Container(
                               alignment: Alignment.center,
                               width: Get.width * 0.65,
-                              padding: EdgeInsets.only(
-                                  left: Get.width * 0.1,
-                                  right: Get.width * 0.1),
+                              padding: EdgeInsets.only(left: Get.width * 0.1, right: Get.width * 0.1),
                               height: 76,
                               child: TextFormField(
                                 keyboardType: TextInputType.number,
@@ -145,28 +121,20 @@ class ProductCountBottomSheetState extends State<ProductCountBottomSheet> {
                                 maxLength: 3,
                                 textAlign: TextAlign.center,
                                 controller: textEditingController,
-                                style: TextStyle(
-                                    fontSize: Get.width * 0.2,
-                                    color: MyColors.blue_00458C),
+                                style: TextStyle(fontSize: Get.width * 0.2, color: MyColors.blue_00458C),
                                 decoration: InputDecoration(
-                                    counterText: '',
-                                    contentPadding: EdgeInsets.zero,
-                                    border: InputBorder.none,
-                                    enabledBorder: null,
-                                    disabledBorder: null),
+                                    counterText: '', contentPadding: EdgeInsets.zero, border: InputBorder.none, enabledBorder: null, disabledBorder: null),
                                 // initialValue: ,
                               )),
                           InkWell(
                             onTap: () {
-                              int currentCount =
-                                  int.tryParse(textEditingController.text) ?? 0;
+                              int currentCount = int.tryParse(textEditingController.text) ?? 0;
 
                               if (currentCount > 0) {
                                 --currentCount;
                               }
 
-                              textEditingController.text =
-                                  currentCount.toString();
+                              textEditingController.text = currentCount.toString();
                             },
                             child: Container(
                               child: Image.asset(
@@ -179,18 +147,12 @@ class ProductCountBottomSheetState extends State<ProductCountBottomSheet> {
                         ],
                       ),
                       Container(
-                        margin: EdgeInsets.only(
-                            left: Get.width * 0.1,
-                            right: Get.width * 0.1,
-                            top: Get.width * 0.03),
+                        margin: EdgeInsets.only(left: Get.width * 0.1, right: Get.width * 0.1, top: Get.width * 0.03),
                         color: MyColors.blue_00458C,
                         height: 1,
                       ),
                       Padding(
-                          padding: EdgeInsets.only(
-                              top: Get.width * 0.03,
-                              left: Get.width * 0.1,
-                              right: Get.width * 0.1),
+                          padding: EdgeInsets.only(top: Get.width * 0.03, left: Get.width * 0.1, right: Get.width * 0.1),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -198,15 +160,10 @@ class ProductCountBottomSheetState extends State<ProductCountBottomSheet> {
                               Row(children: [
                                 Text(
                                   "${'Quantity'.tr} ",
-                                  style: TextStyle(
-                                      fontSize: 17,
-                                      color: MyColors.blue_0050A2),
+                                  style: TextStyle(fontSize: 17, color: MyColors.blue_0050A2),
                                 ),
-                                Text(
-                                    "${widget.material.countByUnitType(unitType).toString().tr} ${'units in'.tr} ${unitType.text.tr}",
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        color: MyColors.blue_0571E0)),
+                                Text("${widget.material.countByUnitType(unitType).toString().tr} ${'units in'.tr} ${unitType.text.tr}",
+                                    style: TextStyle(fontSize: 20, color: MyColors.blue_0571E0)),
                               ]),
                               InkWell(
                                   onTap: () {
@@ -214,10 +171,7 @@ class ProductCountBottomSheetState extends State<ProductCountBottomSheet> {
                                   },
                                   child: Text(
                                     "Zero".tr,
-                                    style: TextStyle(
-                                        color: MyColors.gray_707070,
-                                        decoration: TextDecoration.underline,
-                                        fontSize: 20),
+                                    style: TextStyle(color: MyColors.gray_707070, decoration: TextDecoration.underline, fontSize: 20),
                                   ))
                             ],
                           )),
@@ -226,9 +180,7 @@ class ProductCountBottomSheetState extends State<ProductCountBottomSheet> {
                   Spacer(),
                   InkWell(
                     onTap: () {
-                      Get.back(result: {
-                        unitType: int.tryParse(textEditingController.text) ?? 0
-                      });
+                      Get.back(result: {unitType: int.tryParse(textEditingController.text) ?? 0});
                     },
                     child: Container(
                       alignment: Alignment.center,
@@ -253,19 +205,12 @@ class ProductCountBottomSheetState extends State<ProductCountBottomSheet> {
         ? Container(
             width: Get.width * 0.225,
             alignment: Alignment.center,
-            decoration: BoxDecoration(
-                color: MyColors.blue_003E7E,
-                borderRadius:
-                    BorderRadius.all(Radius.circular(Get.width * 0.06))),
+            decoration: BoxDecoration(color: MyColors.blue_003E7E, borderRadius: BorderRadius.all(Radius.circular(Get.width * 0.06))),
             child: Text(
               text,
               style: TextStyle(color: Colors.white),
             ),
           )
-        : Container(
-            width: Get.width * 0.225,
-            alignment: Alignment.center,
-            height: 52,
-            child: Text(text));
+        : Container(width: Get.width * 0.225, alignment: Alignment.center, height: 52, child: Text(text));
   }
 }

@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import 'package:***REMOVED***/core/mycolors.dart';
-import 'package:***REMOVED***/presentation/ui/widgets/loaders/points_loader.dart';
+import 'package:salesforce.startup/core/mycolors.dart';
+import 'package:salesforce.startup/presentation/ui/widgets/loaders/points_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,8 +16,6 @@ defaultDialog() => Get.defaultDialog(
       filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
       child: Container(
           alignment: Alignment.center,
-          decoration: BoxDecoration(
-              color: MyColors.blue_00458C,
-              borderRadius: BorderRadius.all(Radius.circular(15))),
+          decoration: BoxDecoration(color: MyColors.blue_00458C, borderRadius: BorderRadius.all(Radius.circular(15))),
           child: Center(child: PointsLoader(points_color: Colors.white))),
     ));

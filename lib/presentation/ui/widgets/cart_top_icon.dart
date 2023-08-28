@@ -1,5 +1,5 @@
-import 'package:***REMOVED***/core/asset_images.dart';
-import 'package:***REMOVED***/core/mycolors.dart';
+import 'package:salesforce.startup/core/asset_images.dart';
+import 'package:salesforce.startup/core/mycolors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -33,8 +33,7 @@ class CartTopIconState extends State<CartTopIcon> {
 
   Widget getFavorite() {
     return Padding(
-        padding:
-            EdgeInsets.only(left: Get.width * 0.03, right: Get.width * 0.03),
+        padding: EdgeInsets.only(left: Get.width * 0.03, right: Get.width * 0.03),
         child: Image.asset(
           AssetImages.favorite,
         ));
@@ -42,8 +41,7 @@ class CartTopIconState extends State<CartTopIcon> {
 
   Widget getFavoriteSelect() {
     return Padding(
-        padding:
-            EdgeInsets.only(left: Get.width * 0.02, right: Get.width * 0.02),
+        padding: EdgeInsets.only(left: Get.width * 0.02, right: Get.width * 0.02),
         child: Image.asset(
           AssetImages.favorite_select,
         ));
@@ -51,11 +49,8 @@ class CartTopIconState extends State<CartTopIcon> {
 
   Widget getClose() {
     return Container(
-      decoration: BoxDecoration(
-          border: Border.all(color: MyColors.blue_00458C),
-          shape: BoxShape.circle),
-      child: Padding(
-          padding: EdgeInsets.all(7), child: Image.asset(AssetImages.close)),
+      decoration: BoxDecoration(border: Border.all(color: MyColors.blue_00458C), shape: BoxShape.circle),
+      child: Padding(padding: EdgeInsets.all(7), child: Image.asset(AssetImages.close)),
     );
   }
 

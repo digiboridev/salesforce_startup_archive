@@ -1,12 +1,12 @@
-import 'package:***REMOVED***/core/mycolors.dart';
-import 'package:***REMOVED***/domain/entities/materials/material.dart';
-import 'package:***REMOVED***/domain/entities/materials/materials_catalog.dart';
-import 'package:***REMOVED***/domain/services/connections_service.dart';
-import 'package:***REMOVED***/domain/services/image_caching_service.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar_controller.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalog_page_controller.dart';
-import 'package:***REMOVED***/presentation/ui/screens/material_screen.dart';
-import 'package:***REMOVED***/presentation/ui/widgets/material_card.dart';
+import 'package:salesforce.startup/core/mycolors.dart';
+import 'package:salesforce.startup/domain/entities/materials/material.dart';
+import 'package:salesforce.startup/domain/entities/materials/materials_catalog.dart';
+import 'package:salesforce.startup/domain/services/connections_service.dart';
+import 'package:salesforce.startup/domain/services/image_caching_service.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/bottombar/bottom_bar_controller.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/catalog/catalog_page_controller.dart';
+import 'package:salesforce.startup/presentation/ui/screens/material_screen.dart';
+import 'package:salesforce.startup/presentation/ui/widgets/material_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -35,27 +35,19 @@ class _HomePageState extends State<HomePage> {
   }
 
   List<Materiale> get getRecomendedProducts {
-    return widget.materialsCatalog.materials
-        .where((element) => element.IsRecommended)
-        .toList();
+    return widget.materialsCatalog.materials.where((element) => element.IsRecommended).toList();
   }
 
   List<Materiale> get getMissingProducts {
-    return widget.materialsCatalog.materials
-        .where((element) => element.RecommendationType == 5)
-        .toList();
+    return widget.materialsCatalog.materials.where((element) => element.RecommendationType == 5).toList();
   }
 
   List<Materiale> get getNewProducts {
-    return widget.materialsCatalog.materials
-        .where((element) => element.IsNew)
-        .toList();
+    return widget.materialsCatalog.materials.where((element) => element.IsNew).toList();
   }
 
   List<Materiale> get getDeals {
-    return widget.materialsCatalog.materials
-        .where((element) => element.IsHotSale)
-        .toList();
+    return widget.materialsCatalog.materials.where((element) => element.IsHotSale).toList();
   }
 
   goToRecomended() async {
@@ -119,11 +111,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       Text(
                         'All recomended'.tr,
-                        style: TextStyle(
-                            decoration: TextDecoration.underline,
-                            fontSize: Get.width * 0.045,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.blue),
+                        style: TextStyle(decoration: TextDecoration.underline, fontSize: Get.width * 0.045, fontWeight: FontWeight.w500, color: Colors.blue),
                       ),
                     ],
                   )),
@@ -194,8 +182,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget buildDeals(
-      {required List<Materiale> materials, required Widget header}) {
+  Widget buildDeals({required List<Materiale> materials, required Widget header}) {
     buildDealsCard(materiale: materials[dealsPosition]);
     return Container(
         color: Colors.white,
@@ -228,16 +215,12 @@ class _HomePageState extends State<HomePage> {
                         return Column(
                           children: [
                             Container(
-                                padding: EdgeInsets.only(
-                                    left: Get.width * 0.02,
-                                    right: Get.width * 0.02,
-                                    top: Get.width * 0.02),
+                                padding: EdgeInsets.only(left: Get.width * 0.02, right: Get.width * 0.02, top: Get.width * 0.02),
                                 width: Get.width / 4,
                                 child: InkWell(
                                     onTap: () {
                                       dealsPosition = index;
-                                      buildDealsCard(
-                                          materiale: materials[index]);
+                                      buildDealsCard(materiale: materials[index]);
                                       setState(() {
                                         dealsPosition;
                                         dealsCard;
@@ -248,31 +231,16 @@ class _HomePageState extends State<HomePage> {
                                       width: Get.width * 0.2,
                                       decoration: BoxDecoration(
                                           border: dealsPosition == index
-                                              ? Border.all(
-                                                  color: MyColors.blue_00458C)
-                                              : Border.all(
-                                                  color: MyColors.blue_00458C
-                                                      .withAlpha(0)),
+                                              ? Border.all(color: MyColors.blue_00458C)
+                                              : Border.all(color: MyColors.blue_00458C.withAlpha(0)),
                                           color: Colors.white,
-                                          borderRadius: BorderRadius.circular(
-                                              Get.width * 0.02),
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: Colors.black
-                                                    .withOpacity(0.15),
-                                                blurRadius: Get.width * 0.01,
-                                                spreadRadius: 1)
-                                          ]),
+                                          borderRadius: BorderRadius.circular(Get.width * 0.02),
+                                          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.15), blurRadius: Get.width * 0.01, spreadRadius: 1)]),
                                       child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
-                                          CachedImage(
-                                              Url: materials[index].ImageUrl,
-                                              width: Get.width * 0.15,
-                                              height: Get.width * 0.15),
+                                          CachedImage(Url: materials[index].ImageUrl, width: Get.width * 0.15, height: Get.width * 0.15),
                                         ],
                                       ),
                                     ))),
@@ -283,8 +251,7 @@ class _HomePageState extends State<HomePage> {
                                     child: Container(
                                       width: 15,
                                       height: 10,
-                                      decoration: BoxDecoration(
-                                          color: MyColors.blue_00458C),
+                                      decoration: BoxDecoration(color: MyColors.blue_00458C),
                                     )))
                           ],
                         );
@@ -298,19 +265,13 @@ class _HomePageState extends State<HomePage> {
 
   void buildDealsCard({required Materiale materiale}) {
     dealsCard = Container(
-        decoration: BoxDecoration(boxShadow: [
-          BoxShadow(
-              color: Colors.black.withOpacity(0.05),
-              blurRadius: Get.width * 0.07,
-              spreadRadius: 1)
-        ]),
+        decoration: BoxDecoration(boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: Get.width * 0.07, spreadRadius: 1)]),
         child: MaterialCard(
           materiale: materiale,
         ));
   }
 
-  Widget buildIItemsRow(
-      {required List<Materiale> materials, required Widget header}) {
+  Widget buildIItemsRow({required List<Materiale> materials, required Widget header}) {
     return Container(
       color: Colors.white,
       child: Column(
@@ -350,17 +311,10 @@ class _HomePageState extends State<HomePage> {
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(Get.width * 0.02),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black.withOpacity(0.15),
-                              blurRadius: Get.width * 0.03)
-                        ]),
+                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.15), blurRadius: Get.width * 0.03)]),
                     child: Column(
                       children: [
-                        CachedImage(
-                            Url: e.ImageUrl,
-                            width: Get.width * 0.3,
-                            height: Get.width * 0.3),
+                        CachedImage(Url: e.ImageUrl, width: Get.width * 0.3, height: Get.width * 0.3),
                         Expanded(
                             child: Center(
                           child: Padding(
@@ -368,9 +322,7 @@ class _HomePageState extends State<HomePage> {
                             child: Text(
                               e.Name,
                               textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: Get.width * 0.035,
-                                  color: MyColors.blue_0050A2),
+                              style: TextStyle(fontSize: Get.width * 0.035, color: MyColors.blue_0050A2),
                             ),
                           ),
                         ))

@@ -1,6 +1,6 @@
-import 'package:***REMOVED***/data/repositories/cart_repository.dart';
-import 'package:***REMOVED***/domain/entities/cart_item.dart';
-import 'package:***REMOVED***/domain/usecases/usecase.dart';
+import 'package:salesforce.startup/data/repositories/cart_repository.dart';
+import 'package:salesforce.startup/domain/entities/cart_item.dart';
+import 'package:salesforce.startup/domain/usecases/usecase.dart';
 
 class SetCartItems implements UseCase<void, SetCartItemsParams> {
   final CartRepository cartRepository;
@@ -8,8 +8,7 @@ class SetCartItems implements UseCase<void, SetCartItemsParams> {
 
   @override
   Future<void> call(SetCartItemsParams params) async {
-    await cartRepository.setItemsByCustomer(
-        customerSAP: params.customerSAP, items: params.items);
+    await cartRepository.setItemsByCustomer(customerSAP: params.customerSAP, items: params.items);
   }
 }
 

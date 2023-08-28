@@ -1,10 +1,9 @@
-import 'package:***REMOVED***/core/errors.dart';
-import 'package:***REMOVED***/data/repositories/favorites_repository.dart';
-import 'package:***REMOVED***/domain/entities/favorites/favorite_list.dart';
-import 'package:***REMOVED***/domain/usecases/usecase.dart';
+import 'package:salesforce.startup/core/errors.dart';
+import 'package:salesforce.startup/data/repositories/favorites_repository.dart';
+import 'package:salesforce.startup/domain/entities/favorites/favorite_list.dart';
+import 'package:salesforce.startup/domain/usecases/usecase.dart';
 
-class GetFavoritesAndCache
-    implements UseCase<List<FavoriteList>, GetFavoritesAndCacheParams> {
+class GetFavoritesAndCache implements UseCase<List<FavoriteList>, GetFavoritesAndCacheParams> {
   final FavoritesRepository favoritesRepository;
 
   GetFavoritesAndCache(this.favoritesRepository);
@@ -13,15 +12,11 @@ class GetFavoritesAndCache
   Future<List<FavoriteList>> call(GetFavoritesAndCacheParams params) async {
     if (params.hasConnection) {
       try {
-        List<FavoriteList> remoteFavoriteLists = await favoritesRepository
-            .getFavoritesListRemote(customerSAP: params.customerSAP);
+        List<FavoriteList> remoteFavoriteLists = await favoritesRepository.getFavoritesListRemote(customerSAP: params.customerSAP);
 
-        favoritesRepository.setFavoritesListsLocal(
-            customerSAP: params.customerSAP,
-            favoriteslists: remoteFavoriteLists);
+        favoritesRepository.setFavoritesListsLocal(customerSAP: params.customerSAP, favoriteslists: remoteFavoriteLists);
 
-        favoritesRepository.setFavoritesSyncTime(
-            customerSAP: params.customerSAP, dateTime: DateTime.now());
+        favoritesRepository.setFavoritesSyncTime(customerSAP: params.customerSAP, dateTime: DateTime.now());
         return remoteFavoriteLists;
       } catch (e) {
         return _loadCache(customerSAP: params.customerSAP);
@@ -33,18 +28,15 @@ class GetFavoritesAndCache
 
   Future<List<FavoriteList>> _loadCache({required String customerSAP}) async {
     if (await _cacheUpToDate(customerSAP: customerSAP)) {
-      return favoritesRepository.getFavoritesListLocal(
-          customerSAP: customerSAP);
+      return favoritesRepository.getFavoritesListLocal(customerSAP: customerSAP);
     } else {
-      throw InternalException(
-          'Unable to load favorites list for consumer $customerSAP');
+      throw InternalException('Unable to load favorites list for consumer $customerSAP');
     }
   }
 
   Future<bool> _cacheUpToDate({required String customerSAP}) async {
     try {
-      DateTime lastSync = await favoritesRepository.getFavoritesSyncTime(
-          customerSAP: customerSAP);
+      DateTime lastSync = await favoritesRepository.getFavoritesSyncTime(customerSAP: customerSAP);
       Duration diff = DateTime.now().difference(lastSync);
 
       if (diff.inMinutes < 30) {

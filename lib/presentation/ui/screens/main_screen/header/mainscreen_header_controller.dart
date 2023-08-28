@@ -1,5 +1,5 @@
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar_controller.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/mainscreen_header_states.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/bottombar/bottom_bar_controller.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/header/mainscreen_header_states.dart';
 import 'package:get/get.dart';
 
 class MainScreeenHeaderController extends GetxController {

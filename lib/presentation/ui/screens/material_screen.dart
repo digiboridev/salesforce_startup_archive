@@ -1,20 +1,20 @@
-import 'package:***REMOVED***/core/asset_images.dart';
-import 'package:***REMOVED***/core/mycolors.dart';
-import 'package:***REMOVED***/domain/entities/cart_item.dart';
-import 'package:***REMOVED***/domain/entities/materials/material.dart';
-import 'package:***REMOVED***/domain/entities/materials/unit_types.dart';
-import 'package:***REMOVED***/domain/services/image_caching_service.dart';
-import 'package:***REMOVED***/presentation/controllers/cart_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/favorites_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
-import 'package:***REMOVED***/presentation/ui/widgets/cart_top_icon.dart';
-import 'package:***REMOVED***/presentation/ui/widgets/product_options.dart';
-import 'package:***REMOVED***/presentation/ui/screens/material_screen_dialog.dart';
-import 'package:***REMOVED***/presentation/ui/widgets/material_components/focused_material_component.dart';
-import 'package:***REMOVED***/presentation/ui/widgets/material_components/normal_material_component.dart';
-import 'package:***REMOVED***/presentation/ui/widgets/material_components/outstock_material_component.dart';
+import 'package:salesforce.startup/core/asset_images.dart';
+import 'package:salesforce.startup/core/mycolors.dart';
+import 'package:salesforce.startup/domain/entities/cart_item.dart';
+import 'package:salesforce.startup/domain/entities/materials/material.dart';
+import 'package:salesforce.startup/domain/entities/materials/unit_types.dart';
+import 'package:salesforce.startup/domain/services/image_caching_service.dart';
+import 'package:salesforce.startup/presentation/controllers/cart_controller.dart';
+import 'package:salesforce.startup/presentation/controllers/customer_controller.dart';
+import 'package:salesforce.startup/presentation/controllers/favorites_controller.dart';
+import 'package:salesforce.startup/presentation/controllers/materials_catalog_controller.dart';
+import 'package:salesforce.startup/presentation/controllers/user_data_controller.dart';
+import 'package:salesforce.startup/presentation/ui/widgets/cart_top_icon.dart';
+import 'package:salesforce.startup/presentation/ui/widgets/product_options.dart';
+import 'package:salesforce.startup/presentation/ui/screens/material_screen_dialog.dart';
+import 'package:salesforce.startup/presentation/ui/widgets/material_components/focused_material_component.dart';
+import 'package:salesforce.startup/presentation/ui/widgets/material_components/normal_material_component.dart';
+import 'package:salesforce.startup/presentation/ui/widgets/material_components/outstock_material_component.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -81,10 +81,7 @@ class _MaterialScreenState extends State<MaterialScreen> {
         SizedBox(
           height: Get.width * 0.06,
         ),
-        if (materialsCatalogController
-            .getAlternativeMaterials(altItems: widget.material.alternativeItems)
-            .isNotEmpty)
-          buildSuggestions(),
+        if (materialsCatalogController.getAlternativeMaterials(altItems: widget.material.alternativeItems).isNotEmpty) buildSuggestions(),
         SizedBox(
           height: Get.width * 0.06,
         ),
@@ -95,19 +92,14 @@ class _MaterialScreenState extends State<MaterialScreen> {
   Widget buildSuggestions() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(12))),
+      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(12))),
       width: Get.width,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Padding(
-              padding: EdgeInsets.only(
-                  top: Get.width * 0.04,
-                  left: Get.width * 0.03,
-                  right: Get.width * 0.03),
+              padding: EdgeInsets.only(top: Get.width * 0.04, left: Get.width * 0.03, right: Get.width * 0.03),
               child: Text(
                 'Substitutes for this product'.tr,
                 style: TextStyle(fontSize: 20, color: MyColors.blue_003E7E),
@@ -117,13 +109,9 @@ class _MaterialScreenState extends State<MaterialScreen> {
               height: Get.width * 0.7,
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                children: materialsCatalogController
-                    .getAlternativeMaterials(
-                        altItems: widget.material.alternativeItems)
-                    .map((e) {
+                children: materialsCatalogController.getAlternativeMaterials(altItems: widget.material.alternativeItems).map((e) {
                   return Container(
-                    margin: EdgeInsets.only(
-                        left: Get.width * 0.05, right: Get.width * 0.05),
+                    margin: EdgeInsets.only(left: Get.width * 0.05, right: Get.width * 0.05),
                     width: Get.width * 0.25,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -137,8 +125,7 @@ class _MaterialScreenState extends State<MaterialScreen> {
                         Text(
                           e.Name,
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: MyColors.blue_003E7E, fontSize: 17),
+                          style: TextStyle(color: MyColors.blue_003E7E, fontSize: 17),
                         )
                       ],
                     ),
@@ -157,8 +144,7 @@ class _MaterialScreenState extends State<MaterialScreen> {
       );
     } else {
       return Obx(() {
-        CartItem? cartItem = cartController.getItemByNumber(
-            materialNumber: widget.material.MaterialNumber);
+        CartItem? cartItem = cartController.getItemByNumber(materialNumber: widget.material.MaterialNumber);
 
         if (cartItem is CartItem) {
           return FocusedMaterialComponent(
@@ -182,21 +168,14 @@ class _MaterialScreenState extends State<MaterialScreen> {
       child: Stack(
         children: [
           Container(
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(12))),
-              margin: EdgeInsets.only(
-                  left: Get.width * 0.06,
-                  right: Get.width * 0.06,
-                  top: Get.width * 0.04,
-                  bottom: Get.width * 0.02),
+              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(12))),
+              margin: EdgeInsets.only(left: Get.width * 0.06, right: Get.width * 0.06, top: Get.width * 0.04, bottom: Get.width * 0.02),
               child: Column(
                 children: [
                   Row(
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(
-                            left: Get.width * 0.03, right: Get.width * 0.03),
+                        padding: EdgeInsets.only(left: Get.width * 0.03, right: Get.width * 0.03),
                         child: GestureDetector(
                             onTap: showPhotoDialog,
                             child: CachedImage(
@@ -212,11 +191,7 @@ class _MaterialScreenState extends State<MaterialScreen> {
                           SizedBox(
                             height: Get.width * 0.01,
                           ),
-                          ProductOptions(
-                              isNew: true,
-                              isHotSale: true,
-                              optionType: ProductOptions.MATERIAL_SCREEN_TYPE,
-                              isFrozen: true),
+                          ProductOptions(isNew: true, isHotSale: true, optionType: ProductOptions.MATERIAL_SCREEN_TYPE, isFrozen: true),
                           Container(
                               width: Get.width * 0.5,
                               child: Text(
@@ -241,12 +216,7 @@ class _MaterialScreenState extends State<MaterialScreen> {
                                 fontSize: Get.width * 0.035,
                                 fontWeight: FontWeight.w400,
                               )),
-                          Text(
-                              '${'Minimum order'.tr}: ' +
-                                  widget.material.MinimumOrderQuantity
-                                      .toString() +
-                                  ' ' +
-                                  widget.material.salesUnitType.text,
+                          Text('${'Minimum order'.tr}: ' + widget.material.MinimumOrderQuantity.toString() + ' ' + widget.material.salesUnitType.text,
                               style: TextStyle(
                                 color: MyColors.blue_003E7E,
                                 fontSize: Get.width * 0.035,
@@ -257,28 +227,22 @@ class _MaterialScreenState extends State<MaterialScreen> {
                     ],
                   ),
                   Container(
-                    margin: EdgeInsets.only(
-                        left: Get.width * 0.03,
-                        right: Get.width * 0.03,
-                        top: Get.width * 0.06),
+                    margin: EdgeInsets.only(left: Get.width * 0.03, right: Get.width * 0.03, top: Get.width * 0.06),
                     width: Get.width,
                     child: Row(
                       children: [
                         Text(
                           'About the product'.tr,
-                          style: TextStyle(
-                              fontSize: 18, color: MyColors.blue_003E7E),
+                          style: TextStyle(fontSize: 18, color: MyColors.blue_003E7E),
                         ),
                       ],
                     ),
                   ),
                   Container(
                     margin: EdgeInsets.all(Get.width * 0.03),
-                    child: Text(
-                        widget.material.ProductDescription ?? 'No Description'),
+                    child: Text(widget.material.ProductDescription ?? 'No Description'),
                   ),
-                  if (widget.material.freeGoods.isNotEmpty ||
-                      widget.material.pricing.isNotEmpty)
+                  if (widget.material.freeGoods.isNotEmpty || widget.material.pricing.isNotEmpty)
                     Padding(
                       padding: EdgeInsets.all(Get.width * 0.03),
                       child: Row(
@@ -287,9 +251,7 @@ class _MaterialScreenState extends State<MaterialScreen> {
                             alignment: Alignment.center,
                             height: Get.width * 0.05,
                             width: Get.width * 0.05,
-                            decoration: BoxDecoration(
-                                color: MyColors.blue_6DA5EC,
-                                shape: BoxShape.circle),
+                            decoration: BoxDecoration(color: MyColors.blue_6DA5EC, shape: BoxShape.circle),
                             child: Icon(
                               Icons.check,
                               color: Colors.white,
@@ -301,8 +263,7 @@ class _MaterialScreenState extends State<MaterialScreen> {
                           ),
                           Text(
                             "The Rabbinical Society".tr,
-                            style: TextStyle(
-                                color: MyColors.blue_003E7E, fontSize: 18),
+                            style: TextStyle(color: MyColors.blue_003E7E, fontSize: 18),
                           ),
                           SizedBox(
                             width: Get.width * 0.02,
@@ -310,33 +271,23 @@ class _MaterialScreenState extends State<MaterialScreen> {
                         ],
                       ),
                     ),
-                  if (widget.material.freeGoods.isNotEmpty ||
-                      widget.material.pricing.isNotEmpty)
+                  if (widget.material.freeGoods.isNotEmpty || widget.material.pricing.isNotEmpty)
                     Container(
                       color: MyColors.blue_003E7E,
                       height: 1,
                       width: Get.width,
-                      margin: EdgeInsets.only(
-                          left: Get.width * 0.03, right: Get.width * 0.03),
+                      margin: EdgeInsets.only(left: Get.width * 0.03, right: Get.width * 0.03),
                     ),
-                  if (widget.material.freeGoods.isNotEmpty ||
-                      widget.material.pricing.isNotEmpty)
-                    buildFreeGodsAndPricing(),
-                  if (widget.material.freeGoods.isNotEmpty ||
-                      widget.material.pricing.isNotEmpty)
+                  if (widget.material.freeGoods.isNotEmpty || widget.material.pricing.isNotEmpty) buildFreeGodsAndPricing(),
+                  if (widget.material.freeGoods.isNotEmpty || widget.material.pricing.isNotEmpty)
                     Container(
                       color: MyColors.blue_003E7E,
                       height: 1,
                       width: Get.width,
-                      margin: EdgeInsets.only(
-                          left: Get.width * 0.03, right: Get.width * 0.03),
+                      margin: EdgeInsets.only(left: Get.width * 0.03, right: Get.width * 0.03),
                     ),
                   Padding(
-                    padding: EdgeInsets.only(
-                        left: Get.width * 0.03,
-                        right: Get.width * 0.03,
-                        top: Get.width * 0.05,
-                        bottom: Get.width * 0.05),
+                    padding: EdgeInsets.only(left: Get.width * 0.03, right: Get.width * 0.03, top: Get.width * 0.05, bottom: Get.width * 0.05),
                     child: pricesRow(),
                   ),
                   getMaterialComponent(),
@@ -348,17 +299,11 @@ class _MaterialScreenState extends State<MaterialScreen> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Container(
-                  margin: EdgeInsets.only(
-                      right: Get.width * 0.06, left: Get.width * 0.06),
+                  margin: EdgeInsets.only(right: Get.width * 0.06, left: Get.width * 0.06),
                   width: Get.width * 0.09,
                   height: Get.width * 0.09,
                   decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey.shade300,
-                            spreadRadius: 1,
-                            blurRadius: 5)
-                      ],
+                      boxShadow: [BoxShadow(color: Colors.grey.shade300, spreadRadius: 1, blurRadius: 5)],
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(Get.width * 0.1)),
                   child: CartTopIcon(
@@ -522,11 +467,7 @@ class _MaterialScreenState extends State<MaterialScreen> {
     );
 
     return Container(
-      margin: EdgeInsets.only(
-          left: Get.width * 0.07,
-          right: Get.width * 0.07,
-          top: Get.width * 0.03,
-          bottom: Get.width * 0.03),
+      margin: EdgeInsets.only(left: Get.width * 0.07, right: Get.width * 0.07, top: Get.width * 0.03, bottom: Get.width * 0.03),
       child: Column(
         children: [
           Row(
@@ -622,8 +563,7 @@ class _MaterialScreenState extends State<MaterialScreen> {
                           ),
                         ),
                         Text(
-                          priceWithVAT(price: widget.material.UnitNetPrice)
-                              .toString(),
+                          priceWithVAT(price: widget.material.UnitNetPrice).toString(),
                           style: TextStyle(
                             color: MyColors.blue_0571E0,
                             fontSize: Get.width * 0.045,
@@ -646,8 +586,7 @@ class _MaterialScreenState extends State<MaterialScreen> {
                               ),
                             ),
                             Text(
-                              priceWithVAT(price: widget.material.UnitPrice)
-                                  .toString(),
+                              priceWithVAT(price: widget.material.UnitPrice).toString(),
                               style: TextStyle(
                                 color: MyColors.gray_8B9298,
                                 fontSize: Get.width * 0.045,
@@ -694,16 +633,14 @@ class _MaterialScreenState extends State<MaterialScreen> {
                   Get.back();
                 },
                 child: Icon(
-                  Directionality.of(context) == TextDirection.rtl
-                      ? Icons.keyboard_arrow_right
-                      : Icons.keyboard_arrow_left,
+                  Directionality.of(context) == TextDirection.rtl ? Icons.keyboard_arrow_right : Icons.keyboard_arrow_left,
                   color: Colors.white,
                 ),
               ),
               Hero(
                 tag: 'logo',
                 child: Image.asset(
-                  AssetImages.***REMOVED***Logo,
+                  AssetImages.startupLogo,
                   width: Get.width * 0.3,
                 ),
               ),

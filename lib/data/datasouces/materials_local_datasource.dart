@@ -1,17 +1,14 @@
-import 'package:***REMOVED***/core/errors.dart';
-import 'package:***REMOVED***/data/models/materials/materials_catalog_model.dart';
-import 'package:***REMOVED***/data/models/sync_data.dart';
+import 'package:salesforce.startup/core/errors.dart';
+import 'package:salesforce.startup/data/models/materials/materials_catalog_model.dart';
+import 'package:salesforce.startup/data/models/sync_data.dart';
 import 'package:get_storage/get_storage.dart';
 
 abstract class MaterialsLocalDataSource {
-  Future setMaterials(
-      {required String customerSAP,
-      required MaterialsCatalogModel materialsCatalogModel});
+  Future setMaterials({required String customerSAP, required MaterialsCatalogModel materialsCatalogModel});
 
   Future<MaterialsCatalogModel> getMaterials({required String customerSAP});
 
-  Future setMaterialsSyncData(
-      {required String customerSAP, required SyncData syncData});
+  Future setMaterialsSyncData({required String customerSAP, required SyncData syncData});
 
   Future<SyncData> getMaterialsSyncData({required String customerSAP});
 }
@@ -21,15 +18,12 @@ class MaterialsLocalDataSourceImpl implements MaterialsLocalDataSource {
   final materialsSyncBox = GetStorage('materialsSyncBox');
 
   @override
-  Future setMaterials(
-      {required String customerSAP,
-      required MaterialsCatalogModel materialsCatalogModel}) async {
+  Future setMaterials({required String customerSAP, required MaterialsCatalogModel materialsCatalogModel}) async {
     await materialsBox.write(customerSAP, materialsCatalogModel.toJson());
   }
 
   @override
-  Future<MaterialsCatalogModel> getMaterials(
-      {required String customerSAP}) async {
+  Future<MaterialsCatalogModel> getMaterials({required String customerSAP}) async {
     String? data = materialsBox.read(customerSAP);
 
     if (data == null) {
@@ -40,8 +34,7 @@ class MaterialsLocalDataSourceImpl implements MaterialsLocalDataSource {
   }
 
   @override
-  Future setMaterialsSyncData(
-      {required String customerSAP, required SyncData syncData}) async {
+  Future setMaterialsSyncData({required String customerSAP, required SyncData syncData}) async {
     await materialsSyncBox.write(customerSAP, syncData.toJson());
   }
 

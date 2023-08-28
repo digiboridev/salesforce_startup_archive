@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:***REMOVED***/domain/entities/materials/supplementary_item.dart';
+import 'package:salesforce.startup/domain/entities/materials/supplementary_item.dart';
 
 class SupplementaryItemModel extends SupplementaryItem {
   SupplementaryItemModel({
@@ -32,8 +32,7 @@ class SupplementaryItemModel extends SupplementaryItem {
     );
   }
 
-  factory SupplementaryItemModel.fromEntity(
-      SupplementaryItem supplementaryItem) {
+  factory SupplementaryItemModel.fromEntity(SupplementaryItem supplementaryItem) {
     return SupplementaryItemModel(
       SFId: supplementaryItem.SFId,
       RelatedMaterialId: supplementaryItem.RelatedMaterialId,
@@ -44,6 +43,5 @@ class SupplementaryItemModel extends SupplementaryItem {
 
   String toJson() => json.encode(toMap());
 
-  factory SupplementaryItemModel.fromJson(String source) =>
-      SupplementaryItemModel.fromMap(json.decode(source));
+  factory SupplementaryItemModel.fromJson(String source) => SupplementaryItemModel.fromMap(json.decode(source));
 }

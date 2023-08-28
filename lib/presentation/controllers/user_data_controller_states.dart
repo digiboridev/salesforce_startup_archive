@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import 'package:***REMOVED***/domain/entities/user_data.dart';
+import 'package:salesforce.startup/domain/entities/user_data.dart';
 
 abstract class UserDataState {}
 

@@ -1,19 +1,19 @@
-import 'package:***REMOVED***/core/asset_images.dart';
-import 'package:***REMOVED***/core/mycolors.dart';
-import 'package:***REMOVED***/domain/entities/cart_item.dart';
-import 'package:***REMOVED***/domain/entities/materials/material.dart';
-import 'package:***REMOVED***/domain/entities/materials/unit_types.dart';
-import 'package:***REMOVED***/domain/services/image_caching_service.dart';
-import 'package:***REMOVED***/presentation/controllers/cart_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/favorites_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
-import 'package:***REMOVED***/presentation/ui/widgets/cart_top_icon.dart';
-import 'package:***REMOVED***/presentation/ui/widgets/product_options.dart';
-import 'package:***REMOVED***/presentation/ui/screens/material_screen.dart';
-import 'package:***REMOVED***/presentation/ui/widgets/material_components/focused_material_component.dart';
-import 'package:***REMOVED***/presentation/ui/widgets/material_components/normal_material_component.dart';
-import 'package:***REMOVED***/presentation/ui/widgets/material_components/outstock_material_component.dart';
+import 'package:salesforce.startup/core/asset_images.dart';
+import 'package:salesforce.startup/core/mycolors.dart';
+import 'package:salesforce.startup/domain/entities/cart_item.dart';
+import 'package:salesforce.startup/domain/entities/materials/material.dart';
+import 'package:salesforce.startup/domain/entities/materials/unit_types.dart';
+import 'package:salesforce.startup/domain/services/image_caching_service.dart';
+import 'package:salesforce.startup/presentation/controllers/cart_controller.dart';
+import 'package:salesforce.startup/presentation/controllers/customer_controller.dart';
+import 'package:salesforce.startup/presentation/controllers/favorites_controller.dart';
+import 'package:salesforce.startup/presentation/controllers/user_data_controller.dart';
+import 'package:salesforce.startup/presentation/ui/widgets/cart_top_icon.dart';
+import 'package:salesforce.startup/presentation/ui/widgets/product_options.dart';
+import 'package:salesforce.startup/presentation/ui/screens/material_screen.dart';
+import 'package:salesforce.startup/presentation/ui/widgets/material_components/focused_material_component.dart';
+import 'package:salesforce.startup/presentation/ui/widgets/material_components/normal_material_component.dart';
+import 'package:salesforce.startup/presentation/ui/widgets/material_components/outstock_material_component.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -55,14 +55,8 @@ class MaterialCardState extends State<MaterialCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(Get.width * 0.04))),
-      margin: EdgeInsets.only(
-          bottom: Get.width * 0.025,
-          left: Get.width * 0.025,
-          top: Get.width * 0.05,
-          right: Get.width * 0.025),
+      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(Get.width * 0.04))),
+      margin: EdgeInsets.only(bottom: Get.width * 0.025, left: Get.width * 0.025, top: Get.width * 0.05, right: Get.width * 0.025),
       // clipBehavior: Clip.antiAlias,
       child: Stack(
         clipBehavior: Clip.none,
@@ -90,14 +84,8 @@ class MaterialCardState extends State<MaterialCard> {
                           padding: EdgeInsets.all(Get.width * 0.01),
                           decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.circular(Get.width * 0.03),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.grey.shade300,
-                                    spreadRadius: 1,
-                                    blurRadius: 10)
-                              ]),
+                              borderRadius: BorderRadius.circular(Get.width * 0.03),
+                              boxShadow: [BoxShadow(color: Colors.grey.shade300, spreadRadius: 1, blurRadius: 10)]),
                           child: CachedImage(
                             Url: widget.materiale.ImageUrl,
                             width: Get.width * 0.25,
@@ -108,24 +96,18 @@ class MaterialCardState extends State<MaterialCard> {
                           width: Get.width * 0.03,
                         ),
                         Expanded(
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                              Text(
-                                widget.materiale.Name,
-                                // 'Jacobs Kosher Passover Nescafe with Kernels',
+                            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                          Text(
+                            widget.materiale.Name,
+                            // 'Jacobs Kosher Passover Nescafe with Kernels',
 
-                                style: TextStyle(
-                                    height: 1,
-                                    color: MyColors.blue_003E7E,
-                                    fontSize: Get.width * 0.045,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              SizedBox(
-                                height: Get.width * 0.03,
-                              ),
-                              pricesRow()
-                            ])),
+                            style: TextStyle(height: 1, color: MyColors.blue_003E7E, fontSize: Get.width * 0.045, fontWeight: FontWeight.w500),
+                          ),
+                          SizedBox(
+                            height: Get.width * 0.03,
+                          ),
+                          pricesRow()
+                        ])),
                       ],
                     ),
                   ),
@@ -152,12 +134,7 @@ class MaterialCardState extends State<MaterialCard> {
                     width: Get.width * 0.1,
                     height: Get.width * 0.1,
                     decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.grey.shade300,
-                              spreadRadius: 1,
-                              blurRadius: 10)
-                        ],
+                        boxShadow: [BoxShadow(color: Colors.grey.shade300, spreadRadius: 1, blurRadius: 10)],
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(Get.width * 0.1)),
                     child: buildTopIcon(),
@@ -188,8 +165,7 @@ class MaterialCardState extends State<MaterialCard> {
 
   Widget buildBonusesRow() {
     return Obx(() {
-      CartItem? cartItem = cartController.getItemByNumber(
-          materialNumber: widget.materiale.MaterialNumber);
+      CartItem? cartItem = cartController.getItemByNumber(materialNumber: widget.materiale.MaterialNumber);
 
       List<String> reachedScales = [];
 
@@ -197,14 +173,11 @@ class MaterialCardState extends State<MaterialCard> {
         widget.materiale.pricing.forEach(
           (pricing) {
             pricing.scales.forEach((scales) {
-              if (scales.Unit == cartItem.unit &&
-                  cartItem.quantity >= scales.ScaleQuantityFrom) {
+              if (scales.Unit == cartItem.unit && cartItem.quantity >= scales.ScaleQuantityFrom) {
                 if (pricing.IsPercentage) {
-                  reachedScales.add(
-                      'You got ' + scales.Rate.toString() + ' % ' + 'off'.tr);
+                  reachedScales.add('You got ' + scales.Rate.toString() + ' % ' + 'off'.tr);
                 } else {
-                  reachedScales.add(
-                      'You got ' + scales.Rate.toString() + ' ₪ ' + 'off'.tr);
+                  reachedScales.add('You got ' + scales.Rate.toString() + ' ₪ ' + 'off'.tr);
                 }
               }
             });
@@ -218,8 +191,7 @@ class MaterialCardState extends State<MaterialCard> {
         widget.materiale.pricing.forEach(
           (pricing) {
             pricing.scales.forEach((scales) {
-              if (scales.Unit == cartItem.unit &&
-                  cartItem.quantity < scales.ScaleQuantityFrom) {
+              if (scales.Unit == cartItem.unit && cartItem.quantity < scales.ScaleQuantityFrom) {
                 if (pricing.IsPercentage) {
                   avaliableScales.add('Buy ' +
                       scales.ScaleQuantityFrom.toString() +
@@ -370,10 +342,7 @@ class MaterialCardState extends State<MaterialCard> {
             //   height: Get.width * 0.02,
             // ),
             Text(
-              widget.materiale
-                      .countByUnitType(
-                          widget.materiale.avaliableUnitTtypes.first)
-                      .toString() +
+              widget.materiale.countByUnitType(widget.materiale.avaliableUnitTtypes.first).toString() +
                   " " +
                   'units per'.tr +
                   " " +
@@ -417,8 +386,7 @@ class MaterialCardState extends State<MaterialCard> {
                         ),
                       ),
                       Text(
-                        priceWithVAT(price: widget.materiale.UnitNetPrice)
-                            .toString(),
+                        priceWithVAT(price: widget.materiale.UnitNetPrice).toString(),
                         style: TextStyle(
                           color: MyColors.blue_0571E0,
                           fontSize: Get.width * 0.035,
@@ -441,8 +409,7 @@ class MaterialCardState extends State<MaterialCard> {
                             ),
                           ),
                           Text(
-                            priceWithVAT(price: widget.materiale.UnitPrice)
-                                .toString(),
+                            priceWithVAT(price: widget.materiale.UnitPrice).toString(),
                             style: TextStyle(
                               color: MyColors.gray_8B9298,
                               fontSize: Get.width * 0.035,
@@ -475,31 +442,27 @@ class MaterialCardState extends State<MaterialCard> {
   Widget buildTopIcon() {
     if (widget.insideFavorites) {
       return GestureDetector(
-        onTap: () =>
-            favoritesController.showBelongEdit(material: widget.materiale),
+        onTap: () => favoritesController.showBelongEdit(material: widget.materiale),
         child: CartTopIcon(
           type: CartTopIcon.menu_type,
         ),
       );
     } else if (widget.insideCart) {
       return GestureDetector(
-        onTap: () => cartController.removeItem(
-            materialNumber: widget.materiale.MaterialNumber),
+        onTap: () => cartController.removeItem(materialNumber: widget.materiale.MaterialNumber),
         child: CartTopIcon(
           type: CartTopIcon.close_type,
         ),
       );
     } else {
       return Obx(() {
-        if (favoritesController.isMaterialInFavorite(
-            material: widget.materiale)) {
+        if (favoritesController.isMaterialInFavorite(material: widget.materiale)) {
           return CartTopIcon(
             type: CartTopIcon.favorite_select_type,
           );
         } else {
           return GestureDetector(
-            onTap: () => favoritesController.addItemToAllList(
-                material: widget.materiale),
+            onTap: () => favoritesController.addItemToAllList(material: widget.materiale),
             child: CartTopIcon(
               type: CartTopIcon.favorite_type,
             ),
@@ -516,8 +479,7 @@ class MaterialCardState extends State<MaterialCard> {
       );
     } else {
       return Obx(() {
-        CartItem? cartItem = cartController.getItemByNumber(
-            materialNumber: widget.materiale.MaterialNumber);
+        CartItem? cartItem = cartController.getItemByNumber(materialNumber: widget.materiale.MaterialNumber);
 
         if (cartItem is CartItem) {
           return FocusedMaterialComponent(

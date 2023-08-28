@@ -1,4 +1,4 @@
-import 'package:***REMOVED***/core/mycolors.dart';
+import 'package:salesforce.startup/core/mycolors.dart';
 import 'package:flutter/material.dart';
 
 class CustomSwitch extends StatefulWidget {
@@ -27,21 +27,17 @@ class CustomSwitch extends StatefulWidget {
   _CustomSwitchState createState() => _CustomSwitchState();
 }
 
-class _CustomSwitchState extends State<CustomSwitch>
-    with SingleTickerProviderStateMixin {
+class _CustomSwitchState extends State<CustomSwitch> with SingleTickerProviderStateMixin {
   late Animation _circleAnimation;
   late AnimationController _animationController;
 
   @override
   void initState() {
     super.initState();
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 60));
-    _circleAnimation = AlignmentTween(
-            begin: widget.value ? Alignment.centerRight : Alignment.centerLeft,
-            end: widget.value ? Alignment.centerLeft : Alignment.centerRight)
-        .animate(CurvedAnimation(
-            parent: _animationController, curve: Curves.linear));
+    _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 60));
+    _circleAnimation =
+        AlignmentTween(begin: widget.value ? Alignment.centerRight : Alignment.centerLeft, end: widget.value ? Alignment.centerLeft : Alignment.centerRight)
+            .animate(CurvedAnimation(parent: _animationController, curve: Curves.linear));
   }
 
   @override
@@ -62,9 +58,7 @@ class _CustomSwitchState extends State<CustomSwitch>
               } else {
                 _animationController.forward();
               }
-              widget.value == false
-                  ? widget.onChanged(true)
-                  : widget.onChanged(false);
+              widget.value == false ? widget.onChanged(true) : widget.onChanged(false);
             },
             child: Stack(
               fit: StackFit.passthrough,
@@ -74,9 +68,7 @@ class _CustomSwitchState extends State<CustomSwitch>
                   width: 50,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30.0),
-                    color: _circleAnimation.value == Alignment.centerLeft
-                        ? widget.disableColor
-                        : MyColors.blue_003E7E,
+                    color: _circleAnimation.value == Alignment.centerLeft ? widget.disableColor : MyColors.blue_003E7E,
                   ),
                   padding: EdgeInsets.all(2),
                   child: Container(
@@ -85,23 +77,17 @@ class _CustomSwitchState extends State<CustomSwitch>
                   ),
                 ),
                 Positioned.fill(
-                    left:
-                        _circleAnimation.value == Alignment.centerLeft ? 4 : 10,
-                    right:
-                        _circleAnimation.value == Alignment.centerLeft ? 10 : 4,
+                    left: _circleAnimation.value == Alignment.centerLeft ? 4 : 10,
+                    right: _circleAnimation.value == Alignment.centerLeft ? 10 : 4,
                     child: Container(
-                      alignment: widget.value
-                          ? Alignment.centerRight
-                          : Alignment.centerLeft,
+                      alignment: widget.value ? Alignment.centerRight : Alignment.centerLeft,
                       child: Container(
                         alignment: Alignment.center,
                         width: 20,
                         height: 20,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: _circleAnimation.value == Alignment.centerLeft
-                              ? MyColors.blue_003E7E
-                              : Colors.white,
+                          color: _circleAnimation.value == Alignment.centerLeft ? MyColors.blue_003E7E : Colors.white,
                         ),
                       ),
                     )),

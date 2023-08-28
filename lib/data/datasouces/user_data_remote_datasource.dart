@@ -1,15 +1,14 @@
-import 'package:***REMOVED***/core/constants.dart';
-import 'package:***REMOVED***/core/errors.dart';
-import 'package:***REMOVED***/core/languages.dart';
-import 'package:***REMOVED***/data/models/user_data_model.dart';
+import 'package:salesforce.startup/core/constants.dart';
+import 'package:salesforce.startup/core/errors.dart';
+import 'package:salesforce.startup/core/languages.dart';
+import 'package:salesforce.startup/data/models/user_data_model.dart';
 import 'package:salesforce/salesforce.dart';
 
 abstract class UserDataRemoteDatasource {
   Future<UserDataModel> get getUserData;
   Future<void> acceptLegalDoc();
   Future<void> changeLanguage({required Languages lang});
-  Future<void> changePassword(
-      {required String oldPass, required String newPass});
+  Future<void> changePassword({required String oldPass, required String newPass});
 }
 
 class UserDataRemoteDatasourceImpl implements UserDataRemoteDatasource {
@@ -17,7 +16,7 @@ class UserDataRemoteDatasourceImpl implements UserDataRemoteDatasource {
   Future<UserDataModel> get getUserData async {
     try {
       Map<String, dynamic> response = await SalesforcePlugin.sendRequest(
-        endPoint: ***REMOVED***Endpoint,
+        endPoint: startupEndpoint,
         path: '/me',
       ) as Map<String, dynamic>;
       if (response['success']) {
@@ -34,11 +33,8 @@ class UserDataRemoteDatasourceImpl implements UserDataRemoteDatasource {
   @override
   Future<void> acceptLegalDoc() async {
     try {
-      Map<String, dynamic> response = await SalesforcePlugin.sendRequest(
-          endPoint: ***REMOVED***Endpoint,
-          path: '/me/accept',
-          method: 'POST',
-          payload: {}) as Map<String, dynamic>;
+      Map<String, dynamic> response =
+          await SalesforcePlugin.sendRequest(endPoint: startupEndpoint, path: '/me/accept', method: 'POST', payload: {}) as Map<String, dynamic>;
       if (response['success']) {
         return;
       } else {
@@ -52,11 +48,9 @@ class UserDataRemoteDatasourceImpl implements UserDataRemoteDatasource {
   @override
   Future<void> changeLanguage({required Languages lang}) async {
     try {
-      Map<String, dynamic> response = await SalesforcePlugin.sendRequest(
-          endPoint: ***REMOVED***Endpoint,
-          path: '/me/changeLang',
-          method: 'POST',
-          payload: {"langCode": lang.identifier}) as Map<String, dynamic>;
+      Map<String, dynamic> response =
+          await SalesforcePlugin.sendRequest(endPoint: startupEndpoint, path: '/me/changeLang', method: 'POST', payload: {"langCode": lang.identifier})
+              as Map<String, dynamic>;
       if (response['success']) {
         return;
       } else {
@@ -68,15 +62,10 @@ class UserDataRemoteDatasourceImpl implements UserDataRemoteDatasource {
   }
 
   @override
-  Future<void> changePassword(
-      {required String oldPass, required String newPass}) async {
+  Future<void> changePassword({required String oldPass, required String newPass}) async {
     try {
       Map<String, dynamic> response = await SalesforcePlugin.sendRequest(
-              endPoint: ***REMOVED***Endpoint,
-              path: '/newPassword',
-              method: 'POST',
-              payload: {"newPassword": newPass, "oldPassword": oldPass})
-          as Map<String, dynamic>;
+          endPoint: startupEndpoint, path: '/newPassword', method: 'POST', payload: {"newPassword": newPass, "oldPassword": oldPass}) as Map<String, dynamic>;
       if (response['success']) {
         return;
       } else {

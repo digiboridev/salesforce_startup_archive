@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:***REMOVED***/domain/entities/customer.dart';
+import 'package:salesforce.startup/domain/entities/customer.dart';
 
 class CustomerModel extends Customer {
   CustomerModel({
@@ -120,8 +120,7 @@ class CustomerModel extends Customer {
       nextCutOff: DateTime.parse(map['NextCutOff']),
       minimumOrderAmountFrozen: map['MinimumOrderAmountFrozen'],
       minimumOrderAmount: map['MinimumOrderAmount'],
-      maximumReturnItems:
-          map['MaximumReturnItems'] is num ? map['MaximumReturnItems'] : null,
+      maximumReturnItems: map['MaximumReturnItems'] is num ? map['MaximumReturnItems'] : null,
       maximumLinesInOrder: map['MaximumLinesInOrder'],
       industryKey: map['IndustryKey'],
       hidePrices: map['HidePrices'],
@@ -174,6 +173,5 @@ class CustomerModel extends Customer {
 
   String toJson() => json.encode(toMap());
 
-  factory CustomerModel.fromJson(String source) =>
-      CustomerModel.fromMap(json.decode(source));
+  factory CustomerModel.fromJson(String source) => CustomerModel.fromMap(json.decode(source));
 }

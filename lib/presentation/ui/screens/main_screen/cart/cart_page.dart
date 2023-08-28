@@ -1,10 +1,10 @@
-import 'package:***REMOVED***/core/asset_images.dart';
-import 'package:***REMOVED***/core/mycolors.dart';
-import 'package:***REMOVED***/presentation/controllers/cart_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/materials_catalog_states.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar_controller.dart';
-import 'package:***REMOVED***/presentation/ui/widgets/material_card.dart';
+import 'package:salesforce.startup/core/asset_images.dart';
+import 'package:salesforce.startup/core/mycolors.dart';
+import 'package:salesforce.startup/presentation/controllers/cart_controller.dart';
+import 'package:salesforce.startup/presentation/controllers/materials_catalog_controller.dart';
+import 'package:salesforce.startup/presentation/controllers/materials_catalog_states.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/bottombar/bottom_bar_controller.dart';
+import 'package:salesforce.startup/presentation/ui/widgets/material_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -33,16 +33,14 @@ class CartPageState extends State<CartPage> {
                     height: Get.width * 0.06,
                   ),
                   Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: Get.width * 0.06),
+                      padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
                       child: Column(
                         children: [
                           Row(
                             children: [
                               Text(
                                 'Shopping cart'.tr,
-                                style: TextStyle(
-                                    color: MyColors.blue_003E7E, fontSize: 24),
+                                style: TextStyle(color: MyColors.blue_003E7E, fontSize: 24),
                               )
                             ],
                           ),
@@ -53,30 +51,24 @@ class CartPageState extends State<CartPage> {
                             children: [
                               Text(
                                 "Next delivery".tr,
-                                style: TextStyle(
-                                    color: MyColors.blue_003E7E,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold),
+                                style: TextStyle(color: MyColors.blue_003E7E, fontSize: 12, fontWeight: FontWeight.bold),
                               ),
                               SizedBox(
                                 width: Get.width * 0.04,
                               ),
                               Text(
                                 "Wed 21/3/21",
-                                style: TextStyle(
-                                    color: MyColors.blue_003E7E, fontSize: 12),
+                                style: TextStyle(color: MyColors.blue_003E7E, fontSize: 12),
                               ),
                               Container(
-                                margin: EdgeInsets.symmetric(
-                                    horizontal: Get.width * 0.01),
+                                margin: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
                                 width: 1,
                                 height: Get.width * 0.04,
                                 color: MyColors.blue_003E7E,
                               ),
                               Text(
                                 "${'Frozen'}, Wednesday 21.3.21",
-                                style: TextStyle(
-                                    color: MyColors.blue_003E7E, fontSize: 12),
+                                style: TextStyle(color: MyColors.blue_003E7E, fontSize: 12),
                               ),
                             ],
                           )
@@ -107,10 +99,8 @@ class CartPageState extends State<CartPage> {
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(
-                vertical: Get.width * 0.05, horizontal: Get.width * 0.05),
-            decoration: BoxDecoration(
-                shape: BoxShape.circle, color: MyColors.blue_003E7E),
+            padding: EdgeInsets.symmetric(vertical: Get.width * 0.05, horizontal: Get.width * 0.05),
+            decoration: BoxDecoration(shape: BoxShape.circle, color: MyColors.blue_003E7E),
             child: Image.asset(
               AssetImages.empty_cart,
               height: Get.width * 0.06,
@@ -129,10 +119,7 @@ class CartPageState extends State<CartPage> {
           ),
           Text(
             "To start an order from the recommended list".tr,
-            style: TextStyle(
-                color: MyColors.blue_003E7E,
-                decoration: TextDecoration.underline,
-                fontSize: 17),
+            style: TextStyle(color: MyColors.blue_003E7E, decoration: TextDecoration.underline, fontSize: 17),
           ),
           SizedBox(
             height: Get.width * 0.06,
@@ -142,18 +129,14 @@ class CartPageState extends State<CartPage> {
             margin: EdgeInsets.symmetric(
               horizontal: Get.width * 0.06,
             ),
-            padding: EdgeInsets.symmetric(
-                horizontal: Get.width * 0.05, vertical: Get.width * 0.06),
+            padding: EdgeInsets.symmetric(horizontal: Get.width * 0.05, vertical: Get.width * 0.06),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   "Next delivery".tr,
-                  style: TextStyle(
-                      color: MyColors.blue_003E7E,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
+                  style: TextStyle(color: MyColors.blue_003E7E, fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
                   height: Get.width * 0.025,
@@ -182,10 +165,7 @@ class CartPageState extends State<CartPage> {
                 ),
               ],
             ),
-            decoration: BoxDecoration(color: Colors.white, boxShadow: [
-              BoxShadow(
-                  color: Colors.grey.shade300, spreadRadius: 1, blurRadius: 10)
-            ]),
+            decoration: BoxDecoration(color: Colors.white, boxShadow: [BoxShadow(color: Colors.grey.shade300, spreadRadius: 1, blurRadius: 10)]),
           ),
           SizedBox(
             height: Get.width * 0.1,
@@ -199,9 +179,7 @@ class CartPageState extends State<CartPage> {
               "Catalog".tr,
               style: TextStyle(color: Colors.white, fontSize: 22),
             ),
-            decoration: BoxDecoration(
-                color: MyColors.blue_00458C,
-                borderRadius: BorderRadius.circular(20)),
+            decoration: BoxDecoration(color: MyColors.blue_00458C, borderRadius: BorderRadius.circular(20)),
           )
         ],
       ),
@@ -210,8 +188,7 @@ class CartPageState extends State<CartPage> {
 
   Widget buildItemsList() {
     return Obx(() {
-      MaterialsCatalogState mcState =
-          materialsCatalogController.materialsCatalogState.value;
+      MaterialsCatalogState mcState = materialsCatalogController.materialsCatalogState.value;
 
       if (mcState is MCSCommon) {
         return ListView(
@@ -220,16 +197,12 @@ class CartPageState extends State<CartPage> {
           children: [
             if (cartController.dryMaterials.isNotEmpty)
               Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: Get.width * 0.06, vertical: Get.width * 0.06),
+                padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06, vertical: Get.width * 0.06),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text('Dry'.tr),
-                    Text('${'Price'.tr}: ' +
-                        cartController.dryItemsPrice.toStringAsFixed(2) +
-                        ' / ' +
-                        cartController.totalPrice.toStringAsFixed(2))
+                    Text('${'Price'.tr}: ' + cartController.dryItemsPrice.toStringAsFixed(2) + ' / ' + cartController.totalPrice.toStringAsFixed(2))
                   ],
                 ),
               ),
@@ -239,21 +212,16 @@ class CartPageState extends State<CartPage> {
                 )),
             if (cartController.frozenMaterials.isNotEmpty)
               Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: Get.width * 0.06, vertical: Get.width * 0.06),
+                padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06, vertical: Get.width * 0.06),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text('Frozen'.tr),
-                    Text('${'Price'.tr}: ' +
-                        cartController.frozenItemsPrice.toStringAsFixed(2) +
-                        ' / ' +
-                        cartController.totalPrice.toStringAsFixed(2))
+                    Text('${'Price'.tr}: ' + cartController.frozenItemsPrice.toStringAsFixed(2) + ' / ' + cartController.totalPrice.toStringAsFixed(2))
                   ],
                 ),
               ),
-            ...cartController.frozenMaterials
-                .map((e) => MaterialCard(materiale: e)),
+            ...cartController.frozenMaterials.map((e) => MaterialCard(materiale: e)),
           ],
         );
       } else {
@@ -268,13 +236,9 @@ class CartPageState extends State<CartPage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        GestureDetector(
-            onTap: () => cartController.cleanCart(), child: Text('Clear')),
-        GestureDetector(
-            onTap: () => Get.snackbar('Error', 'Not implemented'),
-            child: Text('Save to fav')),
-        GestureDetector(
-            onTap: () => bottomBarController.goToCatalog(), child: Text('Add')),
+        GestureDetector(onTap: () => cartController.cleanCart(), child: Text('Clear')),
+        GestureDetector(onTap: () => Get.snackbar('Error', 'Not implemented'), child: Text('Save to fav')),
+        GestureDetector(onTap: () => bottomBarController.goToCatalog(), child: Text('Add')),
       ],
     );
   }
@@ -285,11 +249,7 @@ class CartPageState extends State<CartPage> {
       'assets/icons/save_list.png',
       'assets/icons/add_product.png',
     ];
-    List<String> descriptionList = [
-      "Emptying All Basket".tr,
-      "Save As a shopping list".tr,
-      "Add Products From the catalog".tr
-    ];
+    List<String> descriptionList = ["Emptying All Basket".tr, "Save As a shopping list".tr, "Add Products From the catalog".tr];
     return Container(
         margin: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
         alignment: Alignment.center,
@@ -325,8 +285,7 @@ class CartPageState extends State<CartPage> {
                     Text(
                       descriptionList[index],
                       textAlign: TextAlign.center,
-                      style:
-                          TextStyle(color: MyColors.blue_003E83, fontSize: 12),
+                      style: TextStyle(color: MyColors.blue_003E83, fontSize: 12),
                     )
                   ],
                 ),
@@ -338,17 +297,12 @@ class CartPageState extends State<CartPage> {
 
   Widget buildSaveShoppingList() {
     return Container(
-      padding: EdgeInsets.symmetric(
-          horizontal: Get.width * 0.06, vertical: Get.width * 0.05),
+      padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06, vertical: Get.width * 0.05),
       width: Get.width,
       decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-                color: Colors.grey.shade300, spreadRadius: 1, blurRadius: 10)
-          ],
+          boxShadow: [BoxShadow(color: Colors.grey.shade300, spreadRadius: 1, blurRadius: 10)],
           color: Colors.white,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(25), topRight: Radius.circular(25))),
+          borderRadius: BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25))),
       child: Column(
         children: [
           Row(
@@ -371,15 +325,11 @@ class CartPageState extends State<CartPage> {
             child: TextFormField(
               textAlign: TextAlign.center,
               decoration: InputDecoration(
-                  hintStyle:
-                      TextStyle(color: MyColors.blue_003E7E, fontSize: 18),
+                  hintStyle: TextStyle(color: MyColors.blue_003E7E, fontSize: 18),
                   hintText: "List Name".tr,
-                  border: UnderlineInputBorder(
-                      borderSide: BorderSide(color: MyColors.blue_003E7E)),
-                  enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: MyColors.blue_003E7E)),
-                  focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: MyColors.blue_003E7E))),
+                  border: UnderlineInputBorder(borderSide: BorderSide(color: MyColors.blue_003E7E)),
+                  enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: MyColors.blue_003E7E)),
+                  focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: MyColors.blue_003E7E))),
             ),
           ),
           SizedBox(
@@ -394,9 +344,7 @@ class CartPageState extends State<CartPage> {
                 padding: EdgeInsets.symmetric(
                   vertical: Get.width * 0.03,
                 ),
-                decoration: BoxDecoration(
-                    color: MyColors.blue_00458C,
-                    borderRadius: BorderRadius.all(Radius.circular(27))),
+                decoration: BoxDecoration(color: MyColors.blue_00458C, borderRadius: BorderRadius.all(Radius.circular(27))),
                 child: Text(
                   "Continue".tr,
                   style: TextStyle(fontSize: 20, color: Colors.white),
@@ -411,9 +359,7 @@ class CartPageState extends State<CartPage> {
                 padding: EdgeInsets.symmetric(
                   vertical: Get.width * 0.03,
                 ),
-                decoration: BoxDecoration(
-                    color: MyColors.blue_E8EEF6,
-                    borderRadius: BorderRadius.all(Radius.circular(27))),
+                decoration: BoxDecoration(color: MyColors.blue_E8EEF6, borderRadius: BorderRadius.all(Radius.circular(27))),
                 child: Text(
                   "Cancellation".tr,
                   style: TextStyle(fontSize: 20, color: MyColors.blue_00458C),

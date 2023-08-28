@@ -1,20 +1,20 @@
 import 'dart:async';
-import 'package:***REMOVED***/core/asset_images.dart';
-import 'package:***REMOVED***/data/models/sync_data.dart';
-import 'package:***REMOVED***/domain/entities/customer.dart';
-import 'package:***REMOVED***/domain/entities/related_consumer.dart';
-import 'package:***REMOVED***/domain/entities/user_data.dart';
-import 'package:***REMOVED***/domain/services/cache_fetching_service.dart';
-import 'package:***REMOVED***/domain/services/connections_service.dart';
-import 'package:***REMOVED***/domain/services/location_service.dart';
-import 'package:***REMOVED***/domain/usecases/customer/get_customer_and_cache.dart';
-import 'package:***REMOVED***/domain/usecases/customer/get_customer_sync_data.dart';
-import 'package:***REMOVED***/domain/usecases/customer/get_selected_customer_sap.dart';
-import 'package:***REMOVED***/domain/usecases/customer/set_selected_customer_sap.dart';
-import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/user_data_controller_states.dart';
-import 'package:***REMOVED***/presentation/ui/widgets/dialogs/default_dialog.dart';
-import 'package:***REMOVED***/presentation/ui/widgets/dialogs/info_bottomsheet.dart';
+import 'package:salesforce.startup/core/asset_images.dart';
+import 'package:salesforce.startup/data/models/sync_data.dart';
+import 'package:salesforce.startup/domain/entities/customer.dart';
+import 'package:salesforce.startup/domain/entities/related_consumer.dart';
+import 'package:salesforce.startup/domain/entities/user_data.dart';
+import 'package:salesforce.startup/domain/services/cache_fetching_service.dart';
+import 'package:salesforce.startup/domain/services/connections_service.dart';
+import 'package:salesforce.startup/domain/services/location_service.dart';
+import 'package:salesforce.startup/domain/usecases/customer/get_customer_and_cache.dart';
+import 'package:salesforce.startup/domain/usecases/customer/get_customer_sync_data.dart';
+import 'package:salesforce.startup/domain/usecases/customer/get_selected_customer_sap.dart';
+import 'package:salesforce.startup/domain/usecases/customer/set_selected_customer_sap.dart';
+import 'package:salesforce.startup/presentation/controllers/user_data_controller.dart';
+import 'package:salesforce.startup/presentation/controllers/user_data_controller_states.dart';
+import 'package:salesforce.startup/presentation/ui/widgets/dialogs/default_dialog.dart';
+import 'package:salesforce.startup/presentation/ui/widgets/dialogs/info_bottomsheet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -54,8 +54,7 @@ class CustomerController extends GetxController {
     super.onReady();
     // Listen to user data
     handleUserDataState(userDataState: _userDataController.userDataState);
-    _userDataController.userDataStateStream
-        .listen((event) => handleUserDataState(userDataState: event));
+    _userDataController.userDataStateStream.listen((event) => handleUserDataState(userDataState: event));
   }
 
   // Update all on user data change
@@ -84,45 +83,30 @@ class CustomerController extends GetxController {
 
     // Determine closest consumer
     if (_locationService.lastPosition is Position) {
-      _closestRelatedConsumer.value = userData.closestRelatedCustomer(
-          lattitude: _locationService.lastPosition!.latitude,
-          longtitude: _locationService.lastPosition!.longitude);
+      _closestRelatedConsumer.value =
+          userData.closestRelatedCustomer(lattitude: _locationService.lastPosition!.latitude, longtitude: _locationService.lastPosition!.longitude);
     }
 
     try {
       // Get saved selection
-      _selectedCustomerSAP.value = await _getSelectedCustomerSAP.call(
-          GetSelectedCustomerSAPParams(
-              userId: _userDataController.authData!.userId));
+      _selectedCustomerSAP.value = await _getSelectedCustomerSAP.call(GetSelectedCustomerSAPParams(userId: _userDataController.authData!.userId));
 
       // Select customer durning first time or related list changes
       if (_selectedCustomerSAP.value is! String ||
-          !userData.relatedCustomers
-              .map((element) => element.customerSAPNumber)
-              .contains(_selectedCustomerSAP.value)) {
+          !userData.relatedCustomers.map((element) => element.customerSAPNumber).contains(_selectedCustomerSAP.value)) {
         // select closest if possible, if not select first one
-        _selectedCustomerSAP.value =
-            closestRelatedConsumer?.customerSAPNumber ??
-                userData.relatedCustomers.first.customerSAPNumber;
+        _selectedCustomerSAP.value = closestRelatedConsumer?.customerSAPNumber ?? userData.relatedCustomers.first.customerSAPNumber;
 
         // save selected customer
-        _setSelectedCustomerSAP.call(SetSelectedCustomerSAPParams(
-            userId: _userDataController.authData!.userId,
-            customerSAP: _selectedCustomerSAP.value!));
+        _setSelectedCustomerSAP.call(SetSelectedCustomerSAPParams(userId: _userDataController.authData!.userId, customerSAP: _selectedCustomerSAP.value!));
       }
 
       // load data
-      _selectedCustomer.value = await _getCustomerAndCache.call(
-          GetCustomerAndCacheParams(
-              customerSAP: _selectedCustomerSAP.value!,
-              hasConnetrion: _connectionService.hasConnection,
-              locale: Get.locale!.languageCode));
+      _selectedCustomer.value = await _getCustomerAndCache.call(GetCustomerAndCacheParams(
+          customerSAP: _selectedCustomerSAP.value!, hasConnetrion: _connectionService.hasConnection, locale: Get.locale!.languageCode));
 
       // Register in cache fetching service
-      CacheUpdateEvent cacheUpdateEvent = CacheUpdateEvent(
-          tag: 'customer',
-          updateActionCallback: updateCustomerData,
-          lastUpdateTimeCallback: getLastSync);
+      CacheUpdateEvent cacheUpdateEvent = CacheUpdateEvent(tag: 'customer', updateActionCallback: updateCustomerData, lastUpdateTimeCallback: getLastSync);
       _cacheFetchingService.registerEvent(cacheUpdateEvent: cacheUpdateEvent);
     } catch (e) {
       // _customerLoadingError.value = e.toString();
@@ -151,17 +135,14 @@ class CustomerController extends GetxController {
   }
 
   Future<DateTime> getLastSync() async {
-    SyncData syncData =
-        await _getCustomerSyncData.call(_selectedCustomerSAP.value!);
+    SyncData syncData = await _getCustomerSyncData.call(_selectedCustomerSAP.value!);
     return syncData.syncDateTime;
   }
 
   Future updateCustomerData() async {
     try {
       Customer c = await _getCustomerAndCache.call(GetCustomerAndCacheParams(
-          locale: Get.locale!.languageCode,
-          customerSAP: _selectedCustomerSAP.value!,
-          hasConnetrion: _connectionService.hasConnection));
+          locale: Get.locale!.languageCode, customerSAP: _selectedCustomerSAP.value!, hasConnetrion: _connectionService.hasConnection));
       _selectedCustomer.value = c;
     } catch (e) {
       print(e.toString());
@@ -185,28 +166,20 @@ class CustomerController extends GetxController {
       defaultDialog();
 
       // load data
-      _selectedCustomer.value = await _getCustomerAndCache.call(
-          GetCustomerAndCacheParams(
-              locale: Get.locale!.languageCode,
-              customerSAP: customerSAP,
-              hasConnetrion: _connectionService.hasConnection));
+      _selectedCustomer.value = await _getCustomerAndCache
+          .call(GetCustomerAndCacheParams(locale: Get.locale!.languageCode, customerSAP: customerSAP, hasConnetrion: _connectionService.hasConnection));
 
       // Switch
       _selectedCustomerSAP.value = customerSAP;
       // save
-      _setSelectedCustomerSAP.call(SetSelectedCustomerSAPParams(
-          userId: _userDataController.authData!.userId,
-          customerSAP: _selectedCustomerSAP.value!));
+      _setSelectedCustomerSAP.call(SetSelectedCustomerSAPParams(userId: _userDataController.authData!.userId, customerSAP: _selectedCustomerSAP.value!));
 
       Get.until((route) => !Get.isDialogOpen!);
     } catch (e) {
       Get.until((route) => !Get.isDialogOpen!);
       // Get.snackbar('Error', e.toString());
       Get.bottomSheet(InfoBottomSheet(
-          headerText: 'Error'.tr,
-          mainText: e.toString(),
-          actions: [InfoAction(text: 'Ok', callback: () => Get.back())],
-          headerIconPath: AssetImages.info));
+          headerText: 'Error'.tr, mainText: e.toString(), actions: [InfoAction(text: 'Ok', callback: () => Get.back())], headerIconPath: AssetImages.info));
     }
   }
 }

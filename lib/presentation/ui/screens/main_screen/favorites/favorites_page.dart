@@ -1,16 +1,15 @@
-import 'package:***REMOVED***/core/asset_images.dart';
-import 'package:***REMOVED***/core/mycolors.dart';
-import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/materials_catalog_states.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/favorites/favorites_page_controller.dart';
-import 'package:***REMOVED***/presentation/ui/widgets/material_card.dart';
+import 'package:salesforce.startup/core/asset_images.dart';
+import 'package:salesforce.startup/core/mycolors.dart';
+import 'package:salesforce.startup/presentation/controllers/materials_catalog_controller.dart';
+import 'package:salesforce.startup/presentation/controllers/materials_catalog_states.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/favorites/favorites_page_controller.dart';
+import 'package:salesforce.startup/presentation/ui/widgets/material_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FavoritesPage extends StatelessWidget {
   final MaterialsCatalogController materialsCatalogController = Get.find();
-  final FavoritesPageController favoritesPageController =
-      Get.put(FavoritesPageController());
+  final FavoritesPageController favoritesPageController = Get.put(FavoritesPageController());
 
   @override
   Widget build(BuildContext context) {
@@ -77,8 +76,7 @@ class FavoritesPage extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
                     child: Text(
                       "Add the entire list to cart".tr,
-                      style:
-                          TextStyle(color: MyColors.blue_003E83, fontSize: 14),
+                      style: TextStyle(color: MyColors.blue_003E83, fontSize: 14),
                     ))
               ],
             ),
@@ -105,8 +103,7 @@ class FavoritesPage extends StatelessWidget {
 
   Widget buildItemsList() {
     return Obx(() {
-      MaterialsCatalogState mcState =
-          materialsCatalogController.materialsCatalogState.value;
+      MaterialsCatalogState mcState = materialsCatalogController.materialsCatalogState.value;
 
       if (mcState is MCSCommon) {
         if (favoritesPageController.materialsToShow.isEmpty) {
@@ -173,22 +170,14 @@ class FavoritesPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       listTile(
-                          onTap: () =>
-                              favoritesPageController.selectRecomended(),
-                          isSelected:
-                              favoritesPageController.recomendedListSelected,
+                          onTap: () => favoritesPageController.selectRecomended(),
+                          isSelected: favoritesPageController.recomendedListSelected,
                           name: 'Recomended List'.tr,
-                          count: favoritesPageController
-                              .recomendedMaterials.length),
+                          count: favoritesPageController.recomendedMaterials.length),
                       ...favoritesPageController.favoriteLists.map((e) {
                         return listTile(
-                            onTap: () => favoritesPageController.selectList(
-                                index: favoritesPageController.favoriteLists
-                                    .indexOf(e)),
-                            isSelected:
-                                favoritesPageController.selectedListIndex ==
-                                    favoritesPageController.favoriteLists
-                                        .indexOf(e),
+                            onTap: () => favoritesPageController.selectList(index: favoritesPageController.favoriteLists.indexOf(e)),
+                            isSelected: favoritesPageController.selectedListIndex == favoritesPageController.favoriteLists.indexOf(e),
                             name: e.listName,
                             count: e.favoriteItems.length);
                       }).toList()
@@ -215,17 +204,9 @@ class FavoritesPage extends StatelessWidget {
                 ),
                 Container(
                     decoration: BoxDecoration(
-                        color: isSelected
-                            ? Color(0xff00458C)
-                            : Color(0xff00458C).withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(Get.width * 0.04)),
-                    margin: EdgeInsets.only(
-                        left: Get.width * 0.01,
-                        right: Get.width * 0.01,
-                        top: 10),
-                    padding: EdgeInsets.symmetric(
-                        horizontal: Get.width * 0.035,
-                        vertical: Get.width * 0.025),
+                        color: isSelected ? Color(0xff00458C) : Color(0xff00458C).withOpacity(0.2), borderRadius: BorderRadius.circular(Get.width * 0.04)),
+                    margin: EdgeInsets.only(left: Get.width * 0.01, right: Get.width * 0.01, top: 10),
+                    padding: EdgeInsets.symmetric(horizontal: Get.width * 0.035, vertical: Get.width * 0.025),
                     child: Text(name,
                         style: TextStyle(
                           fontSize: 12,
@@ -235,10 +216,7 @@ class FavoritesPage extends StatelessWidget {
             ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 9, vertical: 6),
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white,
-                  border: Border.all(color: MyColors.blue_00458C)),
+              decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white, border: Border.all(color: MyColors.blue_00458C)),
               child: Text(
                 "${count}",
                 style: TextStyle(fontSize: 12, color: MyColors.blue_00458C),
@@ -259,10 +237,8 @@ class FavoritesPage extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  padding: EdgeInsets.symmetric(
-                      vertical: Get.width * 0.05, horizontal: Get.width * 0.05),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: MyColors.blue_003E7E),
+                  padding: EdgeInsets.symmetric(vertical: Get.width * 0.05, horizontal: Get.width * 0.05),
+                  decoration: BoxDecoration(shape: BoxShape.circle, color: MyColors.blue_003E7E),
                   child: Image.asset(
                     AssetImages.no_products,
                     height: Get.width * 0.06,
@@ -275,28 +251,22 @@ class FavoritesPage extends StatelessWidget {
                 Text(
                   "No product transfer yet To this list".tr,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: MyColors.blue_003E7E, fontSize: Get.width * 0.06),
+                  style: TextStyle(color: MyColors.blue_003E7E, fontSize: Get.width * 0.06),
                 ),
                 SizedBox(
                   height: Get.width * 0.03,
                 ),
                 Text(
-                  "Save your products on the page Favorites by clicking on -"
-                      .tr,
+                  "Save your products on the page Favorites by clicking on -".tr,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: MyColors.blue_003E7E, fontSize: Get.width * 0.04),
+                  style: TextStyle(color: MyColors.blue_003E7E, fontSize: Get.width * 0.04),
                 ),
                 SizedBox(
                   height: Get.width * 0.03,
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(
-                      vertical: Get.width * 0.025,
-                      horizontal: Get.width * 0.025),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: MyColors.blue_003E7E),
+                  padding: EdgeInsets.symmetric(vertical: Get.width * 0.025, horizontal: Get.width * 0.025),
+                  decoration: BoxDecoration(shape: BoxShape.circle, color: MyColors.blue_003E7E),
                   child: Image.asset(AssetImages.favorite_no_product),
                   height: Get.width * 0.09,
                   width: Get.width * 0.1,
@@ -307,18 +277,14 @@ class FavoritesPage extends StatelessWidget {
                 Text(
                   "On the favorites page, click on -".tr,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: MyColors.blue_003E7E, fontSize: Get.width * 0.04),
+                  style: TextStyle(color: MyColors.blue_003E7E, fontSize: Get.width * 0.04),
                 ),
                 SizedBox(
                   height: Get.width * 0.03,
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(
-                      vertical: Get.width * 0.025,
-                      horizontal: Get.width * 0.025),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: MyColors.blue_003E7E),
+                  padding: EdgeInsets.symmetric(vertical: Get.width * 0.025, horizontal: Get.width * 0.025),
+                  decoration: BoxDecoration(shape: BoxShape.circle, color: MyColors.blue_003E7E),
                   child: Icon(
                     Icons.more_vert,
                     color: Colors.white,
@@ -329,11 +295,9 @@ class FavoritesPage extends StatelessWidget {
                   height: Get.width * 0.03,
                 ),
                 Text(
-                  "Let you move the\nproduct\nTo one of the lists you opened"
-                      .tr,
+                  "Let you move the\nproduct\nTo one of the lists you opened".tr,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: MyColors.blue_003E7E, fontSize: Get.width * 0.04),
+                  style: TextStyle(color: MyColors.blue_003E7E, fontSize: Get.width * 0.04),
                 ),
                 SizedBox(
                   height: Get.width * 0.03,
@@ -349,10 +313,7 @@ class FavoritesPage extends StatelessWidget {
                     ),
                     Text(
                       "Delete the list".tr,
-                      style: TextStyle(
-                          color: MyColors.blue_00458C,
-                          fontSize: Get.width * 0.03,
-                          decoration: TextDecoration.underline),
+                      style: TextStyle(color: MyColors.blue_00458C, fontSize: Get.width * 0.03, decoration: TextDecoration.underline),
                     )
                   ],
                 ),
@@ -368,26 +329,16 @@ class FavoritesPage extends StatelessWidget {
   Widget buildHaveNewList() {
     return Container(
       decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-                color: Colors.grey.shade300, spreadRadius: 1, blurRadius: 5)
-          ],
-          borderRadius: BorderRadius.circular(10)),
-      margin: EdgeInsets.symmetric(
-          horizontal: Get.width * 0.05, vertical: Get.width * 0.05),
+          color: Colors.white, boxShadow: [BoxShadow(color: Colors.grey.shade300, spreadRadius: 1, blurRadius: 5)], borderRadius: BorderRadius.circular(10)),
+      margin: EdgeInsets.symmetric(horizontal: Get.width * 0.05, vertical: Get.width * 0.05),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-              padding: EdgeInsets.symmetric(
-                  horizontal: Get.width * 0.05, vertical: Get.width * 0.05),
+              padding: EdgeInsets.symmetric(horizontal: Get.width * 0.05, vertical: Get.width * 0.05),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(10),
-                      topLeft: Radius.circular(10)),
-                  gradient: LinearGradient(
-                      colors: [MyColors.green_49D84C, MyColors.green_37C33A])),
+                  borderRadius: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10)),
+                  gradient: LinearGradient(colors: [MyColors.green_49D84C, MyColors.green_37C33A])),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -417,17 +368,12 @@ class FavoritesPage extends StatelessWidget {
               children: [
                 Text(
                   "Breakfast Products",
-                  style: TextStyle(
-                      color: MyColors.blue_003E7E,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
+                  style: TextStyle(color: MyColors.blue_003E7E, fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
                   height: Get.width * 0.05,
                 ),
-                Text(
-                    "To fill out the list click on the three points on the left side of the product"
-                        .tr,
+                Text("To fill out the list click on the three points on the left side of the product".tr,
                     style: TextStyle(
                       color: MyColors.blue_003E7E,
                       fontSize: 16,

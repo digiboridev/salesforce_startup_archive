@@ -1,6 +1,6 @@
-import 'package:***REMOVED***/core/mycolors.dart';
-import 'package:***REMOVED***/domain/entities/materials/material.dart';
-import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
+import 'package:salesforce.startup/core/mycolors.dart';
+import 'package:salesforce.startup/domain/entities/materials/material.dart';
+import 'package:salesforce.startup/presentation/controllers/materials_catalog_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,8 +13,7 @@ class OutStockMaterialComponent extends StatefulWidget {
   final Materiale materiale;
 
   @override
-  State<OutStockMaterialComponent> createState() =>
-      _OutStockMaterialComponentState();
+  State<OutStockMaterialComponent> createState() => _OutStockMaterialComponentState();
 }
 
 class _OutStockMaterialComponentState extends State<OutStockMaterialComponent> {
@@ -25,8 +24,7 @@ class _OutStockMaterialComponentState extends State<OutStockMaterialComponent> {
   onSubscribe() async {
     setState(() => loading = true);
 
-    await materialsCatalogController.subscribeToMaterial(
-        material: widget.materiale);
+    await materialsCatalogController.subscribeToMaterial(material: widget.materiale);
 
     setState(() => loading = false);
   }
@@ -37,16 +35,11 @@ class _OutStockMaterialComponentState extends State<OutStockMaterialComponent> {
       child: Column(
         children: [
           Obx(() => Container(
-                margin: EdgeInsets.only(
-                    left: Get.width * 0.05,
-                    right: Get.width * 0.05,
-                    bottom: 15),
+                margin: EdgeInsets.only(left: Get.width * 0.05, right: Get.width * 0.05, bottom: 15),
                 alignment: Alignment.center,
                 height: 44,
                 decoration: BoxDecoration(
-                    color: widget.materiale.didSubscribedToInventoryAlert.value
-                        ? MyColors.blue_007AFE
-                        : MyColors.blue_003E83,
+                    color: widget.materiale.didSubscribedToInventoryAlert.value ? MyColors.blue_007AFE : MyColors.blue_003E83,
                     borderRadius: BorderRadius.all(Radius.circular(20))),
                 child: content,
               ))
@@ -61,8 +54,7 @@ class _OutStockMaterialComponentState extends State<OutStockMaterialComponent> {
     } else {
       return widget.materiale.didSubscribedToInventoryAlert.value
           ? Padding(
-              padding: EdgeInsets.only(
-                  left: Get.width * 0.03, right: Get.width * 0.03),
+              padding: EdgeInsets.only(left: Get.width * 0.03, right: Get.width * 0.03),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

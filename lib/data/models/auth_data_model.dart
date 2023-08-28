@@ -1,4 +1,4 @@
-import 'package:***REMOVED***/domain/entities/auth_data.dart';
+import 'package:salesforce.startup/domain/entities/auth_data.dart';
 
 class AuthDataModel extends AuthData {
   AuthDataModel({

@@ -1,36 +1,34 @@
 import 'dart:ui';
-import 'package:***REMOVED***/domain/entities/related_consumer.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/contact_option_tile.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/contactus_panel.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/header_search_result.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/our_focus_head.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/related_customer_tile.dart';
-import 'package:***REMOVED***/core/asset_images.dart';
-import 'package:***REMOVED***/core/mycolors.dart';
-import 'package:***REMOVED***/domain/entities/contact_us_data.dart';
-import 'package:***REMOVED***/presentation/controllers/contactus_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/search_controller.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar_controller.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/favorites/favorites_page_controller.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/mainscreen_header_controller.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/mainscreen_header_states.dart';
-import 'package:***REMOVED***/presentation/ui/screens/profile/profile_screen.dart';
+import 'package:salesforce.startup/domain/entities/related_consumer.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/header/contact_option_tile.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/header/contactus_panel.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/header/header_search_result.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/header/our_focus_head.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/header/related_customer_tile.dart';
+import 'package:salesforce.startup/core/asset_images.dart';
+import 'package:salesforce.startup/core/mycolors.dart';
+import 'package:salesforce.startup/domain/entities/contact_us_data.dart';
+import 'package:salesforce.startup/presentation/controllers/contactus_controller.dart';
+import 'package:salesforce.startup/presentation/controllers/customer_controller.dart';
+import 'package:salesforce.startup/presentation/controllers/search_controller.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/bottombar/bottom_bar_controller.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/favorites/favorites_page_controller.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/header/mainscreen_header_controller.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/header/mainscreen_header_states.dart';
+import 'package:salesforce.startup/presentation/ui/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MainScreenHeader extends StatefulWidget {
   final double headerHeight;
-  const MainScreenHeader({Key? key, required this.headerHeight})
-      : super(key: key);
+  const MainScreenHeader({Key? key, required this.headerHeight}) : super(key: key);
 
   @override
   State<MainScreenHeader> createState() => _MainScreenHeaderState();
 }
 
 class _MainScreenHeaderState extends State<MainScreenHeader> {
-  final MainScreeenHeaderController mainScreeenHeaderController =
-      Get.put(MainScreeenHeaderController());
+  final MainScreeenHeaderController mainScreeenHeaderController = Get.put(MainScreeenHeaderController());
   final CustomerController customerController = Get.find();
   // final ContactusController contactusController = Get.find();
   final SearchController searchController = Get.find();
@@ -78,16 +76,10 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
       return AnimatedContainer(
         curve: Curves.easeInOut,
         duration: Duration(milliseconds: 300),
-        height: mainScreeenHeaderController.mainScreeenHeaderState.value
-                is! MSHShowContactus
-            ? widget.headerHeight
-            : widget.headerHeight / 1.5,
+        height: mainScreeenHeaderController.mainScreeenHeaderState.value is! MSHShowContactus ? widget.headerHeight : widget.headerHeight / 1.5,
         // color: Colors.red,
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
+            gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
         padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
         child: Column(
           children: [
@@ -99,8 +91,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
               children: [
                 GestureDetector(
                     onTap: () {
-                      Get.to(() => ProfileScreen(),
-                          transition: Transition.cupertino);
+                      Get.to(() => ProfileScreen(), transition: Transition.cupertino);
                     },
                     child: Image.asset(
                       AssetImages.settings,
@@ -109,7 +100,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                 Hero(
                   tag: 'logo',
                   child: Image.asset(
-                    AssetImages.***REMOVED***Logo,
+                    AssetImages.startupLogo,
                     width: Get.width * 0.2,
                   ),
                 ),
@@ -133,20 +124,15 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
             Spacer(
               flex: 1,
             ),
-            if (mainScreeenHeaderController.mainScreeenHeaderState.value
-                is! MSHShowContactus)
-              searchBar(),
+            if (mainScreeenHeaderController.mainScreeenHeaderState.value is! MSHShowContactus) searchBar(),
             Spacer(
               flex: 1,
             ),
-            if (mainScreeenHeaderController.mainScreeenHeaderState.value
-                is! MSHShowContactus)
+            if (mainScreeenHeaderController.mainScreeenHeaderState.value is! MSHShowContactus)
               AnimatedContainer(
                 curve: Curves.easeInOut,
                 duration: Duration(milliseconds: 300),
-                height: mainScreeenHeaderController.enableBrunchSelection.value
-                    ? Get.width * 0.08
-                    : 0,
+                height: mainScreeenHeaderController.enableBrunchSelection.value ? Get.width * 0.08 : 0,
                 child: GestureDetector(
                   onTap: () {
                     setState(() {
@@ -167,18 +153,11 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                               overflow: TextOverflow.ellipsis,
                             )),
                       ),
-                      if (mainScreeenHeaderController
-                          .mainScreeenHeaderState.value is! MSHShowBrunch)
+                      if (mainScreeenHeaderController.mainScreeenHeaderState.value is! MSHShowBrunch)
                         Container(
                           decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(Get.width * 0.03),
-                              border: Border.all(
-                                  width: Get.width * 0.001,
-                                  color: Colors.white)),
-                          padding: EdgeInsets.symmetric(
-                              vertical: Get.width * 0.005,
-                              horizontal: Get.width * 0.03),
+                              borderRadius: BorderRadius.circular(Get.width * 0.03), border: Border.all(width: Get.width * 0.001, color: Colors.white)),
+                          padding: EdgeInsets.symmetric(vertical: Get.width * 0.005, horizontal: Get.width * 0.03),
                           child: GestureDetector(
                             onTap: () => goToRecomended(),
                             child: Row(
@@ -186,9 +165,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                               children: [
                                 Text(
                                   'Recomended List'.tr,
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: Get.width * 0.035),
+                                  style: TextStyle(color: Colors.white, fontSize: Get.width * 0.035),
                                 ),
                                 SizedBox(
                                   width: Get.width * 0.015,
@@ -219,8 +196,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
       alignment: Alignment.topCenter,
       child: Stack(children: [
         Obx(() {
-          if (mainScreeenHeaderController.mainScreeenHeaderState.value
-              is! MSHShowCommon) {
+          if (mainScreeenHeaderController.mainScreeenHeaderState.value is! MSHShowCommon) {
             return Positioned(
                 child: ClipRect(
               child: BackdropFilter(
@@ -239,15 +215,10 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
               clipBehavior: Clip.antiAlias,
               duration: Duration(milliseconds: 200),
               curve: Curves.easeInOut,
-              height: mainScreeenHeaderController.mainScreeenHeaderState.value
-                      is MSHShowSearch
-                  ? Get.height
-                  : 0,
+              height: mainScreeenHeaderController.mainScreeenHeaderState.value is MSHShowSearch ? Get.height : 0,
               child: OverflowBox(
                 minHeight: 0,
-                child: HeaderSearchResult(
-                    searchController: searchController,
-                    mainScreeenHeaderController: mainScreeenHeaderController),
+                child: HeaderSearchResult(searchController: searchController, mainScreeenHeaderController: mainScreeenHeaderController),
               ),
             )),
         Obx(() => AnimatedContainer(
@@ -255,10 +226,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
               clipBehavior: Clip.antiAlias,
               duration: Duration(milliseconds: 200),
               curve: Curves.easeInOut,
-              height: mainScreeenHeaderController.mainScreeenHeaderState.value
-                      is MSHShowContactus
-                  ? Get.width
-                  : 0,
+              height: mainScreeenHeaderController.mainScreeenHeaderState.value is MSHShowContactus ? Get.width : 0,
               child: OverflowBox(
                 minHeight: 0,
                 child: ContactUsPanel(
@@ -272,10 +240,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
             clipBehavior: Clip.antiAlias,
             duration: Duration(milliseconds: 200),
             curve: Curves.easeInOut,
-            height: mainScreeenHeaderController.mainScreeenHeaderState.value
-                    is MSHShowBrunch
-                ? Get.width * 1.2
-                : 0,
+            height: mainScreeenHeaderController.mainScreeenHeaderState.value is MSHShowBrunch ? Get.width * 1.2 : 0,
             child: OverflowBox(
               minHeight: 0,
               child: Column(
@@ -328,12 +293,10 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                 ),
               ),
               secondChild: SizedBox(),
-              crossFadeState: mainScreeenHeaderController
-                          .enableBrunchSelection.value &&
-                      mainScreeenHeaderController.mainScreeenHeaderState.value
-                          is MSHShowCommon
-                  ? CrossFadeState.showFirst
-                  : CrossFadeState.showSecond,
+              crossFadeState:
+                  mainScreeenHeaderController.enableBrunchSelection.value && mainScreeenHeaderController.mainScreeenHeaderState.value is MSHShowCommon
+                      ? CrossFadeState.showFirst
+                      : CrossFadeState.showSecond,
               duration: Duration(milliseconds: 010),
               firstCurve: Curves.easeOut,
               secondCurve: Curves.easeOut,
@@ -353,9 +316,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
               mainScreeenHeaderController.hide();
             },
             child: Container(
-              decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.8),
-                  borderRadius: BorderRadius.circular(Get.width * 0.1)),
+              decoration: BoxDecoration(color: Colors.white.withOpacity(0.8), borderRadius: BorderRadius.circular(Get.width * 0.1)),
               width: Get.width * 0.1,
               height: Get.width * 0.1,
               child: Icon(Icons.close),
@@ -365,12 +326,8 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
           SizedBox(
             width: Get.width * 0.015,
           ),
-        if (mainScreeenHeaderController.mainScreeenHeaderState.value
-            is MSHShowBrunch)
-          buildBrunchSearchField(),
-        if (mainScreeenHeaderController.mainScreeenHeaderState.value
-            is! MSHShowBrunch)
-          buildMaterialsSearchField(),
+        if (mainScreeenHeaderController.mainScreeenHeaderState.value is MSHShowBrunch) buildBrunchSearchField(),
+        if (mainScreeenHeaderController.mainScreeenHeaderState.value is! MSHShowBrunch) buildMaterialsSearchField(),
       ].reversed.toList(),
     );
   }
@@ -399,8 +356,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                   controller: _scrollController,
                   physics: BouncingScrollPhysics(),
                   child: Column(children: [
-                    if (customerController.closestRelatedConsumer
-                        is RelatedConsumer)
+                    if (customerController.closestRelatedConsumer is RelatedConsumer)
                       Padding(
                         padding: EdgeInsets.symmetric(
                           horizontal: Get.width * 0.03,
@@ -409,27 +365,19 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                           children: [
                             Text(
                               '${'Nearest Brunch'.tr}',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white.withOpacity(0.77)),
+                              style: TextStyle(fontSize: 16, color: Colors.white.withOpacity(0.77)),
                             ),
                           ],
                         ),
                       ),
-                    if (customerController.closestRelatedConsumer
-                        is RelatedConsumer)
+                    if (customerController.closestRelatedConsumer is RelatedConsumer)
                       RelatedCustomerTile(
                         ontap: () {
                           customerController
-                              .switchCustomer(
-                                  customerSAP: customerController
-                                      .closestRelatedConsumer!
-                                      .customerSAPNumber)
-                              .then((value) =>
-                                  mainScreeenHeaderController.hide());
+                              .switchCustomer(customerSAP: customerController.closestRelatedConsumer!.customerSAPNumber)
+                              .then((value) => mainScreeenHeaderController.hide());
                         },
-                        relatedConsumer:
-                            customerController.closestRelatedConsumer!,
+                        relatedConsumer: customerController.closestRelatedConsumer!,
                       ),
                     Padding(
                       padding: EdgeInsets.symmetric(
@@ -439,24 +387,17 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                         children: [
                           Text(
                             '${'All brunches'.tr}',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.white.withOpacity(0.77)),
+                            style: TextStyle(fontSize: 16, color: Colors.white.withOpacity(0.77)),
                           ),
                         ],
                       ),
                     ),
                     ...customerController.relatedConsumers
-                        .where((element) => element.customerName
-                            .toLowerCase()
-                            .contains(searchBranchCondition.toLowerCase()))
+                        .where((element) => element.customerName.toLowerCase().contains(searchBranchCondition.toLowerCase()))
                         .map((e) {
                       return RelatedCustomerTile(
                         ontap: () {
-                          customerController
-                              .switchCustomer(customerSAP: e.customerSAPNumber)
-                              .then((value) =>
-                                  mainScreeenHeaderController.hide());
+                          customerController.switchCustomer(customerSAP: e.customerSAPNumber).then((value) => mainScreeenHeaderController.hide());
                         },
                         relatedConsumer: e,
                       );
@@ -514,9 +455,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
     return Expanded(
       child: Container(
         height: Get.width * 0.1,
-        decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.8),
-            borderRadius: BorderRadius.circular(Get.width * 0.1)),
+        decoration: BoxDecoration(color: Colors.white.withOpacity(0.8), borderRadius: BorderRadius.circular(Get.width * 0.1)),
         child: Row(
           children: [
             SizedBox(
@@ -545,8 +484,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                 alignLabelWithHint: true,
 
                 labelText: 'Search branch'.tr,
-                labelStyle:
-                    TextStyle(color: MyColors.blue_00458C, fontSize: 16),
+                labelStyle: TextStyle(color: MyColors.blue_00458C, fontSize: 16),
                 floatingLabelBehavior: FloatingLabelBehavior.never,
                 border: InputBorder.none,
 
@@ -571,9 +509,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
     return Expanded(
       child: Container(
         height: Get.width * 0.1,
-        decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.8),
-            borderRadius: BorderRadius.circular(Get.width * 0.1)),
+        decoration: BoxDecoration(color: Colors.white.withOpacity(0.8), borderRadius: BorderRadius.circular(Get.width * 0.1)),
         child: Row(
           children: [
             SizedBox(
@@ -600,8 +536,7 @@ class _MainScreenHeaderState extends State<MainScreenHeader> {
                 alignLabelWithHint: true,
 
                 labelText: 'Search product'.tr,
-                labelStyle:
-                    TextStyle(color: MyColors.blue_00458C, fontSize: 16),
+                labelStyle: TextStyle(color: MyColors.blue_00458C, fontSize: 16),
                 floatingLabelBehavior: FloatingLabelBehavior.never,
                 border: InputBorder.none,
                 focusedBorder: InputBorder.none,

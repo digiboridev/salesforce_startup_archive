@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:***REMOVED***/core/mycolors.dart';
+import 'package:salesforce.startup/core/mycolors.dart';
 
 class InfoAction extends Equatable {
   final String text;
@@ -26,12 +26,7 @@ class InfoBottomSheet extends StatelessWidget {
   final String headerText;
   final String mainText;
   const InfoBottomSheet(
-      {Key? key,
-      required this.actions,
-      required this.headerIconPath,
-      required this.headerText,
-      required this.mainText,
-      this.withCloseBtn = false})
+      {Key? key, required this.actions, required this.headerIconPath, required this.headerText, required this.mainText, this.withCloseBtn = false})
       : super(key: key);
 
   @override
@@ -41,9 +36,7 @@ class InfoBottomSheet extends StatelessWidget {
       width: Get.width,
       child: Stack(
         children: [
-          BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-              child: Container()),
+          BackdropFilter(filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), child: Container()),
           Positioned.fill(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -55,8 +48,7 @@ class InfoBottomSheet extends StatelessWidget {
                       child: Container(
                         height: Get.width * 0.1,
                         width: Get.width * 0.1,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle, color: Colors.white),
+                        decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white),
                         child: Icon(
                           Icons.clear,
                           color: MyColors.gray_979797,
@@ -74,10 +66,7 @@ class InfoBottomSheet extends StatelessWidget {
                     width: Get.width,
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                            opacity: 1,
-                            fit: BoxFit.fitWidth,
-                            alignment: Alignment.topCenter,
-                            image: AssetImage('assets/images/bottombar.png'))),
+                            opacity: 1, fit: BoxFit.fitWidth, alignment: Alignment.topCenter, image: AssetImage('assets/images/bottombar.png'))),
                   ),
                 ),
               ],
@@ -118,30 +107,22 @@ class InfoBottomSheet extends StatelessWidget {
                         height: Get.width * 0.15,
                       ),
                     Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: Get.width * 0.08),
+                      padding: EdgeInsets.symmetric(horizontal: Get.width * 0.08),
                       child: Text(
                         headerText,
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.fade,
-                        style: TextStyle(
-                            color: MyColors.blue_003E7E,
-                            fontWeight: FontWeight.w600,
-                            fontSize: Get.width * 0.06),
+                        style: TextStyle(color: MyColors.blue_003E7E, fontWeight: FontWeight.w600, fontSize: Get.width * 0.06),
                       ),
                     ),
                     Expanded(
                       child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: Get.width * 0.08),
+                        padding: EdgeInsets.symmetric(horizontal: Get.width * 0.08),
                         child: Text(
                           mainText,
                           textAlign: TextAlign.center,
                           overflow: TextOverflow.fade,
-                          style: TextStyle(
-                              color: MyColors.blue_003E7E,
-                              fontWeight: FontWeight.w400,
-                              fontSize: Get.width * 0.05),
+                          style: TextStyle(color: MyColors.blue_003E7E, fontWeight: FontWeight.w400, fontSize: Get.width * 0.05),
                         ),
                       ),
                     ),
@@ -156,16 +137,9 @@ class InfoBottomSheet extends StatelessWidget {
                             padding: EdgeInsets.symmetric(
                               vertical: Get.width * 0.025,
                             ),
-                            decoration: BoxDecoration(
-                                color: MyColors.blue_003E7E,
-                                borderRadius:
-                                    BorderRadius.circular(Get.width * 0.06)),
+                            decoration: BoxDecoration(color: MyColors.blue_003E7E, borderRadius: BorderRadius.circular(Get.width * 0.06)),
                             alignment: Alignment.center,
-                            child: Text(actions.first.text,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: Get.width * 0.05))),
+                            child: Text(actions.first.text, style: TextStyle(color: Colors.white, fontWeight: FontWeight.w400, fontSize: Get.width * 0.05))),
                       ),
                     if (actions.length > 1)
                       Row(
@@ -179,15 +153,8 @@ class InfoBottomSheet extends StatelessWidget {
                                   vertical: Get.width * 0.025,
                                 ),
                                 alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                    color: MyColors.blue_003E7E,
-                                    borderRadius: BorderRadius.circular(
-                                        Get.width * 0.06)),
-                                child: Text(e.text,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: Get.width * 0.05))),
+                                decoration: BoxDecoration(color: MyColors.blue_003E7E, borderRadius: BorderRadius.circular(Get.width * 0.06)),
+                                child: Text(e.text, style: TextStyle(color: Colors.white, fontWeight: FontWeight.w400, fontSize: Get.width * 0.05))),
                           );
                         }).toList(),
                       ),

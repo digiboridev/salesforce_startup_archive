@@ -497,7 +497,7 @@
 					"-framework",
 					"\"webview_flutter_wkwebview\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ***REMOVED***.qa;
+				PRODUCT_BUNDLE_IDENTIFIER = net.archive.qa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -555,7 +555,7 @@
 					"-framework",
 					"\"webview_flutter_wkwebview\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ***REMOVED***.qa;
+				PRODUCT_BUNDLE_IDENTIFIER = net.archive.qa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

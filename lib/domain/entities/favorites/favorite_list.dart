@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import 'package:***REMOVED***/domain/entities/favorites/favorite_item.dart';
+import 'package:salesforce.startup/domain/entities/favorites/favorite_item.dart';
 
 class FavoriteList extends Equatable {
   final String sFId;

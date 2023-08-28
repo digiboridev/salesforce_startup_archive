@@ -1,10 +1,10 @@
-import 'package:***REMOVED***/domain/entities/materials/brand.dart';
-import 'package:***REMOVED***/domain/entities/materials/classification.dart';
-import 'package:***REMOVED***/domain/entities/materials/family.dart';
-import 'package:***REMOVED***/domain/entities/materials/hierarchy.dart';
-import 'package:***REMOVED***/domain/entities/materials/material.dart';
-import 'package:***REMOVED***/domain/entities/materials/materials_catalog.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalog_page_states.dart';
+import 'package:salesforce.startup/domain/entities/materials/brand.dart';
+import 'package:salesforce.startup/domain/entities/materials/classification.dart';
+import 'package:salesforce.startup/domain/entities/materials/family.dart';
+import 'package:salesforce.startup/domain/entities/materials/hierarchy.dart';
+import 'package:salesforce.startup/domain/entities/materials/material.dart';
+import 'package:salesforce.startup/domain/entities/materials/materials_catalog.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/catalog/catalog_page_states.dart';
 import 'package:get/get.dart';
 
 class CatalogPageController extends GetxController {
@@ -28,18 +28,14 @@ class CatalogPageController extends GetxController {
 
   List<Hierarchy> get hierarhys => _materialsCatalog.value.hierarchys;
 
-  List<Classification> get getClassifications =>
-      _materialsCatalog.value.classifications
-          .where((element) => _materialsCatalog.value.materials
-              .map((e) => e.ClassificationId)
-              .contains(element.SFId))
-          .toList();
+  List<Classification> get getClassifications => _materialsCatalog.value.classifications
+      .where((element) => _materialsCatalog.value.materials.map((e) => e.ClassificationId).contains(element.SFId))
+      .toList();
 
   Rxn<Classification> _selectedClassification = Rxn();
   Classification? get selectedClassification => _selectedClassification.value;
 
-  List<Materiale> get _materialsByClassification =>
-      _materialsCatalog.value.materials.where((element) {
+  List<Materiale> get _materialsByClassification => _materialsCatalog.value.materials.where((element) {
         if (_selectedClassification.value != null) {
           if (element.ClassificationId == _selectedClassification.value!.SFId) {
             return true;
@@ -54,8 +50,7 @@ class CatalogPageController extends GetxController {
   onClassificationClick({required Classification classification}) {
     if (_selectedClassification.value == classification) {
       _selectedClassification.value = null;
-      _state.value =
-          ShowAllMaterials(materials: _materialsCatalog.value.materials);
+      _state.value = ShowAllMaterials(materials: _materialsCatalog.value.materials);
     } else {
       _selectedClassification.value = classification;
       showBrands();
@@ -67,9 +62,7 @@ class CatalogPageController extends GetxController {
 
     _state.value = ShowFamilies(
         families: _materialsCatalog.value.families.where((element) {
-      if (_materialsByClassification
-          .map((e) => e.FamilyId ?? '')
-          .contains(element.SFId)) {
+      if (_materialsByClassification.map((e) => e.FamilyId ?? '').contains(element.SFId)) {
         return true;
       }
       return false;
@@ -81,9 +74,7 @@ class CatalogPageController extends GetxController {
 
     _state.value = ShowBrands(
         brands: _materialsCatalog.value.brands.where((element) {
-      if (_materialsByClassification
-          .map((e) => e.BrandId ?? '')
-          .contains(element.SFId)) {
+      if (_materialsByClassification.map((e) => e.BrandId ?? '').contains(element.SFId)) {
         return true;
       }
       return false;
@@ -123,12 +114,8 @@ class CatalogPageController extends GetxController {
       }
     });
 
-    _state.value = ShowMaterialsByBrand(
-        brand: brand,
-        avaliableHierarhys: avaliableHierarhys.toList(),
-        materials: materials,
-        hierarhyFilter: null,
-        showFilter: false);
+    _state.value =
+        ShowMaterialsByBrand(brand: brand, avaliableHierarhys: avaliableHierarhys.toList(), materials: materials, hierarhyFilter: null, showFilter: false);
   }
 
   onFamilySelect({required Family family}) {
@@ -150,12 +137,8 @@ class CatalogPageController extends GetxController {
       }
     });
 
-    _state.value = ShowMaterialsByFamily(
-        family: family,
-        materials: materials,
-        avaliableHierarhys: avaliableHierarhys.toList(),
-        hierarhyFilter: null,
-        showFilter: false);
+    _state.value =
+        ShowMaterialsByFamily(family: family, materials: materials, avaliableHierarhys: avaliableHierarhys.toList(), hierarhyFilter: null, showFilter: false);
   }
 
   onFilterClick() {
@@ -179,13 +162,10 @@ class CatalogPageController extends GetxController {
 
   onDealsClick({bool forsed = false}) {
     if (_state.value is ShowDeals && !forsed) {
-      _state.value =
-          ShowAllMaterials(materials: _materialsCatalog.value.materials);
+      _state.value = ShowAllMaterials(materials: _materialsCatalog.value.materials);
     } else {
       _selectedClassification.value = null;
-      List<Materiale> materialsToShow = _materialsCatalog.value.materials
-          .where((element) => element.IsHotSale)
-          .toList();
+      List<Materiale> materialsToShow = _materialsCatalog.value.materials.where((element) => element.IsHotSale).toList();
       _state.value = ShowDeals(materials: materialsToShow);
     }
   }

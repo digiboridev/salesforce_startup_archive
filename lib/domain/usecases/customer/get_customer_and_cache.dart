@@ -1,11 +1,10 @@
-import 'package:***REMOVED***/core/errors.dart';
-import 'package:***REMOVED***/data/models/sync_data.dart';
-import 'package:***REMOVED***/data/repositories/customers_repository.dart';
-import 'package:***REMOVED***/domain/entities/customer.dart';
-import 'package:***REMOVED***/domain/usecases/usecase.dart';
+import 'package:salesforce.startup/core/errors.dart';
+import 'package:salesforce.startup/data/models/sync_data.dart';
+import 'package:salesforce.startup/data/repositories/customers_repository.dart';
+import 'package:salesforce.startup/domain/entities/customer.dart';
+import 'package:salesforce.startup/domain/usecases/usecase.dart';
 
-class GetCustomerAndCache
-    implements UseCase<Customer, GetCustomerAndCacheParams> {
+class GetCustomerAndCache implements UseCase<Customer, GetCustomerAndCacheParams> {
   final CustomersRepository customersRepository;
 
   GetCustomerAndCache(this.customersRepository);
@@ -20,24 +19,17 @@ class GetCustomerAndCache
         throw InternalException('No connection');
       }
 
-      Customer remoteCustomer = await customersRepository
-          .getRemoteCustomerBySAP(customerSAP: params.customerSAP);
+      Customer remoteCustomer = await customersRepository.getRemoteCustomerBySAP(customerSAP: params.customerSAP);
 
-      customersRepository.setLocalCustomerBySAP(
-          customerSAP: params.customerSAP, customer: remoteCustomer);
-      customersRepository.setCustomerSyncData(
-          customerSAP: params.customerSAP,
-          syncData:
-              SyncData(syncDateTime: DateTime.now(), locale: params.locale));
+      customersRepository.setLocalCustomerBySAP(customerSAP: params.customerSAP, customer: remoteCustomer);
+      customersRepository.setCustomerSyncData(customerSAP: params.customerSAP, syncData: SyncData(syncDateTime: DateTime.now(), locale: params.locale));
       return remoteCustomer;
     }
   }
 
-  Future<Customer> _loadCache(
-      {required GetCustomerAndCacheParams params}) async {
+  Future<Customer> _loadCache({required GetCustomerAndCacheParams params}) async {
     if (await _cacheValid(params: params)) {
-      return customersRepository.getLocalCustomerBySAP(
-          customerSAP: params.customerSAP);
+      return customersRepository.getLocalCustomerBySAP(customerSAP: params.customerSAP);
     } else {
       throw InternalException('Unable to load that customer');
     }
@@ -45,8 +37,7 @@ class GetCustomerAndCache
 
   Future<bool> _cacheValid({required GetCustomerAndCacheParams params}) async {
     try {
-      SyncData syncData = await customersRepository.getCustomerSyncData(
-          customerSAP: params.customerSAP);
+      SyncData syncData = await customersRepository.getCustomerSyncData(customerSAP: params.customerSAP);
 
       Duration diff = DateTime.now().difference(syncData.syncDateTime);
 

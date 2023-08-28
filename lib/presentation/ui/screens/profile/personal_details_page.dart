@@ -1,9 +1,9 @@
-import 'package:***REMOVED***/core/asset_images.dart';
-import 'package:***REMOVED***/core/mycolors.dart';
-import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/user_data_controller_states.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/contactus_panel.dart';
+import 'package:salesforce.startup/core/asset_images.dart';
+import 'package:salesforce.startup/core/mycolors.dart';
+import 'package:salesforce.startup/presentation/controllers/customer_controller.dart';
+import 'package:salesforce.startup/presentation/controllers/user_data_controller.dart';
+import 'package:salesforce.startup/presentation/controllers/user_data_controller_states.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/header/contactus_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -83,8 +83,7 @@ class PersonalDetailsPageState extends State<PersonalDetailsPage> {
                 padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
                 child: Text(
                   'Personal details'.tr,
-                  style: TextStyle(
-                      fontSize: Get.width * 0.06, color: MyColors.blue_003E7E),
+                  style: TextStyle(fontSize: Get.width * 0.06, color: MyColors.blue_003E7E),
                 ),
               ),
               Spacer(
@@ -94,27 +93,19 @@ class PersonalDetailsPageState extends State<PersonalDetailsPage> {
                 padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
                 child: Column(
                   children: [
-                    buildRow(
-                        text1: 'First name'.tr,
-                        text2: userDataState.userData.contactFirstName),
+                    buildRow(text1: 'First name'.tr, text2: userDataState.userData.contactFirstName),
                     SizedBox(
                       height: Get.width * 0.12,
                     ),
-                    buildRow(
-                        text1: 'Last name'.tr,
-                        text2: userDataState.userData.contactLastName),
+                    buildRow(text1: 'Last name'.tr, text2: userDataState.userData.contactLastName),
                     SizedBox(
                       height: Get.width * 0.12,
                     ),
-                    buildRow(
-                        text1: 'Phone'.tr,
-                        text2: userDataState.userData.contactMobile),
+                    buildRow(text1: 'Phone'.tr, text2: userDataState.userData.contactMobile),
                     SizedBox(
                       height: Get.width * 0.12,
                     ),
-                    buildRow(
-                        text1: 'Email'.tr,
-                        text2: userDataState.userData.contactEmail),
+                    buildRow(text1: 'Email'.tr, text2: userDataState.userData.contactEmail),
                   ],
                 ),
               ),
@@ -155,13 +146,9 @@ class PersonalDetailsPageState extends State<PersonalDetailsPage> {
                 child: Container(
                   width: Get.width,
                   alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: MyColors.blue_00458C,
-                      borderRadius: BorderRadius.circular(Get.width * 0.06)),
-                  padding: EdgeInsets.symmetric(
-                      horizontal: Get.width * 0.1, vertical: Get.width * 0.02),
-                  margin: EdgeInsets.symmetric(
-                      horizontal: Get.width * 0.1, vertical: Get.width * 0.03),
+                  decoration: BoxDecoration(color: MyColors.blue_00458C, borderRadius: BorderRadius.circular(Get.width * 0.06)),
+                  padding: EdgeInsets.symmetric(horizontal: Get.width * 0.1, vertical: Get.width * 0.02),
+                  margin: EdgeInsets.symmetric(horizontal: Get.width * 0.1, vertical: Get.width * 0.03),
                   child: Text(
                     'Close'.tr,
                     style: TextStyle(color: Colors.white, fontSize: 22),
@@ -186,10 +173,7 @@ class PersonalDetailsPageState extends State<PersonalDetailsPage> {
   }) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: Get.width * 0.01),
-      decoration: BoxDecoration(
-          border: Border(
-              bottom: BorderSide(
-                  color: MyColors.blue_003E7E, width: Get.width * 0.003))),
+      decoration: BoxDecoration(border: Border(bottom: BorderSide(color: MyColors.blue_003E7E, width: Get.width * 0.003))),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -203,9 +187,7 @@ class PersonalDetailsPageState extends State<PersonalDetailsPage> {
           ),
           Text(
             text2,
-            style: TextStyle(
-                fontSize: Get.width * 0.042,
-                color: MyColors.blue_003E7E.withOpacity(0.5)),
+            style: TextStyle(fontSize: Get.width * 0.042, color: MyColors.blue_003E7E.withOpacity(0.5)),
           ),
         ],
       ),
@@ -216,10 +198,7 @@ class PersonalDetailsPageState extends State<PersonalDetailsPage> {
     return Container(
       height: Get.width * 0.3,
       decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
+          gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
       padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
       child: Column(
         children: [
@@ -232,16 +211,14 @@ class PersonalDetailsPageState extends State<PersonalDetailsPage> {
                   Get.back();
                 },
                 child: Icon(
-                  Directionality.of(context) == TextDirection.rtl
-                      ? Icons.keyboard_arrow_right
-                      : Icons.keyboard_arrow_left,
+                  Directionality.of(context) == TextDirection.rtl ? Icons.keyboard_arrow_right : Icons.keyboard_arrow_left,
                   color: Colors.white,
                 ),
               ),
               Hero(
                 tag: 'logo',
                 child: Image.asset(
-                  AssetImages.***REMOVED***Logo,
+                  AssetImages.startupLogo,
                   width: Get.width * 0.3,
                 ),
               ),

@@ -1,11 +1,8 @@
 import 'dart:convert';
-import 'package:***REMOVED***/domain/entities/cart_item.dart';
+import 'package:salesforce.startup/domain/entities/cart_item.dart';
 
 class CartItemModel extends CartItem {
-  CartItemModel(
-      {required String materialNumber,
-      required String unit,
-      required num quantity})
+  CartItemModel({required String materialNumber, required String unit, required num quantity})
       : super(materialNumber: materialNumber, unit: unit, quantity: quantity);
 
   Map<String, dynamic> toMap() {
@@ -33,6 +30,5 @@ class CartItemModel extends CartItem {
 
   String toJson() => json.encode(toMap());
 
-  factory CartItemModel.fromJson(String source) =>
-      CartItemModel.fromMap(json.decode(source));
+  factory CartItemModel.fromJson(String source) => CartItemModel.fromMap(json.decode(source));
 }

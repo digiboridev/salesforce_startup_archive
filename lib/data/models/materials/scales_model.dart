@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:***REMOVED***/domain/entities/materials/scales.dart';
+import 'package:salesforce.startup/domain/entities/materials/scales.dart';
 
 class ScalesModel extends Scales {
   ScalesModel({
@@ -38,6 +38,5 @@ class ScalesModel extends Scales {
 
   String toJson() => json.encode(toMap());
 
-  factory ScalesModel.fromJson(String source) =>
-      ScalesModel.fromMap(json.decode(source));
+  factory ScalesModel.fromJson(String source) => ScalesModel.fromMap(json.decode(source));
 }

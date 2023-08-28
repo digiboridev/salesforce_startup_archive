@@ -1,9 +1,9 @@
 import 'dart:ui';
 
-import 'package:***REMOVED***/core/asset_images.dart';
-import 'package:***REMOVED***/core/mycolors.dart';
-import 'package:***REMOVED***/presentation/controllers/cart_controller.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar_controller.dart';
+import 'package:salesforce.startup/core/asset_images.dart';
+import 'package:salesforce.startup/core/mycolors.dart';
+import 'package:salesforce.startup/presentation/controllers/cart_controller.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/bottombar/bottom_bar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -32,9 +32,7 @@ class BottomBar extends StatelessWidget {
                 ),
                 Obx(() {
                   return AnimatedCrossFade(
-                    crossFadeState: bottomBarController.showCount.value
-                        ? CrossFadeState.showFirst
-                        : CrossFadeState.showSecond,
+                    crossFadeState: bottomBarController.showCount.value ? CrossFadeState.showFirst : CrossFadeState.showSecond,
                     duration: Duration(milliseconds: 100),
                     firstCurve: Curves.linear,
                     secondCurve: Curves.linear,
@@ -55,31 +53,21 @@ class BottomBar extends StatelessWidget {
                         width: Get.width * 0.15,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                                begin: Alignment.bottomCenter,
-                                end: Alignment.topCenter,
-                                colors: [
-                                  MyColors.blue_00458C,
-                                  MyColors.blue_0D63BB
-                                ]),
-                            borderRadius:
-                                BorderRadius.circular(Get.width * 0.15)),
+                            gradient:
+                                LinearGradient(begin: Alignment.bottomCenter, end: Alignment.topCenter, colors: [MyColors.blue_00458C, MyColors.blue_0D63BB]),
+                            borderRadius: BorderRadius.circular(Get.width * 0.15)),
                         child: GestureDetector(
                           onTap: () {
                             bottomBarController.changePage(newPageIndex: 3);
                           },
-                          child: Image.asset(AssetImages.cart,
-                              width: Get.width * 0.06),
+                          child: Image.asset(AssetImages.cart, width: Get.width * 0.06),
                         )),
                     if (cartController.cartItems.isNotEmpty)
                       Positioned(
                         left: -Get.width * 0.01,
                         child: Container(
                           padding: EdgeInsets.all(Get.width * 0.005),
-                          decoration: BoxDecoration(
-                              color: Colors.green,
-                              borderRadius:
-                                  BorderRadius.circular(Get.width * 0.01)),
+                          decoration: BoxDecoration(color: Colors.green, borderRadius: BorderRadius.circular(Get.width * 0.01)),
                           child: Text(
                             cartController.cartItems.length.toString(),
                             style: TextStyle(color: Colors.white),
@@ -112,12 +100,8 @@ class BottomBar extends StatelessWidget {
           Spacer(),
           Obx(() {
             return buildCount(
-                fill:
-                    cartController.frozenItemsPrice / cartController.totalPrice,
-                text: 'Frozen: ' +
-                    cartController.frozenItemsPrice.toStringAsFixed(2) +
-                    ' / ' +
-                    cartController.totalPrice.toStringAsFixed(2));
+                fill: cartController.frozenItemsPrice / cartController.totalPrice,
+                text: 'Frozen: ' + cartController.frozenItemsPrice.toStringAsFixed(2) + ' / ' + cartController.totalPrice.toStringAsFixed(2));
           }),
           Spacer(
             flex: 2,
@@ -125,10 +109,7 @@ class BottomBar extends StatelessWidget {
           Obx(() {
             return buildCount(
                 fill: cartController.dryItemsPrice / cartController.totalPrice,
-                text: 'Dry: ' +
-                    cartController.dryItemsPrice.toStringAsFixed(2) +
-                    ' / ' +
-                    cartController.totalPrice.toStringAsFixed(2));
+                text: 'Dry: ' + cartController.dryItemsPrice.toStringAsFixed(2) + ' / ' + cartController.totalPrice.toStringAsFixed(2));
           }),
           Spacer()
         ],
@@ -149,9 +130,7 @@ class BottomBar extends StatelessWidget {
         Container(
           width: Get.width * 0.3,
           height: Get.width * 0.02,
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(Get.width * 0.02)),
+          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(Get.width * 0.02)),
           child: Align(
             alignment: Alignment.centerLeft,
             child: Container(
@@ -185,11 +164,7 @@ class BottomBar extends StatelessWidget {
           key: Key('btnRow'),
           height: bottomBarHeight * 0.7,
           decoration: BoxDecoration(
-              image: DecorationImage(
-                  opacity: 0.7,
-                  fit: BoxFit.fitWidth,
-                  alignment: Alignment.topCenter,
-                  image: AssetImage('assets/images/bottombar.png'))),
+              image: DecorationImage(opacity: 0.7, fit: BoxFit.fitWidth, alignment: Alignment.topCenter, image: AssetImage('assets/images/bottombar.png'))),
           child: Row(
             children: [
               Spacer(),
@@ -201,19 +176,14 @@ class BottomBar extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     bottomBarController.currentPageIndex.value == 1
-                        ? Image.asset(AssetImages.home_active,
-                            height: Get.width * 0.06)
-                        : Image.asset(AssetImages.home,
-                            height: Get.width * 0.06),
+                        ? Image.asset(AssetImages.home_active, height: Get.width * 0.06)
+                        : Image.asset(AssetImages.home, height: Get.width * 0.06),
                     SizedBox(
                       height: Get.width * 0.01,
                     ),
                     Text(
                       'Home'.tr,
-                      style: TextStyle(
-                          color: bottomBarController.currentPageIndex.value == 1
-                              ? MyColors.blue_00458C
-                              : Colors.grey),
+                      style: TextStyle(color: bottomBarController.currentPageIndex.value == 1 ? MyColors.blue_00458C : Colors.grey),
                     ),
                   ],
                 ),
@@ -227,19 +197,14 @@ class BottomBar extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     bottomBarController.currentPageIndex.value == 2
-                        ? Image.asset(AssetImages.fav_active,
-                            height: Get.width * 0.06)
-                        : Image.asset(AssetImages.fav,
-                            height: Get.width * 0.06),
+                        ? Image.asset(AssetImages.fav_active, height: Get.width * 0.06)
+                        : Image.asset(AssetImages.fav, height: Get.width * 0.06),
                     SizedBox(
                       height: Get.width * 0.01,
                     ),
                     Text(
                       'Favorites'.tr,
-                      style: TextStyle(
-                          color: bottomBarController.currentPageIndex.value == 2
-                              ? MyColors.blue_00458C
-                              : Colors.grey),
+                      style: TextStyle(color: bottomBarController.currentPageIndex.value == 2 ? MyColors.blue_00458C : Colors.grey),
                     ),
                   ],
                 ),
@@ -255,19 +220,14 @@ class BottomBar extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     bottomBarController.currentPageIndex.value == 4
-                        ? Image.asset(AssetImages.catalog_active,
-                            height: Get.width * 0.06)
-                        : Image.asset(AssetImages.catalog,
-                            height: Get.width * 0.06),
+                        ? Image.asset(AssetImages.catalog_active, height: Get.width * 0.06)
+                        : Image.asset(AssetImages.catalog, height: Get.width * 0.06),
                     SizedBox(
                       height: Get.width * 0.01,
                     ),
                     Text(
                       'Catalog'.tr,
-                      style: TextStyle(
-                          color: bottomBarController.currentPageIndex.value == 4
-                              ? MyColors.blue_00458C
-                              : Colors.grey),
+                      style: TextStyle(color: bottomBarController.currentPageIndex.value == 4 ? MyColors.blue_00458C : Colors.grey),
                     ),
                   ],
                 ),
@@ -281,19 +241,14 @@ class BottomBar extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     bottomBarController.currentPageIndex.value == 5
-                        ? Image.asset(AssetImages.orders_active,
-                            height: Get.width * 0.06)
-                        : Image.asset(AssetImages.orders,
-                            height: Get.width * 0.06),
+                        ? Image.asset(AssetImages.orders_active, height: Get.width * 0.06)
+                        : Image.asset(AssetImages.orders, height: Get.width * 0.06),
                     SizedBox(
                       height: Get.width * 0.01,
                     ),
                     Text(
                       'Order'.tr,
-                      style: TextStyle(
-                          color: bottomBarController.currentPageIndex.value == 5
-                              ? MyColors.blue_00458C
-                              : Colors.grey),
+                      style: TextStyle(color: bottomBarController.currentPageIndex.value == 5 ? MyColors.blue_00458C : Colors.grey),
                     ),
                   ],
                 ),

@@ -1,19 +1,19 @@
-import 'package:***REMOVED***/core/asset_images.dart';
-import 'package:***REMOVED***/data/models/sync_data.dart';
-import 'package:***REMOVED***/domain/entities/materials/alternative_item.dart';
-import 'package:***REMOVED***/domain/entities/materials/material.dart';
-import 'package:***REMOVED***/domain/services/cache_fetching_service.dart';
-import 'package:***REMOVED***/domain/services/connections_service.dart';
-import 'package:***REMOVED***/domain/services/image_caching_service.dart';
-import 'package:***REMOVED***/domain/usecases/materials/get_materials_sync_data.dart';
-import 'package:***REMOVED***/domain/usecases/materials/subscribe_to_material.dart';
-import 'package:***REMOVED***/presentation/controllers/materials_catalog_states.dart';
-import 'package:***REMOVED***/presentation/ui/widgets/dialogs/info_bottomsheet.dart';
+import 'package:salesforce.startup/core/asset_images.dart';
+import 'package:salesforce.startup/data/models/sync_data.dart';
+import 'package:salesforce.startup/domain/entities/materials/alternative_item.dart';
+import 'package:salesforce.startup/domain/entities/materials/material.dart';
+import 'package:salesforce.startup/domain/services/cache_fetching_service.dart';
+import 'package:salesforce.startup/domain/services/connections_service.dart';
+import 'package:salesforce.startup/domain/services/image_caching_service.dart';
+import 'package:salesforce.startup/domain/usecases/materials/get_materials_sync_data.dart';
+import 'package:salesforce.startup/domain/usecases/materials/subscribe_to_material.dart';
+import 'package:salesforce.startup/presentation/controllers/materials_catalog_states.dart';
+import 'package:salesforce.startup/presentation/ui/widgets/dialogs/info_bottomsheet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:***REMOVED***/domain/entities/materials/materials_catalog.dart';
-import 'package:***REMOVED***/domain/usecases/materials/get_materials_and_cache.dart';
-import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
+import 'package:salesforce.startup/domain/entities/materials/materials_catalog.dart';
+import 'package:salesforce.startup/domain/usecases/materials/get_materials_and_cache.dart';
+import 'package:salesforce.startup/presentation/controllers/customer_controller.dart';
 
 class MaterialsCatalogController extends GetxController {
   // Dependency
@@ -55,8 +55,7 @@ class MaterialsCatalogController extends GetxController {
 
     try {
       // Load catalog data
-      MaterialsCatalog catalog =
-          await _getMaterialsAndCache.call(GetMaterialsAndCacheParams(
+      MaterialsCatalog catalog = await _getMaterialsAndCache.call(GetMaterialsAndCacheParams(
         customerSAP: _customerController.selectedCustomerSAP!,
         hasConnection: _connectionService.hasConnection,
         locale: Get.locale!.languageCode,
@@ -65,10 +64,7 @@ class MaterialsCatalogController extends GetxController {
       materialsCatalogState.value = MCSCommon(catalog: catalog);
 
       // Register in cache fetching service
-      CacheUpdateEvent cacheUpdateEvent = CacheUpdateEvent(
-          tag: 'catalog',
-          updateActionCallback: updateCatalog,
-          lastUpdateTimeCallback: getLastSync);
+      CacheUpdateEvent cacheUpdateEvent = CacheUpdateEvent(tag: 'catalog', updateActionCallback: updateCatalog, lastUpdateTimeCallback: getLastSync);
       _cacheFetchingService.registerEvent(cacheUpdateEvent: cacheUpdateEvent);
 
       // Perform images caching
@@ -79,8 +75,7 @@ class MaterialsCatalogController extends GetxController {
       ]);
     } catch (e) {
       print('Load catalog error' + e.toString());
-      materialsCatalogState.value =
-          MCSLoadingError(errorMsg: 'Load catalog error' + e.toString());
+      materialsCatalogState.value = MCSLoadingError(errorMsg: 'Load catalog error' + e.toString());
 
       Get.bottomSheet(
         WillPopScope(
@@ -106,8 +101,7 @@ class MaterialsCatalogController extends GetxController {
   // Perform only update of data, without side states
   Future updateCatalog() async {
     try {
-      MaterialsCatalog catalog =
-          await _getMaterialsAndCache.call(GetMaterialsAndCacheParams(
+      MaterialsCatalog catalog = await _getMaterialsAndCache.call(GetMaterialsAndCacheParams(
         customerSAP: _customerController.selectedCustomerSAP!,
         hasConnection: _connectionService.hasConnection,
         locale: Get.locale!.languageCode,
@@ -119,13 +113,11 @@ class MaterialsCatalogController extends GetxController {
   }
 
   Future<DateTime> getLastSync() async {
-    SyncData syncData = await _getMaterialsSyncData
-        .call(_customerController.selectedCustomerSAP!);
+    SyncData syncData = await _getMaterialsSyncData.call(_customerController.selectedCustomerSAP!);
     return syncData.syncDateTime;
   }
 
-  List<Materiale> getAlternativeMaterials(
-      {required List<AlternativeItem> altItems}) {
+  List<Materiale> getAlternativeMaterials({required List<AlternativeItem> altItems}) {
     MaterialsCatalogState state = materialsCatalogState.value;
     if (state is MCSCommon) {
       // List<String> asd = state.catalog.materials.map((e) => e.SFId).toList();
@@ -133,10 +125,7 @@ class MaterialsCatalogController extends GetxController {
 
       // print('asd');
 
-      return state.catalog.materials
-          .where(
-              (element) => altItems.map((e) => e.SFId).contains(element.SFId))
-          .toList();
+      return state.catalog.materials.where((element) => altItems.map((e) => e.SFId).contains(element.SFId)).toList();
     } else {
       throw Exception('Operation denied');
     }
@@ -145,16 +134,12 @@ class MaterialsCatalogController extends GetxController {
   Future subscribeToMaterial({required Materiale material}) async {
     if (_connectionService.hasConnection) {
       try {
-        await _subscribeToMaterial.call(SubscribeToMaterialParams(
-            customerSAP: _customerController.selectedCustomerSAP!,
-            materialNumber: material.MaterialNumber));
+        await _subscribeToMaterial
+            .call(SubscribeToMaterialParams(customerSAP: _customerController.selectedCustomerSAP!, materialNumber: material.MaterialNumber));
         material.didSubscribedToInventoryAlert.value = true;
       } catch (e) {
         Get.bottomSheet(InfoBottomSheet(
-            headerText: 'Error'.tr,
-            mainText: e.toString(),
-            actions: [InfoAction(text: 'Ok', callback: () => Get.back())],
-            headerIconPath: AssetImages.info));
+            headerText: 'Error'.tr, mainText: e.toString(), actions: [InfoAction(text: 'Ok', callback: () => Get.back())], headerIconPath: AssetImages.info));
       }
     } else {
       // Get.snackbar('Error', 'Restricted for offline mode'.tr);

@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:***REMOVED***/domain/entities/materials/brand.dart';
+import 'package:salesforce.startup/domain/entities/materials/brand.dart';
 
 class BrandModel extends Brand {
   BrandModel({
@@ -38,6 +38,5 @@ class BrandModel extends Brand {
 
   String toJson() => json.encode(toMap());
 
-  factory BrandModel.fromJson(String source) =>
-      BrandModel.fromMap(json.decode(source));
+  factory BrandModel.fromJson(String source) => BrandModel.fromMap(json.decode(source));
 }

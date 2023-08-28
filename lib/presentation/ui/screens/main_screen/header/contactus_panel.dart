@@ -1,10 +1,10 @@
-import 'package:***REMOVED***/core/asset_images.dart';
-import 'package:***REMOVED***/core/mycolors.dart';
-import 'package:***REMOVED***/domain/entities/contact_us_data.dart';
-import 'package:***REMOVED***/presentation/controllers/contactus_controller.dart';
-import 'package:***REMOVED***/presentation/ui/screens/contactus_form.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/contact_option_tile.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/our_focus_head.dart';
+import 'package:salesforce.startup/core/asset_images.dart';
+import 'package:salesforce.startup/core/mycolors.dart';
+import 'package:salesforce.startup/domain/entities/contact_us_data.dart';
+import 'package:salesforce.startup/presentation/controllers/contactus_controller.dart';
+import 'package:salesforce.startup/presentation/ui/screens/contactus_form.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/header/contact_option_tile.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/header/our_focus_head.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -48,18 +48,11 @@ class ContactUsPanel extends StatelessWidget {
                             GestureDetector(
                               onTap: () => Get.to(() => ContactusFormScreen()),
                               child: Container(
-                                decoration: BoxDecoration(
-                                    color: MyColors.blue_0250A0,
-                                    borderRadius: BorderRadius.circular(
-                                        Get.width * 0.02)),
-                                margin: EdgeInsets.symmetric(
-                                    horizontal: Get.width * 0.06),
-                                padding: EdgeInsets.symmetric(
-                                    vertical: Get.width * 0.01,
-                                    horizontal: Get.width * 0.025),
+                                decoration: BoxDecoration(color: MyColors.blue_0250A0, borderRadius: BorderRadius.circular(Get.width * 0.02)),
+                                margin: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
+                                padding: EdgeInsets.symmetric(vertical: Get.width * 0.01, horizontal: Get.width * 0.025),
                                 child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Contact Form'.tr,
@@ -134,8 +127,7 @@ class ContactUsPanel extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Contact Us loaing error',
-                  style: TextStyle(color: Colors.white)),
+              Text('Contact Us loaing error', style: TextStyle(color: Colors.white)),
               SizedBox(height: Get.width * 0.06),
               GestureDetector(
                   onTap: () {

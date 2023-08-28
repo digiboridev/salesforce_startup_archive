@@ -1,6 +1,6 @@
-import 'package:***REMOVED***/data/repositories/cart_repository.dart';
-import 'package:***REMOVED***/domain/entities/cart_item.dart';
-import 'package:***REMOVED***/domain/usecases/usecase.dart';
+import 'package:salesforce.startup/data/repositories/cart_repository.dart';
+import 'package:salesforce.startup/domain/entities/cart_item.dart';
+import 'package:salesforce.startup/domain/usecases/usecase.dart';
 
 class GetCartItems implements UseCase<List<CartItem>, GetCartItemsParams> {
   final CartRepository cartRepository;

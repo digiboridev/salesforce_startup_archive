@@ -1,9 +1,9 @@
 import 'dart:convert';
-import 'package:***REMOVED***/data/models/materials/alternative_item_model.dart';
-import 'package:***REMOVED***/data/models/materials/free_goods_model.dart';
-import 'package:***REMOVED***/data/models/materials/pricing_model.dart';
-import 'package:***REMOVED***/data/models/materials/supplementary_item_model.dart';
-import 'package:***REMOVED***/domain/entities/materials/material.dart';
+import 'package:salesforce.startup/data/models/materials/alternative_item_model.dart';
+import 'package:salesforce.startup/data/models/materials/free_goods_model.dart';
+import 'package:salesforce.startup/data/models/materials/pricing_model.dart';
+import 'package:salesforce.startup/data/models/materials/supplementary_item_model.dart';
+import 'package:salesforce.startup/domain/entities/materials/material.dart';
 import 'package:get/get.dart';
 
 class MaterialModel extends Materiale {
@@ -154,9 +154,7 @@ class MaterialModel extends Materiale {
       UnitPrice: map['UnitPrice'],
       UnitNetPrice: map['UnitNetPrice'],
       Tags: map['Tags'],
-      SupplementaryItems: List<SupplementaryItemModel>.from(
-          map['SupplementaryItems']
-              .map((x) => SupplementaryItemModel.fromMap(x))),
+      SupplementaryItems: List<SupplementaryItemModel>.from(map['SupplementaryItems'].map((x) => SupplementaryItemModel.fromMap(x))),
       SFId: map['SFId'],
       SalesUnitNumber: map['SalesUnitNumber'],
       SalesUnitDisplay: map['SalesUnitDisplay'],
@@ -164,8 +162,7 @@ class MaterialModel extends Materiale {
       RecommendationType: map['RecommendationType'],
       RecommendationOrder: map['RecommendationOrder'],
       ProductDescription: map['ProductDescription'],
-      pricing: List<PricingModel>.from(
-          map['Pricing']?.map((x) => PricingModel.fromMap(x)) ?? []),
+      pricing: List<PricingModel>.from(map['Pricing']?.map((x) => PricingModel.fromMap(x)) ?? []),
       PalletCount: map['PalletCount'],
       NetWeight: map['NetWeight'],
       Name: map['Name'],
@@ -182,8 +179,7 @@ class MaterialModel extends Materiale {
       ImageUrl: map['ImageUrl'],
       HasPromotion: map['HasPromotion'],
       GrossWeight: map['GrossWeight'],
-      freeGoods: List<FreeGoodsModel>.from(
-          map['FreeGoods']?.map((x) => FreeGoodsModel.fromMap(x)) ?? []),
+      freeGoods: List<FreeGoodsModel>.from(map['FreeGoods']?.map((x) => FreeGoodsModel.fromMap(x)) ?? []),
       FamilyId: map['FamilyId'],
       ClassificationId: map['ClassificationId'],
       Hierarchy4: map['hierarchy4Id'],
@@ -193,11 +189,8 @@ class MaterialModel extends Materiale {
       BlockForReturn: map['BlockForReturn'],
       Barcode: map['Barcode'],
       AverageQty: map['AverageQty'],
-      alternativeItems: List<AlternativeItemModel>.from(map['AlternativeItems']
-              ?.map((x) => AlternativeItemModel.fromMap(x)) ??
-          []),
-      didSubscribedToInventoryAlert:
-          RxBool(map['didSubscribedToInventoryAlert']),
+      alternativeItems: List<AlternativeItemModel>.from(map['AlternativeItems']?.map((x) => AlternativeItemModel.fromMap(x)) ?? []),
+      didSubscribedToInventoryAlert: RxBool(map['didSubscribedToInventoryAlert']),
     );
   }
 
@@ -207,8 +200,7 @@ class MaterialModel extends Materiale {
       UnitPrice: materialModel.UnitPrice,
       UnitNetPrice: materialModel.UnitNetPrice,
       Tags: materialModel.Tags,
-      SupplementaryItems: materialModel.SupplementaryItems.map(
-          (e) => SupplementaryItemModel.fromEntity(e)).toList(),
+      SupplementaryItems: materialModel.SupplementaryItems.map((e) => SupplementaryItemModel.fromEntity(e)).toList(),
       SFId: materialModel.SFId,
       SalesUnitNumber: materialModel.SalesUnitNumber,
       SalesUnitDisplay: materialModel.SalesUnitDisplay,
@@ -216,8 +208,7 @@ class MaterialModel extends Materiale {
       RecommendationType: materialModel.RecommendationType,
       RecommendationOrder: materialModel.RecommendationOrder,
       ProductDescription: materialModel.ProductDescription,
-      pricing:
-          materialModel.pricing.map((e) => PricingModel.fromEntity(e)).toList(),
+      pricing: materialModel.pricing.map((e) => PricingModel.fromEntity(e)).toList(),
       PalletCount: materialModel.PalletCount,
       NetWeight: materialModel.NetWeight,
       Name: materialModel.Name,
@@ -234,9 +225,7 @@ class MaterialModel extends Materiale {
       ImageUrl: materialModel.ImageUrl,
       HasPromotion: materialModel.HasPromotion,
       GrossWeight: materialModel.GrossWeight,
-      freeGoods: materialModel.freeGoods
-          .map((e) => FreeGoodsModel.fromEntity(e))
-          .toList(),
+      freeGoods: materialModel.freeGoods.map((e) => FreeGoodsModel.fromEntity(e)).toList(),
       FamilyId: materialModel.FamilyId,
       ClassificationId: materialModel.ClassificationId,
       Hierarchy4: materialModel.Hierarchy4,
@@ -246,16 +235,12 @@ class MaterialModel extends Materiale {
       BlockForReturn: materialModel.BlockForReturn,
       Barcode: materialModel.Barcode,
       AverageQty: materialModel.AverageQty,
-      alternativeItems: materialModel.alternativeItems
-          .map((e) => AlternativeItemModel.fromEntity(e))
-          .toList(),
-      didSubscribedToInventoryAlert:
-          materialModel.didSubscribedToInventoryAlert,
+      alternativeItems: materialModel.alternativeItems.map((e) => AlternativeItemModel.fromEntity(e)).toList(),
+      didSubscribedToInventoryAlert: materialModel.didSubscribedToInventoryAlert,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory MaterialModel.fromJson(String source) =>
-      MaterialModel.fromMap(json.decode(source));
+  factory MaterialModel.fromJson(String source) => MaterialModel.fromMap(json.decode(source));
 }

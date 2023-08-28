@@ -1,14 +1,13 @@
 import 'dart:async';
-
-import 'package:***REMOVED***/core/mycolors.dart';
-import 'package:***REMOVED***/presentation/controllers/search_controller.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar_controller.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/cart/cart_page.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalog_loader.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/favorites/favorites_loader.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/mainscreen_header.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/homepage/homepage_loader.dart';
+import 'package:salesforce.startup/core/mycolors.dart';
+import 'package:salesforce.startup/presentation/controllers/search_controller.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/bottombar/bottom_bar.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/bottombar/bottom_bar_controller.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/cart/cart_page.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/catalog/catalog_loader.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/favorites/favorites_loader.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/header/mainscreen_header.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/homepage/homepage_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -29,11 +28,9 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     super.initState();
     bottomBarController = Get.put(BottomBarController());
-    pageController = PageController(
-        initialPage: bottomBarController.currentPageIndex.value - 1);
+    pageController = PageController(initialPage: bottomBarController.currentPageIndex.value - 1);
     pageListener = bottomBarController.futureIndex.listen((event) {
-      pageController.animateToPage(event - 1,
-          duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
+      pageController.animateToPage(event - 1, duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
     });
   }
 

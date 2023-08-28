@@ -1,10 +1,10 @@
-import 'package:***REMOVED***/domain/entities/favorites/favorite_list.dart';
-import 'package:***REMOVED***/domain/entities/materials/material.dart';
-import 'package:***REMOVED***/presentation/controllers/favorites_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/favorites_states.dart';
-import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/materials_catalog_states.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/favorites/new_fav_list_bottomsheet.dart';
+import 'package:salesforce.startup/domain/entities/favorites/favorite_list.dart';
+import 'package:salesforce.startup/domain/entities/materials/material.dart';
+import 'package:salesforce.startup/presentation/controllers/favorites_controller.dart';
+import 'package:salesforce.startup/presentation/controllers/favorites_states.dart';
+import 'package:salesforce.startup/presentation/controllers/materials_catalog_controller.dart';
+import 'package:salesforce.startup/presentation/controllers/materials_catalog_states.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/favorites/new_fav_list_bottomsheet.dart';
 import 'package:get/get.dart';
 
 class FavoritesPageController extends GetxController {
@@ -34,8 +34,7 @@ class FavoritesPageController extends GetxController {
       updateFavoritesLists(fcstate: fcstate);
     });
 
-    updateRecomendedMaterials(
-        mcstate: _materialsCatalogController.materialsCatalogState.value);
+    updateRecomendedMaterials(mcstate: _materialsCatalogController.materialsCatalogState.value);
     _materialsCatalogController.materialsCatalogState.listen((mcstate) {
       updateRecomendedMaterials(mcstate: mcstate);
     });
@@ -83,16 +82,14 @@ class FavoritesPageController extends GetxController {
   List<Materiale> get materialsToShow {
     List<Materiale> materials = [];
 
-    MaterialsCatalogState mcstate =
-        _materialsCatalogController.materialsCatalogState.value;
+    MaterialsCatalogState mcstate = _materialsCatalogController.materialsCatalogState.value;
 
     if (mcstate is MCSCommon) {
       if (_recomendedListSelected.value) {
         materials = recomendedMaterials;
       } else {
         if (selectedListIndex != null) {
-          FavoriteList listToShow =
-              _favoriteLists.elementAt(selectedListIndex!);
+          FavoriteList listToShow = _favoriteLists.elementAt(selectedListIndex!);
 
           listToShow.favoriteItems.forEach((fi) {
             Materiale? m = mcstate.catalog.materials.firstWhereOrNull(

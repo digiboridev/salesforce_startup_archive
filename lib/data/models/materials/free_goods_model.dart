@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:***REMOVED***/domain/entities/materials/free_goods.dart';
+import 'package:salesforce.startup/domain/entities/materials/free_goods.dart';
 
 class FreeGoodsModel extends FreeGoods {
   FreeGoodsModel({
@@ -67,6 +67,5 @@ class FreeGoodsModel extends FreeGoods {
 
   String toJson() => json.encode(toMap());
 
-  factory FreeGoodsModel.fromJson(String source) =>
-      FreeGoodsModel.fromMap(json.decode(source));
+  factory FreeGoodsModel.fromJson(String source) => FreeGoodsModel.fromMap(json.decode(source));
 }

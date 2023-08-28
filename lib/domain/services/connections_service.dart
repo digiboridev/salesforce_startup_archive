@@ -1,5 +1,5 @@
-import 'package:***REMOVED***/core/constants.dart';
-import 'package:***REMOVED***/domain/services/sync.dart';
+import 'package:salesforce.startup/core/constants.dart';
+import 'package:salesforce.startup/domain/services/sync.dart';
 import 'package:simple_connection_checker/simple_connection_checker.dart';
 import 'package:get/get.dart';
 
@@ -13,15 +13,14 @@ class ConnectionService extends GetxService {
 
   Future<ConnectionService> init() async {
     parseConfig();
-    _hasConnection = RxBool(await SimpleConnectionChecker.isConnectedToInternet(
-        lookUpAddress: ***REMOVED***));
+    _hasConnection = RxBool(await SimpleConnectionChecker.isConnectedToInternet(lookUpAddress: startupServer));
     return this;
   }
 
   @override
   void onReady() {
     super.onReady();
-    _simpleConnectionChecker.setLookUpAddress(***REMOVED***);
+    _simpleConnectionChecker.setLookUpAddress(startupServer);
     _hasConnection.bindStream(_simpleConnectionChecker.onConnectionChange);
 
     _hasConnection.listen((p0) {

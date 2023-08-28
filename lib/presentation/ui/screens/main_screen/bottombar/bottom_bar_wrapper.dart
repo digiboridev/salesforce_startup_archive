@@ -1,4 +1,4 @@
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/bottombar/bottom_bar.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/bottombar/bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

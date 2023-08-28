@@ -1,16 +1,14 @@
-import 'package:***REMOVED***/data/models/sync_data.dart';
+import 'package:salesforce.startup/data/models/sync_data.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:***REMOVED***/core/errors.dart';
-import 'package:***REMOVED***/data/models/customer_model.dart';
+import 'package:salesforce.startup/core/errors.dart';
+import 'package:salesforce.startup/data/models/customer_model.dart';
 
 abstract class CustomersLocalDatasource {
   Future<String> getSelectedCustomerSAP({required String userId});
 
-  Future setSelectedCustomerSAP(
-      {required String userId, required String customerSAP});
+  Future setSelectedCustomerSAP({required String userId, required String customerSAP});
 
-  Future setCustomer(
-      {required String customerSAP, required CustomerModel customerModel});
+  Future setCustomer({required String customerSAP, required CustomerModel customerModel});
 
   Future<CustomerModel> getCustomerBySAP({required String customerSAP});
 
@@ -39,15 +37,12 @@ class CustomersLocalDatasourceImpl implements CustomersLocalDatasource {
   }
 
   @override
-  Future setSelectedCustomerSAP(
-      {required String userId, required String customerSAP}) async {
+  Future setSelectedCustomerSAP({required String userId, required String customerSAP}) async {
     await sapBox.write(userId, customerSAP);
   }
 
   @override
-  Future setCustomer(
-      {required String customerSAP,
-      required CustomerModel customerModel}) async {
+  Future setCustomer({required String customerSAP, required CustomerModel customerModel}) async {
     await customersBox.write(customerSAP, customerModel.toJson());
   }
 

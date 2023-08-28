@@ -1,10 +1,10 @@
-import 'package:***REMOVED***/core/asset_images.dart';
-import 'package:***REMOVED***/core/mycolors.dart';
-import 'package:***REMOVED***/domain/services/connections_service.dart';
-import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/user_data_controller.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/header/contactus_panel.dart';
-import 'package:***REMOVED***/presentation/ui/widgets/custom_switch.dart';
+import 'package:salesforce.startup/core/asset_images.dart';
+import 'package:salesforce.startup/core/mycolors.dart';
+import 'package:salesforce.startup/domain/services/connections_service.dart';
+import 'package:salesforce.startup/presentation/controllers/customer_controller.dart';
+import 'package:salesforce.startup/presentation/controllers/user_data_controller.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/header/contactus_panel.dart';
+import 'package:salesforce.startup/presentation/ui/widgets/custom_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -115,10 +115,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                     maxLength: 20,
                     obscureText: showAsterisks,
                     validator: (val) {
-                      return passIsCorrect(pass: val, field_type: 'Current'.tr)
-                              .isEmpty
-                          ? null
-                          : '';
+                      return passIsCorrect(pass: val, field_type: 'Current'.tr).isEmpty ? null : '';
                     },
                     controller: _oldPass,
                     decoration: InputDecoration(
@@ -150,10 +147,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                     obscureText: showAsterisks,
                     controller: _pass,
                     validator: (val) {
-                      return passIsCorrect(pass: val, field_type: 'New'.tr)
-                              .isEmpty
-                          ? null
-                          : '';
+                      return passIsCorrect(pass: val, field_type: 'New'.tr).isEmpty ? null : '';
                     },
                     decoration: InputDecoration(
                         counterText: '',
@@ -184,10 +178,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                     obscureText: showAsterisks,
                     controller: _confirmPass,
                     validator: (val) {
-                      return passIsCorrect(pass: val, field_type: 'New'.tr)
-                              .isEmpty
-                          ? null
-                          : '';
+                      return passIsCorrect(pass: val, field_type: 'New'.tr).isEmpty ? null : '';
                     },
                     decoration: InputDecoration(
                         counterText: '',
@@ -209,10 +200,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(
-                      left: Get.width * 0.06,
-                      right: Get.width * 0.06,
-                      top: Get.width * 0.07),
+                  padding: EdgeInsets.only(left: Get.width * 0.06, right: Get.width * 0.06, top: Get.width * 0.07),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -247,8 +235,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                     child: Container(
                         width: Get.width,
                         alignment: Alignment.center,
-                        margin: EdgeInsets.only(
-                            left: Get.width * 0.06, right: Get.width * 0.06),
+                        margin: EdgeInsets.only(left: Get.width * 0.06, right: Get.width * 0.06),
                         child: Visibility(
                             visible: passError.isNotEmpty,
                             child: Row(
@@ -276,10 +263,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                               ],
                             )))),
                 Padding(
-                  padding: EdgeInsets.only(
-                      left: Get.width * 0.06,
-                      right: Get.width * 0.06,
-                      bottom: Get.width * 0.12),
+                  padding: EdgeInsets.only(left: Get.width * 0.06, right: Get.width * 0.06, bottom: Get.width * 0.12),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -318,10 +302,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                           child: Container(
                             width: Get.width / 2.4,
                             alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                                color: MyColors.gray_EAF2FA,
-                                borderRadius:
-                                    BorderRadius.circular(Get.width * 0.06)),
+                            decoration: BoxDecoration(color: MyColors.gray_EAF2FA, borderRadius: BorderRadius.circular(Get.width * 0.06)),
                             padding: EdgeInsets.symmetric(
                               vertical: Get.width * 0.03,
                             ),
@@ -341,31 +322,21 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                             bool valid = _form.currentState!.validate();
 
                             if (!connectionService.hasConnection) {
-                              Get.snackbar(
-                                  'Error'.tr, 'Restricted for offline mode'.tr);
+                              Get.snackbar('Error'.tr, 'Restricted for offline mode'.tr);
                               return;
                             }
                             if (valid) {
-                              if (validationPassForSave(
-                                  oldPass: _oldPass.text,
-                                  newPass: _pass.text,
-                                  confirmPass: _confirmPass.text)) {
+                              if (validationPassForSave(oldPass: _oldPass.text, newPass: _pass.text, confirmPass: _confirmPass.text)) {
                                 closePassError();
-                                userDataController.changePassword(
-                                    oldPass: _oldPass.text,
-                                    newPass: _pass.text);
+                                userDataController.changePassword(oldPass: _oldPass.text, newPass: _pass.text);
                               }
                             }
                           },
                           child: Container(
                             width: Get.width / 2.4,
                             alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                                color: MyColors.blue_00458C,
-                                borderRadius:
-                                    BorderRadius.circular(Get.width * 0.06)),
-                            padding: EdgeInsets.symmetric(
-                                vertical: Get.width * 0.03),
+                            decoration: BoxDecoration(color: MyColors.blue_00458C, borderRadius: BorderRadius.circular(Get.width * 0.06)),
+                            padding: EdgeInsets.symmetric(vertical: Get.width * 0.03),
                             child: Text(
                               'Save'.tr,
                               style: TextStyle(
@@ -393,10 +364,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
     return Container(
       height: Get.width * 0.3,
       decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
+          gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
       padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
       child: Column(
         children: [
@@ -409,16 +377,14 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                   Get.back();
                 },
                 child: Icon(
-                  Directionality.of(context) == TextDirection.rtl
-                      ? Icons.keyboard_arrow_right
-                      : Icons.keyboard_arrow_left,
+                  Directionality.of(context) == TextDirection.rtl ? Icons.keyboard_arrow_right : Icons.keyboard_arrow_left,
                   color: Colors.white,
                 ),
               ),
               Hero(
                 tag: 'logo',
                 child: Image.asset(
-                  AssetImages.***REMOVED***Logo,
+                  AssetImages.startupLogo,
                   width: Get.width * 0.3,
                 ),
               ),
@@ -445,8 +411,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
   }
 
   bool validationPassword({required String? pass}) {
-    String pattern =
-        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+    String pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
     final RegExp regExp = RegExp(pattern);
     return regExp.hasMatch(pass ?? ' ');
   }
@@ -480,8 +445,7 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
     }
   }
 
-  bool validationPassForSave(
-      {required oldPass, required newPass, required confirmPass}) {
+  bool validationPassForSave({required oldPass, required newPass, required confirmPass}) {
     if (oldPass == newPass) {
       showPassError(error: 'Passwords must not match'.tr);
       return false;

@@ -1,5 +1,5 @@
-import 'package:***REMOVED***/data/repositories/user_data_repository.dart';
-import 'package:***REMOVED***/domain/usecases/usecase.dart';
+import 'package:salesforce.startup/data/repositories/user_data_repository.dart';
+import 'package:salesforce.startup/domain/usecases/usecase.dart';
 
 class GetUserDataSyncTime implements UseCase<DateTime, String> {
   final UserDataRepository userDataRepository;

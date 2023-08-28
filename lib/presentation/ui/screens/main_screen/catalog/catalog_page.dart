@@ -1,18 +1,18 @@
-import 'package:***REMOVED***/core/asset_images.dart';
-import 'package:***REMOVED***/core/mycolors.dart';
-import 'package:***REMOVED***/domain/entities/materials/brand.dart';
-import 'package:***REMOVED***/domain/entities/materials/classification.dart';
-import 'package:***REMOVED***/domain/entities/materials/family.dart';
-import 'package:***REMOVED***/domain/entities/materials/material.dart';
-import 'package:***REMOVED***/domain/services/image_caching_service.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/brand_card.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalog_page_states.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/families_card.dart';
-import 'package:***REMOVED***/presentation/ui/widgets/material_card.dart';
+import 'package:salesforce.startup/core/asset_images.dart';
+import 'package:salesforce.startup/core/mycolors.dart';
+import 'package:salesforce.startup/domain/entities/materials/brand.dart';
+// import 'package:salesforce.startup/domain/entities/materials/classification.dart';
+import 'package:salesforce.startup/domain/entities/materials/family.dart';
+import 'package:salesforce.startup/domain/entities/materials/material.dart';
+import 'package:salesforce.startup/domain/services/image_caching_service.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/catalog/brand_card.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/catalog/catalog_page_states.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/catalog/families_card.dart';
+import 'package:salesforce.startup/presentation/ui/widgets/material_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:***REMOVED***/domain/entities/materials/materials_catalog.dart';
-import 'package:***REMOVED***/presentation/ui/screens/main_screen/catalog/catalog_page_controller.dart';
+import 'package:salesforce.startup/domain/entities/materials/materials_catalog.dart';
+import 'package:salesforce.startup/presentation/ui/screens/main_screen/catalog/catalog_page_controller.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 
 class CatalogPage extends StatefulWidget {
@@ -32,8 +32,7 @@ class _CatalogPageState extends State<CatalogPage> {
   @override
   void initState() {
     super.initState();
-    catalogPageController = Get.put(
-        CatalogPageController(materialsCatalog: widget.materialsCatalog));
+    catalogPageController = Get.put(CatalogPageController(materialsCatalog: widget.materialsCatalog));
   }
 
   @override
@@ -55,11 +54,9 @@ class _CatalogPageState extends State<CatalogPage> {
                 AnimatedCrossFade(
                     firstChild: SizedBox(),
                     secondChild: buildBrandsOrFamilySelection(),
-                    crossFadeState:
-                        catalogPageController.state is ShowAllMaterials ||
-                                catalogPageController.state is ShowDeals
-                            ? CrossFadeState.showFirst
-                            : CrossFadeState.showSecond,
+                    crossFadeState: catalogPageController.state is ShowAllMaterials || catalogPageController.state is ShowDeals
+                        ? CrossFadeState.showFirst
+                        : CrossFadeState.showSecond,
                     duration: Duration(milliseconds: 300)),
                 Expanded(
                   child: AnimatedSwitcher(
@@ -98,26 +95,16 @@ class _CatalogPageState extends State<CatalogPage> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(Get.width * 0.02),
               color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    spreadRadius: Get.width * 0.01,
-                    blurRadius: Get.width * 0.03)
-              ],
+              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.2), spreadRadius: Get.width * 0.01, blurRadius: Get.width * 0.03)],
             ),
-            margin: EdgeInsets.only(
-                top: Get.width * 0.18,
-                left: Get.width * 0.06,
-                right: Get.width * 0.06,
-                bottom: Get.width * 0.3),
+            margin: EdgeInsets.only(top: Get.width * 0.18, left: Get.width * 0.06, right: Get.width * 0.06, bottom: Get.width * 0.3),
             padding: EdgeInsets.only(
               top: Get.width * 0.025,
             ),
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: Get.width * 0.03, vertical: Get.width * 0.02),
+                  padding: EdgeInsets.symmetric(horizontal: Get.width * 0.03, vertical: Get.width * 0.02),
                   child: Row(
                     children: [
                       Text(
@@ -153,18 +140,13 @@ class _CatalogPageState extends State<CatalogPage> {
                         }
 
                         return GestureDetector(
-                          onTap: () => catalogPageController
-                              .changeHierarhyFilter(hierarchy: null),
+                          onTap: () => catalogPageController.changeHierarhyFilter(hierarchy: null),
                           child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: Get.width * 0.03,
-                                vertical: Get.width * 0.02),
+                            padding: EdgeInsets.symmetric(horizontal: Get.width * 0.03, vertical: Get.width * 0.02),
                             child: Text(
                               'All_filter'.tr,
                               style: TextStyle(
-                                color: selected
-                                    ? Colors.blue
-                                    : MyColors.blue_003E7E,
+                                color: selected ? Colors.blue : MyColors.blue_003E7E,
                                 fontSize: Get.width * 0.04,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -183,18 +165,13 @@ class _CatalogPageState extends State<CatalogPage> {
                           }
 
                           return GestureDetector(
-                            onTap: () => catalogPageController
-                                .changeHierarhyFilter(hierarchy: e),
+                            onTap: () => catalogPageController.changeHierarhyFilter(hierarchy: e),
                             child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: Get.width * 0.03,
-                                  vertical: Get.width * 0.02),
+                              padding: EdgeInsets.symmetric(horizontal: Get.width * 0.03, vertical: Get.width * 0.02),
                               child: Text(
                                 e.Display,
                                 style: TextStyle(
-                                  color: selected
-                                      ? Colors.blue
-                                      : MyColors.blue_003E7E,
+                                  color: selected ? Colors.blue : MyColors.blue_003E7E,
                                   fontSize: Get.width * 0.04,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -234,13 +211,11 @@ class _CatalogPageState extends State<CatalogPage> {
     }
 
     if (state is ShowMaterialsByBrand) {
-      return buildMaterialsByBrand(
-          materials: state.materialsByFilter, brand: state.brand);
+      return buildMaterialsByBrand(materials: state.materialsByFilter, brand: state.brand);
     }
 
     if (state is ShowMaterialsByFamily) {
-      return buildMaterialsByFamily(
-          materials: state.materialsByFilter, family: state.family);
+      return buildMaterialsByFamily(materials: state.materialsByFilter, family: state.family);
     }
 
     return SizedBox();
@@ -266,28 +241,21 @@ class _CatalogPageState extends State<CatalogPage> {
                 ...catalogPageController.getClassifications.map((e) {
                   return classificationBtn(
                       text: e.Display,
-                      selected:
-                          catalogPageController.selectedClassification == e,
-                      onTap: () => catalogPageController.onClassificationClick(
-                          classification: e));
+                      selected: catalogPageController.selectedClassification == e,
+                      onTap: () => catalogPageController.onClassificationClick(classification: e));
                 }).toList()
               ],
             )));
   }
 
-  GestureDetector classificationBtn(
-      {required bool selected, required String text, required Callback onTap}) {
+  GestureDetector classificationBtn({required bool selected, required String text, required Callback onTap}) {
     return GestureDetector(
       onTap: () => onTap(),
       child: Container(
           decoration: BoxDecoration(
-              color: selected
-                  ? MyColors.blue_00458C
-                  : MyColors.blue_00458C.withOpacity(0.2),
-              borderRadius: BorderRadius.circular(Get.width * 0.04)),
+              color: selected ? MyColors.blue_00458C : MyColors.blue_00458C.withOpacity(0.2), borderRadius: BorderRadius.circular(Get.width * 0.04)),
           margin: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
-          padding: EdgeInsets.symmetric(
-              horizontal: Get.width * 0.03, vertical: Get.width * 0.015),
+          padding: EdgeInsets.symmetric(horizontal: Get.width * 0.03, vertical: Get.width * 0.015),
           child: Text(
             text,
             style: TextStyle(
@@ -311,17 +279,12 @@ class _CatalogPageState extends State<CatalogPage> {
               itemCount: brands.length,
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
-                    onTap: () => catalogPageController.onBrandSelect(
-                        brand: brands[index]),
+                    onTap: () => catalogPageController.onBrandSelect(brand: brands[index]),
                     child: BrandCard(
                       brand: brands[index],
                     ));
               },
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  childAspectRatio: 1 / 1,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  crossAxisCount: 3),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: 1 / 1, crossAxisSpacing: 10, mainAxisSpacing: 10, crossAxisCount: 3),
             ),
           )
         : Container(
@@ -343,17 +306,13 @@ class _CatalogPageState extends State<CatalogPage> {
               itemCount: families.length,
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
-                    onTap: () => catalogPageController.onFamilySelect(
-                        family: families[index]),
+                    onTap: () => catalogPageController.onFamilySelect(family: families[index]),
                     child: FamiliesCard(
                       family: families[index],
                     ));
               },
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: Get.width * 0.5,
-                  childAspectRatio: 3 / 2,
-                  crossAxisSpacing: 20,
-                  mainAxisSpacing: 20),
+                  maxCrossAxisExtent: Get.width * 0.5, childAspectRatio: 3 / 2, crossAxisSpacing: 20, mainAxisSpacing: 20),
             ),
           )
         : Container(
@@ -374,22 +333,16 @@ class _CatalogPageState extends State<CatalogPage> {
               onTap: () => catalogPageController.showBrands(),
               child: Container(
                   decoration: BoxDecoration(
-                      color: catalogPageController.state is ShowBrands ||
-                              catalogPageController.state
-                                  is ShowMaterialsByBrand
+                      color: catalogPageController.state is ShowBrands || catalogPageController.state is ShowMaterialsByBrand
                           ? MyColors.blue_00458C
                           : MyColors.blue_00458C.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(Get.width * 0.04)),
                   margin: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
-                  padding: EdgeInsets.symmetric(
-                      horizontal: Get.width * 0.03,
-                      vertical: Get.width * 0.015),
+                  padding: EdgeInsets.symmetric(horizontal: Get.width * 0.03, vertical: Get.width * 0.015),
                   child: Text(
                     'Brands'.tr,
                     style: TextStyle(
-                      color: catalogPageController.state is ShowBrands ||
-                              catalogPageController.state
-                                  is ShowMaterialsByBrand
+                      color: catalogPageController.state is ShowBrands || catalogPageController.state is ShowMaterialsByBrand
                           ? Colors.white
                           : MyColors.blue_003E7E,
                       fontSize: Get.width * 0.035,
@@ -401,22 +354,16 @@ class _CatalogPageState extends State<CatalogPage> {
               onTap: () => catalogPageController.showFamilies(),
               child: Container(
                   decoration: BoxDecoration(
-                      color: catalogPageController.state is ShowFamilies ||
-                              catalogPageController.state
-                                  is ShowMaterialsByFamily
+                      color: catalogPageController.state is ShowFamilies || catalogPageController.state is ShowMaterialsByFamily
                           ? MyColors.blue_00458C
                           : MyColors.blue_00458C.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(Get.width * 0.04)),
                   margin: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
-                  padding: EdgeInsets.symmetric(
-                      horizontal: Get.width * 0.03,
-                      vertical: Get.width * 0.015),
+                  padding: EdgeInsets.symmetric(horizontal: Get.width * 0.03, vertical: Get.width * 0.015),
                   child: Text(
                     'Families'.tr,
                     style: TextStyle(
-                      color: catalogPageController.state is ShowFamilies ||
-                              catalogPageController.state
-                                  is ShowMaterialsByFamily
+                      color: catalogPageController.state is ShowFamilies || catalogPageController.state is ShowMaterialsByFamily
                           ? Colors.white
                           : MyColors.blue_003E7E,
                       fontSize: Get.width * 0.035,
@@ -427,8 +374,7 @@ class _CatalogPageState extends State<CatalogPage> {
             Spacer(),
             Builder(builder: (context) {
               CatalogPageState state = catalogPageController.state;
-              if (state is HierarhableMaterials &&
-                  state.avaliableHierarhys.isNotEmpty) {
+              if (state is HierarhableMaterials && state.avaliableHierarhys.isNotEmpty) {
                 return GestureDetector(
                   onTap: () {
                     catalogPageController.onFilterClick();
@@ -443,9 +389,7 @@ class _CatalogPageState extends State<CatalogPage> {
                         width: Get.width * 0.01,
                       ),
                       Text(
-                        state.hierarhyFilter != null
-                            ? state.hierarhyFilter!.Display
-                            : 'Filtering'.tr,
+                        state.hierarhyFilter != null ? state.hierarhyFilter!.Display : 'Filtering'.tr,
                         style: TextStyle(
                           fontSize: Get.width * 0.035,
                           fontWeight: FontWeight.w500,
@@ -493,8 +437,7 @@ class _CatalogPageState extends State<CatalogPage> {
     );
   }
 
-  Widget buildMaterialsByBrand(
-      {required List<Materiale> materials, required Brand brand}) {
+  Widget buildMaterialsByBrand({required List<Materiale> materials, required Brand brand}) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -545,8 +488,7 @@ class _CatalogPageState extends State<CatalogPage> {
     );
   }
 
-  Widget buildMaterialsByFamily(
-      {required List<Materiale> materials, required Family family}) {
+  Widget buildMaterialsByFamily({required List<Materiale> materials, required Family family}) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

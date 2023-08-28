@@ -1,8 +1,8 @@
-import 'package:***REMOVED***/domain/entities/materials/alternative_item.dart';
-import 'package:***REMOVED***/domain/entities/materials/free_goods.dart';
-import 'package:***REMOVED***/domain/entities/materials/pricing.dart';
-import 'package:***REMOVED***/domain/entities/materials/supplementary_item.dart';
-import 'package:***REMOVED***/domain/entities/materials/unit_types.dart';
+import 'package:salesforce.startup/domain/entities/materials/alternative_item.dart';
+import 'package:salesforce.startup/domain/entities/materials/free_goods.dart';
+import 'package:salesforce.startup/domain/entities/materials/pricing.dart';
+import 'package:salesforce.startup/domain/entities/materials/supplementary_item.dart';
+import 'package:salesforce.startup/domain/entities/materials/unit_types.dart';
 import 'package:equatable/equatable.dart';
 import 'package:get/get.dart';
 

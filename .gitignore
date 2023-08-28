@@ -13,3 +13,5 @@ packages
 /ios/.symlinks/
 ios/Flutter/flutter_export_environment.sh
 ios/Podfile.lock
+bfg.jar
+passwords.txt

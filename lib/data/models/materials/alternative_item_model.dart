@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:***REMOVED***/domain/entities/materials/alternative_item.dart';
+import 'package:salesforce.startup/domain/entities/materials/alternative_item.dart';
 
 class AlternativeItemModel extends AlternativeItem {
   AlternativeItemModel({
@@ -7,11 +7,7 @@ class AlternativeItemModel extends AlternativeItem {
     required String RelatedMaterialId,
     required String MaterialId,
     required num? Index,
-  }) : super(
-            SFId: SFId,
-            RelatedMaterialId: RelatedMaterialId,
-            MaterialId: MaterialId,
-            Index: Index);
+  }) : super(SFId: SFId, RelatedMaterialId: RelatedMaterialId, MaterialId: MaterialId, Index: Index);
 
   Map<String, dynamic> toMap() {
     return {
@@ -42,6 +38,5 @@ class AlternativeItemModel extends AlternativeItem {
 
   String toJson() => json.encode(toMap());
 
-  factory AlternativeItemModel.fromJson(String source) =>
-      AlternativeItemModel.fromMap(json.decode(source));
+  factory AlternativeItemModel.fromJson(String source) => AlternativeItemModel.fromMap(json.decode(source));
 }

@@ -1,5 +1,4 @@
-import 'dart:math';
-import 'package:***REMOVED***/domain/entities/related_consumer.dart';
+import 'package:salesforce.startup/domain/entities/related_consumer.dart';
 import 'package:equatable/equatable.dart';
 
 class UserData extends Equatable {
@@ -83,14 +82,12 @@ class UserData extends Equatable {
     ];
   }
 
-  RelatedConsumer? closestRelatedCustomer(
-      {required double lattitude, required double longtitude}) {
+  RelatedConsumer? closestRelatedCustomer({required double lattitude, required double longtitude}) {
     RelatedConsumer? closestCustomer;
     double minDistance = double.infinity;
 
     relatedCustomers.forEach((element) {
-      double distance =
-          element.distanceTo(lattitude: lattitude, longtitude: longtitude);
+      double distance = element.distanceTo(lattitude: lattitude, longtitude: longtitude);
 
       if (distance < minDistance) {
         minDistance = distance;

@@ -1,5 +1,5 @@
-import 'package:***REMOVED***/core/asset_images.dart';
-import 'package:***REMOVED***/core/mycolors.dart';
+import 'package:salesforce.startup/core/asset_images.dart';
+import 'package:salesforce.startup/core/mycolors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,16 +17,10 @@ class UpsaleMaterialComponentState extends State<UpsaleMaterialComponent> {
         Container(
           height: 43,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(15),
-                  bottomLeft: Radius.circular(15)),
-              gradient: LinearGradient(
-                  colors: [MyColors.yellow_FF268E, MyColors.orange_FF8800],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter)),
+              borderRadius: BorderRadius.only(bottomRight: Radius.circular(15), bottomLeft: Radius.circular(15)),
+              gradient: LinearGradient(colors: [MyColors.yellow_FF268E, MyColors.orange_FF8800], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
           child: Padding(
-            padding: EdgeInsets.only(
-                left: Get.width * 0.04, right: Get.width * 0.03),
+            padding: EdgeInsets.only(left: Get.width * 0.04, right: Get.width * 0.03),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

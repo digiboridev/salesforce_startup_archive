@@ -1,4 +1,4 @@
-package ***REMOVED***.qa
+package net.archive.qa
 import com.salesforce.androidsdk.app.SalesforceSDKManager
 import com.salesforce.androidsdk.rest.ClientManager
 import io.flutter.app.FlutterApplication

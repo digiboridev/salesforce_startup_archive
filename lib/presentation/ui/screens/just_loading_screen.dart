@@ -1,5 +1,5 @@
-import 'package:***REMOVED***/core/asset_images.dart';
-import 'package:***REMOVED***/core/mycolors.dart';
+import 'package:salesforce.startup/core/asset_images.dart';
+import 'package:salesforce.startup/core/mycolors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -34,17 +34,14 @@ class JustLoadingScreen extends StatelessWidget {
     return Container(
       height: Get.width * 0.25,
       decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
+          gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [MyColors.blue_0D63BB, MyColors.blue_00458C])),
       padding: EdgeInsets.symmetric(horizontal: Get.width * 0.06),
       child: Align(
         alignment: Alignment.center,
         child: Hero(
           tag: 'logo',
           child: Image.asset(
-            AssetImages.***REMOVED***Logo,
+            AssetImages.startupLogo,
             width: Get.width * 0.25,
           ),
         ),

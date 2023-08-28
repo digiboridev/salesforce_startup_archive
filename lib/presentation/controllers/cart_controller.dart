@@ -1,11 +1,11 @@
-import 'package:***REMOVED***/domain/entities/cart_item.dart';
-import 'package:***REMOVED***/domain/entities/materials/material.dart';
-import 'package:***REMOVED***/domain/entities/materials/unit_types.dart';
-import 'package:***REMOVED***/domain/usecases/cart/get_cart_items.dart';
-import 'package:***REMOVED***/domain/usecases/cart/set_cart_items.dart';
-import 'package:***REMOVED***/presentation/controllers/customer_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/materials_catalog_controller.dart';
-import 'package:***REMOVED***/presentation/controllers/materials_catalog_states.dart';
+import 'package:salesforce.startup/domain/entities/cart_item.dart';
+import 'package:salesforce.startup/domain/entities/materials/material.dart';
+import 'package:salesforce.startup/domain/entities/materials/unit_types.dart';
+import 'package:salesforce.startup/domain/usecases/cart/get_cart_items.dart';
+import 'package:salesforce.startup/domain/usecases/cart/set_cart_items.dart';
+import 'package:salesforce.startup/presentation/controllers/customer_controller.dart';
+import 'package:salesforce.startup/presentation/controllers/materials_catalog_controller.dart';
+import 'package:salesforce.startup/presentation/controllers/materials_catalog_states.dart';
 import 'package:get/get.dart';
 
 class CartController extends GetxController {
@@ -39,8 +39,7 @@ class CartController extends GetxController {
     }
 
     try {
-      List<CartItem> data = await _getCartItems.call(GetCartItemsParams(
-          customerSAP: _customerController.selectedCustomerSAP!));
+      List<CartItem> data = await _getCartItems.call(GetCartItemsParams(customerSAP: _customerController.selectedCustomerSAP!));
 
       _cartItems.value = List<CartItem>.of(data);
     } catch (e) {
@@ -49,14 +48,11 @@ class CartController extends GetxController {
   }
 
   Future save() async {
-    await _setCartItems.call(SetCartItemsParams(
-        customerSAP: _customerController.selectedCustomerSAP!,
-        items: _cartItems));
+    await _setCartItems.call(SetCartItemsParams(customerSAP: _customerController.selectedCustomerSAP!, items: _cartItems));
   }
 
   CartItem? getItemByNumber({required String materialNumber}) {
-    int existIndex = _cartItems
-        .indexWhere((element) => element.materialNumber == materialNumber);
+    int existIndex = _cartItems.indexWhere((element) => element.materialNumber == materialNumber);
 
     if (existIndex != -1) {
       return _cartItems.elementAt(existIndex);
@@ -70,26 +66,18 @@ class CartController extends GetxController {
     required UnitType unit,
     required int quantity,
   }) {
-    int existIndex = _cartItems
-        .indexWhere((element) => element.materialNumber == materialNumber);
+    int existIndex = _cartItems.indexWhere((element) => element.materialNumber == materialNumber);
 
     if (existIndex != -1) {
-      _cartItems[existIndex] = CartItem(
-          materialNumber: materialNumber,
-          unit: unit.salesUnitString,
-          quantity: quantity);
+      _cartItems[existIndex] = CartItem(materialNumber: materialNumber, unit: unit.salesUnitString, quantity: quantity);
     } else {
-      _cartItems.add(CartItem(
-          materialNumber: materialNumber,
-          unit: unit.salesUnitString,
-          quantity: quantity));
+      _cartItems.add(CartItem(materialNumber: materialNumber, unit: unit.salesUnitString, quantity: quantity));
     }
     save();
   }
 
   removeItem({required String materialNumber}) {
-    int existIndex = _cartItems
-        .indexWhere((element) => element.materialNumber == materialNumber);
+    int existIndex = _cartItems.indexWhere((element) => element.materialNumber == materialNumber);
 
     if (existIndex != -1) {
       _cartItems.removeAt(existIndex);
@@ -105,8 +93,7 @@ class CartController extends GetxController {
   List<Materiale> get frozenMaterials {
     List<Materiale> frozenMaterials = [];
 
-    MaterialsCatalogState mcState =
-        _materialsCatalogController.materialsCatalogState.value;
+    MaterialsCatalogState mcState = _materialsCatalogController.materialsCatalogState.value;
 
     if (mcState is MCSCommon) {
       cartItems.forEach((e) {
@@ -126,8 +113,7 @@ class CartController extends GetxController {
   List<Materiale> get dryMaterials {
     List<Materiale> dryMaterials = [];
 
-    MaterialsCatalogState mcState =
-        _materialsCatalogController.materialsCatalogState.value;
+    MaterialsCatalogState mcState = _materialsCatalogController.materialsCatalogState.value;
 
     if (mcState is MCSCommon) {
       cartItems.forEach((e) {
@@ -147,8 +133,7 @@ class CartController extends GetxController {
   double get dryItemsPrice {
     double dryPrice = 0;
 
-    MaterialsCatalogState mcState =
-        _materialsCatalogController.materialsCatalogState.value;
+    MaterialsCatalogState mcState = _materialsCatalogController.materialsCatalogState.value;
 
     if (mcState is MCSCommon) {
       cartItems.forEach((e) {
@@ -157,8 +142,7 @@ class CartController extends GetxController {
         );
 
         if (m is Materiale && !m.IsFrozen) {
-          dryPrice +=
-              m.UnitNetPrice * m.countByUnitType(e.salesUnitType) * e.quantity;
+          dryPrice += m.UnitNetPrice * m.countByUnitType(e.salesUnitType) * e.quantity;
           ;
         }
       });
@@ -170,8 +154,7 @@ class CartController extends GetxController {
   double get frozenItemsPrice {
     double frozenPrice = 0;
 
-    MaterialsCatalogState mcState =
-        _materialsCatalogController.materialsCatalogState.value;
+    MaterialsCatalogState mcState = _materialsCatalogController.materialsCatalogState.value;
 
     if (mcState is MCSCommon) {
       cartItems.forEach((e) {
@@ -180,8 +163,7 @@ class CartController extends GetxController {
         );
 
         if (m is Materiale && m.IsFrozen) {
-          frozenPrice +=
-              m.UnitNetPrice * m.countByUnitType(e.salesUnitType) * e.quantity;
+          frozenPrice += m.UnitNetPrice * m.countByUnitType(e.salesUnitType) * e.quantity;
           ;
         }
       });
